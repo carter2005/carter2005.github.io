@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 天高云淡</title>
+    <link>https://carter2005.github.io/post/</link>
+    <description>Recent content in Posts on 天高云淡</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>最不正经的NAS - N1盒子</title>
+      <link>https://carter2005.github.io/post/2020/2020-05-05_phicomm-n1/</link>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-05-05_phicomm-n1/</guid>
+      <description>背景 先看参数，斐讯的N1盒子具备还不错的外观，4核1.5GHz的A53处理器，千兆网卡，双频wifi，2G内存，8G存贮空间，2个USB 2.</description>
+    </item>
+    
+    <item>
+      <title>群晖隐藏启动盘</title>
+      <link>https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/</guid>
+      <description>为什么隐藏启动盘？ 黑群的引导大约50M，不隐藏的话，一是碍眼，几T的硬盘中间突然有个50M的小家伙，看着怎么都不顺眼。二是在虚拟机环境下，哪</description>
+    </item>
+    
+    <item>
+      <title>python技巧</title>
+      <link>https://carter2005.github.io/post/2020/2020-01-09_python-tips/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-01-09_python-tips/</guid>
+      <description>安装 官方源非常慢，建议更改为清华的 临时使用 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package 注意，simple 不能少, 是 https 而不是 http 设为默认 升级 pip 到最新的版本 (&amp;gt;=10.0.0) 后进行配置： 1 2 pip install</description>
+    </item>
+    
+    <item>
+      <title>重置launcherpad</title>
+      <link>https://carter2005.github.io/post/2020/2020-01-01_reset-auncherpad/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-01-01_reset-auncherpad/</guid>
+      <description>defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock</description>
+    </item>
+    
+    <item>
+      <title>tar压缩/解压缩</title>
+      <link>https://carter2005.github.io/post/2019/2019-12-17_tar/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-12-17_tar/</guid>
+      <description>压缩 tar czpfv /path/to/file.tar.gz -C `pwd` . 解压 tar xzvf /path/to/file.tar.gz -C /path/to 加密压缩 tar -czpvf - * | openssl des3 -salt -k password -out /path/to/file.tar.gz 解密解压 openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -</description>
+    </item>
+    
+    <item>
+      <title>proxmox</title>
+      <link>https://carter2005.github.io/post/2019/2019-11-20_proxmox/</link>
+      <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-11-20_proxmox/</guid>
+      <description>去掉订阅提示 /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索da</description>
+    </item>
+    
+    <item>
+      <title>基于群晖的mailplus邮件服务器</title>
+      <link>https://carter2005.github.io/post/2019/2019-10-21_synology-mailplus-server/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-10-21_synology-mailplus-server/</guid>
+      <description>先决条件 公网IP 个人域名 一台群晖 域名解析 类型：MX 主机记录：@ 记录值：edward.cf MX优先等级：5 类型：CNAME 主机记录：imap 记</description>
+    </item>
+    
+    <item>
+      <title>clover自定义启动图标</title>
+      <link>https://carter2005.github.io/post/2019/2019-09-07_clover-customize-boot-icon/</link>
+      <pubDate>Sat, 07 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-09-07_clover-customize-boot-icon/</guid>
+      <description>GUI，dict下面添加 CustomEntriesDisabledFullTitlewin10HiddenIgnoreImagewin10Path\EFI\Microsoft\Boot\bootmgfw.efiTypeWindowsVolumeWDDisabledFullTitle18.04HiddenIgnoreImageubuntuPathEFI\ubuntu\grubx64.efiTypeLinuxVolume016703F9-502D-487E-BD8D-9B31C5BEACCD</description>
+    </item>
+    
+    <item>
+      <title>消耗CPU</title>
+      <link>https://carter2005.github.io/post/2019/2019-09-03_consume-cpu/</link>
+      <pubDate>Tue, 03 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-09-03_consume-cpu/</guid>
+      <description>for i in `seq 1 $(cat /proc/cpuinfo |grep &amp;ldquo;physical id&amp;rdquo; |wc -l)`; do dd if=/dev/zero of=/dev/null &amp;amp; done</description>
+    </item>
+    
+    <item>
+      <title>create mojave bootable disk</title>
+      <link>https://carter2005.github.io/post/2019/2019-09-01_create-mojave-bootable-disk/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-09-01_create-mojave-bootable-disk/</guid>
+      <description>mojave #根据安装程序大小创建空白dmg包 hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J #装载自定义命名宗卷 hdiutil attach ~/Desktop/macOS\ Mojave.dmg -noverify -mountpoint /Volumes/install #将安装程序写入之 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia &amp;ndash;volume /Volumes/install #卸载得到的Ins</description>
+    </item>
+    
+    <item>
+      <title>openwrt for x86-64</title>
+      <link>https://carter2005.github.io/post/2019/2019-09-01_openwrt-for-x86-64/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-09-01_openwrt-for-x86-64/</guid>
+      <description>下载：http://downloads.openwrt.org/releases/18.06.4/targets/x86/64/openwr</description>
+    </item>
+    
+    <item>
+      <title>onedrive 5T</title>
+      <link>https://carter2005.github.io/post/2019/2019-08-31_onedrive-5t/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-08-31_onedrive-5t/</guid>
+      <description>rjpts8pss@xkx.me</description>
+    </item>
+    
+    <item>
+      <title>系统安装</title>
+      <link>https://carter2005.github.io/post/2019/2019-08-24_install-system/</link>
+      <pubDate>Sat, 24 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-08-24_install-system/</guid>
+      <description>不知道为什么，win7突然就不能登陆了，总是启动到系统恢复界面，修复还总不成功。用启动盘修复又在raid0的硬盘上新建分区了，简直吐血，幸好</description>
+    </item>
+    
+    <item>
+      <title>Docker运行图形界面应用</title>
+      <link>https://carter2005.github.io/post/2019/2019-07-02_run-graphic-ui-in-docker/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-07-02_run-graphic-ui-in-docker/</guid>
+      <description>Docker因其轻量级，配制简单，与host完全隔离等特性，自诞生以来发展迅速，占领了大量原本使用虚拟机的生产，测试环境。但是，很多人不知道</description>
+    </item>
+    
+    <item>
+      <title>网页宽高测试</title>
+      <link>https://carter2005.github.io/post/2019/2019-06-18_html-width-height-detect/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-06-18_html-width-height-detect/</guid>
+      <description>源码如下 &amp;lt;!doctype html&amp;gt; p.innerHTML = o.toString ? o.toString() : o; el.appendChild(p); } function outputData() { var el = document.getElementById(&#39;log&#39;); el.innerHTML = &#39;&#39;; log(&#39;screen.width: &#39; + screen.width); log(&#39;screen.height: &#39; + screen.height); log(&#39;window.outerWidth: &#39; + window.outerWidth); log(&#39;window.outerHeight: &#39; + window.outerHeight); log(&#39;window.innerWidth: &#39; + window.innerWidth); log(&#39;window.innerHeight: &#39; + window.innerHeight); log(&#39;document.documentElement.clientWidth: &#39; + document.documentElement.clientWidth); log(&#39;document.documentElement.clientHeight: &#39; + document.documentElement.clientHeight); var box = document.getElementById(&#39;box&#39;); log(&#39;div#box width: &#39; + box.offsetWidth); log(&#39;window.devicePixelRatio: &#39; + window.devicePixelRatio);</description>
+    </item>
+    
+    <item>
+      <title>蓝牙文件传输防止重入的方法</title>
+      <link>https://carter2005.github.io/post/2019/2019-05-20_bluetooth-file-transfer/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-05-20_bluetooth-file-transfer/</guid>
+      <description>蓝牙opp文件传输底层其实是支持同时传输多个文件的，但考虑到蓝牙速度较慢，UI也不好展示，故在系统层屏蔽了重入，当有文件传输时，新的连接请求</description>
+    </item>
+    
+    <item>
+      <title>网线</title>
+      <link>https://carter2005.github.io/post/2019/2019-05-23_ethernet-cable/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-05-23_ethernet-cable/</guid>
+      <description>无论超五类还是六类网线，一般都是8根线，分为4组，颜色分别为： 橙白、橙 绿白、绿 蓝白、蓝 棕白、棕 网线的接法一般有568A和568B两种标准，二</description>
+    </item>
+    
+    <item>
+      <title>蓝牙名称设置</title>
+      <link>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</guid>
+      <description>java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;</description>
+    </item>
+    
+    <item>
+      <title>NFC p2p模式</title>
+      <link>https://carter2005.github.io/post/2019/2019-03-14_nfc-p2p/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-03-14_nfc-p2p/</guid>
+      <description>NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And</description>
+    </item>
+    
+    <item>
+      <title>nfc基础</title>
+      <link>https://carter2005.github.io/post/2019/2019-03-14_nfc/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-03-14_nfc/</guid>
+      <description>NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备</description>
+    </item>
+    
+    <item>
+      <title>刷机后蓝牙广播没有名字，只显示MAC地址</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</guid>
+      <description>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ</description>
+    </item>
+    
+    <item>
+      <title>蓝牙打电话后播放音乐无声</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/</guid>
+      <description>查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c</description>
+    </item>
+    
+    <item>
+      <title>蓝牙调试总结</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/</guid>
+      <description>最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort+116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()+56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()+164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort+68) #04 pc 000000000004d7b4</description>
+    </item>
+    
+    <item>
+      <title>DSO missing from command line的原因及解决方法</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-14_dso-missing-from-command-line/</link>
+      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-14_dso-missing-from-command-line/</guid>
+      <description>最近在移植蓝牙，编译bt-service的时候，链接器报错：DSO missing from command line。用readelf/dumpobj查看符号，明明动态库里存在</description>
+    </item>
+    
+    <item>
+      <title>GDBServer远程调试</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-14_debug-with-gdbserver/</link>
+      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-14_debug-with-gdbserver/</guid>
+      <description>手机端 $ adb shell ps #查看要调试进程的PID gdbserver :1234 &amp;ndash;attach 96 #:1234是端口号，96 是进程ID pc端 # adb forward tcp:1234 tcp:1234 #端口映射，将pc机的1234端口映射到手</description>
+    </item>
+    
+    <item>
+      <title>github的一小步，微软的一大步</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-08_github/</link>
+      <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-08_github/</guid>
+      <description>长久以来，被微软收购的软件公司结局都不太妙，自从去年收购github以来，市场一直有各种负面猜测，不少人甚至转向了gitlab（好像被goo</description>
+    </item>
+    
+    <item>
+      <title>深入理解git原理</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-02_understand-git/</link>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-02_understand-git/</guid>
+      <description>carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C</description>
+    </item>
+    
+    <item>
+      <title>如何从信号角度理解卷积神经网络？</title>
+      <link>https://carter2005.github.io/post/2018/2018-12-31_understand-cnn/</link>
+      <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-12-31_understand-cnn/</guid>
+      <description>随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经</description>
+    </item>
+    
+    <item>
+      <title>git打补丁失败</title>
+      <link>https://carter2005.github.io/post/2018/2018-12-27_git_patch/</link>
+      <pubDate>Thu, 27 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-12-27_git_patch/</guid>
+      <description>问题 外包的工作成果需要merge进master分支，但是有少量的patch文件没能直接打进去，git提示存在冲突。 解决 patch文件是在分支</description>
+    </item>
+    
+    <item>
+      <title>toggle_handle消失</title>
+      <link>https://carter2005.github.io/post/2018/2018-12-26_toggle-handle/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-12-26_toggle-handle/</guid>
+      <description>问题 移植横竖屏切换逻辑以后，发现setting里面的开关handle消失了。 分析 setting是基于html5实现的，git log发现代码有</description>
+    </item>
+    
+    <item>
+      <title>caddy</title>
+      <link>https://carter2005.github.io/post/2018/2018-09-17_caddy/</link>
+      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-09-17_caddy/</guid>
+      <description>背景 caddy 是一个用go语言写的，像 Apache, nginx, 或 lighttpd 的web服务器，其优点如下： HTTP/2 全自动支持HTTP/2协议，无需任何配置。 Auto HTTPS Caddy 使用 Let&amp;rsquo;s Encrypt 让你的站点全自动</description>
+    </item>
+    
+    <item>
+      <title>WebSSH</title>
+      <link>https://carter2005.github.io/post/2018/2018-09-13_webssh/</link>
+      <pubDate>Thu, 13 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-09-13_webssh/</guid>
+      <description>背景 ssh终端其实是有很多的，用起来也很方便，但是，一些场合下，企业防火墙会阻拦ssh数据流，从而造成ssh终端不可用。解决的办法就是通过h</description>
+    </item>
+    
+    <item>
+      <title>Lets_encrypt泛域名证书</title>
+      <link>https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/</guid>
+      <description>背景 Let&amp;rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&amp;rsquo;s encrypt</description>
+    </item>
+    
+    <item>
+      <title>虚拟化方案</title>
+      <link>https://carter2005.github.io/post/2018/2018-09-04_vms/</link>
+      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-09-04_vms/</guid>
+      <description>国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。 一、Xen Xen 由剑桥大学开发，</description>
+    </item>
+    
+    <item>
+      <title>apple安装镜像dmg制作方法</title>
+      <link>https://carter2005.github.io/post/2018/2018-06-15_create-macos-bootdisk/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-06-15_create-macos-bootdisk/</guid>
+      <description>创建空白磁盘 注意磁盘大小，格式要选成apple分区格式，这样制作出来的dmg镜像虚拟机也可以启动 写入文件 High Sierra: 1 sudo /Applications/Install macOS High Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install macOS High Sierra.app Sierra: 1 sudo</description>
+    </item>
+    
+    <item>
+      <title>黑苹果完善记</title>
+      <link>https://carter2005.github.io/post/2018/2018-09-04_hackentosh/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-09-04_hackentosh/</guid>
+      <description>家里的台式机很久前就装过黑苹果，一路从mavericks，el capitan，sierra走来，由于硬件和tonymacx86推荐的类似，原</description>
+    </item>
+    
+    <item>
+      <title>群晖</title>
+      <link>https://carter2005.github.io/post/2018/2018-03-26_synology/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-03-26_synology/</guid>
+      <description>root 1 终端下面运行synouser --setpw root XXXX即可 tmux 安装tmux后运行报错 1 tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory 可以这样解决 1 2 sh-4.3# ln -s libncurses.so.5 libtinfo.so.5 sh-4.3# ln -s</description>
+    </item>
+    
+    <item>
+      <title>chrome设置代理</title>
+      <link>https://carter2005.github.io/post/2018/2018-01-24_chrome-proxy/</link>
+      <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-01-24_chrome-proxy/</guid>
+      <description>修改Chrome启动参数 1 2 3 /usr/bin/google-chrome-stable %U --user-data-dir=/root/.config/chrome --proxy-server=&amp;#34;http://127.0.0.1:8087&amp;#34; /usr/bin/google-chrome-stable %U --user-data-dir=/root/.config/chrome --proxy-server=&amp;#34;socks5://127.0.0.1:6300&amp;#34; --host-resolver-rules=&amp;#34;MAP * ~NOTFOUND , EXCLUDE 127.0.0.1&amp;#34;</description>
+    </item>
+    
+    <item>
+      <title>android_jar包白名单</title>
+      <link>https://carter2005.github.io/post/2018/2018-01-23_android-jar-whitelist/</link>
+      <pubDate>Tue, 23 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-01-23_android-jar-whitelist/</guid>
+      <description>移植pixel experience rom的时候，发现编译framweork.jar会报错 1 check package ××× ExtendedFace is not in whitelist 在网上搜索了一下，这个错误是build/core</description>
+    </item>
+    
+    <item>
+      <title>Linux命令关闭屏幕</title>
+      <link>https://carter2005.github.io/post/2018/2018-01-07_turn-off-screen/</link>
+      <pubDate>Wed, 17 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-01-07_turn-off-screen/</guid>
+      <description>在系统中调用如下两个命令，可以关闭显示器： xset dpms force off 依赖X11环境 vbetool dpms off 直接通过pci总线访问x86寄存器地址，依赖更少，更为底层，但不支持自</description>
+    </item>
+    
+    <item>
+      <title>Linux后台程序管理</title>
+      <link>https://carter2005.github.io/post/2018/2018-01-09_linux-running-in-background/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2018/2018-01-09_linux-running-in-background/</guid>
+      <description>通常情况下，Linux终端执行的命令是运行在前台的，一个命令执行完毕，才可以执行下一个命令，且终端一关闭，进程会被kill掉。但是，有时候希</description>
+    </item>
+    
+    <item>
+      <title>top</title>
+      <link>https://carter2005.github.io/post/2017/2017-11-13_top/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-11-13_top/</guid>
+      <description>Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy</description>
+    </item>
+    
+    <item>
+      <title>一键SS</title>
+      <link>https://carter2005.github.io/post/2017/2017-11-10_ss/</link>
+      <pubDate>Fri, 10 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-11-10_ss/</guid>
+      <description>一键安装翻墙工具 wget &amp;ndash;no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh &amp;amp;&amp;amp; chmod +x shadowsocks-all.sh &amp;amp;&amp;amp; ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log</description>
+    </item>
+    
+    <item>
+      <title>TimingLogger</title>
+      <link>https://carter2005.github.io/post/2017/2017-11-09_timinglogger/</link>
+      <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-11-09_timinglogger/</guid>
+      <description>TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档： 1 2 3 4 5 6 7 8 9 10 public class TimingLogger extends Object java.lang.Object ↳ android.util.TimingLogger Class OverView A utility class to help log timings splits throughout a method</description>
+    </item>
+    
+    <item>
+      <title>EXT保留空间</title>
+      <link>https://carter2005.github.io/post/2017/2017-10-09_ext-reserve-space/</link>
+      <pubDate>Mon, 09 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-10-09_ext-reserve-space/</guid>
+      <description>有一只4G U盘，快写满的时候，App发现就写不进去了，非常奇怪。调查发现打印出来的信息，存在available和free 2个数值，free还</description>
+    </item>
+    
+    <item>
+      <title>TensorFlow</title>
+      <link>https://carter2005.github.io/post/2017/2017-10-09_tensorflow/</link>
+      <pubDate>Mon, 09 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-10-09_tensorflow/</guid>
+      <description>在机器学习流行之前，都是基于规则的系统，因此做语音的需要了解语音学，做NLP的需要很多语言学知识，做深蓝需要很多国际象棋大师。 而到后来统计方</description>
+    </item>
+    
+    <item>
+      <title>High_Sierra安装记录</title>
+      <link>https://carter2005.github.io/post/2017/2017-10-05_install-hsierra/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-10-05_install-hsierra/</guid>
+      <description>十一长假期间，也没打算去远处玩，只在近处散了散心，闲的时间比较多，正好将家里的台式机系统做了一下升级。 家里的电脑主要有3个系统： win7 主要是孩子</description>
+    </item>
+    
+    <item>
+      <title>遍历目录删除文件</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-30_android-issue-delete-files/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-30_android-issue-delete-files/</guid>
+      <description>在某些rm命令实现中，采用的是如下的伪代码逻辑，这在一些文件系统（例如yaffs2）上是不严谨的，存在文件删除不干净的问题。 1 2 3 4 opendir(); while (readdir()) unlink();</description>
+    </item>
+    
+    <item>
+      <title>android_overlay机制</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-21_android-overlay/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-21_android-overlay/</guid>
+      <description>android overlay机制，主要是用来不修改代码从而实现资源替换，主题定制等需求。可定制资源一般为下面几类： 系统设置（字符串，功能开关等） 本地化资</description>
+    </item>
+    
+    <item>
+      <title>gitbook搭建</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-21_gitbook/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-21_gitbook/</guid>
+      <description>GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非</description>
+    </item>
+    
+    <item>
+      <title>Linux下sogou输入法崩溃</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-19_sougou-crash/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-19_sougou-crash/</guid>
+      <description>在Ubuntu14.05上，sogou输入法经常莫名其妙的开机就崩溃了，然后就没法输入中文了。可以通过清理fcitx和sogou的临时文件解</description>
+    </item>
+    
+    <item>
+      <title>recovery_id</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-19_recovery-id/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-19_recovery-id/</guid>
+      <description>在分析android 8.0 property的时候，发现有2个后缀为recovery_id的变量，前者在init初始化property时，通过计算</description>
+    </item>
+    
+    <item>
+      <title>kworker</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-14_kworker/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-14_kworker/</guid>
+      <description>kworker进程 kworker进程是内核工作线程的占位符进程，它执行大部分内核的实际处理，特别是在有中断，定时器，I/O等的情况下，这些进</description>
+    </item>
+    
+    <item>
+      <title>wordpress</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-14_wordpress/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-14_wordpress/</guid>
+      <description>wordpress 优点 WordPress是一个注重美学、易用性和网络标准的个人信息发布平台。 WordPress的图形设计在性能上易于操作、易于浏览；在外观上</description>
+    </item>
+    
+    <item>
+      <title>进程nice</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-14_nice/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-14_nice/</guid>
+      <description>用top或者ps命令会输出PRI/PR、NI、%ni/%nice这三种指标值 PRI ：进程优先权，代表这个进程可被执行的优先级，其值越小，优先级就</description>
+    </item>
+    
+    <item>
+      <title>ethtool</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-13_ethtool/</link>
+      <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-13_ethtool/</guid>
+      <description>ethtool命令 查询及设置网卡参数 主要参数 1 2 3 4 5 6 7 8 ethtool ethx //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等</description>
+    </item>
+    
+    <item>
+      <title>Android与时间相关广播</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-08_android-timing-intent/</link>
+      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-08_android-timing-intent/</guid>
+      <description>四种和时间相关的广播 1 2 3 4 5 6 1. ACTION_TIME_TICK = &amp;#34;android.intent.action.TIME_TICK&amp;#34; 2. ACTION_TIME_CHANGED = &amp;#34;android.intent.action.TIME_SET&amp;#34; 3. ACTION_TIMEZONE_CHANGED = &amp;#34;android.intent.action.TIMEZONE_CHANGED&amp;#34; 4. ACTION_DATE_CHANGED = &amp;#34;android.intent.action.DATE_CHANGED&amp;#34; 处理逻辑都集中在AlarmManagerService.java里面，下文代</description>
+    </item>
+    
+    <item>
+      <title>ssh代理</title>
+      <link>https://carter2005.github.io/post/2017/2017-09-01_ssh-proxy/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-09-01_ssh-proxy/</guid>
+      <description>前提条件 有一个ssh账号，现阶段互联网上还是有不少的的公司提供免费vps，云平台的，一般都提供ssh访问账号。 该服务器在墙外，墙内的虽然也能</description>
+    </item>
+    
+    <item>
+      <title>android基础</title>
+      <link>https://carter2005.github.io/post/2017/2017-08-31_android-basic/</link>
+      <pubDate>Thu, 31 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-08-31_android-basic/</guid>
+      <description>android源码下载 众所周知，android是由google开发的，但是，国内没法访问google的服务器下载源码，解决办法有2个 通过vp</description>
+    </item>
+    
+    <item>
+      <title>gitblog</title>
+      <link>https://carter2005.github.io/post/2017/2017-08-31_gitblog/</link>
+      <pubDate>Thu, 31 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-08-31_gitblog/</guid>
+      <description>下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 + apache2 + php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的</description>
+    </item>
+    
+    <item>
+      <title>fingerprint越界</title>
+      <link>https://carter2005.github.io/post/2017/2017-08-30_property-length/</link>
+      <pubDate>Wed, 30 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-08-30_property-length/</guid>
+      <description>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;quot;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.</description>
+    </item>
+    
+    <item>
+      <title>htop</title>
+      <link>https://carter2005.github.io/post/2017/2017-07-28_htop/</link>
+      <pubDate>Fri, 28 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-07-28_htop/</guid>
+      <description>一个可以让用户与之交互的进程查看器，主要用于控制台或 X 终端中。当前具有按树状方式来查看进程，支持颜色主题，可以定制等特性。 与 top 相比，htop</description>
+    </item>
+    
+    <item>
+      <title>Linux中！号的妙用</title>
+      <link>https://carter2005.github.io/post/2017/2017-07-28_linux-tips/</link>
+      <pubDate>Fri, 28 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-07-28_linux-tips/</guid>
+      <description>在Linux中，曾经运行过的命令可以通过history命令查看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 1992 ll 1993 cc test.c nvram.c -o test 1994 ll 1995 gdb ./test 1996 ./test 1997 ls 1998 reboot 1999 netstat -tln</description>
+    </item>
+    
+    <item>
+      <title>服务器开放的端口号</title>
+      <link>https://carter2005.github.io/post/2017/2017-07-28_nmap/</link>
+      <pubDate>Fri, 28 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-07-28_nmap/</guid>
+      <description>获取远程主机的端口信息和识别主机操作系统 1 2 3 4 5 6 7 8 9 10 nmap -sS -P0 -sV -O &amp;lt;target&amp;gt; &amp;lt;target&amp;gt; 可以是独立IP, 一个主机名 或一个子网 -sS TCP SYN扫描(也叫半开或隐蔽</description>
+    </item>
+    
+    <item>
+      <title>开篇</title>
+      <link>https://carter2005.github.io/post/2017/2017-07-26_begin/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2017/2017-07-26_begin/</guid>
+      <description>考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。 wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。 H</description>
+    </item>
+    
+  </channel>
+</rss>

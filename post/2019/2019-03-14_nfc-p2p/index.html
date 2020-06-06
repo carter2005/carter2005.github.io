@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>NFC p2p模式 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-03-14_nfc-p2p/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="NFC p2p模式" />
+<meta property="og:description" content="NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-03-14_nfc-p2p/" />
+<meta property="article:published_time" content="2019-03-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-14T00:00:00+00:00" />
+<meta itemprop="name" content="NFC p2p模式">
+<meta itemprop="description" content="NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And">
+<meta itemprop="datePublished" content="2019-03-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-03-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2856">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NFC p2p模式"/>
+<meta name="twitter:description" content="NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">NFC p2p模式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-14 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。</p>
+<p>P2P模式是在Android2.3.3+(API 10)中开始加入的，之后在Android4.0+(API 14)后又重新提供了一套新的API函数。 在API 10以上的系统开发p2p功能时，ndroid系统提供两套API函数。在API 10到API 13之间提供的是enableForegroundNdefPush方法，在API 14之后提供的则是setNdefPushMessageCallback方法和setNdefPushMessage方法。</p>
+<p>在Android API 14+后，将两个NFC设备之间通过p2p模式传输数据称为Beam，Android Beam功能允许设备把一个NDEF消息推送到物理上相互监听的另一个设备上。这种交互提供了比其他无线技术(如蓝牙)更容易的发送数据的方法。因为 NFC不需要手动的设备发现或配对要求。两个设备在接近到一定范围时会自动的连接。Android Beam通过一组NFC API来使用,以便应用程序能够在设备之间来传输信息。例如,通信录、浏览器以及YouTube等应用程序都使用Android Beam来跟其他设备共享通信录、网页和视频。 在两个NFC设备之间实现Beam功能必须满足以下条件：</p>
+<ol>
+<li>两台设备的Android系统设置里的Android beam必须打开</li>
+<li>想要发送数据的应用程序必须是在前台</li>
+<li>接收数据的设备必须不锁屏</li>
+<li>当发射设备跟接收设备的距离足够近的时候,发射设备会显示”Touch to Beam(触摸发射)”的UI。然后,用户能够选择是否把消息发射给接收设备。</li>
+</ol>
+<p>利用Android Beam功能，你可以传输NDEF消息给另一台设备。为了传输NDEF消息，必须要生成一个NDEF消息。而且如果发射设备上当前打开的应用程序没有实现Android Beam功能， 系统会自动发送一个默认的包含你这个app的URI的NDEFmessage给接收端。如果目标设备的API level在9到13之间，这台设备会提醒用户该app未打开。如果API level在14之上，设备就会自动跳转到Google Play中这个应用的下载链接页供用户下载。基于这个功能，用户同样可以和其他用户分享app而不需要在谷歌商店中搜索，这个功能适用于API level 14 或更高。 通过调用下列两个方法中的任意一个,就能够为你的应用程序启用Android Beam: 1) setNdefPushMessage():这个方法把接收到的NdefMessage对象作为一个消息 设置给Beam。当两个设备足够近的时候,就会自动的发送消息。 2) setNdefPushMessageCallback():接收包含createNdefMessage()方法的回调, 当设备在发射数据的范围内时，这个回调方法会被调用。回调会让你只在需要的时候创建NDEF消息。 一个Activity一次只能推送一条NDEF消息，因此如果同时使用了这两种方法，那么setNdefPushMessageCallback()方法的优先级要高于setNdefPushMessage()方法。 要使用Android Beam，通常必须满足以下条件: 1) 发射数据的Activity必须是在前台。两个设备的屏幕都必须没有被锁定; 2) 必须要把发射的数据封装到一个NdefMessage对象中; 3) 接收发射数据的NFC设备必须支持Android NDEF推送协议或是NFC论坛的SNEP协议(简单的NDEF交换协议)。在API Level9(Android2.3)到API Level 13(Android3.2)的设备上需要NDEF推送协议。在API Level 14(Android4.0)和以后的设备上NDEF推送协议和SNEP都需要。NDEF Push Protocol 是Android独有的协议，而SNEP是NFC论坛的标准，所以其他操作系统也支持。如果android设备有NFC功能，则两个协议支持。 注意:如果在前台的Activity 启用了Android Beam,那么标准的Intent调度系统就会被禁用，这时Android是不能扫描标签的。但是,如果该Activity还启用了前台调度,那么在前台调度系统中,它依然能够扫描到跟Intent过滤器匹配的NFC标签。</p>
+<p>二、 发送数据－setNdefPushMessageCallback()方法 1. 启动Beam，发送NDEF message的步骤： 1) 在你的activity类对象中实现CreateNdefMessageCallback接口; 2) 调用setNdefPushMessageCallback(NfcAdapter.CreateNdefMessageCallback callback, Activity activity, Activity … activities)方法，当这个方法被调用，activity接收到一个回调而且如果一个要传输数据的设备被发现，方法creatNdefMessage（NfcEvent）会被自动调用。</p>
+<ol start="3">
+<li>在creatNdefMessage方法中,创建一个NDEF消息并返回这个message。这个NDEF message会被传输到目标设备上。 setNdefPushMessageCallback()方法动态的生成NDEF消息。你可以在activity中的任意地方调用这个方法。当然最好是在activity中的onCreate方法中调用它。 当目标设备被发现后，creatNdefMessage方法会被调用，它会返回一个NDEF消息。而这个NDEF消息会被传输给目标设备。在这期间，Touch to Beam的UI会显示在你的activity之上，所以在这个方法中你不能得到任意用户的输入。因此只能生成你想要传输的NDEF消息，然后返回这个消息。</li>
+</ol>
+<p>三、 发送数据－setNdefPushMessage()方法 1. 启动Beam，发送NDEF message的步骤： 1) 创建一个NDEF消息； 2) 调用setNdefPushMessage (NdefMessage message, Activity activity, Activity … activities)方法。当这个方法被调用时，activity会将接收到的NdefMessage参数作为一个NDEF消息发送出去。 其中，第2步中，setNdefPushMessage()中的NDEF消息的生成是静态的，即由用户选择生成然后作为参数进行传递。</p>
+<p>四、 接收数据 两个NFC设备之间通过Beam实现数据传递时，数据接受端即接受Beam消息端。接受Beam消息的实现步骤如下： 1.在你的activity中实现onNewIntent(Intent)方法，该方法会调用setIntent(Intent)，由Android生命周期描述可知，在调用onNewIntent方法后，onResume()方法会自动调用。 2.在activity的onResume()方法中，检测当前消息是否来自Beam，如果是，获取并处理该NDEF消息。 3.调用自己定义的消息解析函数，将获取的NDEF消息解析并获取Payload，再对Payload进行进一步UI操作。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-03-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-05-07_bluetooth-name-setup/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">蓝牙名称设置</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2019/2019-03-14_nfc/">
+            <span class="next-text nav-default">nfc基础</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

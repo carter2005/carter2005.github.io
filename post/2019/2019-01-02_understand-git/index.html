@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>深入理解git原理 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="深入理解git原理" />
+<meta property="og:description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
+<meta property="article:published_time" content="2019-01-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-01-02T00:00:00+00:00" />
+<meta itemprop="name" content="深入理解git原理">
+<meta itemprop="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C">
+<meta itemprop="datePublished" content="2019-01-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="12215">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入理解git原理"/>
+<meta name="twitter:description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">深入理解git原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-01-02 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>carter 2019-1-2 8:03:25</p>
+<p>Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的CVS等。顾名思义，版本控制系统主要就是控制、协调各个版本的文档内容的一致性，这些文档包括但不限于代码文件、图片文件等等。早期SVN占据了绝大部分市场，而后来随着Git的出现，越来越多的人选择将它作为版本控制工具，社区也越来越强大。相较于SVN，最核心的区别是Git是分布式的VCS，简而言之，每一个你pull下来的Git仓库都是主仓库的一个分布式版本，仓库的内容完全一样，而SVN则不然，它需要一个中央版本库来进行集中控制。采用分布式模式的好处便是你不再依赖于网络，当有更改需要提交的时候而你又无法连接网络时，你只需要把更改提交到本地的Git仓库，最后有网络的时候再把本地仓库和远程的主仓库进行同步即可。当然，分布式和非分布式各有各的优缺点，但是目前来看，分布式的Git正逐渐被越来越多的人所接受并推广。本文主要对Git的基本原理和常用命令进行简介，试图从底层来说明Git是如何工作的，从而帮助大家理解上层命令在执行的时候背后所产生的动作和变化。原理部分的内容可以参考Pro Git做进一步的了解，而常用的命令可以参考其他的资料。本文的总结根据自己的理解进行描述，如果错误，请不吝赐教。</p>
+<p><strong>Git的基本原理</strong></p>
+<p>本质上，Git是一套内容寻址（content-addressable）文件系统，而和我们直接接触的Git界面，只不过是封装在其之上的一个应用层。这个关系颇有点类似于计算机网络中应用层和下属层的关系。在Git中，那些和应用层相关的命令（也就是我们最常用的命令，如git commit、 git push等），我们称之为porcelain命令（瓷器之意，意为成品、高级命令）；而和底层相关的命令（几乎不会在日常中使用，如git hash-object、git update-index等），则称之为plumbing命令（管道之意，是连接git应用界面和git底层实现的一个管道，类似于shell，底层命令）。要了解Git的底层原理，就需要了解Git是如何利用底层命令来实现高层命令的。在此之前，让我们先来看一下Git的目录结构，和各个文件在Git中的作用。</p>
+<p><strong>Git的目录结构</strong></p>
+<p>在操作系统中，我们的仓库就是一个文件夹。但是为什么这些文件夹就是Git仓库呢？这是因为Git在初始化的时候会生成一个.git的文件夹，而Git进行版本控制所需要的文件，则都放在这个文件夹中。在桌面上新建一个目录，然后利用命令行在该目录下运行git init命令即可完成git仓库的初始化。如果这个时候你看不到.git目录，这是因为你的操作系统自动隐藏了该文件夹，需要在系统设置中设置隐藏文件可见。进入.git目录，便可以看到其中有很多的文件和文件夹，这每一个文件都有各自的作用，下面结合图1来进行说明。</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/ff0b48af67594816b25eeaa4c5ee86fc" alt="深入理解git原理"></p>
+<p>图1 .git目录结构示意图</p>
+<p>在上图中，第一排的几个文件和文件夹是Git的核心，而第二排的则是一些不需要特别关注的。核心文件包括：config文件、objects文件夹、HEAD文件、index文件以及refs文件夹。下面依次对其进行说明。</p>
+<ul>
+<li><strong>config文件</strong>：该文件主要记录针对该项目的一些配置信息，例如是否以bare方式初始化、remote的信息等，通过git remote add命令增加的远程分支的信息就保存在这里；</li>
+<li><strong>objects文件夹：<strong>该文件夹主要包含git对象。关于什么是git对象，将会在下一节进行详细介绍。Git中的文件和一些操作都会以git对象来保存，git对象分为BLOB、tree和commit三种类型，例如git commit便是git中的commit对象，而各个版本之间是通过</strong>版本树</strong>来组织的，比如当前的HEAD会指向某个commit对象，而该commit对象又会指向几个BLOB对象或者tree对象。objects文件夹中会包含很多的子文件夹，其中Git对象保存在以其sha-1值的前两位为子文件夹、后38位位文件名的文件中；除此以外，Git为了节省存储对象所占用的磁盘空间，会定期对Git对象进行压缩和打包，其中pack文件夹用于存储打包压缩的对象，而info文件夹用于从打包的文件中查找git对象；</li>
+<li>**HEAD文件：**该文件指明了git branch（即当前分支）的结果，比如当前分支是master，则该文件就会指向master，但是并不是存储一个master字符串，而是分支在refs中的表示，例如ref: refs/heads/master。</li>
+<li>**index文件：**该文件保存了暂存区域的信息。该文件某种程度就是缓冲区（staging area），内容包括它指向的文件的时间戳、文件名、sha1值等；</li>
+<li><strong>Refs文件夹</strong>：该文件夹存储指向数据（分支）的提交对象的指针。其中heads文件夹存储本地每一个分支最近一次commit的sha-1值（也就是commit对象的sha-1值），每个分支一个文件；remotes文件夹则记录你最后一次和每一个远程仓库的通信，Git会把你最后一次推送到这个remote的每个分支的值都记录在这个文件夹中；tag文件夹则是分支的别名，这里不需要对其有过多的了解；</li>
+</ul>
+<p>除此以外，.git目录下还有很多其他的文件和文件夹，这些文件和文件夹会额外支撑一些其他的功能，但是不是Git的核心部分，因此稍作了解即可。hooks主要定义了客户端或服务端钩子脚本，这些脚本主要用于在特定的命令和操作之前或者之后进行特定的处理，比如：当你把本地仓库push到服务器的远程仓库时，可以在服务器仓库的hooks文件夹下定义post_update脚本，在该脚本中可以通过脚本代码将最新的代码部署到服务器的web服务器上，从而将版本控制和代码发布无缝连接起来；description文件仅供GitWeb程序使用，这里不需要过多的关心；logs则记录了本地仓库和远程仓库的每一个分支的提交记录，即所有的commit对象（包括时间、作者等信息）都会被记录在这个文件夹中，因此这个文件夹中的内容是我们查看最频繁的，不管是Git log命令还是tortoiseGit的show log，都需要从该文件夹中获取提交日志；info文件夹保存了一份不希望在.gitignore 文件中管理的忽略模式的全局可执行文件，基本也用不上；COMMIT_EDITMSG文件则记录了最后一次提交时的注释信息。从以上的描述中我们可以发现，.git文件夹中包含了众多功能不一的文件夹和文件，这些文件夹和文件是描述Git仓库所必不可少的信息，不可以随意更改或删除；尤其需要注意的是，.git文件夹随着项目的演进，可能会变得越来越大，因为任何文件的任何一个变动，都需要Git在objects文件夹下将其重新存储为一个新的对象文件，因此如果一个文件非常大，那么你提交几次改动就会造成.git文件夹容量成倍增长。因此，.git文件夹更像是一本书，每一个版本的每一个变动都存储在这本书中，而且这本书还有一个目录，指明了不同的版本的变动内容存储在这本书的哪一页上，这就是Git的最基本的原理。</p>
+<p><strong>从底层命令理解Git</strong></p>
+<p>上节中我们讲到，Git分为porcelain命令和plumbing命令，而porcelain命令是基于plumbing来实现的。为了进一步的理解Git的底层原理，我们将在这一节中详细的探讨Git对象的存储格式以及plumbing命令。如果把Git比作Linux操作系统，那plumbing命令就有点类似于shell命令，而上层的procelain命令便是利用shell命令编写的一系列的系统功能或工具，如你自定义的自动化运维工具等。在接下来的介绍中，我们将试着如何利用plumbing命令，而不是porcelain命令，来完成Git的暂存和提交工作，并利用log查看提交记录。首先，我们从Git的对象介绍开始。</p>
+<p><strong>Git对象</strong></p>
+<p>在之前我们提到过，Git是一套<strong>内容寻址</strong>（content-addressable）文件系统，那么Git是怎么进行寻址呢？其实，寻址无非就是查找，而Git采用HashTable的方式进行查找，也就是说，Git只是通过简单的存储键值对（key-value pair）的方式来实现内容寻址的，而key就是<strong>文件（头+内容）的哈希值</strong>（采用sha-1的方式，40位），value就是<strong>经过压缩后的文件内容</strong>。因此，在接下来的实践中，我们会经常通过40位的hash值来进行plumbing操作，几乎每一个plumbing命令都需要通过key来指定所要操作的对象。</p>
+<p>Git对象的类型包括：<strong>BLOB、tree对象、commit对象</strong>。BLOB对象可以存储几乎所有的文件类型，全称为binary large object，顾名思义，就是大的二进制表示的对象，这种对象类型和数据库中的BLOB类型（经常用来在数据库中存储图片、视频等）是一样的，当作一种数据类型即可；tree对象是用来组织BLOB对象的一种数据类型，你完全可以把它想象成二叉树中的树节点，只不过Git中的树不是二叉树，而是&quot;多叉树&rdquo;；commit对象表示每一次的提交操作，由tree对象衍生，每一个commit对象表示一次提交，在创建的过程中可以指定该commit对象的父节点，这样所有的commit操作便可以连接在一起，而这些commit对象便组成了提交树，branch只不过是这个树中的某一个子树罢了。如果你能理解commit树，那Git几乎就已经理解了一半了。</p>
+<p>Git对象的存储方式也很简单，基本可以用如下表达式来表示：</p>
+<p>Key = sha1(file_header + file_content)</p>
+<p>Value = zlib(file_content)</p>
+<p>简单来说，Git 将<strong>文件头</strong>与原始数据内容拼接起来，并计算拼接后的新内容的 40位的sha-1校验和，将该校验和的前2位作为object目录中的子目录的名称，后38位作为子目录中的文件名；然后，Git 用zlib的方式对数据内容进行压缩，最后将用 zlib 压缩后的内容写入磁盘。文件头的格式为 &ldquo;<strong>blob #{content.length}</strong>&quot;，例如&quot;blob 16&rdquo;，这种文件头格式也是经常采用的格式。对于tree对象和commit对象，文件头的格式都是一样的，但是其文件数据却是有固定格式的，鉴于本次只是Git原理的基本介绍，这里不再详细描述，有兴趣的可以去Git的官网查找相关文档进行了解；其实也可以自己按照理解构思一下，如果让你来设计这种格式，应该如何设计：tree对象类似于树中节点的定义，在tree对象中要包含对连接的BLOB对象的引用，而commit对象与tree对象类似，要包含提交的tree对象的引用，想到这里，我觉得文档的阅读大概也就可以省去了。</p>
+<p><strong>对象暂存区</strong></p>
+<p>在procelain命令中，为了将修改的文件加入暂存区（也叫索引库，将修改的文件key-value化，.git根目录下的index文件记录该暂存区中的文件索引），我们会使用git add filename命令。那么在git add这个命令的背后，Git是如何使用plumbing命令来完成文件的索引操作呢？其实，git add命令对应着两个基本的plumbing命令：</p>
+<p>git hash-object #获取指定文件的key，如果带上-w选项，则会将该对象的value进行存储</p>
+<p>git update-index #将指定的object加入索引库，需要带上—add选项</p>
+<p>因此，git add命令在plumbing命令中其实是分成了两步：首先，通过hash-object命令将需要暂存的文件进行key-value化转换成Git对象，并进行存储，拿到这些文件的key；然后，通过update-index命令将这些对象加入到索引库进行暂存，这样便完成了Git文件的暂存操作。如果要根据Git对象的key来查看文件的信息，还需要涉及下面的一个plumbing命令：</p>
+<p>git cat-file –p/-t key #获取指定key的对象信息，-p打印详细信息，-t打印对象的类型</p>
+<p>利用该命令可以查看已经key-value化的Git对象的详细信息。</p>
+<p>接下来，我们利用plumbing命令来进行git add的实践。首先，新建一个Git仓库，通过在新建的文件夹中利用git init命令来初始化，这里不再详述，如下图所示：</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/67f46113f9034dc2bf6b5286b4f8c830" alt="深入理解git原理"></p>
+<p>初始化之后，会在当前目录下生成.git目录，进入该目录，就会发现我们上述的目录结构。然后，我们新建一个version.txt文件并在文件中写入&quot;version 1&quot;字符串，这是version.txt的第一个版本，然后利用git hash-object –w命令将该文件转换为Git的对象并存储，如下图：</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/1786ba79a71140f2b764521b287a68e4" alt="深入理解git原理"></p>
+<p>这里hash-objec命令会返回该Git对象的key值，这时到.git目录的objects目录下会发现，多了一个6c子目录，该目录中的文件名称为58b76a52188643965f3a6704166e8e0424b7fe，也就是该key值的后38位。记下该key值，因为我们要根据该key值将该对象加入索引库。接着，我们利用update-index命令进行索引化操作，如下图：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/d297e50c2add4d31abea1a9b1e2ad09a" alt="深入理解git原理"></p>
+<p>注意，这里一定要带上—add选项，而—cacheinfo选项则指出该文件的文件类型，100644表示普通文件，与之相关的还有可执行文件等等；并且，除了指定key值，还需要指定文件名，表明要把哪个文件的哪个版本加入索引库。该命令执行完成后，可以发现.git目录下多了index文件，并且在以后每次update-index命令执行之后，该index文件的内容都会发生变化。至此，git add的主要过程也便完成了。</p>
+<p>这里我们简单谈一下index文件。index是一个索引文件，存放的是暂存区的整个目录树的信息，并且为目录树中的每个文件都保存了时间戳和长度。如果用UltraEdit打开使用过程中的index文件，可以发现index的格式为以下形式：</p>
+<p>Index魔数（DIRC） + 版本号 + 暂存的文件个数 + 每个文件的时间戳和长度</p>
+<p>Index索引库记录从项目初始化到目前为止，项目仓库中所有文件最后一次修改时刻的时间戳以及对应的长度信息，因此随着加入仓库中的文件不断增多，index文件也会不断增大。每次调用git add命令，都会把add的文件的索引信息（时间戳和大小）进行更新，而我们所使用的git status命令，则会把每一个文件的索引信息和上次提交的索引信息进行比较，如果发生了变化，就会显示出来。Pro git 中是这样描述暂存操作的：暂存操作会对每一个文件计算校验和（即第一章中提到的 SHA-1 哈希字串），然后把当前版本的文件快照保存到 Git 仓库中（Git 使用 blob 类型的对象存储这些快照），并将校验和加入暂存区域。意思很明确，也就是每个文件对应的当前版本的key也会加入到index文件中，这个我没有进行验证，不过理论上讲应该是正确的。</p>
+<p><strong>创建树节点</strong></p>
+<p>在Git中，所有的内容以tree或者BLOB对象进行存储，如果把Git比作UNIX的文件系统，则tree对象对应于UNIX文件系统中的目录，而BLOB对象则对应于inodes或文件内容。在Git对象小节中，我们大致猜想了tree对象的存储格式。其实，一个单独的tree对象包含一条或多条tree记录，每一条记录含有一个指向BLOB对象或子tree对象的sha-1指针（也就是一个40位的key值），并附有该对象的权限模式 、类型和文件名信息，因此，我们的猜想也是八九不离十的。为什么要创建tree对象呢？我们都知道，在Git中，我们add完已修改的文件之后，一般就直接commit暂存区中的内容到本地仓库了，似乎并没有tree这个概念。其实，创建tree对象只是add和commit中间的一个缓冲步骤，因为commit对象要根据tree对象来创建。那么如何创建tree对象呢？只需要如下命令即可：</p>
+<p>git write-tree #根据索引库中的信息创建tree对象</p>
+<p>该命令返回所创建的tree对象的key值，通过git cat-file可以查看该对象的详细信息。创建过程如下图：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/f8fc6b9b2d6844d7af9dbb02ec72e506" alt="深入理解git原理"></p>
+<p>从图中可以看出，cat-file –t显示该对象的类型为tree，表明该tree对象创建成功了，至此，树节点便创建完成了。</p>
+<p>实际上，由于index暂存区包括了项目仓库中所有的文件，因此commit对象所对应的tree对象，永远都是工作目录的根tree对象。也就是说，每次commit，都是把工作目录的根目录所对应的tree对象，链接给此次的commit对象；而且，在Git中，每个子目录都对应一个tree对象，每个文件对应一个BLOB对象，因此整个工作目录对应一棵Git对象树，根节点就是commit对象所引用的tree节点，而每个子文件夹又分别对应一棵子树。所以任何一个文件的更改，都会导致其上层所有父对象的更改和重新存储。这里不再进行演示，你可以通过git add和git commit进行多次提交，并在每次提交之后使用git log查看commit对象的key，使用cat-file获取对应的tree对象的key，并再次使用cat-file获取该tree对象下所有的子对象，这时你可以发现，子文件夹都对应一个tree节点，文件都对应一个BLOB节点。</p>
+<p><strong>Commit对象</strong></p>
+<p>在Git中，每一次commit都对应一个commit对象，而一个commit对象对应一个tree对象。为了创建commit对象，需要使用如下命令：</p>
+<p>git commit-tree key –p key2 #根据tree对象创建commit对象，-p表示前继commit对象</p>
+<p>该方法有点类似于数据结构中树的增加节点操作：都是向父节点中增加子节点。其中，-p选项指明了前继commit对象的key值，也就是父节点的key值，这样，这两个commit节点便连接在了一起，而不断的连接便构成了一棵树，也就是我们接下来要讲的提交树。Commit对象的创建过程如下所示：</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/dc4b283b5a764e28b3b2b0d73dfe08d2" alt="深入理解git原理"></p>
+<p>在该命令中，我们只需要指定key的前六位即可，由于这是第一次提交，因此不需要带上-p选项来指明父节点。通过cat-file命令可以看到，commit对象已创建成功，该commit对象中包含了与之关联的tree对象的key值，以及author和committer的信息。如果要查看完整的提交记录，可以通过git log –stat key命令，该命令会打印指定commit对象之前的所有提交记录。至此，commit对象已经创建完成，而我们也利用plumbing命令，完整的实现了Git的add和commit操作，Cool。到目前为止，所创建的所有对象的关系如下图所示：</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/3cab4774d5fa490e8a1c4c7763aec757" alt="深入理解git原理"></p>
+<p>图2 第一次提交后Git对象关系图</p>
+<p><strong>提交树Commit Tree</strong></p>
+<p>接下来，我们在第一次提交的基础上完成第二次提交和第三次提交。第二次提交我们会提交version.txt的第二个版本，并增加一个新的文件；第三次提交会演示在tree对象中构造子tree对象并提交。在下面的每一次提交中，我们还需要指定每一次提交的前继提交对象，这样commit对象便连接在一起，形成一棵提交树。首先，我们进行第二个版本的修改和提交。如下图，修改version.txt并添加一个new.txt文件，然后利用上面的方法进行key-value化和索引更新：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/0d0444fdc2bb494ba56b1b0e1b92b546" alt="深入理解git原理"></p>
+<p>然后进行索引的更新：</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/4e90156bc4cb4b848f77dd93016ff1eb" alt="深入理解git原理"></p>
+<p>然后我们利用暂存区创建tree对象，并根据该tree对象创建commit对象，如下图所示。注意，本次commit需要利用-p选项指定此次commit对象的前继commit对象，可以看到，通过git log命令打印出来的commit对象，连接在了一起。</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/50d8c77d711a47cc83f23f23ac05e63d" alt="深入理解git原理"></p>
+<p>本次提交完成后，Git中的对象关系如下图所示：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/75ac14c387734ea5a07949535956e110" alt="深入理解git原理"></p>
+<p>图3 第二次提交后Git对象关系图</p>
+<p>紧接着，我们来进行第三次提交。首先，利用read-tree命令将第一个版本中的tree对象读入暂存区。如下图所示：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/de83de01e744447b93e3454a871b1153" alt="深入理解git原理"></p>
+<p>注意，在读取的过程中，需要加上—prefix选项，否则无法成功读取，这是因为在index中相同路径的文件只能出现一次，由于version.txt已经存在于index索引库了，因此如果想把第一个版本的tree对象读取进来，需要将该版本的version.txt放在文件夹bak中。然后创建tree对象并进行第三次提交，如下图所示：</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/ea361a4678224091a90e871b56ac2e4f" alt="深入理解git原理"></p>
+<p>通过git log可以查看所有的commit对象。这个时候，通过cat-file命令查看此次创建的tree对象所包含的内容：</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/8b3d9e3af2c848ccad5ad6ba0d70560b" alt="深入理解git原理"></p>
+<p>可以看到，所创建的tree对象还不仅包括以上的两个BLOB对象，还包括刚才读取的子tree对象，这个时候如果把这个tree再导出成工作目录的话，则在根目录会多出一个bak子文件夹。经过第三次提交后，Git中的所有对象的关系如图4所示。</p>
+<p>注意，这里加上这样的步骤只是为了让大家明白tree对象中的子tree对象的存在，正如上面上节所说的，整个工作目录对应一个tree对象，并且其下的每一个子文件夹都是一个tree对象，每次的commit对象都对应着根tree对象，而任何一个对象的改变都会导致其上层所有tree对象的重新存储。</p>
+<p>以上，便是我们利用plumbing命令完成的三次提交的过程，希望通过这几个步骤，能让你简单的理解porcelain命令和plumbing命令之间的联系，为接下来的Git学习做铺垫。</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/dd93e3b8a37b4f16b1038229a8432a45" alt="深入理解git原理"></p>
+<p>图4 第三次提交后Git对象关系图</p>
+<p><strong>Git的常用命令</strong></p>
+<p>本节的目的在于对Git中比较重要但是不太会经常使用的命令进行一个简要的介绍，从而让大家对Git中大部门命令都有一个整体的了解。Git中的基本命令的使用这里不再赘述，整体的工作流程如图所示。如果对Git的分支还不是很了解的话，建议去仔细阅读下Pro Git的第三章。Git的基本工作流程如图5所示。其中，git pull、git push、git fetch、git remote等基本命令的使用这里不再进行赘述，这些基本的命令是最重要的命令，请务必牢牢掌握。建议通过以上的基本原理的讲解和Pro Git的描述对各个基础命令背后所发生的变化进行详细的思考，以加深自己对Git应用层命令的认识。不要仅仅把自己局限于tortoiseGit的GUI的使用中，只有深入的理解了工具，才有可能用好它。</p>
+<p>本节重点对以下几个git命令进行介绍，重点在于对这些命令的基本使用的普及，包括：git log、git fork、git rebase、git reset、git reverse和git stash。大多数情况下，我们在开发中小型项目的时候，如果团队成员不是很多，则只需要开一个分支就够了。在这种情况下，只要你操作规范，在push之前注意pull最新的代码，则基本不会出现比较严重的冲突或者问题，这时候以上命令基本都用不上，但是在多分支的情况下，我们可能会使用以上的命令来进行分支合并或者版本回退等，因此，我们有必要对这些命令做一个简单的了解，知道在什么时候去使用它们。</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/5489b04c79784e80ae3c24f75cea3d63" alt="深入理解git原理"></p>
+<p>图5 Git的基本工作流程图</p>
+<p><strong>Git log</strong></p>
+<p>在提交了若干更新之后，又或者克隆了某个项目，想回顾下提交历史，可以使用 git log 命令查看。默认不用任何参数的话，git log会按提交时间列出所有的更新，最近的更新排在最上面。一般情况下，我会使用如下命令来打印log中的提交日志记录：</p>
+<p>git log &ndash;pretty=format:&quot;%h %s&rdquo; &ndash;graph</p>
+<p>其中。&ndash;pretty选项指定打印的格式，%h表示列出每个提交对象的短的sha1值（40位中的前6位）；&ndash;graph选项表示使用图的方式来打印日志记录。打印的结果如下图所示：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/2ae2ef17feb042818d33a4ec585b6f7e" alt="深入理解git原理"></p>
+<p>也可以使用Git的GUI来显示Git的提交历史，在仓库中右键选择Git GUI，然后选择菜单栏上的 repository&ndash;&gt;visual all branch history 选项，即可以显示所有分支的提交记录。如下图所示：</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/6d801ed5cd0f4fbfb83484243045a603" alt="深入理解git原理"></p>
+<p><strong>Git fork</strong></p>
+<p>Git fork不是一个Git命令，而是一种工作流。它不是使用单个服务端仓库作为『中央』代码基线，而让各个开发者都有一个服务端仓库，这意味着各个代码贡献者有2个Git仓库而不是1个：一个本地私有的，另一个服务端公开的，如下图所示。</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/351cd0ff19b5446e804fd4023a0cf423" alt="深入理解git原理"></p>
+<p>Forking工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能push代码到仅有的中央仓库中。 开发者push到自己的服务端仓库，而只有项目维护者才能push到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。</p>
+<p><strong>Git rebase</strong></p>
+<p>把一个分支中的修改整合到另一个分支的办法有两种，第一种是我们常用的git merge操作，而第二种便是本节要讲的rebase（中文翻译为衍合）。该命令的原理是，回到两个分支最近的共同祖先，根据当前分支（也就是要进行衍合的分支experiment）后续的历次提交对象（这里只有一个 C3），生成一系列文件补丁，然后以基底分支（也就是主干分支master）最后一个提交对象（C4）为新的出发点，逐个应用之前准备好的补丁文件，最后会生成一个新的合并提交对象（C3&rsquo;），从而改写 experiment 的提交历史，使它成为 master 分支的直接下游。如下图所示：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/75a0dfc9f6724992b475c7f9a596deca" alt="深入理解git原理"></p>
+<p>一般我们使用rebase的目的，是想要得到一个能在远程分支上干净应用的补丁，比如某些项目你不是维护者，但想帮点忙的话，最好用rebase：先在自己的一个分支里进行开发，当准备向主项目提交补丁的时候，根据最新的 origin/master 进行一次衍合操作然后再提交，这样维护者就不需要做任何整合工作（实际上是<strong>把解决分支补丁同最新主干代码之间冲突的责任，化转为由提交补丁的人来解决</strong>），只需根据你提供的仓库地址作一次快进合并，或者直接采纳你提交的补丁。</p>
+<p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用git add命令去更新这些内容的索引， 然后，你无需执行git-commit，只要执行git rebase –continue，这样git会继续应用(apply)余下的补丁。如果要舍弃本次衍合，只需要git rebase &ndash;abort即可。切记，<strong>一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行rebase操作</strong>。</p>
+<p>我们在使用git pull命令的时候，可以使用&ndash;rebase参数，即git pull &ndash;rebase。这里表示把你的本地当前分支里的每个提交取消掉，并且把它们临时保存为补丁（这些补丁放到.git/rebase目录中），然后把本地当前分支更新为最新的origin分支，最后把保存的这些补丁应用到本地当前分支上。在使用tortoise的pull的过程中，如果你留意tortoiseGit的日志的话，你就会发现，它使用的就是这种方式来pull最新的提交的。</p>
+<p><strong>Git reset</strong></p>
+<p>在使用Git的过程中，由于操作不当，作为初学者的我们可能经常要去解决冲突。某些时候，当你不小心改错了内容，或者错误地提交了某些commit，我们就需要进行版本的回退。版本回退最常用的命令包括git reset和git revert。这两个命令允许我们在版本的历史之间穿梭。</p>
+<p>下面就几种比较经典的场景进行总结：</p>
+<ul>
+<li>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命git checkout &ndash; filename；</li>
+<li>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作；</li>
+<li>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，使用git reset &ndash;hard commit_id，不过前提是没有推送到远程库。</li>
+</ul>
+<p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本；要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p>
+<p><strong>Git revert</strong></p>
+<p>Git revert用来撤销某次操作，此次操作之前和之后的commit和history都会保留，并且把这次撤销作为一次最新的提交。git revert是提交一个新的版本，将需要revert的版本的内容再反向修改回去，版本会递增，不影响之前提交的内容。</p>
+<p>Git revert和git reset都可以进行版本的回退，将工作区回退到历史的某个状态，二者有如下的区别：</p>
+<ul>
+<li>git revert是用一次新的commit来回滚之前的commit，而git reset是直接删除指定的commit（并没有真正的删除，通过git reflog可以找回），这是二者最显著的区别；</li>
+<li>git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容；</li>
+<li>在回滚这一操作上，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit&quot;中和&quot;之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现；但是git reset是之间把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入。</li>
+</ul>
+<p><strong>Git stash</strong></p>
+<p>Git stash用来暂存当前正在进行的工作， 将工作区还没加入索引库的内容压入本地的Git栈中，在需要应用的时候再弹出来。比如想pull 最新代码，又不想加新commit；或者为了修复一个紧急的bug，先stash，使返回到自己上一个commit，改完bug之后再stash pop，继续原来的工作。Git stash可以让本地仓库返回到上一个提交状态，而本地的还未提交的内容则被压入Git栈。Git stash的基本使用流程如下：</p>
+<p>git stash #暂存工作区尚未提交的内容</p>
+<p>Do your work #在上一个提交的状态之上完成你的操作</p>
+<p>git stash pop #将暂存的内容弹出并应用</p>
+<p>当你多次使用git stash命令后，你的栈里将充满了未提交的代码，这时候你会对将哪个版本应用回来有些困惑，这时git stash list命令可以将当前的Git栈信息打印出来，你只需要将找到对应的版本号，例如使用 git stash apply stash@{1} 就可以将你指定版本号为stash@{1}的暂存内容取出来，当你将所有的栈都应用回来的时候，可以使用git stash clear来将栈清空。TortoiseGit中的stash save菜单就对应该命令。</p>
+<p><strong>总结</strong></p>
+<p>本文主要对Git的基本原理和常用命令进行介绍和知识普及。从Git的目录结构，到porcelain命令和plumbing命令，到利用plumbing命令完成commit实践，最后对一些比较重要的命令进行说明，希望阅读完本文，你能对Git的原理有整体的认识，同时能够灵活的使用Git的各种命令。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-01-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-01-08_github/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">github的一小步，微软的一大步</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2018/2018-12-31_understand-cnn/">
+            <span class="next-text nav-default">如何从信号角度理解卷积神经网络？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

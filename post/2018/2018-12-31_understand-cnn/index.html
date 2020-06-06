@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何从信号角度理解卷积神经网络？ - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2018/2018-12-31_understand-cnn/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="如何从信号角度理解卷积神经网络？" />
+<meta property="og:description" content="随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-12-31_understand-cnn/" />
+<meta property="article:published_time" content="2018-12-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-12-31T00:00:00+00:00" />
+<meta itemprop="name" content="如何从信号角度理解卷积神经网络？">
+<meta itemprop="description" content="随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经">
+<meta itemprop="datePublished" content="2018-12-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-12-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2816">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何从信号角度理解卷积神经网络？"/>
+<meta name="twitter:description" content="随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何从信号角度理解卷积神经网络？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-31 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经转向了 CNN，并开始相信 CNN 就是这一领域的未来。但是，在 CNN 的实践成功背后，我们对其的理解还很少。因此，当今有很多热门课题都是研究其中的原理。基本而言，存在三种主流角度：优化角度、近似角度和信号角度。前两者主要关注纯数学的表示方式，以分析神经网络的统计学性质和收敛性。而信号角度的研究则是试图解决以下问题：</p>
+<ol>
+<li>为什么非线性激活函数在所有中间层的过滤器输出处都很关键？</li>
+<li>两层级联系统相对于单层系统有什么优势？</li>
+</ol>
+<p>球面修正相关性（RECOS）</p>
+<p>众所周知，给定包含有限数量神经元的单个隐藏层，前馈神经网络（FNN）可以被视为一种能够近似任意连续函数的通用近似器。FNN 的特别之处是神经元中的非线性激活函数。神经网络有时候很宽，有时候很深，但如果没有非线性激活，它们的复杂架构就会像简单的单层线性模型一样工作，即将输入映射到另一个输出空间。具体来说，非线性激活函数能为我们提供一个从输入表征学习到新集合，这更适合解决真实世界问题。</p>
+<p>CNN 只是一类 FNN 或 MLP（多层感知器）。为了分析 CNN 中的分线性，这篇论文提出了一种用于理解 CNN 的行为的数学模型。CNN 可被视为一种由基本运算单元构成的网络，这些单元执行的是球面修正相关性（RECOS）。因此，它被称为 RECOS 模型。在 CNN 的训练期间，首先会对其核的权重进行初始化，然后这些权重会通过梯度下降方法和反向传播算法来调整。在 RECOS 模型中，权重被称为锚向量，代表它们在聚类输入数据上的作用。这就是说我们想要计算输入向量和锚向量之间的相关性，然后衡量其相似性。</p>
+<p>为什么用非线性激活？</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/31ff0d2cef5b4bacb49e46454042094d" alt="如何从信号角度理解卷积神经网络？"></p>
+<p>CNN 不会和 MLP 一样在一个步骤中考虑所有像素的交互，而是会将输入图像分解成更小的片，这被称为特定层的节点的感受野。CNN 会逐渐增大感受野以覆盖图像的更大范围。神经元会计算输入向量和锚向量之间的相关性以衡量它们之间的相似性。一个 RECOS 单元中存在 K 个神经元。我们可将我们的系统看作是 Y=AX，其中 X 是输入向量，Y 是输出向量，A 是锚向量（核过滤器的权重矩阵）。根据这个等式，我们可以看到 CNN 是将输入映射到另一个空间。在 RECOS 模型中，我们可以立即得出结论：学习得到的核权重往往会将相似的目标映射到同一个区域。举个例子，如果 x_i 和 x_j 在欧几里德距离上很相近，那么对应的输出 y_i 和 y_j 必然在新空间中也很相近。对于被用于获取猫的特征的过滤器，任何猫向量 X_cat 都会被这种类型的所学到的锚向量 A 映射到 Y_cat，而其它向量 X_dog 或 X_car 则永远不会出现在这片区域中。这就是 CNN 能够有效识别不同事物的原因。</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/6924827ca8c741fc87f66c59412dcb65" alt="如何从信号角度理解卷积神经网络？"></p>
+<p>但我们为何必须使用非线性激活呢？考虑上图：左为原图，右为反色后的图。根据人类知识，这两张图可能是同类，也可以是不同类。我们可以得出结论说它们都是猫，也可以说它们是反色相关的。因为这只黑猫是通过将白猫的像素减去 255 的值得到的。CNN 会怎么解读这两只猫？</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/df61c1b2415549419e19b49ea55cc5d4" alt="如何从信号角度理解卷积神经网络？"></p>
+<p>我们可以从上图一窥对修正（rectification）的需求。X 是输入向量，a_1、a_2 和 a_3是所学习到的不同锚向量。在 RECOS 模型中，线性运算 Y=AX 是输入向量与锚向量之间的相似度的度量。因此，对于锚向量 a_1 和 a_3，我们可以看到 x 与这两个锚向量之间的相似度的幅度是一样的，但符号相反。此时在 CNN 看来这两只猫是不同的。但以 LeNet-5 为例，该网络有两个卷积层，如果原始输入 x 经过这两层，那么最后的结果会很混乱：没有修正的系统不能区分以下两种情况：“第一层正响应后第二层负过滤器权重”与“第一层负响应后第二层正过滤器权重”。但是，通过使用非线性激活，CNN 可以轻松排除负值的影响，保证系统的鲁棒性。</p>
+<p>此外，作者还执行了一个有趣的实验，结果引述如下：</p>
+<p>我们使用 MNIST 训练数据集训练了 LeNet-5，并在 MNIST 测试数据集上得到了 98.94% 的正确识别率。然后我们将同一网络应用到了经过灰度反色处理的测试图像上，如图 5 所示。准确度下降到了 37.36%。接下来，我们将 C1 中所有过滤器权重都改成了它们的负值，同时保持网络其它部分不变。这个经过稍微修改的 LeNet-5 在经过灰度反转的测试数据集上得到了 98.94% 的正确识别率，而在原始测试数据集上的正确识别率为 37.36%。</p>
+<p>可以看到，在修改了第一个卷积层中所有的过滤器权重之后得到了对称的结果。这个结果表明添加激活会导致负相关性消失，如果我们将锚图像加倍来学习灰度反转的特征，我们能在这两个测试集上都得到较好的识别表现。</p>
+<p>级联层的优势？</p>
+<p>一般而言，随着CNN 加深，卷积核会尝试基于所有之前核的输出来构建自己的抽象特征。所以深度层能得到全局形义以及高级特征。这其中发生的情况是，作为 RECOS 模型，CNN 尝试利用一种序列修正变换来逐层地聚类相似的输入数据，这等价于相似度测量。输出层预测所有可能决策（比如目标类别）的可能性。训练样本能为图像与其决策标签提供一个关系。而且它们能引导 CNN 构建更合适的锚向量（由此得到更好的聚类），并将聚类后的数据与决策标签连接起来。</p>
+<p><img src="http://p99.pstatp.com/large/pgc-image/d30d0cc2218d435ea8730407dd4c034f" alt="如何从信号角度理解卷积神经网络？"></p>
+<p>上图展现了深度网络的有效性，该实验的细节引述如下：</p>
+<p>我们使用一个示例来阐述这一点。首先，我们对 MNIST 训练和测试数据集进行修改，做法是随机地向 MNIST 数据集中的原始手写数字添加十种不同的背景场景。对于这三列图像，最左列是输入数字图像、中间一列是 6 张来自卷积层和 ReLU 层的谱输出图像、右边两列是 16 张谱输出图像。由于背景的多样性，寻找第一层的优良的锚矩阵是很困难的。但是，这些图像中的背景场景在空间域中并不一致，而前景数字则是一致的。</p>
+<p>使用不同的扭曲背景，CNN 能成功获取表征的模式。注意，在第一层中有大量冗余且不需要的信息，而通过又一次应用特征提取，CNN 能学习到全局模式而非局部细节。也就是说，对于输入向量 x，RECOS 变换会生成一组 K 个非负相关值作为维度为 K 的输出向量。这种表征能逐层实现反复的聚类。最后，标签会引导 CNN 在不同的设定中寻找到同一模式。</p>
+<p>根据上面的分析，我们可以看到卷积层是一种用于自动特征选择的有用模型。无需任何人力工作，它就能度量相似度并将输入数据聚类到不同的区域。但全连接层的作用是什么？</p>
+<p>将 CNN 分解成两个子网络是很常见的：特征提取（FE）子网络和决策（DM）子网络。FE 子网络由多个卷积层构成，而 DM 子网络则由几个全连接层构成。大致来说，FE 子网络是通过一系列 RECOS 变换来进行聚类，目标是新的表征。DM 子网络则是将数据表征连接到决策标签，作用类似于 MLP 中的分类。</p>
+<p>到目前为止，我们都可以说 CNN 在计算机视觉领域都大幅优于经典的机器学习算法。因为 CNN 既能自动提取特征，又能基于这些特征来学习对输入分类，而随机森林（RF）和支持向量机（SVM）等经典算法非常依赖特征工程，但这些特征工程往往又难以执行。</p>
+<p>总结</p>
+<p>总而言之，RECOS 模型为我们提供了一个对卷积神经网络的信号角度的分析。从这个角度，我们可以看到激活和深度架构的有效性。但是，以下领域还需要更多研究努力：网络架构设计、弱监督学习、对错误标签的稳健性、数据集偏差和过拟合问题等。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-12-31
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-01-02_understand-git/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">深入理解git原理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2018/2018-12-27_git_patch/">
+            <span class="next-text nav-default">git打补丁失败</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

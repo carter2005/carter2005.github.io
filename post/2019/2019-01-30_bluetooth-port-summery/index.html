@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>蓝牙调试总结 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort&#43;116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()&#43;56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()&#43;164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort&#43;68) #04 pc 000000000004d7b4" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="蓝牙调试总结" />
+<meta property="og:description" content="最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort&#43;116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()&#43;56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()&#43;164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort&#43;68) #04 pc 000000000004d7b4" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/" />
+<meta property="article:published_time" content="2019-01-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-01-30T00:00:00+00:00" />
+<meta itemprop="name" content="蓝牙调试总结">
+<meta itemprop="description" content="最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort&#43;116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()&#43;56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()&#43;164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort&#43;68) #04 pc 000000000004d7b4">
+<meta itemprop="datePublished" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="880">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="蓝牙调试总结"/>
+<meta name="twitter:description" content="最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort&#43;116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()&#43;56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()&#43;164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort&#43;68) #04 pc 000000000004d7b4"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">蓝牙调试总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-01-30 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中</p>
+<p><strong>情况一</strong></p>
+<p>#00 pc 00000000000229ac /system/lib64/libc.so (abort+116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()+56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()+164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort+68) #04 pc 000000000004d7b4 /system/lib64/hw/bluetooth.default.so (__cfi_check_fail+108) #05 pc 0000000000065408 /system/lib64/hw/bluetooth.default.so (__cfi_check+95240) #06 pc 000000000019690c /system/lib64/hw/bluetooth.default.so (btm_vsc_complete(unsigned char*, unsigned short, unsigned short, void (*)(void*)) [clone .cfi]+140) #07 pc 00000000001a9c94 /system/lib64/hw/bluetooth.default.so (btu_hcif_command_complete_evt_on_task(BT_HDR*) [clone .cfi]+344) #08 pc 0000000000212d6c /system/lib64/hw/bluetooth.default.so (internal_dequeue_ready(void*) [clone .cfi]+112) #09 pc 0000000000219998 /system/lib64/hw/bluetooth.default.so (run_reactor(reactor_t*, int) [clone .cfi]+412) #10 pc 00000000002197d0 /system/lib64/hw/bluetooth.default.so (reactor_start(reactor_t*) [clone .cfi]+84) #11 pc 000000000021b3e4 /system/lib64/hw/bluetooth.default.so (run_thread(void*) [clone .cfi]+356) #12 pc 0000000000082e98 /system/lib64/libc.so (__pthread_start(void*)+36) #13 pc 0000000000024200 /system/lib64/libc.so (__start_thread+68)</p>
+<p><strong>情况二</strong></p>
+<p>01-24 16:55:33.668 2593 2593 F libc : FORTIFY: pthread_mutex_destroy called on a destroyed mutex (0x7658fb5008)</p>
+<p><strong>情况三</strong></p>
+<p>#00 pc 0000000000000000 <!-- raw HTML omitted --> #01 pc 0000000000096908 /system/lib64/libchrome.so (base::debug::TaskAnnotator::RunTask(char const*, base::PendingTask*)+248) #02 pc 00000000000afd14 /system/lib64/libchrome.so (base::MessageLoop::RunTask(base::PendingTask*)+416) #03 pc 00000000000affbc /system/lib64/libchrome.so (base::MessageLoop::DeferOrRunPendingTask(base::PendingTask)+52) #04 pc 00000000000b03f8 /system/lib64/libchrome.so (base::MessageLoop::DoWork()+380) #05 pc 00000000000b1790 /system/lib64/libchrome.so (base::MessagePumpDefault::Run(base::MessagePump::Delegate*)+180) #06 pc 00000000000afa08 /system/lib64/libchrome.so (base::MessageLoop::RunHandler()+112) #07 pc 00000000000cc60c /system/lib64/libchrome.so (base::RunLoop::Run()+136) #08 pc 00000000000f4d58 /system/lib64/hw/bluetooth.default.so (message_loop_run(void*)+336) #09 pc 00000000001c3ab8 /system/lib64/hw/bluetooth.default.so (work_queue_read_cb(void*)+92) #10 pc 00000000001c1bc4 /system/lib64/hw/bluetooth.default.so (run_reactor(reactor_t*, int)+312) #11 pc 00000000001c1a60 /system/lib64/hw/bluetooth.default.so (reactor_start(reactor_t*)+84) #12 pc 00000000001c3540 /system/lib64/hw/bluetooth.default.so (run_thread(void*)+352) #13 pc 0000000000082f7c /system/lib64/libc.so (__pthread_start(void*)+36) #14 pc 00000000000241c0 /system/lib64/libc.so (__start_thread+68)</p>
+<p><strong>情况四</strong></p>
+<p>#00 pc 000000000002296c /system/lib64/libc.so (abort+116) #01 pc 00000000000a0ac8 /system/lib64/libc.so (ifree+1204) #02 pc 00000000000a0bf4 /system/lib64/libc.so (je_free+120) #03 pc 00000000000f929c /system/lib64/hw/bluetooth.default.so (fragment_and_dispatch(BT_HDR*)+160) #04 pc 00000000000f6328 /system/lib64/hw/bluetooth.default.so (event_command_ready(waiting_command_t*)+72) #05 pc 0000000000096908 /system/lib64/libchrome.so (base::debug::TaskAnnotator::RunTask(char const*, base::PendingTask*)+248) #05 pc 0000000000096908 /system/lib64/libchrome.so (base::debug::TaskAnnotator::RunTask(char const*, base::PendingTask*)+248) #06 pc 00000000000afd14 /system/lib64/libchrome.so (base::MessageLoop::RunTask(base::PendingTask*)+416) #07 pc 00000000000affbc /system/lib64/libchrome.so (base::MessageLoop::DeferOrRunPendingTask(base::PendingTask)+52) #08 pc 00000000000b03f8 /system/lib64/libchrome.so (base::MessageLoop::DoWork()+380) #09 pc 00000000000b1790 /system/lib64/libchrome.so (base::MessagePumpDefault::Run(base::MessagePump::Delegate*)+180) #10 pc 00000000000afa08 /system/lib64/libchrome.so (base::MessageLoop::RunHandler()+112) #11 pc 00000000000cc60c /system/lib64/libchrome.so (base::RunLoop::Run()+136) #12 pc 00000000000f4d58 /system/lib64/hw/bluetooth.default.so (message_loop_run(void*)+336) #13 pc 00000000001c3ab8 /system/lib64/hw/bluetooth.default.so (work_queue_read_cb(void*)+92) #14 pc 00000000001c1bc4 /system/lib64/hw/bluetooth.default.so (run_reactor(reactor_t*, int)+312) #15 pc 00000000001c1a60 /system/lib64/hw/bluetooth.default.so (reactor_start(reactor_t*)+84) #16 pc 00000000001c3540 /system/lib64/hw/bluetooth.default.so (run_thread(void*)+352) #17 pc 0000000000082f7c /system/lib64/libc.so (__pthread_start(void*)+36) #18 pc 00000000000241c0 /system/lib64/libc.so (__start_thread+68)</p>
+<p><strong>情况五</strong></p>
+<p>#00 pc 00006fc426a14c00 <!-- raw HTML omitted --> #01 pc 000000000013d230 /system/lib64/hw/bluetooth.default.so (BleAdvertisingManager::CleanUp()+128) #02 pc 000000000013d438 /system/lib64/hw/bluetooth.default.so (btm_ble_multi_adv_cleanup()+68) #03 pc 000000000009ecd0 /system/lib64/hw/bluetooth.default.so (btif_disable_bluetooth()+92) #04 pc 00000000000e7658 /system/lib64/hw/bluetooth.default.so (event_stack_hdl_bt(void*, Stack_Evt_Type)+308) #05 pc 00000000000e7114 /system/lib64/hw/bluetooth.default.so (event_stack_handler(void*)+48) #06 pc 00000000001c3c34 /system/lib64/hw/bluetooth.default.so (work_queue_read_cb(void*)+92) #07 pc 00000000001c1d40 /system/lib64/hw/bluetooth.default.so (run_reactor(reactor_t*, int)+312) #08 pc 00000000001c1bdc /system/lib64/hw/bluetooth.default.so (reactor_start(reactor_t*)+84) #09 pc 00000000001c36bc /system/lib64/hw/bluetooth.default.so (run_thread(void*)+352) #10 pc 0000000000082f7c /system/lib64/libc.so (__pthread_start(void*)+36) #11 pc 00000000000241c0 /system/lib64/libc.so (__start_thread+68)</p>
+<p>第一个cfi错误，说明c代码存在安全漏洞 第二个fortify错误，是android新引入的运行时检查，看起来存在double free 第三四个看起来和runtask相关，没有头绪 第五个是简单的函数调用，不应该存在问题，怀疑堆栈已经乱掉了。</p>
+<p> </p>
+<p><strong>CFI、fornity</strong></p>
+<p>接下来逐一解决，cfi，fortify检查固然更安全，但C代码太灵活，一些函数指针赋值都会触发此类问题，先关闭检查，在android.bp里面添加 sanitize: { never: true, },</p>
+<p><strong>double free</strong> 经过打印，发现fixed_queue_free存在多次调用的情况，添加适当保护，并refine调用者杜绝。</p>
+<p><strong>run_task问题</strong> libchrome更新支持了C17的右值等新特性，更新了模板实现，调用者蓝牙协议栈需要refine相关代码，这里用了更简单的办法，revert libchrome到老一些的版本来避免该问题。 R Run(Args&hellip; args) const &amp; { static_assert(repeat_mode == internal::RepeatMode::Repeating, &ldquo;OnceCallback::Run() may only be invoked on a non-const &quot; &ldquo;rvalue, i.e. std::move(callback).Run().&quot;);</p>
+<p>PolymorphicInvoke f = reinterpret_cast<!-- raw HTML omitted -->(this-&gt;polymorphic_invoke()); return f(this-&gt;bind_state_.get(), std::forward<!-- raw HTML omitted -->(args)&hellip;); }</p>
+<p>R Run(Args&hellip; args) &amp;&amp; { // Move the callback instance into a local variable before the invocation, // that ensures the internal state is cleared after the invocation. // It&rsquo;s not safe to touch |this| after the invocation, since running the // bound function may destroy |this|. Callback cb = std::move(*this); PolymorphicInvoke f = reinterpret_cast<!-- raw HTML omitted -->(cb.polymorphic_invoke()); return f(cb.bind_state_.get(), std::forward<!-- raw HTML omitted -->(args)&hellip;); }</p>
+<p>经过上述修改，蓝牙基本可以工作正常了，表现稳定。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-01-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">蓝牙打电话后播放音乐无声</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2019/2019-01-14_dso-missing-from-command-line/">
+            <span class="next-text nav-default">DSO missing from command line的原因及解决方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

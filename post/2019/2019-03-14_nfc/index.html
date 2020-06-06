@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>nfc基础 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-03-14_nfc/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="nfc基础" />
+<meta property="og:description" content="NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-03-14_nfc/" />
+<meta property="article:published_time" content="2019-03-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-14T00:00:00+00:00" />
+<meta itemprop="name" content="nfc基础">
+<meta itemprop="description" content="NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备">
+<meta itemprop="datePublished" content="2019-03-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-03-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="935">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="nfc基础"/>
+<meta name="twitter:description" content="NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">nfc基础</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-14 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#nfc标签">NFC标签</a></li>
+        <li><a href="#工作模式">工作模式</a></li>
+        <li><a href="#常用软件">常用软件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备、便携式电子产品以及PC和智能控件工具间进行近距离无线通信（一般4cm以内）。可以理解为一种类似蓝牙的功能，但相比蓝牙，NFC在功能实现方面更为简单，可以让消费者简单直观地交换信息、访问内容与服务。</p>
+<h3 id="nfc标签">NFC标签</h3>
+<p>NFC虽然在功能上很强，但这其中却离不开标签的帮助，目前支持NFC的标签类型有四种，并以“1”至“4”来标识，不同的标签拥有不同的格式与容量。下面我们再来了解下这四种标签的不同之处。</p>
+<p>第1类标签(Tag1Type)：此类型基于ISO14443A标准。此类标签具有可读、重新写入的能力，用户可将其配置为只读。存储能力为96字节(最高可扩充到2K字节)，用来存网址URL或其他小量数据富富有余。此类NFC标签的通信速度为106kbit/s。此类标签简洁，故成本效益较好，适用于许多NFC应用。</p>
+<p>第2类标签(Tag2Type)：此类标签也是基于ISO14443A，具有可读、重新写入的能力，用户可将其配置为只读。其基本内存大小为48字节，但可被扩充到2k字节。通信速度也是106kbit/s。</p>
+<p>第3类标签(Tag3Type)：此类标签基于SonyFeliCa体系。具有2k字节内存容量，数据通讯速度为212kbit/s。故此类标签较为适合较复杂的应用，但成本较高。</p>
+<p>第4类标签(Tag4Type)：此类标签被定义为与ISO14443A、B标准兼容。制造时被预先设定为可读/可重写、或者只读。内存容量可达32k字节，通信速度介于106kbit/s和424kbit/s之间。</p>
+<p>从上述不同标签类型的定义可以看出，前两类与后两类在内存容量、构成方面大不相同。其中第1与第2类标签是双态的，可为读/写或只读。第3与第4类则是只读，数据在生产时写入或者通过特殊的标签写入器来写入。</p>
+<h3 id="工作模式">工作模式</h3>
+<ol>
+<li>读写模式：读写nfc tag</li>
+<li>p2p模式：用于android beam，设备间交换数据</li>
+<li>卡模拟模式：可被外置读卡器识别</li>
+</ol>
+<h3 id="常用软件">常用软件</h3>
+<ol>
+<li>NFCard：可以读取公交卡详细信息</li>
+<li>NFCSniffer：可读取卡的相信tag信息</li>
+<li>NXP TagWriter：读写标签</li>
+<li>NXP TagInfo：读取tag详细信息</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-03-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-03-14_nfc-p2p/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">NFC p2p模式</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2019/2019-01-30_bluetooth-discovery-no-name/">
+            <span class="next-text nav-default">刷机后蓝牙广播没有名字，只显示MAC地址</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

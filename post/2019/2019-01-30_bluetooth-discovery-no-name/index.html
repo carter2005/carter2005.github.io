@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>刷机后蓝牙广播没有名字，只显示MAC地址 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="刷机后蓝牙广播没有名字，只显示MAC地址" />
+<meta property="og:description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" />
+<meta property="article:published_time" content="2019-01-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-01-30T00:00:00+00:00" />
+<meta itemprop="name" content="刷机后蓝牙广播没有名字，只显示MAC地址">
+<meta itemprop="description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ">
+<meta itemprop="datePublished" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1111">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="刷机后蓝牙广播没有名字，只显示MAC地址"/>
+<meta name="twitter:description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">刷机后蓝牙广播没有名字，只显示MAC地址</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-01-30 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ_RES_EVT时，构造的消息内只存在mac，dev_class，dev_type。</p>
+<p>static void btif_dm_search_devices_evt(uint16_t event, char* p_param) {
+tBTA_DM_SEARCH* p_search_data;
+BTIF_TRACE_EVENT(&quot;%s event=%s&rdquo;, __func__, dump_dm_search_event(event));</p>
+<p>switch (event) {
+case BTA_DM_DISC_RES_EVT: {
+p_search_data = (tBTA_DM_SEARCH*)p_param;
+/* Remote name update */
+if (strlen((const char*)p_search_data-&gt;disc_res.bd_name)) {
+bt_property_t properties[1];
+bt_status_t status;</p>
+<pre><code>    properties\[0\].type = BT\_PROPERTY\_BDNAME;
+    properties\[0\].val = p\_search\_data-&gt;disc\_res.bd\_name;
+    properties\[0\].len = strlen((char\*)p\_search\_data-&gt;disc\_res.bd\_name);
+    RawAddress&amp; bdaddr = p\_search\_data-&gt;disc\_res.bd\_addr;
+
+    status =
+        btif\_storage\_set\_remote\_device\_property(&amp;bdaddr, &amp;properties\[0\]);
+    ASSERTC(status == BT\_STATUS\_SUCCESS,
+            &quot;failed to save remote device property&quot;, status);
+    HAL\_CBACK(bt\_hal\_cbacks, remote\_device\_properties\_cb, status, &amp;bdaddr,
+              1, properties);
+  }
+  /\* TODO: Services? \*/
+} break;
+
+case BTA\_DM\_INQ\_RES\_EVT: {
+  /\* inquiry result \*/
+  bt\_bdname\_t bdname;
+  uint8\_t remote\_name\_len;
+  tBTA\_SERVICE\_MASK services = 0;
+
+  p\_search\_data = (tBTA\_DM\_SEARCH\*)p\_param;
+  RawAddress&amp; bdaddr = p\_search\_data-&gt;inq\_res.bd\_addr;
+
+  BTIF\_TRACE\_DEBUG(&quot;%s() %s device\_type = 0x%x\\n&quot;, \_\_func\_\_,
+                   bdaddr.ToString().c\_str(),
+                   p\_search\_data-&gt;inq\_res.device\_type);
+  bdname.name\[0\] = 0;
+
+  if (!check\_eir\_remote\_name(p\_search\_data, bdname.name, &amp;remote\_name\_len))
+    check\_cached\_remote\_name(p\_search\_data, bdname.name, &amp;remote\_name\_len);
+
+  /\* Check EIR for remote name and services \*/
+  if (p\_search\_data-&gt;inq\_res.p\_eir) {
+    BTA\_GetEirService(p\_search\_data-&gt;inq\_res.p\_eir,
+                      p\_search\_data-&gt;inq\_res.eir\_len, &amp;services);
+    BTIF\_TRACE\_DEBUG(&quot;%s()EIR BTA services = %08X&quot;, \_\_func\_\_,
+                     (uint32\_t)services);
+    /\* TODO:  Get the service list and check to see which uuids we got and
+     \* send it back to the client. \*/
+  }
+
+  {
+    bt\_property\_t properties\[5\];
+    bt\_device\_type\_t dev\_type;
+    uint32\_t num\_properties = 0;
+    bt\_status\_t status;
+    int addr\_type = 0;
+
+    memset(properties, 0, sizeof(properties));
+    /\* RawAddress \*/
+    BTIF\_STORAGE\_FILL\_PROPERTY(&amp;properties\[num\_properties\],
+                               BT\_PROPERTY\_BDADDR, sizeof(bdaddr), &amp;bdaddr);
+    num\_properties++;
+    /\* BD\_NAME \*/
+    /\* Don't send BDNAME if it is empty \*/
+    if (bdname.name\[0\]) {
+      BTIF\_STORAGE\_FILL\_PROPERTY(&amp;properties\[num\_properties\],
+                                 BT\_PROPERTY\_BDNAME,
+                                 strlen((char\*)bdname.name), &amp;bdname);
+      num\_properties++;
+    }
+
+    /\* DEV\_CLASS \*/
+    uint32\_t cod = devclass2uint(p\_search\_data-&gt;inq\_res.dev\_class);
+    BTIF\_TRACE\_DEBUG(&quot;%s cod is 0x%06x&quot;, \_\_func\_\_, cod);
+    if (cod != 0) {
+      BTIF\_STORAGE\_FILL\_PROPERTY(&amp;properties\[num\_properties\],
+                                 BT\_PROPERTY\_CLASS\_OF\_DEVICE, sizeof(cod),
+                                 &amp;cod);
+      num\_properties++;
+    }
+
+    /\* DEV\_TYPE \*/
+    /\* FixMe: Assumption is that bluetooth.h and BTE enums match \*/
+
+    /\* Verify if the device is dual mode in NVRAM \*/
+    int stored\_device\_type = 0;
+    if (btif\_get\_device\_type(bdaddr, &amp;stored\_device\_type) &amp;&amp;
+        ((stored\_device\_type != BT\_DEVICE\_TYPE\_BREDR &amp;&amp;
+          p\_search\_data-&gt;inq\_res.device\_type == BT\_DEVICE\_TYPE\_BREDR) ||
+         (stored\_device\_type != BT\_DEVICE\_TYPE\_BLE &amp;&amp;
+          p\_search\_data-&gt;inq\_res.device\_type == BT\_DEVICE\_TYPE\_BLE))) {
+      dev\_type = (bt\_device\_type\_t)BT\_DEVICE\_TYPE\_DUMO;
+    } else {
+      dev\_type = (bt\_device\_type\_t)p\_search\_data-&gt;inq\_res.device\_type;
+    }
+
+    if (p\_search\_data-&gt;inq\_res.device\_type == BT\_DEVICE\_TYPE\_BLE)
+      addr\_type = p\_search\_data-&gt;inq\_res.ble\_addr\_type;
+    BTIF\_STORAGE\_FILL\_PROPERTY(&amp;properties\[num\_properties\],
+                               BT\_PROPERTY\_TYPE\_OF\_DEVICE, sizeof(dev\_type),
+                               &amp;dev\_type);
+    num\_properties++;
+    /\* RSSI \*/
+    BTIF\_STORAGE\_FILL\_PROPERTY(&amp;properties\[num\_properties\],
+                               BT\_PROPERTY\_REMOTE\_RSSI, sizeof(int8\_t),
+                               &amp;(p\_search\_data-&gt;inq\_res.rssi));
+    num\_properties++;
+
+    status =
+        btif\_storage\_add\_remote\_device(&amp;bdaddr, num\_properties, properties);
+    ASSERTC(status == BT\_STATUS\_SUCCESS,
+            &quot;failed to save remote device (inquiry)&quot;, status);
+    status = btif\_storage\_set\_remote\_addr\_type(&amp;bdaddr, addr\_type);
+    ASSERTC(status == BT\_STATUS\_SUCCESS,
+            &quot;failed to save remote addr type (inquiry)&quot;, status);
+    /\* Callback to notify upper layer of device \*/
+    HAL\_CBACK(bt\_hal\_cbacks, device\_found\_cb, num\_properties, properties);
+  }
+} break;
+
+case BTA\_DM\_INQ\_CMPL\_EVT: {
+  do\_in\_bta\_thread(
+      FROM\_HERE,
+      base::Bind(&amp;BTM\_BleAdvFilterParamSetup, BTM\_BLE\_SCAN\_COND\_DELETE, 0,
+                 nullptr, base::Bind(&amp;bte\_scan\_filt\_param\_cfg\_evt, 0)));
+} break;
+case BTA\_DM\_DISC\_CMPL\_EVT: {
+  HAL\_CBACK(bt\_hal\_cbacks, discovery\_state\_changed\_cb,
+            BT\_DISCOVERY\_STOPPED);
+} break;
+case BTA\_DM\_SEARCH\_CANCEL\_CMPL\_EVT: {
+  /\* if inquiry is not in progress and we get a cancel event, then
+   \* it means we are done with inquiry, but remote\_name fetches are in
+   \* progress
+   \*
+   \* if inquiry  is in progress, then we don't want to act on this
+   \* cancel\_cmpl\_evt
+   \* but instead wait for the cancel\_cmpl\_evt via the Busy Level
+   \*
+   \*/
+  if (!btif\_dm\_inquiry\_in\_progress) {
+    btgatt\_filt\_param\_setup\_t adv\_filt\_param;
+    memset(&amp;adv\_filt\_param, 0, sizeof(btgatt\_filt\_param\_setup\_t));
+    do\_in\_bta\_thread(
+        FROM\_HERE,
+        base::Bind(&amp;BTM\_BleAdvFilterParamSetup, BTM\_BLE\_SCAN\_COND\_DELETE, 0,
+                   nullptr, base::Bind(&amp;bte\_scan\_filt\_param\_cfg\_evt, 0)));
+    HAL\_CBACK(bt\_hal\_cbacks, discovery\_state\_changed\_cb,
+              BT\_DISCOVERY\_STOPPED);
+  }
+} break;
+</code></pre>
+<p>}
+}</p>
+<p> </p>
+<p>remote name是从eir data内取得的，很显然，我们的蓝牙设备没有广播eir data。</p>
+<p> </p>
+<p>static bool check_eir_remote_name(tBTA_DM_SEARCH* p_search_data,
+uint8_t* p_remote_name,
+uint8_t* p_remote_name_len) {
+const uint8_t* p_eir_remote_name = NULL;
+uint8_t remote_name_len = 0;</p>
+<p>/* Check EIR for remote name and services */
+if (p_search_data-&gt;inq_res.p_eir) {
+p_eir_remote_name = AdvertiseDataParser::GetFieldByType(
+p_search_data-&gt;inq_res.p_eir, p_search_data-&gt;inq_res.eir_len,
+BTM_EIR_COMPLETE_LOCAL_NAME_TYPE, &amp;remote_name_len);
+if (!p_eir_remote_name) {
+p_eir_remote_name = AdvertiseDataParser::GetFieldByType(
+p_search_data-&gt;inq_res.p_eir, p_search_data-&gt;inq_res.eir_len,
+BTM_EIR_SHORTENED_LOCAL_NAME_TYPE, &amp;remote_name_len);
+}</p>
+<pre><code>if (p\_eir\_remote\_name) {
+  if (remote\_name\_len &gt; BD\_NAME\_LEN) remote\_name\_len = BD\_NAME\_LEN;
+
+  if (p\_remote\_name &amp;&amp; p\_remote\_name\_len) {
+    memcpy(p\_remote\_name, p\_eir\_remote\_name, remote\_name\_len);
+    \*(p\_remote\_name + remote\_name\_len) = 0;
+    \*p\_remote\_name\_len = remote\_name\_len;
+  }
+
+  return true;
+}
+</code></pre>
+<p>}</p>
+<p>return false;
+}</p>
+<p> </p>
+<p>搜索BTM_EIR_COMPLETE_LOCAL_NAME_TYPE，发现在bta_dm_set_eir（）内设置，这个函数会被bta_dm_set_dev_name（）调用，继续朝上追，这个函数会在设置蓝牙名称的时候被调用。</p>
+<p>bt_status_t btif_set_adapter_property(const bt_property_t* property) {
+btif_storage_req_t req;
+bt_status_t status = BT_STATUS_SUCCESS;
+int storage_req_id = BTIF_CORE_STORAGE_NOTIFY_STATUS; /* default */
+char bd_name[BTM_MAX_LOC_BD_NAME_LEN + 1];
+uint16_t name_len = 0;</p>
+<p>BTIF_TRACE_EVENT(&ldquo;btif_set_adapter_property type: %d, len %d, 0x%x&rdquo;,
+property-&gt;type, property-&gt;len, property-&gt;val);</p>
+<p>if (!btif_is_enabled()) return BT_STATUS_NOT_READY;</p>
+<p>switch (property-&gt;type) {
+case BT_PROPERTY_BDNAME: {
+name_len = property-&gt;len &gt; BTM_MAX_LOC_BD_NAME_LEN
+? BTM_MAX_LOC_BD_NAME_LEN
+: property-&gt;len;
+memcpy(bd_name, property-&gt;val, name_len);
+bd_name[name_len] = &lsquo;\0&rsquo;;</p>
+<pre><code>  BTIF\_TRACE\_EVENT(&quot;set property name : %s&quot;, (char\*)bd\_name);
+
+  BTA\_DmSetDeviceName((char\*)bd\_name);
+
+  storage\_req\_id = BTIF\_CORE\_STORAGE\_ADAPTER\_WRITE;
+} break;
+
+case BT\_PROPERTY\_ADAPTER\_SCAN\_MODE: {
+  bt\_scan\_mode\_t mode = \*(bt\_scan\_mode\_t\*)property-&gt;val;
+  tBTA\_DM\_DISC disc\_mode;
+  tBTA\_DM\_CONN conn\_mode;
+
+  switch (mode) {
+    case BT\_SCAN\_MODE\_NONE:
+      disc\_mode = BTA\_DM\_NON\_DISC;
+      conn\_mode = BTA\_DM\_NON\_CONN;
+      break;
+
+    case BT\_SCAN\_MODE\_CONNECTABLE:
+      disc\_mode = BTA\_DM\_NON\_DISC;
+      conn\_mode = BTA\_DM\_CONN;
+      break;
+
+    case BT\_SCAN\_MODE\_CONNECTABLE\_DISCOVERABLE:
+      disc\_mode = BTA\_DM\_GENERAL\_DISC;
+      conn\_mode = BTA\_DM\_CONN;
+      break;
+
+    default:
+      BTIF\_TRACE\_ERROR(&quot;invalid scan mode (0x%x)&quot;, mode);
+      return BT\_STATUS\_PARM\_INVALID;
+  }
+
+  BTIF\_TRACE\_EVENT(&quot;set property scan mode : %x&quot;, mode);
+
+  BTA\_DmSetVisibility(disc\_mode, conn\_mode, BTA\_DM\_IGNORE, BTA\_DM\_IGNORE);
+
+  storage\_req\_id = BTIF\_CORE\_STORAGE\_ADAPTER\_WRITE;
+} break;
+case BT\_PROPERTY\_ADAPTER\_DISCOVERY\_TIMEOUT: {
+  /\* Nothing to do beside store the value in NV.  Java
+     will change the SCAN\_MODE property after setting timeout,
+     if required \*/
+  storage\_req\_id = BTIF\_CORE\_STORAGE\_ADAPTER\_WRITE;
+} break;
+case BT\_PROPERTY\_CLASS\_OF\_DEVICE: {
+  DEV\_CLASS dev\_class;
+  memcpy(dev\_class, property-&gt;val, DEV\_CLASS\_LEN);
+
+  BTIF\_TRACE\_EVENT(&quot;set property dev\_class : 0x%02x%02x%02x&quot;, dev\_class\[0\],
+                   dev\_class\[1\], dev\_class\[2\]);
+
+  BTM\_SetDeviceClass(dev\_class);
+} break;
+case BT\_PROPERTY\_BDADDR:
+case BT\_PROPERTY\_UUIDS:
+case BT\_PROPERTY\_ADAPTER\_BONDED\_DEVICES:
+case BT\_PROPERTY\_REMOTE\_FRIENDLY\_NAME:
+  /\* no write support through HAL, these properties are only populated from
+   \* BTA events \*/
+  status = BT\_STATUS\_FAIL;
+  break;
+default:
+  BTIF\_TRACE\_ERROR(&quot;btif\_get\_adapter\_property : invalid type %d&quot;,
+                   property-&gt;type);
+  status = BT\_STATUS\_FAIL;
+  break;
+</code></pre>
+<p>}</p>
+<p>if (storage_req_id != BTIF_CORE_STORAGE_NO_ACTION) {
+/* pass on to storage for updating local database */</p>
+<pre><code>req.write\_req.bd\_addr = RawAddress::kEmpty;
+memcpy(&amp;(req.write\_req.prop), property, sizeof(bt\_property\_t));
+
+return btif\_transfer\_context(execute\_storage\_request, storage\_req\_id,
+                             (char\*)&amp;req,
+                             sizeof(btif\_storage\_req\_t) + property-&gt;len,
+                             btif\_in\_storage\_request\_copy\_cb);
+</code></pre>
+<p>}</p>
+<p>return status;
+}</p>
+<p>既然这样，那就在系统初开始搜索设备的时候，设置一下蓝牙名称再开始搜索就行了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-01-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-03-14_nfc/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">nfc基础</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/">
+            <span class="next-text nav-default">蓝牙打电话后播放音乐无声</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

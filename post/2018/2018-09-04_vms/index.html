@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>虚拟化方案 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。 一、Xen Xen 由剑桥大学开发，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-04_vms/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="虚拟化方案" />
+<meta property="og:description" content="国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。 一、Xen Xen 由剑桥大学开发，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-04_vms/" />
+<meta property="article:published_time" content="2018-09-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-09-04T00:00:00+00:00" />
+<meta itemprop="name" content="虚拟化方案">
+<meta itemprop="description" content="国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。 一、Xen Xen 由剑桥大学开发，">
+<meta itemprop="datePublished" content="2018-09-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2130">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="虚拟化方案"/>
+<meta name="twitter:description" content="国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。 一、Xen Xen 由剑桥大学开发，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">虚拟化方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-04 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>国内外vps主机商提供的主机大多是基于Xen、OpenVZ、KVM、Hyper-V、VMWare五种虚拟化技术。</p>
+<p>一、<a href="https://www.xenproject.org/">Xen</a></p>
+<p>Xen 由剑桥大学开发，它是基于硬件的完全分割，物理上有多少的资源就只能分配多少资源，因此很难超售。可分为Xen-PV（半虚拟化），和Xen-HVM（全虚拟化）。</p>
+<p>Xen是不能超售内存和硬盘的，当母服务器只有16G内存以及100G硬盘时，当开Xen架构（任意一个虚拟化）的1G内存、25G硬盘的子机时，会直接占用服务器1G内存，以及25G硬盘，所以Xen的性能，相比OpenVZ在超售的情况下要好。</p>
+<p>Xen-PV：半虚拟化，所以它仅仅适用于linux系列VPS，但它的性能损失比较少，大概相对于母机的4%-8%左右。 Xen-HVM：全虚拟化，可以安装windows或自由挂载ISO文件安装任意系统，由于是全虚拟化，所以性能损失较大，大概相对于母机性能损失8%-20%左右。</p>
+<p>Xen适用人群：预算较为充足，且希望VPS有较高性能的客户 Xen注意事项：注意Xen-PV和Xen-HVM的区别。 Xen可用系统：Xen-PV：纯Linux，Xen-HVM：支持Windows、Linux等。 Xen代表商家：Linode.com</p>
+<p>二、<a href="https://openvz.org/">OpenVZ</a></p>
+<p>OpenVZ（简 称OVZ）采用SWsoft的Virutozzo虚拟化服务器软件产品的内核，是基于Linux平台的操作系统级服务器虚拟化架构。这个架构直接调用母服务器（母机）中的内核，模拟生成出子服务器（VPS，小机），所以，它经过虚拟化后相对于母服务器，性能损失大概只有的1-3%。</p>
+<p>当然 OpenVZ可以超售，意思味着一台服务器总共16G内存，他可以开出配置为1G内存×17台以上的子服务器。因为他的虚拟架构关系属于：客户用多少，就扣除母服务器多少，所以OpenVZ架构的VPS较为便宜。但由于存在超售因素，如果服务商毫无休止的超售会导致服务器的性能急剧下降。</p>
+<p>OpenVZ另一个特点是，它是直接调用母服务器的内核，所以会导致部分软件无法使用，以及部分内核文件是无法修改。</p>
+<p>OpenVZ适用人群：新手、低预算客户 OpenVZ注意事项：资源不是自己独有的，安装VPN服务需要注意检测虚拟网卡支持。 OpenVZ可用系统：Linux（不支持Windows） OpenVZ代表商家：Buyvm.net</p>
+<p>三、<a href="https://www.linux-kvm.org">KVM</a></p>
+<p>KVM是Linux下的全功能虚拟化架构，基于KVM架构的VPS，默认是没有系统的，可自己上传ISO或调用服务商自带的ISO手动安装系统。这个非常适合热爱DIY自己VPS的客户。</p>
+<p>由于KVM架构全功能虚拟化架构，甚至拥有独立的BIOS控制，所以对母服务器性能影响较大，所以基于KVM的VPS较贵，但KVM VPS相对其它架构的VPS较为自由。</p>
+<p>KVM适用人群：折腾帝 KVM注意事项：虚拟化性能比Xen略低 KVM可用系统：Windows、Linux系列 KVM代表商家：Hostgation.com</p>
+<p>四、<a href="http://www.microsoft.com/zh-cn/server-cloud/">Hyper-V</a></p>
+<p>Hyper-V是微软的一款虚拟化产品，大部分国内的VPS服务商使用这个架构，主要是因为其转为Windows定制，管理起来较为方便。目前的Hyper-V也支持Linux，只不过性能损失比较严重。</p>
+<p>Hyper-V完美支持Windows系统，包括32位和64位。如果大家选购Hyper-V架构的VPS，强烈建议使用Windows。</p>
+<p>Hyper-V目前不能超售内存，但可超售硬盘，硬盘是根据客户使用情况扣除。一般来说，服务器的硬盘不会100%用完，这点不用担心。</p>
+<p>Hyper-V适用人群：Windows系统爱好者 Hyper-V注意事项：Linux操作系统性能较低 Hyper-V可用系统：Windows、Linux</p>
+<p>五、<a href="http://www.vmware.com">VMWare</a></p>
+<p>VMWare 是全球桌面到数据中心虚拟化解决方案的领导厂商，提供各种各样的虚拟化解决方案。EXSI是其代表性的裸虚拟化产品，不但免费，而且支持网页操作，使用起来很方便。其和OpenVZ架构一样，子机用多少内存，就扣除系统多少内存，所以存在超售。如果物理内存不足时可能导致母服务器使用虚拟内存。</p>
+<p>VMWare适用人群：认真建站或挂机的客户 VMWare注意事项：网页或者客户端操作 VMWare可用系统：Windows、Linux系列</p>
+<p>以上衡量超售指的是内存、磁盘，其它硬件条件，如网络带宽、CPU等不在考虑范围内。</p>
+<p>六、Xen和OpenVZ的区别 Xen由dom0和domU组成，Dom0是虚拟出CPU, IO总路线等资源，供工作于DomU上的不同的kernel运行。 这样的好处是，</p>
+<ol>
+<li>对可以运行的操作系统限制较少。</li>
+<li>domU上系统的crash不会影响其他的dom. 当然Dom0发生故障时还是会有问题。 坏处：</li>
+<li>由于需要虚拟CPU,BUS等物理资源，开销会更大点。</li>
+</ol>
+<p>OpenVZ使用了完全不同的方式，它所创造的虚拟机都使用工作在同一个kernel下。 这样的好处是</p>
+<ol>
+<li>性能好。 坏处：</li>
+<li>任何一个kernel bug都会危及所有的虚拟机。 因kernel bug所crash的可能性大大增加。</li>
+<li>他需要对内核作很多的改动。</li>
+</ol>
+<p>区分上最明显的，XEN VPS有swap区，基于RHEL5的OpenVZ VPS没有swap区，基于RHEL6的OpenVZ VPS有VSwap区。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/2018-09-11_lets-encrypt-cert/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Lets_encrypt泛域名证书</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2018/2018-06-15_create-macos-bootdisk/">
+            <span class="next-text nav-default">apple安装镜像dmg制作方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
