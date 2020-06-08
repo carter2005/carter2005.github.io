@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tensorflow Stridedslice算子是怎么计算的 - 天高云淡</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Tensorflow Stridedslice算子是怎么计算的" />
+<meta property="og:description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/" />
+<meta property="article:published_time" content="2020-05-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-19T00:00:00+00:00" />
+<meta itemprop="name" content="Tensorflow Stridedslice算子是怎么计算的">
+<meta itemprop="description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非">
+<meta itemprop="datePublished" content="2020-05-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3574">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tensorflow Stridedslice算子是怎么计算的"/>
+<meta name="twitter:description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">天高云淡</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">天高云淡</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Tensorflow Stridedslice算子是怎么计算的</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-19 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="stridedslice算子定义">stridedslice算子定义</h1>
+<p>strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非常强大，官方文档定义的算子原型如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tf.strided_slice(
+    input_, begin, end, strides=None, begin_mask=0, end_mask=0, ellipsis_mask=0,
+    new_axis_mask=0, shrink_axis_mask=0, var=None, name=None
+)
+</code></pre></td></tr></table>
+</div>
+</div><p>一般来讲，begin，end，strides是1D矢量，个数必须相同，不能多于input的维数，mask参数是与begin，end，strides对应的位变量，用于精细控制挑选数据的行为。</p>
+<h1 id="参数">参数</h1>
+<p>从上面定义可以看出，strided_slice的参数其实蛮多的，细看的话，其实可以分为2类</p>
+<ul>
+<li>input，begin，end，strides</li>
+<li>begin_mask，end_mask，ellipsis_mask，new_axis_mask， shrink_axis_mask</li>
+</ul>
+<p>首先我们看第一类，input，begin，end，strides这几个参数定义了strided_slice算子的基本功能，即从input中按照从begin开始，strides为步进挑选数据，直到到达end，选择的区间是左闭右开的，意味着并不包含end。这几个参数的含义很容易理解，并不存在什么疑义，本文就不再细讲了。</p>
+<p>本文重点关注后面的这5个mask参数，首先我们看官方文档的介绍：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">If the ith bit of begin_mask is set, begin[i] is ignored and the fullest possible range in that dimension is used instead. end_mask works analogously, except with the end range.
+
+If the ith bit of ellipsis_mask is set, as many unspecified dimensions as needed will be inserted between other dimensions. Only one non-zero bit is allowed in ellipsis_mask.
+
+If the ith bit of new_axis_mask is set, then begin, end, and stride are ignored and a new length 1 dimension is added at this point in the output tensor.
+
+If the ith bit of shrink_axis_mask is set, it implies that the ith specification shrinks the dimensionality by 1, taking on the value at index begin[i]. end[i] and strides[i] are ignored in this case.
+</code></pre></td></tr></table>
+</div>
+</div><p>相信绝大多数人看了上文的解释，觉得这5个mask功能还是很明确的，很好理解的，但是，一执行TensorFlow，就会发现实际情况远不是字面的那样，很多场景运行结果完全无法解释清楚，google搜索也没有什么实质的解释，一头雾水。</p>
+<h1 id="计算过程">计算过程</h1>
+<p>下面我们详细分析一下这5个mask之间的关系以及详细计算过程。首先，我们要明确一点，这5个mask并不是独立的，其实它们是互相影响的，尤其是后面3个mask：ellipsis_mask，new_axis_mask，shrink_axis_mask。其次，要注意到，mask的位数是可以少于input的维数的，例如，【6，3，4，5】维的输入数据，你可以指定begin为【0，1】，end为【3，5】，strides为【1，2】，缺失的维度默认全选，这种模式叫稀疏模式，反之，如果begin数据个数和input的维度相同，叫稠密模式。</p>
+<p>有了这些共识，我们接下来就可以分析这几个mask的实际功能了。</p>
+<ul>
+<li>begin_mask，end_mask功能比较简单明确，就是单纯的忽略对应位的begin，end设置，要注意的是，有ellipsis_mask的时候，索引位置需要考虑ellipsis_mask，可能需要适当延后。</li>
+<li>ellipsis_mask：这个mask最多只能设置一位，如果你注意到了，文档上提到过，这个mask设置的时候，as many unspecified dimensions as needed will be inserted between other dimensions，该怎么理解呢？其实是说，如果某位有ellipsis_mask，那么这一个维度将全选，其后未指定的维度也尽可能的全选。稠密模式每个维度都指定了，ellipsis_mask只能影响第i个维度，稀疏模式的话，begin比input少几个维度，elipsis_mask除了影响第i维度，之后的几个维度也会是全选状态，换言之，ellipsis_mask相当于开启全选模式，直到遇到用户指定才退出这种状态，它影响的是一个区间，这也是为什么它只能最多有一位的原因。</li>
+<li>new_axis_mask：简单来说，就是在指定位上增加维度为1的shape，但是，这个增加过程是重复计算的，例如input为【6，3，4，5】，new_axis_mask为0b1111的话，第一次发现最低位为1，索引0增加1，shape变为【1，6，3，4，5】，第二次发现第二位为1，在索引1增加1，shape变为【1，1，6，3，4，5】，第三次发现第三位为1，在索引2增加1，shape变为【1，1，1，6，3，4，5】，第四次发现第四位为1，在索引3增加1，shape变为【1，1，1，1，6，3，4，5】，常规模式这样就可以了，但是，加上ellipsis_mask以后，情况就变得复杂了，因为新增axis以后，稠密模式就不存在了，一定会变成稀疏模式，ellipsis_mask位置会全选一个区间，这时新增的索引就需要考虑ellipsis_mask的位置。特别注意一点，ellipsis_mask和new_axis_mask同时设置的位，new_axis_mask位会失效。ellipsis_mask和shrink_axis_mask同时设置的位，shrink_axis_mask位会失效。</li>
+<li>shrink_axis_mask：把对应索引处维度强制降为1。</li>
+</ul>
+<p>综上，其实问题全是因为ellipsis_mask影响的是一个区间引起的，它可能导致其它mask的索引被迫延后引起的。分析了这么半天，我们还是举个例子来看一下详细的计算过程吧。</p>
+<p>假设输入是【6，3，4，10】，tf.strided_slice(input_data, [0, 0, 2, 2], [3, 2, 4, 8], [1, 1, 1, 1], new_axis_mask=0b1001, shrink_axis_mask=4, ellipsis_mask=8)，因为最高位ellipsis_mask和new_axis_mask同时设置上了，所以new_axis_mask其实等价于0b0001，新增完axis，shape变为【1，6，3，4，10】，然后列下表计算</p>
+<table>
+<thead>
+<tr>
+<th>axis</th>
+<th>1</th>
+<th>6</th>
+<th>3</th>
+<th>4（此位ellipsis，将替换原始输入）</th>
+<th>10(此位没有对应数据，全选)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2&ndash;&gt;0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>end</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>8&ndash;&gt;4</td>
+<td>10</td>
+</tr>
+<tr>
+<td>strides</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1&ndash;&gt;1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>output</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>最后把结果第三位删掉（强制变成维度为1），所以最终的结果是【1，2，4，10】</p>
+<p>考虑另一个例子，输入不变，还是【6，3，4，10】，tf.strided_slice(input_data, [0, 0, 2, 2], [3, 2, 4, 8], [1, 1, 1, 1], new_axis_mask=0b1001, shrink_axis_mask=4, ellipsis_mask=4)，ellipsis_mask和shrink_axis_mask同时存在，shrink_axis_mask将失效，先做new_axis，第一次发现第0位是1，shape变为【1，6，3，4，10】，第二次发现第三位是1，这个位置比ellipsis的位置要远，input总共添加2维，将变成6维，begin只有4维，ellipsis将从第3位开始全选，维持1+（6-4）维，所以这个插入的位置只能是最后一个，也就是说，shape将变为【1，6，3，4，10，1】，然后列表计算</p>
+<table>
+<thead>
+<tr>
+<th>axis</th>
+<th>1</th>
+<th>6</th>
+<th>3（ellipsis）</th>
+<th>4（ellipsis）</th>
+<th>10（ellipsis）</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin</td>
+<td>0</td>
+<td>0</td>
+<td>2&ndash;&gt;0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>end</td>
+<td>3</td>
+<td>2</td>
+<td>4&ndash;&gt;3</td>
+<td>4</td>
+<td>10</td>
+<td>8</td>
+</tr>
+<tr>
+<td>strides</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>output</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>10</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>结果是【1，2，3，4，10，1】</p>
+<p>上述计算过程的核心是列表计算，核心思想是利用下述原理：</p>
+<ol>
+<li>添加的维度为1其实并不影响存贮的数据，只是view或者解释发生了改变。</li>
+<li>添加的维度不管怎么计算，只能输出1，该位对结果没影响，选择数据时可以跳过新增的维度</li>
+<li>shrink_mask位可以认为强制输出第一个元素，可以认为没有</li>
+</ol>
+<p>主要步骤</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>remove_conflict</td>
+<td>存在ellipsis_mask的话，shrink_mask对应位无效，new_axis_mask对应位也忽略，修改输入mask数据</td>
+</tr>
+<tr>
+<td>process_new_axis_mask</td>
+<td>对inputShape这个vector循环做insert 1的操作，增加时需要考虑ellipsis区间，实现维度增加1，增加后，inputShape最多变为原先2倍。</td>
+</tr>
+<tr>
+<td>process_elippsis_mask</td>
+<td>强制设置对应ellipsis区间begin, end, stride数据为【0，N, 1】</td>
+</tr>
+<tr>
+<td>fill_missing_shape</td>
+<td>填补缺失的begin，end，stride，数据选择inputShape对应的最大值</td>
+</tr>
+<tr>
+<td>clamp(begin)</td>
+<td>begin为负则加N，使其落在【0， N-1】区间，使输入标准化</td>
+</tr>
+<tr>
+<td>clamp(end)</td>
+<td>end为负则加N，使其落在【0， N-1】区间，使输入标准化</td>
+</tr>
+<tr>
+<td>process_begin_mask</td>
+<td>有begin_mask的话，正向stride&gt;0，设begin设为0，反向stride&lt;0，设begin为N</td>
+</tr>
+<tr>
+<td>process_end_mask</td>
+<td>有end_mask的话，正向stride&gt;0，设end为N，反向stride&lt;0，设end为0</td>
+</tr>
+<tr>
+<td>process_shrink_mask</td>
+<td>强制end，stride为【begin+1，1】，对应位只输出维度1，等价于可以忽略</td>
+</tr>
+<tr>
+<td>compute_output_shape</td>
+<td>根据inputShape， begin， end， stride计算出来新的outputShape：列等式，逐位计算，inputShape为1的话，只能输出1，结果删掉shrink_mask指定的位</td>
+</tr>
+<tr>
+<td>compute_pick_shape</td>
+<td>基本等同outputShape计算，会跳过新增的维度，确保和最初的输入维度相同，不用考虑shrink的维度</td>
+</tr>
+<tr>
+<td>pick_data</td>
+<td>根据pickShape对应的begin，end，stride挑选数据出来，挑选维度最多其实与原先维度相同，新增的1可以忽略掉。</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/2020-05-05_phicomm-n1/">
+            <span class="next-text nav-default">最不正经的NAS - N1盒子</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

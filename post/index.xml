@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 天高云淡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://carter2005.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tensorflow Stridedslice算子是怎么计算的</title>
+      <link>https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/</link>
+      <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/</guid>
+      <description>stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非</description>
+    </item>
     
     <item>
       <title>最不正经的NAS - N1盒子</title>
