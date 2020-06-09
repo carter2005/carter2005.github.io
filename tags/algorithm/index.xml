@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on 天高云淡</title>
+    <link>https://carter2005.github.io/tags/algorithm/</link>
+    <description>Recent content in algorithm on 天高云淡</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>广播机制</title>
+      <link>https://carter2005.github.io/post/2020/2020-03-18_broadcast/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-03-18_broadcast/</guid>
+      <description>背景 tf，PyTorch，numpy的广播其实和python的是一样的，算子支持广播的话可以简化代码（减少准备数据的代码），减少内存消耗。 例</description>
+    </item>
+    
+  </channel>
+</rss>

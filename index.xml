@@ -48,6 +48,15 @@
     </item>
     
     <item>
+      <title>广播机制</title>
+      <link>https://carter2005.github.io/post/2020/2020-03-18_broadcast/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-03-18_broadcast/</guid>
+      <description>背景 tf，PyTorch，numpy的广播其实和python的是一样的，算子支持广播的话可以简化代码（减少准备数据的代码），减少内存消耗。 例</description>
+    </item>
+    
+    <item>
       <title>群晖隐藏启动盘</title>
       <link>https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/</link>
       <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
