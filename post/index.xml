@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 天高云淡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 19 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 10:21:20 +0800</lastBuildDate>
     
 	<atom:link href="https://carter2005.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2020 06 09_git多仓库管理</title>
+      <link>https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 09 Jun 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/</guid>
+      <description>背景 随着项目日益复杂，开发人员的增多，用单独的git做项目管理会遇到不少问题 产生单人维护一个模块的需求，对应一个或者有限的几个git，这样逻</description>
+    </item>
     
     <item>
       <title>Tensorflow Stridedslice算子是怎么计算的</title>
