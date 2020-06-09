@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>基于hugo的个人博客系统</title>
+      <link>https://carter2005.github.io/post/2020/2020-06-07_hugo-blog/</link>
+      <pubDate>Sun, 07 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-06-07_hugo-blog/</guid>
+      <description>之前使用wordpress记录博客，依赖php，占用资源挺多的，在搬瓦工vps上运行也谈不上快，最主要的是申请的tk域名不会被搜索引擎引用，</description>
+    </item>
+    
+    <item>
       <title>Tensorflow Stridedslice算子是怎么计算的</title>
       <link>https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/</link>
       <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
