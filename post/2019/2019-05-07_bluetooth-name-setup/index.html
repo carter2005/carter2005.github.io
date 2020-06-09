@@ -316,25 +316,7 @@ p_prop-&gt;val);</p>
     </footer>
   </article>
         </div>
-        <div id="comments-gitment"></div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      var gitment = new Gitment({
-        id: '2019-05-07 00:00:00 \u002b0000 UTC',
-        title: '蓝牙名称设置',
-        link: decodeURI(location.href),
-        desc: 'java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(\u0026quot;%s\u0026rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-\u0026gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-\u0026gt;GetArrayLength(value); prop.val = val;',
-        owner: 'carter2005',
-        repo: 'carter2005.github.io',
-        oauth: {
-          client_id: '206c894eef64c06153ba',
-          client_secret: '25bc0de5697303513797f269fbbc31ac5c419c10'
-        }
-      });
-      gitment.render('comments-gitment');
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+        
 
   
 
