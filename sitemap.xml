@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://carter2005.github.io/</loc>
+    <lastmod>2020-06-09T10:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2020-06-09T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,13 +17,6 @@
   
   <url>
     <loc>https://carter2005.github.io/post/</loc>
-    <lastmod>2020-06-09T10:21:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://carter2005.github.io/</loc>
     <lastmod>2020-06-09T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
