@@ -153,16 +153,16 @@
 <p>2019年12月12日Pavel Senchanka在Google TensorFlow官方blog上提出了一种基于TsnsorFlow Lite实现的端侧模型定制化的文章（<a href="https://blog.tensorflow.org/2019/12/example-on-device-model-personalization.html"><strong>Example on-device model personalization with TensorFlow Lite</strong></a>），该文章通过一个TensorFlow Lite demo程序，演示了在移动设备上如何利用已经预先训练好的MobileNet V2模型，通过替换最后几层为softmax分类器形成一个新的模型，然后在移动设备上只训练softmax部分从而达到图像分类的目的，也就是我们常说的端侧迁移学习。</p>
 <p>该方案解决了TensorFlow传统方案模型训练所需数据多，计算量大，耗时长的缺点，为移动设备参与训练，学习打开了一个全新的大门，在计算量与效果之间取得了很好的平衡。该演示demo程序充分考虑了移植需求，converter工具和runtime可以很简单的应用到其他类似需求上，非常值得借鉴。</p>
 <h3 id="232--实现方案">2.3.2  实现方案</h3>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200312164019028.png" alt="image-20200312164019028"></p>
+<p><img src="/post/image/image-20200312164019028.png" alt="image-20200312164019028"></p>
 <p>Pavel Senchanka方案基于最简单的transfer learning模型，也即fine tune模型。它要求source data（预训练模型用的数据）和dest data（新分类任务数据）都是label过的，且基于如下知识：</p>
 <ul>
 <li>预先训练好的模型是久经考验的经典模型，训练非常耗时。</li>
 <li>图像分类模型前面一些layer是提取特征，后面一些layer是分类。</li>
 <li>图像分类模型替换掉最后面的分类layer，可以transfer learning到不同的分类能力。</li>
 </ul>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5CTransferLearningUsingAlexNetExample_01.png" alt="transfer learning"></p>
+<p><img src="/post/image/TransferLearningUsingAlexNetExample_01.png" alt="transfer learning"></p>
 <p>Pavel Senchanka方案系统框架如下图所示：</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5CsDAezIApe_pdRnU8tGB0Vfg.png" alt="transfer learning model"></p>
+<p><img src="/post/image/sDAezIApe_pdRnU8tGB0Vfg.png" alt="transfer learning model"></p>
 <p>简单来讲，设计分为2部分，以上图虚线为分割：</p>
 <ul>
 <li>上半部分的核心是Transfer Learning converter这个工具（python实现），它借助TensorFlow Lite converter命令将2个输入base和head模型转换成runtime需要的模型组，即迁移学习模型，完成模型准备工作，该步骤可在云端或者工作站进行。</li>
@@ -365,7 +365,7 @@ tflite-transfer-convert <span class="se">\
 </tr>
 </tbody>
 </table>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200319144931162.png" alt="image-20200319144931162"></p>
+<p><img src="/post/image/image-20200319144931162.png" alt="image-20200319144931162"></p>
 <h4 id="2332-应用">2.3.3.2 应用</h4>
 <p>普通android应用，调用camera模块获取照片先进行训练，然后就可以执行推理。</p>
 <p><!-- raw HTML omitted --></p>
@@ -422,7 +422,7 @@ tflite-transfer-convert <span class="se">\
 </div>
 </div><h4 id="2333-runtime">2.3.3.3 runtime</h4>
 <p>这是一个可复用的gradle模块，目前只实现了android版本，可以很方便地集成在任何一个android应用里。其框架如下图所示，LiteXXXModel的几个类用于加载，管理converter转换出来的迁移学习模型，每个文件对应一个类，AssetModelLoader是对外的接口，可供app使用。TransferLearningModel是runtime的核心，完成迁移学习模型参数设置，训练，推理功能，app一般通过它来同runtime交互实现迁移学习。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200318134626408.png" alt="image-20200318134626408"></p>
+<p><img src="/post/image/image-20200318134626408.png" alt="image-20200318134626408"></p>
 <p>训练代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -606,7 +606,7 @@ tflite-transfer-convert <span class="se">\
 
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200319162955009.png" alt="image-20200319162955009"></p>
+</div><p><img src="/post/image/image-20200319162955009.png" alt="image-20200319162955009"></p>
 <p>推理代码：由bottleneck模型和inference模型组合计算推理结果</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

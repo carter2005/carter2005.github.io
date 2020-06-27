@@ -138,7 +138,7 @@
     <div class="post-content">
       <h1 id="背景">背景</h1>
 <p>反向传播算法的核心是<!-- raw HTML omitted -->按照梯度下降的方向更新参数<!-- raw HTML omitted -->，从而取得函数的<!-- raw HTML omitted -->局部<!-- raw HTML omitted -->极小值（不能保证获得最优解）。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cgradient.png" alt="image-20200114192450339"></p>
+<p><img src="/post/image/gradient.png" alt="image-20200114192450339"></p>
 <p>误差函数，激励函数的表达式可能很复杂，公式推导起来异常复杂，如何计算梯度就变得很关键。tensorflow为此引入了自动梯度计算工具，大大简化了梯度的计算过程，让人们从复杂的推导中解放出来。</p>
 <h1 id="常见方法">常见方法</h1>
 <p>参见 <a href="https://blog.csdn.net/aws3217150/article/details/70214422">https://blog.csdn.net/aws3217150/article/details/70214422</a></p>
@@ -171,18 +171,18 @@ x
 )
 $$
 可以将其转化为如下计算图：</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cfunction_graph.png" alt="function_graph"></p>
+<p><img src="/post/image/function_graph.png" alt="function_graph"></p>
 <p>转化成如上DAG（有向无环图）结构之后，我们可以很容易分步计算函数的值，并求取它每一步的导数值：</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbp_forward_calculate.png" alt="bp_forward_calculate"></p>
+<p><img src="/post/image/bp_forward_calculate.png" alt="bp_forward_calculate"></p>
 <p>神经网络一般输入特别大，输出很小，这样计算的话，计算量特别大，所以一般采用反向计算方式。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbp_reverse_calculate.png" alt="image-20200114195757244"></p>
+<p><img src="/post/image/bp_reverse_calculate.png" alt="image-20200114195757244"></p>
 <p>上述过程其实就是常见的链式求导过程。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbp_reverse_calculate_2.png" alt="image-20200114200319615"></p>
+<p><img src="/post/image/bp_reverse_calculate_2.png" alt="image-20200114200319615"></p>
 <p>vo，v-1存在2个输入，所以要计算多次。</p>
 <p>反向算法计算一次就可以算出所有的梯度，大大提升了效率。</p>
 <h1 id="tensorflow实现">tensorflow实现</h1>
 <p>自动微分会将问题转化成一种有向无环图，因此我们必须构造基本的图部件，包括节点和边。可以先看看节点是如何实现的：
-<img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctensorflow_node.png" alt="tensorflow_node">
+<img src="/post/image/tensorflow_node.png" alt="tensorflow_node">
 首先节点可以分为三种：</p>
 <ul>
 <li>常数节点</li>
@@ -190,9 +190,9 @@ $$
 <li>带操作算子节点</li>
 </ul>
 <p>因此Node类中定义了op成员用于存储节点的操作算子，const_attr代表节点的常数值，name是节点的标识，主要用于调试。对于边的实现则简单的多，每个节点只要知道本身的输入节点即可，因此用inputs来描述节点的关系。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctesorflow_op.png" alt="tesorflow_op"></p>
+<p><img src="/post/image/tesorflow_op.png" alt="tesorflow_op"></p>
 <p>op实现了对应梯度的计算方法</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctensorflow_op2.png" alt="tensorflow_op2"></p>
+<p><img src="/post/image/tensorflow_op2.png" alt="tensorflow_op2"></p>
 
     </div>
 

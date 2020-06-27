@@ -209,7 +209,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 <p>例如：在ARMv7的NEON unit中，register file总大小是1024-bit，可以划分为16个128-bit的Q-register(Quadword register)或者32个64-bit的D-register(Dualword register)，也就是说，最长的寄存器位宽是128-bit。那么，假设我们采用32-bit单精度浮点数float来做浮点运算，那么可以把最多128/32=4个浮点数打包放到Q-register中做运算，即4个4个参与计算，从而提高吞吐量，减少loop次数。</p>
 <p>neon指令集列表：https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/ARM-NEON-Intrinsics.html#ARM-NEON-Intrinsics</p>
 <p>ARMv7 与 ARMv8的区别</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Carm_arch.png" alt="arm_arch"></p>
+<p><img src="/post/image/arm_arch.png" alt="arm_arch"></p>
 <h2 id="指令集优化例子">指令集优化例子</h2>
 <h3 id="汇编-1">汇编</h3>
 <div class="highlight"><div class="chroma">

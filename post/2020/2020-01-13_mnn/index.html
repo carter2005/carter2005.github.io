@@ -213,14 +213,14 @@
 </div>
     <div class="post-content">
       <h1 id="简介">简介</h1>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn.png" alt="banner.png"></p>
+<p><img src="/post/image/mnn.png" alt="banner.png"></p>
 <p><a href="https://github.com/alibaba/MNN">MNN</a>是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等20多个App中使用，覆盖直播、短视频、搜索推荐、商品图像搜索、互动营销、权益发放、安全风控等场景。此外，IoT等场景下也有若干应用。</p>
 <h1 id="特点">特点</h1>
-<p><img src="..%5Cimage%5Cmnn_status.png" alt="img"></p>
-<p><img src="..%5Cimage%5Cmnn_design.png" alt="img"></p>
-<p><img src="..%5Cimage%5Cmnn_convert.png" alt="img"></p>
-<p><img src="..%5Cimage%5Cmnn_quantization.png" alt="img"></p>
-<p><img src="..%5Cimage%5Cmnn_character.png" alt="img"></p>
+<p><img src="/post/image/mnn_status.png" alt="img"></p>
+<p><img src="/post/image/mnn_design.png" alt="img"></p>
+<p><img src="/post/image/mnn_convert.png" alt="img"></p>
+<p><img src="/post/image/mnn_quantization.png" alt="img"></p>
+<p><img src="/post/image/mnn_character.png" alt="img"></p>
 <h3 id="轻量性">轻量性</h3>
 <ul>
 <li>针对端侧设备特点深度定制和裁剪，无任何依赖，可以方便地部署到移动设备和各种嵌入式设备中。</li>
@@ -249,12 +249,12 @@
 <li>支持只运行网络中的一部分，或者指定CPU和GPU间并行运行。</li>
 </ul>
 <h1 id="架构">架构</h1>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_architecture.png" alt="architecture.png"></p>
+<p><img src="/post/image/mnn_architecture.png" alt="architecture.png"></p>
 <p>MNN可以分为Converter和Interpreter两部分。</p>
 <p>Converter由Frontends和Graph Optimize构成。前者负责支持不同的训练框架，MNN当前支持Tensorflow(Lite)、Caffe和ONNX(PyTorch/MXNet的模型可先转为ONNX模型再转到MNN)；后者通过算子融合、算子替代、布局调整等方式优化图。</p>
 <p>Interpreter由Engine和Backends构成。前者负责模型的加载、计算图的调度；后者包含各计算设备下的内存分配、Op实现。在Engine和Backends中，MNN应用了多种优化方案，包括在卷积和反卷积中应用Winograd算法、在矩阵乘法中应用Strassen算法、低精度计算、Neon优化、手写汇编、多线程优化、内存复用、异构计算等。</p>
 <h1 id="用法">用法</h1>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_usage.png" alt="concept.png"></p>
+<p><img src="/post/image/mnn_usage.png" alt="concept.png"></p>
 <ul>
 <li>训练</li>
 </ul>
@@ -952,7 +952,7 @@ private:
 <p>MNN的实现也是简单的按行数据并行处理。</p>
 <p>矩阵乘法
 矩阵乘法的目的是完成一个计算：C = A * B，其中A是h * k, B是k * w，所以C是h * w。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_matrix_multiply.png" alt="å¨è¿éæå¥å¾çæè¿°"></p>
+<p><img src="/post/image/mnn_matrix_multiply.png" alt="å¨è¿éæå¥å¾çæè¿°"></p>
 <p>常用的方式是分行处理，对于C的第一行，可以按如下方式处理：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1764,7 +1764,7 @@ vst1q_f32(cLine, sum0);
 </div><p>广播允许我们执行隐藏的功能，这使代码更简单，并且提高了内存的使用效率，因为我们不需要再使用其他的操作。</p>
 <h2 id="机制">机制</h2>
 <p>Broadcasting 机制的核心思想是普适性，即同一份数据能普遍适合于其他位置。在验证普适性之前，需要先将张量shape 靠右对齐，然后进行普适性判断：对于长度为1 的维度，默认这个数据普遍适合于当前维度的其他位置；对于不存在的维度，则在增加新维度后默认当前数据也是普适于新维度的，从而可以扩展为更多维度数、任意长度的张量形状。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbroadcast.png" alt="image-20200113101343128"></p>
+<p><img src="/post/image/broadcast.png" alt="image-20200113101343128"></p>
 <h2 id="converter实现">converter实现</h2>
 <p>converter将tf，caffe模型转换为mnn模型，不涉及计算，未发现广播相关代码</p>
 <h2 id="interpreter实现">interpreter实现</h2>

@@ -201,12 +201,12 @@
 <h2 id="22-发展历程">2.2 发展历程</h2>
 <p>人工智能的发展主要经历过三个阶段，每个阶段都代表了人们从不同的角度尝试实现人工智能的探索足迹。早期，人们试图通过总结、归纳出一些逻辑规则，并将逻辑规则以计算机程序的方式实现，来开发出智能系统。但是这种显式的规则往往过于简单，并且很难表达复杂、抽象的概念和规则。这一阶段被称为推理期。</p>
 <p>1970 年代，科学家们尝试通过知识库加推理的方式解决人工智能，通过构建庞大复杂的专家系统来模拟人类专家的智能水平。这些明确指定规则的方式存在一个最大的难题，就是很多复杂、抽象的概念无法用具体的代码实现。比如人类对图片的识别、对语言的理解过程，根本无法通过既定规则模拟。为了解决这类问题，一门通过让机器自动从数据中学习规则的研究学科诞生了，称为机器学习，并在1980 年代成为人工智能中的热门学科。在机器学习中，有一门通过神经网络来学习复杂、抽象逻辑的方向，称为神经网络。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="神经网络发展史"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="神经网络发展史"></p>
 <p>神经网络方向的研究经历了两起两落。2012 年开始，由于效果极为显著，应用深层神经网络技术在计算机视觉、自然语言处理、机器人等领域取得了重大突破，部分任务上甚至超越了人类智能水平，开启了以深层神经网络为代表的人工智能的第三次复兴。深层神经网络有了一个新名字，叫作深度学习。一般来讲，神经网络和深度学习的本质区别并不大，深度学习特指基于深层神经网络实现的模型或算法。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cai_relation.png" alt="image-20200117100858762"></p>
+<p><img src="/post/image/ai_relation.png" alt="image-20200117100858762"></p>
 <h2 id="23-深度学习算法">2.3 深度学习算法</h2>
 <p>基于规则的系统一般会编写显式的规则逻辑，这些逻辑一般是针对特定的任务设计的，并不适合其他任务。传统的机器学习算法一般会人为设计具有一定通用性的特征检测方法，如SIFT、HOG 特征，这些特征能够适合某一类的任务，具有一定的通用性，但是如何设计特征方法，以及特征方法的优劣性是问题的关键。神经网络的出现，使得人为设计特征这一部分工作可以通过神经网络让机器自动学习完成，不需要人类干预。但是浅层的神经网络的特征提取能力较为有限，而深层的神经网络擅长提取高层、抽象的特征，因此具有更好的性能表现。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cai_different_method.png" alt="image-20200117101334197"></p>
+<p><img src="/post/image/ai_different_method.png" alt="image-20200117101334197"></p>
 <h2 id="24-深度学习应用">2.4 深度学习应用</h2>
 <h3 id="241-计算机视觉">2.4.1 计算机视觉</h3>
 <ul>
@@ -232,19 +232,19 @@
 <h3 id="311-神经元模型">3.1.1 神经元模型</h3>
 <p>详见  <a href="https://www.cnblogs.com/maybe2030/p/5597716.html">https://www.cnblogs.com/maybe2030/p/5597716.html</a></p>
 <p>生物神经元模型，是现代深度学习的基石。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E5%85%83.png" alt="1575616572055"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E5%85%83.png" alt="1575616572055"></p>
 <p>抽象神经元模型</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8D%95%E5%85%83.PNG" alt="神经网络单元"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8D%95%E5%85%83.PNG" alt="神经网络单元"></p>
 <p>参数𝜃 = {𝑤1, 𝑤2, 𝑤3, . . . , 𝑤𝑛, 𝑏}确定了神经元的状态，通过固定𝜃参数即可确定此神经元的处理逻辑。当神经元输入节点数𝑛 = 1(单输入)时，神经元数学模型可进一步简化为：
 𝑦 = 𝑤𝑥 + 𝑏</p>
 <h3 id="312-两层神经网络">3.1.2 两层神经网络</h3>
 <p>两层神经网络除了包含一个输入层，一个输出层以外，还增加了一个中间层。此时，中间层和输出层都是计算层。当增加一个计算层以后，两层神经网络不仅可以解决异或问题，而且具有非常好的非线性分类效果。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C.png" alt="1575617816143"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E6%95%88%E6%9E%9C.PNG" alt="两层网络效果"></p>
+<p><img src="/post/image/%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C.png" alt="1575617816143"></p>
+<p><img src="/post/image/%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E6%95%88%E6%9E%9C.PNG" alt="两层网络效果"></p>
 <h2 id="32-python">3.2 python</h2>
 <p><a href="https://www.runoob.com/python3/python3-tutorial.html">https://www.runoob.com/python3/python3-tutorial.html</a></p>
 <p>python速查表</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cpython_quick.png" alt="python_quick"></p>
+<p><img src="/post/image/python_quick.png" alt="python_quick"></p>
 <h2 id="33-tensorflow">3.3 tensorflow</h2>
 <p>tensorflow是google主导的，目前最火的开源深度学习框架。</p>
 <p>速查表：https://aicheatsheets.com/static/pdfs/tensorflow_v_2.0.pdf</p>
@@ -290,12 +290,12 @@
 <li>支持只运行网络中的一部分，或者指定CPU和GPU间并行运行。</li>
 </ul>
 <h2 id="42-架构">4.2 架构</h2>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_architecture.png" alt="architecture.png"></p>
+<p><img src="/post/image/mnn_architecture.png" alt="architecture.png"></p>
 <p>MNN可以分为Converter和Interpreter两部分。</p>
 <p>Converter由Frontends和Graph Optimize构成。前者负责支持不同的训练框架，MNN当前支持Tensorflow(Lite)、Caffe和ONNX(PyTorch/MXNet的模型可先转为ONNX模型再转到MNN)；后者通过算子融合、算子替代、布局调整等方式优化图。</p>
 <p>Interpreter由Engine和Backends构成。前者负责模型的加载、计算图的调度；后者包含各计算设备下的内存分配、Op实现。在Engine和Backends中，MNN应用了多种优化方案，包括在卷积和反卷积中应用Winograd算法、在矩阵乘法中应用Strassen算法、低精度计算、Neon优化、手写汇编、多线程优化、内存复用、异构计算等。</p>
 <h2 id="43-用法">4.3 用法</h2>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_usage.png" alt="concept.png"></p>
+<p><img src="/post/image/mnn_usage.png" alt="concept.png"></p>
 <ul>
 <li>训练</li>
 </ul>
@@ -468,10 +468,10 @@
 </tbody>
 </table>
 <p>mnn定义可以去https://www.yuque.com/mnn/en/ops搜索算子名称exp</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_op_define.png" alt="image-20200117143019395"></p>
+<p><img src="/post/image/mnn_op_define.png" alt="image-20200117143019395"></p>
 <p>由MNN文档可以看出，tensorflow的exp算子，MNN和caffe是用UnaryOp实现的，UnaryOp其实支持好几种类型的运算：rsqrt，square，neg，exp，sqrt等，是个大的集合，输入输出对象都是是float32类型的浮点数，数据支持NHWC或者NCHW存贮格式。</p>
 <p>接下来，我们去tensorflow文档 <a href="https://www.tensorflow.org/api_docs/python/tf">https://www.tensorflow.org/api_docs/python/tf</a> 里面搜索exp，可以找到</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctensorflow_op3.png" alt="image-20200117144021744"></p>
+<p><img src="/post/image/tensorflow_op3.png" alt="image-20200117144021744"></p>
 <p>跳转tensorflow::ops::Exp的定义，我们能看到tensorflow对该算子的定义，功能描述及使用例子。重点部分见代码中文注释，以下类同。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

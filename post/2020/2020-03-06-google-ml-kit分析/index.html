@@ -212,19 +212,19 @@
 </div>
 </div><p>机器学习套件是一个移动 SDK，它通过一个强大且易用的软件包将 Google 的机器学习专业技术应用到<!-- raw HTML omitted -->Android 和 iOS 应用<!-- raw HTML omitted -->中。无论您是刚开始接触机器学习，还是拥有丰富的相关经验，只需几行代码即可实现所需的功能。您无需具备丰富的神经网络或模型优化知识即可开始使用该套件。另一方面，如果您是一名经验丰富的机器学习开发者，机器学习套件提供了便捷的 API，可帮助您在移动应用中使用自定义 TensorFlow Lite 模型。</p>
 <p>目前ML Kit提供的功能如下：</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304151323970.png" alt="image-20200304151323970"></p>
+<p><img src="/post/image/image-20200304151323970.png" alt="image-20200304151323970"></p>
 <h1 id="2-ml-kit架构">2. ML Kit架构</h1>
 <p>首先，我们注意到，ML Kit是FireBase的一部分，FireBase是一个用于构建移动应用、提供实时数据存储和同步、用户身份验证等功能的平台。</p>
 <p>Firebase成立于2011年，在被Google收购之前，Firebase是一个协助开发者快速构建App，能够提供移动应用专用开发平台及SDK的一款产品，简单的说就是一套集成后台服务工具。在2014年，谷歌收购了Firebase，在2018年的Google I/O大会上，谷歌发表了新版的Firebase，新的Firebase整合了Google既有的云端服务与工具，扩大支援更全面的功能，涵盖<!-- raw HTML omitted -->开发、成长与营收<!-- raw HTML omitted -->三阶段，并整合分析工具，其分析工具专为App所设计，并以事件和使用者分析为主。在开发阶段所提供的后端服务，包括即时资料库(Realtime database)、身份验证(Authentication)、主机(Hosting)、储存(Storage)、云端讯息(Cloud Messaging)及远端配置(Remote Config)等后端服务，并提供Android测试实验室(Test Lab for Android)，以及当机报告等管理App品质的服务。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304152044290.png" alt="image-20200304152044290"></p>
+<p><img src="/post/image/image-20200304152044290.png" alt="image-20200304152044290"></p>
 <p>FireBase平台目前提供的功能列表</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cgoogle_firebase.PNG" alt="google_firebase"></p>
+<p><img src="/post/image/google_firebase.PNG" alt="google_firebase"></p>
 <p>Ml Kit收费情况，高级功能是收费的</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304151837087.png" alt="image-20200304151837087"></p>
+<p><img src="/post/image/image-20200304151837087.png" alt="image-20200304151837087"></p>
 <p>ML Kit从功能上可分为三部分，视觉，自然语言处理，自定义模型。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage3.png" alt="img"></p>
+<p><img src="/post/image/image3.png" alt="img"></p>
 <p>ML Kit运行堆栈，依赖mobile vision，cloud vision，tf lite实现。底层在Android上是通过NN API实现的，IOS上是通过metal实现的。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmllkit_stack.png" alt="mllkit_stack"></p>
+<p><img src="/post/image/mllkit_stack.png" alt="mllkit_stack"></p>
 <h1 id="3-ml-kit发展历程">3. ML Kit发展历程</h1>
 <h2 id="31-mobile-vision">3.1 mobile vision</h2>
 <p>mobile vision包含在Google GMS组件内，发布于2017年，<!-- raw HTML omitted -->目前mobile vision已被更加强大的ML Kit代替<!-- raw HTML omitted -->。</p>
@@ -254,7 +254,7 @@
 <p><strong>Barcode detector</strong>: com.google.android.gms.vision.barcode</p>
 <p><strong>Text detector</strong>: com.google.android.gms.vision.text</p>
 <p>Google Mobile Vision (GMV) 同时支持 iOS 与 Anriod 平台，用户只需根据 API 与业务需求简单地设定以下三个类即可构建完整的图像处理 Pipeline：设定 Detector 类用于捕捉图像内容；设定 Processor 类允许用户灵活地处理单张或多张图像（即 Focus 模式与 Multi 模式）；最后用户只需完整地重构 Tracker，根据图像信息完成业务逻辑。无论是 iOS 还是 Andriod，遵循以上流程即可构建 GMV 应用。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmobile_vision_work_flow.jpeg" alt="mobile_vision_work_flow"></p>
+<p><img src="/post/image/mobile_vision_work_flow.jpeg" alt="mobile_vision_work_flow"></p>
 <p>上图是完整的流程。摄像头源内部使用了 Camera API，它将图像帧传递给检测器，检测器运行算法来生成检测结果。然后结果被传递给处理器。处理器是首个后处理（post-processing）步骤，它负责筛除、合并、或传递检测到的 item 到相关 Tracker。</p>
 <p>总结来就是两个步骤：</p>
 <ol>
@@ -305,9 +305,9 @@
 </tr>
 </tbody>
 </table>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305162856123.png" alt="image-20200305162856123"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305175116025.png" alt="image-20200305175116025"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305175309720.png" alt="image-20200305175309720"></p>
+<p><img src="/post/image/image-20200305162856123.png" alt="image-20200305162856123"></p>
+<p><img src="/post/image/image-20200305175116025.png" alt="image-20200305175116025"></p>
+<p><img src="/post/image/image-20200305175309720.png" alt="image-20200305175309720"></p>
 <h1 id="4-ml-kit分析">4. ML Kit分析</h1>
 <h2 id="41-文件">4.1 文件</h2>
 <p>ML Kit的开发包和google的其他sdk包一样，放在Google&rsquo;s Maven仓库里，在android工程build.gradle文件里添加引用即可使用。</p>
@@ -1140,12 +1140,12 @@
 </table>
 <h2 id="43-层次结构">4.3 层次结构</h2>
 <p>从包名上看，ML Kit按照功能进行模块划分。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305172528628.png" alt="image-20200305172528628"></p>
+<p><img src="/post/image/image-20200305172528628.png" alt="image-20200305172528628"></p>
 <p>从类关系来看，就是一堆类的组合，前缀有功能标记，都从Object派生出来。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305174421556.png" alt="image-20200305174421556"></p>
+<p><img src="/post/image/image-20200305174421556.png" alt="image-20200305174421556"></p>
 <h2 id="44-使用方法">4.4 使用方法</h2>
 <p>首先在FireBase console创建项目，然后导出FireBase.json配置文件，最后在本地项目内导入FireBase.json配置文件，build.gradle里面添加依赖包就可以开发了。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C10170988-f80c154baa88ccbc.png" alt="ML Kitéæç¤ºæå¾.png"></p>
+<p><img src="/post/image/10170988-f80c154baa88ccbc.png" alt="ML Kitéæç¤ºæå¾.png"></p>
 <h2 id="45-版本变更历史">4.5 版本变更历史</h2>
 <p>ML Kit尚处在Beta阶段，自从2018年5月发布以来，变化非常多，基本1~2个月一个版本，更新日期如下：</p>
 <div class="highlight"><div class="chroma">

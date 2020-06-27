@@ -194,7 +194,7 @@
 </ul>
 <h2 id="发展史">发展史</h2>
 <p><a href="https://zh.wikipedia.org/wiki/">https://zh.wikipedia.org/wiki/</a>人工智能史</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="经网络发展史"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="经网络发展史"></p>
 <ul>
 <li>
 <p>人工智能的诞生：1943 - 1956:在20世纪40年代和50年代，来自不同领域（数学，心理学，工程学，经济学和政治学）的一批科学家开始探讨制造人工大脑的可能性。1956年，人工智能被确立为一门学科。</p>
@@ -221,10 +221,10 @@
 </ul>
 <h2 id="硬件方案">硬件方案</h2>
 <p>AI领域的核心计算是矩阵计算和卷积，其特点是计算量大，运算可拆分。从时间上看，经历了从纯cpu计算，GPU加速计算，专用硬件加速几个阶段。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmatrix_calculate.PNG" alt="matrix_calculate"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E5%8D%B7%E7%A7%AF.gif" alt="卷积"></p>
+<p><img src="/post/image/matrix_calculate.PNG" alt="matrix_calculate"></p>
+<p><img src="/post/image/%E5%8D%B7%E7%A7%AF.gif" alt="卷积"></p>
 <p>CPU是一个有多种功能的优秀领导者。它的优点在于调度、管理、协调能力强，计算能力则位于其次。而GPU相当于一个接受CPU调度的“拥有大量计算能力”的员工。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ccpu_gpu_compare.jpg" alt="cpu_gpu_compare"></p>
+<p><img src="/post/image/cpu_gpu_compare.jpg" alt="cpu_gpu_compare"></p>
 <h3 id="cpu">CPU</h3>
 <p>CPU 有强大的调度、管理、协调能力。应用范围广。开发方便且灵活。但其在大量数据处理上没有 GPU 专业，相对运算量低，但功耗不低。</p>
 <h3 id="gpu">GPU</h3>
@@ -258,28 +258,28 @@
 <h3 id="google-tpu">Google TPU</h3>
 <p>张量处理器（英语：Tensor Processing Unit，缩写：TPU）是Google为机器学习定制的专用芯片（ASIC），专为Google的深度学习框架TensorFlow而设计。</p>
 <p>与GPU相比，TPU采用低精度（8位）计算，以降低每步操作使用的晶体管数量，这对于深度学习的准确度来说影响很小，却可以大幅降低功耗、加快运算速度。同时，TPU使用了脉动阵列的设计，用来优化矩阵乘法与卷积运算，减少I/O操作。利用自身更大的片上内存，来减少对DRAM的访问，从而更大程度地提升性能。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctpu.png" alt="tpu"></p>
+<p><img src="/post/image/tpu.png" alt="tpu"></p>
 <p>TPU v1 计算力 92 Teraflops，8Gb 内存，34GB/s 内存带宽，<strong>只能做推理</strong>（其实这是个 PCI-E 的加速卡，上面插了两条2133Mhz DDR3的内存）——它的光荣成绩是打败了李世石（4 个TPU推演，GPU 训练的 AlphaGo Lee 版本）</p>
 <p>TPU v2 计算力 45Teraflops，16Gb 内存，600GB/s内存带宽（和显卡学习集成的 HBM），看起来单 TPU计算力慢了不少？<strong>既可以做训练，也能够推理</strong>——它的光荣成绩是打败了柯洁和一大堆其他人类高手（4个 TPU 推演，TPUv2  Pod训练的 AlphaGo Master版本，之后的 AlphaGo Zero 也诞生在这上面）</p>
 <h3 id="华为昇腾910">华为昇腾910</h3>
 <p>跟之前公布的参数一样，昇腾910是目前单芯片计算密度最大的芯片，采用7nm增强版EUV工艺，单Die内建32颗达芬奇核心，半精度(FP16)算力达到256 Tera-FLOPS，整数精度 (INT8) 算力达到512 Tera-OPS，最大功耗为350W。支持128通道 全高清 视频解码器- H.264/265。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Chuawei_npu_910.jpg" alt="huawei_npu_910"></p>
+<p><img src="/post/image/huawei_npu_910.jpg" alt="huawei_npu_910"></p>
 <h3 id="nvidia-v100">NVIDIA v100</h3>
 <p>Tesla V100是基于Volta架构的产品，内置了5120个CUDA单元，核心频率为1455MHz，搭载16GB HBM2显存，单精度浮点性能15 TFLOPS，双精度浮点7.5 TFLOPS，显存带宽900GB/s。此外，Tesla V100还增加与深度学习高度相关的Tensor单元，Tensor性能号称可以达到120 TFLOPS。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cnvidia_v100.png" alt="nvidia_v100"></p>
+<p><img src="/post/image/nvidia_v100.png" alt="nvidia_v100"></p>
 <h3 id="intel">intel</h3>
 <p>美国时间11月12日周二，英特尔终于正式宣布了首个针对复杂深度学习神经网络处理器：Nervana NNP。全称 Nervana Neural Network Processor，这是英特尔推出的第一款面向数据中心客户，针对复杂深度学习的专用 ASIC 芯片。芯片的命名来自于英特尔在 2016 年所收购的神经计算公司 Nervana。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cintel_nervana.jpg" alt="intel_nervana"></p>
+<p><img src="/post/image/intel_nervana.jpg" alt="intel_nervana"></p>
 <p>Nervana NNP 芯片家族有三个最主要的亮点：计算密度更高，能效更好，采用英特尔架构+开源的全堆栈软件支持。在推理方面，NNP-I 最大的优势在于具有能效高、成本低，且其外形规格灵活，非常适合使用灵活的规格在现实世界中运行密集的多模式推理。</p>
 <p>NNP-I 的工作功耗大约在15W左右，它能够和数据中心企业用户自己的技术实现完美的结合，部署更快、更高效的推理计算。英特尔面向了百度、 Facebook 等前沿人工智能客户，并针对他们的人工智能处理需求进行了定制开发。比如当 NNP-I 和 Facebook Glow 编译器结合时，可以对计算机视觉等工作负载实现显著优化，在实现高性能的同时节约更多的能源。</p>
 <h3 id="高通">高通</h3>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E9%AB%98%E9%80%9A_cloud_ai100.jpg" alt="CLOUD-AI-100-1.png"></p>
+<p><img src="/post/image/%E9%AB%98%E9%80%9A_cloud_ai100.jpg" alt="CLOUD-AI-100-1.png"></p>
 <p>高通产品管理副总裁Ziad Asghar在介绍Cloud AI 100时，列出了高通在四个方面的优势，包括采用先进的7nm工艺、规模化、信号处理技术，以及低功耗设计专长</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E9%AB%98%E9%80%9A_framework.jpg" alt="CLOUD-AI-100-2.jpg"></p>
+<p><img src="/post/image/%E9%AB%98%E9%80%9A_framework.jpg" alt="CLOUD-AI-100-2.jpg"></p>
 <h3 id="amazon">amazon</h3>
 <p>该芯片能够与TensorFlow和PyTorch等主要框架协同工作，并兼容亚马逊机器学习服务SageMaker和AWS 的EC2实例类型。Inferentia还将与Elastic Inference合作，以便加速GPU芯片部署AI的使用。</p>
 <p>Inferentia检测主要框架何时与EC2实例一起使用，而且能够在每个芯片上获得数百个TOPS，用户也可以将这些顶级数据捆绑在一起以获得数千个TOPS。从这些数据种可以找出哪些部分从加速中受益最多， 然后将这部分数据移动到弹性推理以提高效率。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Camazon.png" alt="img"></p>
+<p><img src="/post/image/amazon.png" alt="img"></p>
 <p>目前推出AI模型所需的两个主要流程是培训和推理，推理占了近90％的成本。</p>
 <p>亚马逊的工程师则认为运营成本可以通过Elastic Inference节省75％的成本，如果Inferentia投入使用，成本还将降低十个百分点，这将是一个重大变革。</p>
 <p>“你将能够在每个芯片上获得数百个TOPS; 如果你愿意的话，你可以将它们捆绑在一起以获得数千个TOPS，“AWS首席执行官Andy Jassy今天在年度re：Invent会议上表示。</p>
@@ -288,31 +288,31 @@
 <p>Zion 是 Facebook 的下一代大容量统一训练平台，目标是高效地承担未来的更大计算负载。Zion 在设计时就考虑了如何高效地处理 CNN、LSTM、稀疏神经网络等多种不同的神经网络模型。Zion 平台可以提供高内存容量、高带宽、灵活的高速内部连接，为 Facebook 内部的关键工作负载提供强大的计算能力。</p>
 <p>Zion 的设计采用了 Facebook 新的供应商透明的 OCP 加速模型（OAM）。OAM 的作用在于，Facebook 从 AMD、Habana、Graphcore、英特尔、英伟达等许多不同的硬件供应商处购买硬件，只要他们在开放计算计划（OCP）的公开标准基础上开发硬件，不仅可以帮助他们更快地创新，也可以让 Facebook 自由地在同一个机架上的不同的硬件平台、不同的服务器之间拓展，只需要通过一个机柜网络交换机。即便 Facebook 的 AI 训练负载不断增加、不断变得更加复杂，Zion 平台也可以拓展并处理。</p>
 <p>具体来说，Facebook 的 Zion 系统可以分为三个部分：八路 CPU 服务器、OCP 加速模块、以及可以安装八个 OCP 加速模块的平台主板。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cfacebook_zion1.jpg" alt="img"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cfacebook_zion2.jpg" alt="img"></p>
+<p><img src="/post/image/facebook_zion1.jpg" alt="img"></p>
+<p><img src="/post/image/facebook_zion2.jpg" alt="img"></p>
 <h3 id="baidu-xpu">baidu XPU</h3>
 <p>在加州Hot Chips大会上，百度发布XPU，这是一款256核、基于FPGA的云计算加速芯片。合作伙伴是赛思灵（Xilinx）。XPU的目标是在性能和效率之间实现平衡，并处理多样化的计算任务。FPGA加速器本身很擅长处理某些计算任务，但随着许多小内核交织在一起，多样性程度将会上升。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbaidu_xpu.jpg" alt="img"></p>
+<p><img src="/post/image/baidu_xpu.jpg" alt="img"></p>
 <h2 id="理论基础">理论基础</h2>
 <h3 id="神经元模型">神经元模型</h3>
 <p><a href="https://www.cnblogs.com/maybe2030/p/5597716.html">https://www.cnblogs.com/maybe2030/p/5597716.html</a></p>
 <p>神经网络目前最广泛的一种定义：“神经网络是由具有适应性的简单单元组成的广泛并行互联的网络，它的组织能够模拟生物神经系统对真实事件物体所作出的交互反应”</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E5%85%83.png" alt="1575616572055"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E5%85%83.png" alt="1575616572055"></p>
 <p>抽象的神经元模型</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8D%95%E5%85%83.PNG" alt="神经网络单元"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8D%95%E5%85%83.PNG" alt="神经网络单元"></p>
 <p>分类</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB.PNG" alt="神经网络分类"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB.PNG" alt="神经网络分类"></p>
 <p>演进史</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="神经网络发展史"></p>
+<p><img src="/post/image/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="神经网络发展史"></p>
 <h3 id="两层神经网络">两层神经网络</h3>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C1620.jpg" alt="img"></p>
+<p><img src="/post/image/1620.jpg" alt="img"></p>
 <p>两层神经网络除了包含一个输入层，一个输出层以外，还增加了一个中间层。此时，中间层和输出层都是计算层。当增加一个计算层以后，两层神经网络不仅可以解决异或问题，而且具有非常好的非线性分类效果。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C.png" alt="1575617816143"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E6%95%88%E6%9E%9C.PNG" alt="两层网络效果"></p>
+<p><img src="/post/image/%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C.png" alt="1575617816143"></p>
+<p><img src="/post/image/%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E6%95%88%E6%9E%9C.PNG" alt="两层网络效果"></p>
 <h3 id="bp算法">bp算法</h3>
 <p>所谓神经网络的训练或者是学习，其主要目的在于通过学习算法得到神经网络解决指定问题所需的参数，这里的参数包括各层神经元之间的连接权重以及偏置等。</p>
 <p>计算过程详见 <a href="https://cloud.tencent.com/developer/news/151178">https://cloud.tencent.com/developer/news/151178</a></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cbp%E7%AE%97%E6%B3%95.gif" alt="bp算法"></p>
+<p><img src="/post/image/bp%E7%AE%97%E6%B3%95.gif" alt="bp算法"></p>
 <p>BP算法的主要流程可以总结如下：</p>
 <p>　　<strong>输入</strong>：训练集D=(xk,yk)mk=1D=(xk,yk)k=1m; 学习率;</p>
 <p>　　过程：</p>
@@ -336,11 +336,11 @@
 <p>是Yann LeCun在1998年设计的用于手写数字识别的卷积神经网络，当年美国大多数银行就是用它来识别支票上面的手写数字的，它是早期卷积神经网络中最有代表性的实验系统之一。</p>
 <p>LeNet-5 大约有 60,000 个参数。</p>
 <p>卷积特征提取</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E5%8D%B7%E7%A7%AF.PNG" alt="卷积"></p>
+<p><img src="/post/image/%E5%8D%B7%E7%A7%AF.PNG" alt="卷积"></p>
 <p>pooling下采样</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cpooling.PNG" alt="pooling"></p>
+<p><img src="/post/image/pooling.PNG" alt="pooling"></p>
 <p>LenNet-5共有7层（不包括输入层），每层都包含不同数量的训练参数，如下图所示。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Clenet-5.jpeg" alt="lenet-5"></p>
+<p><img src="/post/image/lenet-5.jpeg" alt="lenet-5"></p>
 <p>LeNet-5中主要有2个卷积层、2个池化层、3个全连接层3种连接方式</p>
 <p>卷积层 
 卷积层采用的都是5x5大小的卷积核/过滤器，且卷积核每次滑动一个像素，一个特征图谱使用同一个卷积核. 
@@ -360,7 +360,7 @@ C1层是卷积层，形成6个特征图谱。卷积的输入区域大小是5x5�
 S2层是一个下采样层。C1层的6个28x28的特征图谱分别进行以2x2为单位的下抽样得到6个14x14（（28-2）/2+1）的图。每个特征图谱使用一个下抽样核。5（S2中的每个像素都与C1中的2∗2个像素和1个偏置相连接）x14x14x6=5880个连接。</p>
 <p>LeNet-5第三层：卷积层C3 
 C3层是一个卷积层，卷积和和C1相同，不同的是C3的每个节点与S2中的多个图相连。C3层有16个10x10（14-5+1）的图，每个图与S2层的连接的方式如下表 所示。C3与S2中前3个图相连的卷积结构见下图.这种不对称的组合连接的方式有利于提取多种组合特征。该层有(5x5x3+1)x6 + (5x5x4 + 1) x 3 + (5x5x4 +1)x6 + (5x5x6+1)x1 = 1516个训练参数，共有1516x10x10=151600个连接。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Clenet.jpg" alt="c3连接"></p>
+<p><img src="/post/image/lenet.jpg" alt="c3连接"></p>
 <p>LeNet-5第四层：池化层S4 
 S4是一个下采样层。C3层的16个10x10的图分别进行以2x2为单位的下抽样得到16个5x5的图。5x5x5x16=2000个连接。连接的方式与S2层类似。</p>
 <p>LeNet-5第五层：全连接层C5 
@@ -390,10 +390,10 @@ c）权重共享可以减少网络的训练参数，使神经网络结构变得�
 <p>LaNet-5的局限性 
 CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始像素中，经过极少的预处理，识别视觉上面的规律。然而，由于当时缺乏大规模训练数据，计算机的计算能力也跟不上，LeNet-5 对于复杂问题的处理结果并不理想。</p>
 <h3 id="alexnet">alexnet</h3>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cdnn_history.PNG" alt="dnn_history"></p>
+<p><img src="/post/image/dnn_history.PNG" alt="dnn_history"></p>
 <p>2012年，Imagenet比赛冠军的model——Alexnet [2]（以第一作者alex命名）。说实话，这个model的意义比后面那些model都大很多，首先它证明了CNN在复杂模型下的有效性，然后GPU实现使得训练在可接受的时间范围内得到结果，确实让CNN和GPU都大火了一把，顺便推动了有监督DL的发展。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Calexnet.jpeg" alt="img"></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Calexnet-2.png" alt="img"></p>
+<p><img src="/post/image/alexnet.jpeg" alt="img"></p>
+<p><img src="/post/image/alexnet-2.png" alt="img"></p>
 <ul>
 <li>输入层：图像大小为 227×227×3，其中 3 表示输入图像的 channel 数（R，G，B）为 3。</li>
 <li>卷积层：filter 大小 11×11，filter 个数 96，卷积步长 s=4s=4。（filter 大小只列出了宽和高，filter矩阵的 channel 数和输入图片的 channel 数一样，在这里没有列出）</li>
@@ -416,9 +416,9 @@ CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始�
 <h3 id="deep-residual-learning">Deep Residual Learning</h3>
 <p>2015年imgnet比赛冠军，分类效果甚至比人类更好</p>
 <p><a href="https://blog.csdn.net/u011808673/article/details/78836617">https://blog.csdn.net/u011808673/article/details/78836617</a></p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cresnet.png" alt="img"></p>
+<p><img src="/post/image/resnet.png" alt="img"></p>
 <p>创新之处在于引入了残差网络结构，深度加大的同时，网络结构依然很简单，训练很快。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" alt="img"></p>
+<p><img src="/post/image/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.png" alt="img"></p>
 <h2 id="软件框架">软件框架</h2>
 <p>主流框架比较</p>
 <table>
@@ -561,7 +561,7 @@ CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始�
 <p>**4 变量（Variable）：**用来记录一些数据和状态，是我们的容器。</p>
 <p>**5 feed和fetch：**可以为任意的操作(arbitrary operation) 赋值或者从其中获取数据。相当于一些铲子，可以操作数据。</p>
 <p>形象的比喻是：把会话看做车间，图看做车床，里面用Tensor做原料，变量做容器，feed和fetch做铲子，把数据加工成我们的结果。</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctensorflow_demo.webp" alt="img"></p>
+<p><img src="/post/image/tensorflow_demo.webp" alt="img"></p>
 <h3 id="caffe">Caffe</h3>
 <p>Caffe的全称是：Convolutional architecture forfast feature embedding，它是一个清晰、高效的深度学习框架，它是开源的，核心语言是C++，它支持命令行、Python和Matlab接口，它既可以在CPU上运行也可以在GPU上运行。它的license是BSD 2-Clause。Deep Learning比较流行的一个原因，主要是因为它能够自主地从数据上学到有用的feature。特别是对于一些不知道如何设计feature的场合，比如说图像和speech。</p>
 <ul>
@@ -985,9 +985,9 @@ with tf.Session() as sess:
 </div>
 </div><h2 id="昇腾910310">昇腾910/310</h2>
 <p>cube单元一个时钟周期可以计算一个16X16的矩阵与16X16的矩阵相乘</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cdavinci.png" alt="davinci"></p>
+<p><img src="/post/image/davinci.png" alt="davinci"></p>
 <p>vector单元可以一个周期计算128个fp16类型向量相加/乘，或者64个fp32/int32类型向量的相加/乘</p>
-<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cdavinci_vector.png" alt="davinci_vector"></p>
+<p><img src="/post/image/davinci_vector.png" alt="davinci_vector"></p>
 <h2 id="速查表">速查表</h2>
 <p>数据科学速查表: <a href="https://www.datacamp.com/community/tutorials/python-data-science-cheat-sheet-basics">https://www.datacamp.com/community/tutorials/python-data-science-cheat-sheet-basics</a></p>
 <p>数据整理速查表: <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a></p>
