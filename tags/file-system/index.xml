@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>file system on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/tags/file-system/</link>
+    <description>Recent content in file system on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 24 Sep 2019 10:21:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/tags/file-system/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>erofs</title>
+      <link>https://carter2005.github.io/post/2019/2019-09-24_erofs/</link>
+      <pubDate>Tue, 24 Sep 2019 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-09-24_erofs/</guid>
+      <description>erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能</description>
+    </item>
+    
+  </channel>
+</rss>

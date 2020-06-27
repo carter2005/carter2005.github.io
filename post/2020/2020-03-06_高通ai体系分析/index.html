@@ -1,0 +1,2762 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>高通AI体系分析 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="高通AI体系分析" />
+<meta property="og:description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" />
+<meta property="article:published_time" content="2020-03-06T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-03-06T10:21:20+08:00" />
+<meta itemprop="name" content="高通AI体系分析">
+<meta itemprop="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能">
+<meta itemprop="datePublished" content="2020-03-06T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-06T10:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="12911">
+
+
+
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="高通AI体系分析"/>
+<meta name="twitter:description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">高通AI体系分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-06 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#发布形式">发布形式</a></li>
+    <li><a href="#能力">能力</a></li>
+    <li><a href="#流程图">流程图</a></li>
+    <li><a href="#目录结构">目录结构</a></li>
+    <li><a href="#重点文件">重点文件</a></li>
+    <li><a href="#runtime架构">runtime架构</a></li>
+    <li><a href="#使用方法">使用方法</a>
+      <ul>
+        <li><a href="#using-cpu-runtime">using CPU Runtime</a></li>
+        <li><a href="#using-dsp-runtime">using DSP Runtime</a></li>
+        <li><a href="#using-aip-runtime">using AIP Runtime</a></li>
+      </ul>
+    </li>
+    <li><a href="#版本演进">版本演进</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#开发平台">开发平台</a></li>
+    <li><a href="#依赖">依赖</a></li>
+    <li><a href="#支持算法列表">支持算法列表</a></li>
+    <li><a href="#文件列表">文件列表</a></li>
+    <li><a href="#api列表">api列表</a></li>
+    <li><a href="#应用示例">应用示例</a></li>
+    <li><a href="#版本演进-1">版本演进</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#开发平台-1">开发平台</a></li>
+    <li><a href="#面向领域">面向领域</a></li>
+    <li><a href="#功能模块">功能模块</a></li>
+    <li><a href="#依赖-1">依赖</a></li>
+    <li><a href="#文件列表-1">文件列表</a></li>
+    <li><a href="#特征检测">特征检测</a></li>
+    <li><a href="#物体检测">物体检测</a></li>
+    <li><a href="#应用示例-1">应用示例</a></li>
+    <li><a href="#版本演进-2">版本演进</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="高通ai发展历史">高通AI发展历史</h1>
+<p><a href="https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf">https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf</a></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_ai_leadership.PNG" alt="qualcomm_ai_leadership"></p>
+<p>硬件</p>
+<ul>
+<li>各种手机芯片：660，710，855，865</li>
+<li>qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能，云端推理平台</li>
+<li>QCS 40X：2019年发布，audio chip</li>
+</ul>
+<p>软件：</p>
+<ul>
+<li>主流AI框架的支持，包括TF，caffe，pytorch，onnx，paddlepaddle等</li>
+<li>硬件加速库：fastcv，<a href="https://developer.qualcomm.com/software/adreno-gpu-sdk">Adreno GPU SDK</a>，<a href="https://developer.qualcomm.com/software/hexagon-dsp-sdk">Hexagon DSP SDK</a>，<a href="https://developer.qualcomm.com/software/machine-vision-sdk">Machine Vision SDK</a></li>
+</ul>
+<h1 id="高通ai框架及生态">高通AI框架及生态</h1>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_ai_engine.PNG" alt="qualcomm_ai_engine"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_ai_system.PNG" alt="qualcomm_ai_system"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_ai_npe.PNG" alt="qualcomm_ai_npe"></p>
+<h1 id="865特性框图">865特性框图</h1>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_865.PNG" alt="qualcomm_865"></p>
+<h1 id="高通ai软件生态">高通AI软件生态</h1>
+<p><!-- raw HTML omitted -->高通的AI生态主要分4个部分，如下述列表所示<!-- raw HTML omitted --></p>
+<ul>
+<li>
+<p>Neural Network Optimization：Qualcomm Neural Processing SDK for AI，https://www.youtube.com/watch?v=CK-zwbMfDxk&amp;feature=youtu.be <!-- raw HTML omitted -->类似MNN的AI推理框架，将tf，caffe模型转换成dlc格式私有模型，在AI runtime上运行推理<!-- raw HTML omitted --></p>
+<ul>
+<li>Android and Linux runtimes for neural network model execution</li>
+<li>Acceleration support for Qualcomm® Hexagon™ DSPs, Qualcomm® Adreno™ GPUs and Qualcomm® Kryo™, CPUs<a href="https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk#footnotes">1</a></li>
+<li>Support for models in Caffe, Caffe2, ONNX, and TensorFlow formats<a href="https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk#footnotes">2</a></li>
+<li>APIs for controlling loading, execution and scheduling on the runtimes</li>
+<li>Desktop tools for model conversion</li>
+<li>Performance benchmark for bottleneck identification</li>
+<li>Sample code and tutorials</li>
+<li>HTML Documentation</li>
+</ul>
+</li>
+<li>
+<p>App Performance Optimization：<a href="https://developer.qualcomm.com/get-started/snapdragon-developer-tools">Snapdragon Developer Tools</a>  <!-- raw HTML omitted -->应用调试，电源，性能优化工具等<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Specialized Core Optimization  <!-- raw HTML omitted -->GPU，DSP相关加速库<!-- raw HTML omitted --></p>
+<ul>
+<li><a href="https://developer.qualcomm.com/software/adreno-gpu-sdk">Adreno GPU SDK</a> <!-- raw HTML omitted -->opengl es，opencl，vulken开发库<!-- raw HTML omitted --></li>
+<li><a href="https://developer.qualcomm.com/software/hexagon-dsp-sdk">Hexagon DSP SDK</a></li>
+</ul>
+</li>
+<li>
+<p>smart camera解决方案  <!-- raw HTML omitted -->面向传统机器视觉领域，machine version用于嵌入式开发板，fastcv用于移动平台<!-- raw HTML omitted --></p>
+<ul>
+<li><a href="https://developer.qualcomm.com/software/machine-vision-sdk">Machine Vision SDK</a>：engineered to supply cutting-edge computer vision algorithms for localization, feature recognition, and obstacle detection on Qualcomm processors.</li>
+<li><a href="https://developer.qualcomm.com/software/fastcv-sdk">FastCV SDK</a> ：offers a mobile-optimized computer vision (CV) library that includes the most frequently used vision processing functions and helping you to add new user experiences into your camera-based apps like gesture recognition, face detection, tracking, text recognition, and augmented reality (AR)</li>
+</ul>
+</li>
+</ul>
+<h1 id="snapdragon-neural-processing-engine">Snapdragon Neural Processing Engine</h1>
+<h2 id="发布形式">发布形式</h2>
+<p>c++，java接口，so形式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">── [4.0K]  zdl
+    ├── [4.0K]  DiagLog
+    │   ├── [2.2K]  IDiagLog.hpp
+    │   └── [2.1K]  Options.hpp
+    ├── [4.0K]  DlContainer
+    │   └── [5.4K]  IDlContainer.hpp
+    ├── [4.0K]  DlSystem
+    │   ├── [5.2K]  DlEnums.hpp
+    │   ├── [ 11K]  DlError.hpp
+    │   ├── [5.7K]  DlOptional.hpp
+    │   ├── [2.0K]  DlVersion.hpp
+    │   ├── [2.3K]  IBufferAttributes.hpp
+    │   ├── [2.6K]  ITensorFactory.hpp
+    │   ├── [4.0K]  ITensor.hpp
+    │   ├── [5.7K]  ITensorItr.hpp
+    │   ├── [1.1K]  ITensorItrImpl.hpp
+    │   ├── [2.9K]  IUDL.hpp
+    │   ├── [2.6K]  IUserBufferFactory.hpp
+    │   ├── [ 11K]  IUserBuffer.hpp
+    │   ├── [4.8K]  PlatformConfig.hpp
+    │   ├── [3.1K]  RuntimeList.hpp
+    │   ├── [2.4K]  String.hpp
+    │   ├── [2.4K]  StringList.hpp
+    │   ├── [2.6K]  TensorMap.hpp
+    │   ├── [4.7K]  TensorShape.hpp
+    │   ├── [2.8K]  TensorShapeMap.hpp
+    │   ├── [5.8K]  UDLContext.hpp
+    │   ├── [2.4K]  UDLFunc.hpp
+    │   ├── [2.8K]  UserBufferMap.hpp
+    │   └── [ 463]  ZdlExportDefine.hpp
+    ├── [4.0K]  PlatformValidator
+    │   └── [2.3K]  PlatformValidator.hpp
+    └── [4.0K]  SNPE
+        ├── [2.7K]  ApplicationBufferMap.hpp
+        ├── [4.8K]  PSNPE.hpp
+        ├── [2.4K]  RuntimeConfigList.hpp
+        ├── [9.9K]  SNPEBuilder.hpp
+        ├── [3.5K]  SNPEFactory.hpp
+        ├── [8.2K]  SNPE.hpp
+        └── [1.3K]  UserBufferList.hpp
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="能力">能力</h2>
+<ul>
+<li>Execute an arbitrarily deep neural network</li>
+<li>Execute the network on the SnapdragonTM CPU, the AdrenoTM GPU or the HexagonTM DSP.</li>
+<li>Debug the network execution on x86 Ubuntu Linux</li>
+<li>Convert Caffe, Caffe2, ONNXTM and TensorFlowTM models to a SNPE Deep Learning Container (DLC) file</li>
+<li>Quantize DLC files to 8 bit fixed point for running on the Hexagon DSP</li>
+<li>Debug and analyze the performance of the network with SNPE tools</li>
+<li>Integrate a network into applications and other code via C++ or Java</li>
+</ul>
+<h2 id="流程图">流程图</h2>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Csnpe.png" alt="SNPE"></p>
+<p>The basic SNPE workflow consists of only a few steps:</p>
+<ol>
+<li>Convert the network model to a DLC file that can be loaded by SNPE.</li>
+<li>Optionally quantize the DLC file for running on the Hexagon DSP.</li>
+<li>Prepare input data for the model.</li>
+<li>Load and execute the model using SNPE runtime.</li>
+</ol>
+<h2 id="目录结构">目录结构</h2>
+<table>
+<thead>
+<tr>
+<th>SDK Asset</th>
+<th>Type</th>
+<th>Compiler</th>
+<th>C++ STL</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android</td>
+<td>lib</td>
+<td>-</td>
+<td>-</td>
+<td>Android aar file used to include SNPE into your application</td>
+</tr>
+<tr>
+<td>bin/x86_64-linux-clang</td>
+<td>binary</td>
+<td>clang3.4</td>
+<td>gnustl</td>
+<td>x86 Linux binaries</td>
+</tr>
+<tr>
+<td>bin/arm-android-clang6.0</td>
+<td>binary</td>
+<td>clang6.0</td>
+<td>libc++</td>
+<td>ARM Android binaries</td>
+</tr>
+<tr>
+<td>bin/aarch64-android-clang6.0</td>
+<td>binary</td>
+<td>clang6.0</td>
+<td>libc++</td>
+<td>Aarch64 Android binaries</td>
+</tr>
+<tr>
+<td>bin/arm-linux-gcc4.9sf</td>
+<td>binary</td>
+<td>gcc4.9</td>
+<td>gnustl</td>
+<td>Arm Linux Soft Float binaries</td>
+</tr>
+<tr>
+<td>bin/aarch64-linux-gcc4.9</td>
+<td>binary</td>
+<td>gcc4.9</td>
+<td>gnustl</td>
+<td>Aarch64 Linux binaries</td>
+</tr>
+<tr>
+<td>bin/arm-oe-linux-gcc6.4hf</td>
+<td>binary</td>
+<td>gcc6.4</td>
+<td>gnustl</td>
+<td>Arm Linux Hard Float binaries</td>
+</tr>
+<tr>
+<td>bin/aarch64-oe-linux-gcc6.4</td>
+<td>binary</td>
+<td>gcc6.4</td>
+<td>gnustl</td>
+<td>Aarch64 Linux binaries</td>
+</tr>
+<tr>
+<td>lib/x86_64-linux-clang</td>
+<td>lib</td>
+<td>clang3.4</td>
+<td>gnustl</td>
+<td>x86 Linux libraries</td>
+</tr>
+<tr>
+<td>lib/arm-android-clang6.0</td>
+<td>lib</td>
+<td>clang6.0</td>
+<td>libc++</td>
+<td>ARM Android libraries</td>
+</tr>
+<tr>
+<td>lib/aarch64-android-clang6.0</td>
+<td>lib</td>
+<td>clang6.0</td>
+<td>libc++</td>
+<td>Aarch64 Android libraries</td>
+</tr>
+<tr>
+<td>lib/dsp</td>
+<td>lib</td>
+<td>-</td>
+<td>-</td>
+<td>Hexagon DSP runtime libraries</td>
+</tr>
+<tr>
+<td>lib/arm-linux-gcc4.9sf</td>
+<td>lib</td>
+<td>gcc4.9</td>
+<td>gnustl</td>
+<td>ARM Linux Soft Float libraries</td>
+</tr>
+<tr>
+<td>lib/aarch64-linux-gcc4.9</td>
+<td>lib</td>
+<td>gcc4.9</td>
+<td>gnustl</td>
+<td>Aarch64 Linux libraries</td>
+</tr>
+<tr>
+<td>lib/arm-oe-linux-gcc6.4hf</td>
+<td>lib</td>
+<td>gcc6.4</td>
+<td>gnustl</td>
+<td>ARM Linux Hard Float libraries</td>
+</tr>
+<tr>
+<td>lib/aarch64-oe-linux-gcc6.4</td>
+<td>lib</td>
+<td>gcc6.4</td>
+<td>gnustl</td>
+<td>Aarch64 Linux libraries</td>
+</tr>
+<tr>
+<td>lib/python</td>
+<td>lib</td>
+<td>-</td>
+<td>-</td>
+<td>SNPE python model tools modules</td>
+</tr>
+<tr>
+<td>include/zdl/SNPE</td>
+<td>include dir</td>
+<td>-</td>
+<td>-</td>
+<td>SNPE SDK API header files</td>
+</tr>
+<tr>
+<td>examples</td>
+<td>examples dir</td>
+<td>-</td>
+<td>-</td>
+<td>Source code sample applications in Native C++ and Android Java</td>
+</tr>
+<tr>
+<td>doc</td>
+<td>documents</td>
+<td>-</td>
+<td>-</td>
+<td>User and reference API guide</td>
+</tr>
+<tr>
+<td>benchmarks</td>
+<td>scripts</td>
+<td>-</td>
+<td>-</td>
+<td>Benchmark framework to gather runtime performance data on devices</td>
+</tr>
+<tr>
+<td>models</td>
+<td>resources</td>
+<td>-</td>
+<td>-</td>
+<td>Example neural network models</td>
+</tr>
+</tbody>
+</table>
+<h2 id="重点文件">重点文件</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Type</th>
+<th>Details</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>envsetup.sh</td>
+<td>script</td>
+<td>Script to setup various environment variables needed to run SDK tools and binaries</td>
+<td>$SNPE_ROOT/bin</td>
+</tr>
+<tr>
+<td>snpe-caffe-to-dlc</td>
+<td>script</td>
+<td>Script to convert a Caffe model to a DLC file</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-caffe2-to-dlc</td>
+<td>script</td>
+<td>Script to convert a Caffe2 model to a DLC file</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-onnx-to-dlc</td>
+<td>script</td>
+<td>Script to convert a ONNX model to a DLC file</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-tensorflow-to-dlc</td>
+<td>script</td>
+<td>Script to convert a TensorFlow model to a DLC file</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-dlc-quantize</td>
+<td>executable</td>
+<td>Used to quantize a DLC file using 8 bit quantization</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-diagview</td>
+<td>executable</td>
+<td>View SNPE timing output</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe-dlc-info</td>
+<td>script</td>
+<td>Script to print various DLC file information</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang</td>
+</tr>
+<tr>
+<td>snpe_bench.py</td>
+<td>script</td>
+<td>Script to run DLC model on device and collect benchmark information</td>
+<td>$SNPE_ROOT/benchmarks</td>
+</tr>
+<tr>
+<td>snpe-net-run</td>
+<td>executable</td>
+<td>Example binary that can run a neural network</td>
+<td>$SNPE_ROOT/bin/x86_64-linux-clang $SNPE_ROOT/bin/arm-android-clang6.0 $SNPE_ROOT/bin/aarch64-android-clang6.0 $SNPE_ROOT/bin/arm-linux-gcc4.9sf $SNPE_ROOT/bin/aarch64-linux-gcc4.9 $SNPE_ROOT/bin/aarch64-oe-linux-gcc6.4 $SNPE_ROOT/bin/arm-oe-linux-gcc6.4hf</td>
+</tr>
+<tr>
+<td>libSNPE.so</td>
+<td>library</td>
+<td>SNPE runtime for host and device development</td>
+<td>$SNPE_ROOT/lib/x86_64-linux-clang $SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0 $SNPE_ROOT/lib/arm-linux-gcc4.9sf $SNPE_ROOT/lib/aarch64-linux-gcc4.9 $SNPE_ROOT/lib/aarch64-oe-linux-gcc6.4 $SNPE_ROOT/lib/arm-oe-linux-gcc6.4hf</td>
+</tr>
+<tr>
+<td>libSNPE_G.so</td>
+<td>library</td>
+<td>SNPE runtime with GPU support only, not suitable for use on host</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0</td>
+</tr>
+<tr>
+<td>libsymphony-cpu.so</td>
+<td>library</td>
+<td>Symphony CPU runtime library.</td>
+<td>$SNPE_ROOT/lib/x86_64-linux-clang $SNPE_ROOT/lib/arm-linux-gcc4.9sf $SNPE_ROOT/lib/aarch64-linux-gcc4.9 $SNPE_ROOT/lib/aarch64-oe-linux-gcc6.4 $SNPE_ROOT/lib/arm-oe-linux-gcc6.4hf</td>
+</tr>
+<tr>
+<td>libsymphony-cpu.so</td>
+<td>library</td>
+<td>Symphony CPU runtime library for Android.</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0</td>
+</tr>
+<tr>
+<td>libsnpe_adsp.so</td>
+<td>library</td>
+<td>Library for DSP runtime, for SDM820.</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0 $SNPE_ROOT/lib/aarch64-linux-gcc4.9 $SNPE_ROOT/lib/aarch64-oe-linux-gcc6.4 $SNPE_ROOT/lib/arm-oe-linux-gcc6.4hf</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_domains.so</td>
+<td>library</td>
+<td>Library for Android DSP runtime, for non SDM 820 targets.</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_domains_system.so</td>
+<td>library</td>
+<td>Library for Android DSP runtime loading from the /system partition, for non SDM 820 targets.</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_skel.so</td>
+<td>library</td>
+<td>Hexagon DSP runtime library for SDM 820.</td>
+<td>$SNPE_ROOT/lib/dsp</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_domains_skel.so</td>
+<td>library</td>
+<td>Hexagon DSP runtime library for v60 targets (excluding SDM820).</td>
+<td>$SNPE_ROOT/lib/dsp</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_v65_domains_v2_skel.so</td>
+<td>library</td>
+<td>Hexagon DSP runtime library for v65 targets.</td>
+<td>$SNPE_ROOT/lib/dsp</td>
+</tr>
+<tr>
+<td>libsnpe_dsp_v66_domains_v2_skel.so</td>
+<td>library</td>
+<td>Hexagon DSP runtime library for v66 targets.</td>
+<td>$SNPE_ROOT/lib/dsp</td>
+</tr>
+<tr>
+<td>libc++_shared.so</td>
+<td>library</td>
+<td>Shared STL library implementation.</td>
+<td>$SNPE_ROOT/lib/arm-android-clang6.0 $SNPE_ROOT/lib/aarch64-android-clang6.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="runtime架构">runtime架构</h2>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Csnpe_runtime.png" alt="SNPE"></p>
+<p>The AIP (AI Processor) Runtime is a software abstraction of Q6, HVX and HTA into a single entity (AIP) for the execution of a model across all three. 
+A user, who loads a model into Snapdragon NPE and selects the AIP runtime as a target, will have parts of the model running on HTA, and parts on HVX, orchestrated by the Q6.</p>
+<ul>
+<li>HTA subnets: parts of the subnet which were compiled by the HTA Compiler, and whose metadata generated by the HTA compiler appears in the HTA sections of the DLC.</li>
+<li>HNN subnets: The rest of the subnet which can run on the DSP using Hexagon NN library, whose metadata appears in the HVX sections of the DLC.</li>
+</ul>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Caip_runtime.png" alt="SNPE"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Caip_execution_6.png" alt="SNPE"></p>
+<h2 id="使用方法">使用方法</h2>
+<p><strong>Select target architecture</strong></p>
+<p>SNPE provides Android binaries for armeabi-v7a and arm64-v8a architectures. For each architecture, there are binaries compiled with clang6.0 using libc++ STL implementation. The following shows the commands to select the desired binaries:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># architecture: armeabi-v7a - compiler: clang - STL: libc++
+export SNPE_TARGET_ARCH=arm-android-clang6.0
+export SNPE_TARGET_STL=libc++_shared.so
+
+# architecture: arm64-v8a - compiler: clang - STL: libc++
+export SNPE_TARGET_ARCH=aarch64-android-clang6.0
+export SNPE_TARGET_STL=libc++_shared.so
+</code></pre></td></tr></table>
+</div>
+</div><p>For simplicity, this tutorial sets the target binaries to arm-android-clang6.0, which use libc++_shared.so, for commands on host and on target.</p>
+<p><strong>Push binaries to target</strong></p>
+<p>Push SNPE libraries and the prebuilt snpe-net-run executable to /data/local/tmp/snpeexample on the Android target.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">export SNPE_TARGET_ARCH=arm-android-clang6.0
+export SNPE_TARGET_STL=libc++_shared.so
+
+adb shell &#34;mkdir -p /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin&#34;
+adb shell &#34;mkdir -p /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib&#34;
+adb shell &#34;mkdir -p /data/local/tmp/snpeexample/dsp/lib&#34;
+
+adb push $SNPE_ROOT/lib/$SNPE_TARGET_ARCH/$SNPE_TARGET_STL \
+      /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+adb push $SNPE_ROOT/lib/$SNPE_TARGET_ARCH/*.so \
+      /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+adb push $SNPE_ROOT/lib/dsp/*.so \
+      /data/local/tmp/snpeexample/dsp/lib
+adb push $SNPE_ROOT/bin/$SNPE_TARGET_ARCH/snpe-net-run \
+      /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Set up enviroment variables</strong></p>
+<p>Set up the library path, the path variable, and the target architecture in adb shell to run the executable with the -h argument to see its description.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+export SNPE_TARGET_ARCH=arm-android-clang6.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+snpe-net-run -h
+exit
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Push model data to Android target</strong></p>
+<p>To execute the Inception v3 classification model on Android target follow these steps:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd $SNPE_ROOT/models/inception_v3
+mkdir data/rawfiles &amp;&amp; cp data/cropped/*.raw data/rawfiles/
+adb shell &#34;mkdir -p /data/local/tmp/inception_v3&#34;
+adb push data/rawfiles /data/local/tmp/inception_v3/cropped
+adb push data/target_raw_list.txt /data/local/tmp/inception_v3
+adb push dlc/inception_v3_quantized.dlc /data/local/tmp/inception_v3
+rm -rf data/rawfiles
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Note:</strong> It may take some time to push the Inception v3 dlc file to the target.</p>
+<h3 id="using-cpu-runtime">using CPU Runtime</h3>
+<p>The Android C++ executable is run with the following commands:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+export SNPE_TARGET_ARCH=arm-android-clang6.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+cd /data/local/tmp/inception_v3
+snpe-net-run --container inception_v3_quantized.dlc --input_list target_raw_list.txt
+exit
+</code></pre></td></tr></table>
+</div>
+</div><p>The executable will create the results folder: /data/local/tmp/inception_v3/output. To pull the output:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android
+</code></pre></td></tr></table>
+</div>
+</div><p>Check the classification results by running the following python script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+                                                   -o output_android/ \
+                                                   -l data/imagenet_slim_labels.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>The output should look like the following, showing classification results for all the images.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+cropped/trash_bin.raw     0.850245 413 ashcan
+cropped/plastic_cup.raw   0.972899 648 measuring cup
+cropped/chairs.raw        0.286483 832 studio couch
+cropped/handicap_sign.raw 0.430207 920 street sign
+cropped/notice_sign.raw   0.138857 459 brass
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="using-dsp-runtime">using DSP Runtime</h3>
+<p>Try running on an Android target with the &ndash;use_dsp option as follows: 
+Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (See <a href="dsp_runtime.html">DSP Runtime Environment</a> for details.)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+export SNPE_TARGET_ARCH=arm-android-clang6.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+export ADSP_LIBRARY_PATH=&#34;/data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp&#34;
+cd /data/local/tmp/inception_v3
+snpe-net-run --container inception_v3_quantized.dlc --input_list target_raw_list.txt --use_dsp
+exit
+</code></pre></td></tr></table>
+</div>
+</div><p>Pull the output into an output_android_dsp directory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_dsp
+</code></pre></td></tr></table>
+</div>
+</div><p>Check the classification results by running the following python script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+                                                   -o output_android_dsp/ \
+                                                   -l data/imagenet_slim_labels.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>The output should look like the following, showing classification results for all the images.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+cropped/trash_bin.raw     0.639935 413 ashcan
+cropped/plastic_cup.raw   0.937354 648 measuring cup
+cropped/chairs.raw        0.275142 832 studio couch
+cropped/handicap_sign.raw 0.134832 920 street sign
+cropped/notice_sign.raw   0.258279 459 brass
+</code></pre></td></tr></table>
+</div>
+</div><p>Classification results are identical to the run with CPU runtime, but there are differences in the probabilities associated with the output labels due to floating point precision differences.</p>
+<h3 id="using-aip-runtime">using AIP Runtime</h3>
+<p>The AIP runtime allows you to run the Inception v3 model on the HTA. 
+Running the model using the AIP runtime requires setting the &ndash;runtime argument as &lsquo;aip&rsquo; in the script $SNPE_ROOT/models/inception_v3/scripts/setup_inceptionv3.py to allow HTA-specific metadata to be packed into the DLC that is required by the AIP runtime. 
+Refer to <a href="tutorial_setup.html#tutorial_setup_inception_v3">Getting Inception v3</a> for more details.</p>
+<p>Other than that the additional settings for AIP runtime are quite similar to those for the DSP runtime.</p>
+<p>Try running on an Android target with the &ndash;use_aip option as follows: 
+Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (See <a href="dsp_runtime.html">DSP Runtime Environment</a> for details.)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+export SNPE_TARGET_ARCH=arm-android-clang6.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
+export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+export ADSP_LIBRARY_PATH=&#34;/data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp&#34;
+cd /data/local/tmp/inception_v3
+snpe-net-run --container inception_v3_quantized.dlc --input_list target_raw_list.txt --use_aip
+exit
+</code></pre></td></tr></table>
+</div>
+</div><p>Pull the output into an output_android_aip directory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_aip
+</code></pre></td></tr></table>
+</div>
+</div><p>Check the classification results by running the following python script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+                                                   -o output_android_aip/ \
+                                                   -l data/imagenet_slim_labels.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>The output should look like the following, showing classification results for all the images.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+cropped/trash_bin.raw     0.683813 413 ashcan
+cropped/plastic_cup.raw   0.971473 648 measuring cup
+cropped/chairs.raw        0.429178 832 studio couch
+cropped/handicap_sign.raw 0.338605 920 street sign
+cropped/notice_sign.raw   0.154364 459 brass
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="版本演进">版本演进</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.35.0</td>
+<td>January 2020</td>
+<td>Introduce the User-Defined Operations (UDO) feature. Added support for SDM720G/SM7125. Added support to snpe-throughput-net-run for UserBuffer input tensors (both INT8 and INT16). Input batching support is added for networks that can run completely on AIP runtime. Add support for the tf.stack and tf.unstack ops to the DSP and CPU runtimes. Add support for the tf.stack, tf.unstack, tf.floor, tf.minimum to the TF converter. Fixed some small memory leaks that are seen when repeatedly calling dlopen()/dlclose() on libSNPE.so. Updated the Deconvolution operation on DSP with a new kernel that improves performance on various kernel sizes and strides. Fix ssd_detection CDSP crash on DSP runtime. Updated the HTA to partition the input layer, if it has a connection to a layer that is not included in the same partition. Improved the tiling configuration support for depth wise convolution layer.</td>
+</tr>
+<tr>
+<td>1.34.0</td>
+<td>January 2020</td>
+<td>Initial support for ops with 16-bit activations using HTA in both snpe-dlc-quantize and in the SNPE AIP runtime. New option for snpe-net-run to automatically turn unconsumed tensors of the network (tensors that are not inputs to a layer) into network outputs. Fixed inconsistent results on SM8250 in certain cases for depthwise convolutions. Add support for the depth2space operation on the GPU. Using optimized Softmax implementation in AIP networks when input activation has more than 5000 elements. Truncate detection output on DSP to return valid data only. Ensure weights are properly flushed to DDR for use during inference in the DSP runtime. Fix support for NV21 encoding in the DSP runtime.</td>
+</tr>
+<tr>
+<td>1.33.2</td>
+<td>November 2019</td>
+<td>Address accuracy issues for Deconvolution in the AIP runtime. Changed behavior of Crop layer resize, so it retains the number of copied elements on each dimension. Make quantizer –override_params work for AIP. Reordered PerformanceProfile_t to be ABI compatible with 1.32.0. Using optimized Softmax implementation in AIP networks when input activation has more than 5000 elements.</td>
+</tr>
+<tr>
+<td>1.33.1</td>
+<td>November 2019</td>
+<td>Fixed a build issue that incorrectly removed Symphony.</td>
+</tr>
+<tr>
+<td>1.33.0</td>
+<td>November 2019</td>
+<td>New performance modes have been added: LOW_POWER_SAVER: Run in lower clock than POWER_SAVER, at the expense of performance. HIGH_POWER_SAVER: Run in higher clock and provides better performance than POWER_SAVER. LOW_BALANCED: Run in lower balanced mode, provides lower performance than BALANCED. snpe-dlc-info adds a summary of the layer types in use in the model. Updated to use new BLAS functionality that leverages OpenMP. This adds a new dependency on the OpenMP shared library for Linux platforms. Added 32-bit bias support. Support init caching for SSD output layer on DSP. Fix memory leak causing increasing init time on DSP. Add converter support for dilated convolution when used with fakequant nodes. Multiple bugs fixed in snpe-onnx-to-dlc that were causing errors for models having torch.Mul op. Extends TF converter support to NMSv1 Op in addition to existing support for v2 and v3 NMS Ops. Tensorflow conversion bug fixed in infer_shape for StridedSlice Op. output_shape should not be a list of shapes but the shape of the one output. Fix bug with propagation of model version during conversion. If burst mode is set, set thread affinity to Big Cores during init and de-init, and restore to the previous setting after the actions are complete. Fix segfault when using user buffers with a resizable dimension.</td>
+</tr>
+<tr>
+<td>1.32.0</td>
+<td>Oct 2019</td>
+<td>Add Caffe MVN Layer support in the Caffe Converter, CPU Runtime, and DSP Runtime snpe-dlc-quantize: Enable the use of quantization parameters calculated during training when using dlc quantizer. To override the SNPE generated quantization parameters pass –override_params to snpe-dlc-quantize. Removed deprecated command line arguments from converters. All three converters now require passing -i/–input_network for model input paths. snpe-dlc-diff: Added command-line option [–diff_by_id/-i] to snpe-dlc-diff. This option allows users to compare 2 models in order(sorted by id) Added support for L2Norm layer to TensorFlow converter Optimized the DSP performance for the &lsquo;Space To Depth&rsquo; layer Add support in the Java API for setInitCacheEnabled(), and setStorageDirectory() to enable DLC caching support. Allow graceful recovery after a fastrpc error - Recreate the userPD after the cDSP crashes so that the user can continue on the SNPE process with subsequent instances, instead of having to close the SNPE process. Note: all the instance associated to the previous userPD will be lost. snpe-dlc-viewer: Associate each layer type to a fixed color for consistency when using snpe-dlc-viewer Split the SNPE isRuntimeAvailable method into two separate functions to improve backward compatibility with existing client binaries that were built against the older signature. TF Converter: Fix Elementwise Broadcast support ONNX Converter: Fixed bug where output dimension was incorrect when keep_dims parameter was set to False for Argmax, ReduceSum and ReduceMax. ONNX Converter: Fixed bug where pad attribute was not properly parsed for Deconv Op. Caffe Converter: Fixed bug when converting SSD-based models when using Python 3. TF Converter: Fixed bug where converter was removing const Op input to reshape op when passed through identity op(s). i.e const-&gt; identity -&gt; reshape. Fixed bug where getOutputSize() would give the wrong result on output tensors in UserBuffer mode</td>
+</tr>
+<tr>
+<td>1.31.0</td>
+<td>September 2019</td>
+<td>New patterns were added to enable running the CLE algorithm on more op patterns and model architectures. Added Tensorflow converter support for Caffe-style SSD networks. Added support for HeatmapMaxKeypoint layer in the CPU runtime. Added support for ROI Align layer in CPU runtime. Added initial L2Norm layer support in CPU runtime. No support for axis parameter yet: normalization is performed along the inner-most dimension of the input tensor. Support for single-input Concatenation layers was added to CPU, GPU and DSP. Changed determination of number of batch dimensions in the Fully Connected layer so rank greater than 1 is always assumed to mean that there is 1 batch dimension. Removed constraint on the LSTM layer in the GPU runtime that prevented batch mode operation. Added support for Leaky-RELU in the TensorFlow converter. Both the actual Leaky-Relu op and the elementwise op representation are supported and map to SNPE&rsquo;s Prelu op. Added Argmax support to the Caffe converter, and optimized performance on the DSP runtime. Added new column to snpe-dlc-info that displays the supported runtimes for each layer. Fixed an edge case where in certain conditions OpenCL would return CL_INVALID_WORK_GROUP_SIZE. Made isRuntimeAvailable Java API thread-safe. Replace unstable image from sample Android classifier application data set with an image that is more consistent.</td>
+</tr>
+<tr>
+<td>1.30.0</td>
+<td>August 2019</td>
+<td>Documentation has been added to reflect the new common converter command line options for input processing; Converters now propagate required batchnorm information for performing quantization optimizations; Support for the new bias correction quantization optimization which adjusts biases by analyzing float vs quantized activation errors and adjusting the model to compensate; ONNX converter now filters single input Concats as a no ops as SNPE didn’t support them; Converter input processing now uniformly handles different input types and encodings; ONNX converter now supports the ConvTranspose ‘output_padding’ attribute by adding an additional pad layer after the ConvTranspose op; Integrates the latest flatbuffer 1.11 library which brings speed improvements and options for model size reduction; GPU size limitations with the ArgMax op (when setting the keepDims op attribute to false) can be worked around by enabling CPU fallback; Fixed DSP error with MobileNet SSD on QCS403 and QCS405; Fixed the issue with partitioning of deconv layer in HTA;</td>
+</tr>
+<tr>
+<td>1.29.0</td>
+<td>July 2019</td>
+<td>Added support for dlc reorder tool;Optimization of HTA d32 conversions;Added tf space_to_depth op for SNPE CPU and DSP runtime;Benchmarking scripts enhanced for showing further break down of execution time, across various components;Added support for additional ONNX binary element-wise ops;Optimized deconv layer for improving performance;Fixed an issue related to runtime error in DSP runtime;Performance Optimization of SNPE GPU Runtime for Shufflenet V2 by using profiling level config</td>
+</tr>
+<tr>
+<td>1.28.0</td>
+<td>June 2019</td>
+<td>Added an optional argument to isRuntimeAvailable for the DSP runtime so that it doesn&rsquo;t activate the DSP; Allow UB_T8 and UB_FLOAT output for snpe-net-run; Added a new command line option for snpe-dlc-diff to check layer names; Updated the –dlc argument to –output_path for snpe-caffe-to-dlc to align with the ONNX converter; Added –dry_run argument to snpe-onnx-to-dlc to allow evaluation for successful conversion on an ONNX model; Added support for the gather op in the DSP runtime; Added support to convert the TF MobileNet-V1-FPN-SSD model; Fixed a memory leak in the DSP runtime that is seen when repeatedly loading and unloading a network; Addressed issues on V66 DSPs related to acquiring VTCM memory; Fixed an issue related to multiple inputs for the Caffe converter; Fixed an issue in the TF converter related to element-wise sun and the atrous parameter; Fixed an issue in the TF converter related to tf.crop_and_resize when there are only 2 inputs.; Fixed additional cases of uncaught exceptions with the aarch64-android-clang6.0 platform;</td>
+</tr>
+<tr>
+<td>1.27.0</td>
+<td>May 2019</td>
+<td>Added new APIs support for setting output tensor names to snpeBuilder and to fetch output tensor names for a given output layer name; Improved the peak memory usage with DLC v3 format; Fixed few issues with performance and runtime failures on DSP runtime; Fixed few issues and improved error handling for platform validator; Fixed the issues with Pooling and Instance norm layers of Tensorflow converter; Removed *-android-gcc4.9 platform support. This compiler has been retired for the Android NDK, so all support is transitioning to using Clang for Android; Removed arm-linux-gcc4.8hf platform. The development platform has been retired;</td>
+</tr>
+<tr>
+<td>1.26.0</td>
+<td>Apr 2019</td>
+<td>Added support for the ONNX Gather Op in the ONNX Converter and CPU runtime; Optimized DeConvolution Layer for the DSP runtime; Support for tf.nn.moments in the TF converter, CPU and DSP runtimes; Added TF Reflect Pad support for the DSP runtime; Add symmetric quantizer option in snpe-dlc-quantize; Add support for batch &gt; 1 when using the Scale Layer on the DSP runtime; Updated Platform Validator python script to be OS-independent; Added additional optimizations for HTA input conversion;</td>
+</tr>
+<tr>
+<td>1.25.0</td>
+<td>Mar 2019</td>
+<td>Updated DLC format to improve load time performance and memory consumption. Old DLCs will continue to work as is, but new DLCs generated from 1.25 will use the new format; Added support for optimized; MultiClassNms and ArgMax ops on DSP runtime; Added option to request larger memory allocations on the DSP for improved init time, at the expense of more memory use; Improved concurrency for multiple; SNPE objects running simultaneously on DSP; Improvements when using priority control on DSP; Added support for channel shuffle and ArgMax in the ONNX converter; Support multiple subnets within the AIP runtime;</td>
+</tr>
+<tr>
+<td>1.24.0</td>
+<td>Feb 2019</td>
+<td>Adding setProfilingLevel API support for AIP and CPU runtimes; Various stability issues on aip runtimes are addressed;Added support for Snapdragon 712;Support multi inputs and multiple outputs on each SNPE AIP’s subnet</td>
+</tr>
+<tr>
+<td>1.23.0</td>
+<td>Jan 2019</td>
+<td>Upgrade to Android NDK r17c to build SNPE; Improving initialization and de-initialization times; Various DSP timing fixes; Addressed some DSP concurrency edge cases that could impact output values; TF converter support for non max suppression, crop and resize Ops</td>
+</tr>
+<tr>
+<td>1.22.0</td>
+<td>Nov 2018</td>
+<td>Support for several new ops on DSP runtime; Upgrade to Android NDK r16b to build SNPE; setProfilingLevel API support in DSP runtime; Added new tool snpe-throughput-net-run</td>
+</tr>
+<tr>
+<td>1.21.0</td>
+<td>Oct 2018</td>
+<td>Tensorflow converter and CPU runtime support for various ops; DSP runtime support for Eltwise Realdiv and Square ops; GPU support for resize_align_corners layer</td>
+</tr>
+<tr>
+<td>1.20.0</td>
+<td>Sep 2018</td>
+<td>Support for QCS605 LE platform; NDK version upgrade to r14b; Tensorflow converter support for elementwise sqrt and softmax with dimension &gt; 2; Platform validation command line tool</td>
+</tr>
+<tr>
+<td>1.19.0</td>
+<td>Aug 2018</td>
+<td>ELU op support for Tensorflow/Onnx Converters and CPU/GPU runtimes; BoxWithNMSLimit and BBoxTransform ops support in caffe2 converter; Support for Caffe Power Layer in GPU</td>
+</tr>
+<tr>
+<td>1.18.0</td>
+<td>Jul 2018</td>
+<td>Support for pad and elementwise subtraction on GPU; ONNX converter support for shape and pad ops; Tensorflow converter support for additional ops</td>
+</tr>
+<tr>
+<td>1.17.0</td>
+<td>Jun 2018</td>
+<td>Support for Scale Layer in Caffe converter and DSP runtime, DSP support for batch&gt;1 and ChannelShuffle, Updated SDK examples for Inception v3 2016 model</td>
+</tr>
+<tr>
+<td>1.16.2</td>
+<td>May 2018</td>
+<td>Remove linkage to libstdc++.so in DSP loader libraries</td>
+</tr>
+<tr>
+<td>1.16.1</td>
+<td>May 2018</td>
+<td>Remove linkage to libstdc++.so, DSP runtime fixes, fix for 1D BatchNorm</td>
+</tr>
+<tr>
+<td>1.16.0</td>
+<td>May 2018</td>
+<td>Batch&gt;1 support (except DSP runtime); layer optimizations for DSP runtime; Caffe2 ChannelShuffle support (except DSP runtime)</td>
+</tr>
+<tr>
+<td>1.15.2</td>
+<td>Mar 2018</td>
+<td>Fix for GPU runtime memory leak and reshape to/from 1D</td>
+</tr>
+<tr>
+<td>1.15.1</td>
+<td>Apr 2018</td>
+<td>Fix for converter for instance normalization followed by scale</td>
+</tr>
+<tr>
+<td>1.15.0</td>
+<td>Apr 2018</td>
+<td>Support for instance normalization for Caffe and Caffe2, MobilenetSSD (Caffe)</td>
+</tr>
+<tr>
+<td>1.14.1</td>
+<td>Mar 2018</td>
+<td>Minor fixes</td>
+</tr>
+<tr>
+<td>1.14.0</td>
+<td>Mar 2018</td>
+<td>ONNX converter (alpha), multiple enhancements and fixes</td>
+</tr>
+<tr>
+<td>1.13.0</td>
+<td>Feb 2018</td>
+<td>GPU and DSP v65 performance improvements. GPU floating point 16 support.</td>
+</tr>
+<tr>
+<td>1.12.0</td>
+<td>Jan 2018</td>
+<td>Support for Android LLVM/libc++, MobilenetSSD (TensorFlow)</td>
+</tr>
+<tr>
+<td>1.10.1</td>
+<td>Dec 2017</td>
+<td>Fix a bug in the DSP runtime when using mixed userbuffer input types</td>
+</tr>
+<tr>
+<td>1.10.0</td>
+<td>Dec 2017</td>
+<td>Support for Mobilenet on DSP, enhanced DSP runtime, Snapdragon Flight Board, updates for UserBuffers</td>
+</tr>
+<tr>
+<td>1.8.0</td>
+<td>Nov 2017</td>
+<td>Mobilenet support on CPU, GPU, Support for Snapdragon 636 and Android 64 bit</td>
+</tr>
+<tr>
+<td>1.6.0</td>
+<td>Oct 2017</td>
+<td>Support for Snapdragon 450, minor updates and fixes</td>
+</tr>
+<tr>
+<td>1.4.0</td>
+<td>Aug 2017</td>
+<td>Support for Snapdragon 630, FasterRCNN and ADSP on AGL</td>
+</tr>
+<tr>
+<td>1.2.2</td>
+<td>July 2017</td>
+<td>QDN release</td>
+</tr>
+<tr>
+<td>1.2.0</td>
+<td>June 2017</td>
+<td>Beta Caffe2 Converter</td>
+</tr>
+<tr>
+<td>1.0.2</td>
+<td>May 2017</td>
+<td>Support for 820AGL platform, Snapdragon 660, and Compute DSP on Android</td>
+</tr>
+<tr>
+<td>1.0.1</td>
+<td>Apr 2017</td>
+<td>Documentation update only</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>Apr 2017</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="machine-vision-sdk">Machine vision SDK</h1>
+<p>主要面向机器视觉领域，提供C形式的头文件和动态库，提供相机图像矫正，特征识别，障碍物检测等加速功能。</p>
+<h2 id="开发平台">开发平台</h2>
+<p>不同类型的平台单独发布，例如8x09，8x74，8x96，845等。</p>
+<p>提供下述系统下的开发SDK，运行在嵌入式linux上。</p>
+<ul>
+<li>linux</li>
+<li>macOS</li>
+<li>windows</li>
+</ul>
+<h2 id="依赖">依赖</h2>
+<ul>
+<li>Platform image from Intrinsyc <a href="https://support.intrinsyc.com/login?back_url=https%3A%2F%2Fsupport.intrinsyc.com%2Fprojects%2Fsnapdragon-flight%2Ffiles">Flight_x.y.z_JFlash.zip</a></li>
+<li>Flight controller add-on from Intrinsyc <a href="https://support.intrinsyc.com/login?back_url=https%3A%2F%2Fsupport.intrinsyc.com%2Fprojects%2Fsnapdragon-flight%2Ffiles">Flight_x.y.z_qcom_flight_controller_hexagon_sdk_add_on.zip</a></li>
+</ul>
+<h2 id="支持算法列表">支持算法列表</h2>
+<ul>
+<li>Visual-Inertial Simultaneous Localization and Mapping (VISLAM)
+<ul>
+<li>Uses an extended Kalman filter to fuse IMU and camera tracking data to provide a 6 degree of freedom pose estimate in real-world coordinates.</li>
+<li>Provides a 3D point cloud based upon tracked feature points</li>
+<li>Optionally accepts and fuses in GPS data</li>
+</ul>
+</li>
+<li>Depth From Stereo (DFS)</li>
+<li>Uses 2 time-synchronized cameras to generate a per-pixel dense depth map</li>
+<li>Downward Facing Tracker (DFT)</li>
+<li>Provides an &ldquo;optic-flow&rdquo;-like tracking algorithm to generate a displacement in pixels on a camera pointed 90° downwards</li>
+<li>Sequence Reader/Writer (SRW)
+<ul>
+<li>Read and write sequences of camera and IMU sensor data</li>
+</ul>
+</li>
+<li>Voxel Map (VM)
+<ul>
+<li>Combines the camera&rsquo;s current 6DOF position with a depth map to generate a volumetric representation of its perceived world in 3D</li>
+<li>Performs collision checking</li>
+</ul>
+</li>
+<li>Camera Auto Calibration (CAC)
+<ul>
+<li>Use image and IMU data to estimate calibration parameters for the camera</li>
+</ul>
+</li>
+<li>Camera Parameter Adjustment (CPA)
+<ul>
+<li>Use current image data to recommend camera parameter changes</li>
+</ul>
+</li>
+<li>Stereo Auto-Calibration (SAC) (new in v1.1.4)
+<ul>
+<li>Uncalibrated image pairs of scene yield extrinsic calibration parameters</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件列表">文件列表</h2>
+<p>每项功能对应一个头文件，so库按照模块分成独立的库发布</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  bin
+│   ├── [3.3M]  mvCACPlayback
+│   ├── [174K]  mvDFSPlayback
+│   ├── [610K]  mvDFTPlayback
+│   ├── [2.9M]  mvSACPlayback
+│   ├── [ 86K]  mvSRWPlayback
+│   ├── [ 26K]  mvVISLAMPlayback
+│   └── [ 22K]  mvVMPlayback
+├── [4.0K]  include
+│   └── [4.0K]  mv
+│       ├── [ 13K]  mvCAC.h
+│       ├── [9.5K]  mvCPA.h
+│       ├── [ 12K]  mvDFS.h
+│       ├── [4.6K]  mvDFT.h
+│       ├── [ 16K]  mv.h
+│       ├── [5.3K]  mvSAC.h
+│       ├── [ 26K]  mvSRW.h
+│       ├── [ 22K]  mvVISLAM.h
+│       └── [ 26K]  mvVM.h
+└── [4.0K]  lib
+    ├── [1.2M]  libcryptopp.so
+    ├── [3.6M]  libmv0.so
+    ├── [ 14M]  libmv1.so
+    ├── [336K]  libqhull.so
+    ├── [ 11M]  libQML.so
+    ├── [ 11M]  libQML.so.1
+    └── [ 11M]  libQML.so.1.2.100
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="api列表">api列表</h2>
+<p>mv.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">mvVersion</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvPose6DETto6DRT</span><span class="p">(</span> <span class="n">mvPose6DET</span><span class="o">*</span> <span class="n">pose</span><span class="p">,</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">mvPose</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvPose6DRTto6DET</span><span class="p">(</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">pose</span><span class="p">,</span> <span class="n">mvPose6DET</span><span class="o">*</span> <span class="n">mvPose</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvMultiplyPose6DRT</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvInvertPose6DRT</span><span class="p">(</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">pose</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvGetGLProjectionMatrix</span><span class="p">(</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">camera</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvPoseAngles</span><span class="p">(</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">pose</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">yaw</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">pitch</span><span class="p">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvVM.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVM</span><span class="o">*</span> <span class="nf">mvVM_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">sampleDistance</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_Deinitialize</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_GetSampleDistance</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="n">float32_t</span> <span class="n">sampleDistance</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_MoveOriginTo</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="n">float32_t</span> <span class="n">origin</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_Clear</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_IntegrateDepthMap</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_IntegrateDepthMapUInt16</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint16_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithPoint</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> 
+   <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithBox</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithLine</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_GetMinimalDistanceToPoint</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_GetMinimalDistanceToBox</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_ClipAgainstBox</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">lower</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_ClipAgainstSphere</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">center</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_SetBoxFree</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">lower</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_SetBoxOccupied</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">lower</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_ExtractSamplePoints</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> 
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_ExtractSurfacePoints</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> 
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_ExtractSurfaceMesh</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> 
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">integrate</span><span class="p">(</span> <span class="k">const</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">data</span> <span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvCAC.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="nf">mvCAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCamCfg</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_Deinitialize</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddGyro</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddFrame</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddTrackedPoints</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="n">float64_t</span> <span class="n">MV_API</span> <span class="n">mvCAC_FisheyeToPolynomial</span><span class="p">(</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfg</span><span class="p">,</span>
+   <span class="n">float32_t</span> <span class="n">MV_API</span> <span class="n">mvCAC_ScoreSceneTexture</span><span class="p">(</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvCPA.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="nf">mvCPA_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCPA_Configuration</span><span class="o">*</span> <span class="n">cpaConfig</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvCPA_Deinitialize</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_AddFrame</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_GetValues</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">exposure</span><span class="p">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvDFS.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="nf">mvDFSParameters</span><span class="p">();</span>
+   <span class="n">MV_API</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="nf">mvDFS_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvStereoConfiguration</span><span class="o">*</span> <span class="n">nConfig</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_Deinitialize</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFS_GetDepths</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pxlsCamL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetDepthsION</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fileDesc</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">hostPtr</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetRectifyingRotations</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">rot1</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetDepthCameraConfiguration</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetRectifiedImages</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">rectL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_EnableRectAdjustment</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">params</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_DisableRectAdjustment</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span> <span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvDFT.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="nf">mvDFT_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvDFT_Configuration</span><span class="o">*</span> <span class="n">nConfig</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_Deinitialize</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_AddImage</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pxls</span> <span class="p">);</span>
+   <span class="kt">bool</span> <span class="n">MV_API</span> <span class="nf">mvDFT_GetResult</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvDFT_Data</span><span class="o">*</span> <span class="n">data</span> <span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvSAC.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="nf">mvSAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfgL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_Deinitialize</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_AddFrame</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixelsL</span><span class="p">,</span>
+   <span class="n">MV_TRACKING_STATE</span> <span class="n">MV_API</span> <span class="n">mvSAC_GetCalibration</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvSRW.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="nf">mvSRW_Writer_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">folderPath</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_Deinitialize</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Writer_AddImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddStereoImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddAccel</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGyro</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsTimeSync</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsVelocity</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddCameraSettings</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddAttitude</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddCameraParameters</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">mvSRW_Reader_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">configDir</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Reader_Deinitialize</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">int</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Reader_GetNumberOfCameras</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Reader_GetCameras</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">bool</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_GetCameraParameters</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvFrame</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextFrame</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Reader_ReleaseFrame</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvFrame</span><span class="o">*</span> <span class="n">frame</span> <span class="p">);</span>
+   <span class="n">MV_API</span> <span class="n">mvIMUData</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextGyro</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvIMUData</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextAccel</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_ReleaseIMUData</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvGPStimeSyncData</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextGPStimeSync</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_ReleaseGPStimeSyncData</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvGPSvelocityData</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextGPSvelocity</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_ReleaseGPSvelocityData</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvAttitudeData</span><span class="o">*</span> <span class="n">mvSRW_Reader_GetNextAttitude</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_ReleaseAttitudeData</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Reader_ReleaseAttitudeData</span><span class="p">(</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="n">mvStereoConfiguration</span><span class="o">*</span> <span class="n">mvSRW_ReadStereoCalibrationFromXMLFile</span><span class="p">(</span>
+   <span class="kt">bool</span> <span class="n">MV_API</span> <span class="n">mvSRW_WriteStereoCalibrationToXML</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">,</span>
+   <span class="kt">bool</span> <span class="n">MV_API</span> <span class="n">mvSRW_WriteCameraExtrinsicParameters</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">,</span>
+   <span class="kt">bool</span> <span class="n">MV_API</span> <span class="n">mvSRW_ReadCameraExtrinsicParameters</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>mvVISLAM.h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="nf">mvVISLAM_Initialize</span><span class="p">(</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_Deinitialize</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_AddImage</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddAccel</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGyro</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPSvelocity</span><span class="p">(</span><span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPStimeSync</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="n">mvVISLAMPose</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_GetPose</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">int</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_HasUpdatedPointCloud</span><span class="p">(</span> <span class="n">mvVISLAM</span> <span class="o">*</span><span class="n">pObj</span> <span class="p">);</span>
+   <span class="kt">int</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_GetPointCloud</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvVISLAMMapPoint</span><span class="o">*</span> <span class="n">pPoints</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_Reset</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">resetPose</span> <span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="应用示例">应用示例</h2>
+<p><a href="https://github.com/ATLFlight/ATLFlightDocs">https://github.com/ATLFlight/ATLFlightDocs</a></p>
+<p>传统的C库发布方式，集成头文件和动态库即可使用功能。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cqualcomm_flight_pro_820_dev_board-front.png" alt="qualcomm_flight_pro_820_dev_board-front"></p>
+<h2 id="版本演进-1">版本演进</h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>发布时间</th>
+<th>release note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2.7</td>
+<td>03 Jul 19</td>
+<td>无release note，着重于bug fix，功能完善</td>
+</tr>
+<tr>
+<td>1.1.9</td>
+<td>16 Oct 18</td>
+<td>Changes to VISLAM in this version include:<!-- raw HTML omitted --><!-- raw HTML omitted -->Added GPS integration<!-- raw HTML omitted -->Improved tracking drift performance generally and specifically in smaller areas<!-- raw HTML omitted -->Improved tracking CPU utilization</td>
+</tr>
+<tr>
+<td>1.1.8</td>
+<td>24 Jan 18</td>
+<td>Optionally accepts and fuses GPS data in Visual-Inertial Simultaneous Localization and Mapping (VISLAM).</td>
+</tr>
+</tbody>
+</table>
+<h1 id="fastcv">fastcv</h1>
+<p>移动设备端运行的机器视觉库，可以运行在所有的arm处理器上，为高通骁龙处理器优化。包含fastcv for snapdragon和fastcv for arm两条path，API相同。</p>
+<h2 id="开发平台-1">开发平台</h2>
+<p>提供下述系统下的开发SDK，目前版本支持运行在android系统上，后续版本支持运行在ios，windows phone系统</p>
+<ul>
+<li>macOS</li>
+<li>windows</li>
+<li>linux</li>
+</ul>
+<h2 id="面向领域">面向领域</h2>
+<ul>
+<li>手势识别</li>
+<li>脸部跟踪，检测，识别</li>
+<li>文字识别及跟踪</li>
+<li>增强现实</li>
+</ul>
+<h2 id="功能模块">功能模块</h2>
+<ul>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__math__vector.html">Math / Vector Operations</a>：数学运算库</li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__image__processing.html">Image processing</a>：</li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__image__transform.html">Image transformation</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html">Feature detection</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html">Object detection</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group___d__reconstruction.html">3D reconstruction</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__color__conversion.html">Color conversion</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__clustering__and__search.html">Clustering and search</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group___motion__and___object___tracking.html">Motion and object tracking</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group___structural___analysis__and___drawing.html">Shape and drawing</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__mem__management.html">Memory Management</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__misc.html">Miscellaneous</a></li>
+<li><a href="https://developer.qualcomm.com/docs/fastcv/api/group__machine__learning.html">Machine Learning</a></li>
+</ul>
+<h2 id="依赖-1">依赖</h2>
+<ol>
+<li>JDK</li>
+<li>Eclipse IDE</li>
+<li>Android SDK Downloader</li>
+<li>Android ADT</li>
+<li>Android SDK platform support</li>
+<li>Cygwin Environment</li>
+<li>Android NDK</li>
+</ol>
+<h2 id="文件列表-1">文件列表</h2>
+<p>一个头文件，一个静态库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  inc
+│   └── [1.3M]  fastcv.h
+├── [4.0K]  lib
+│   ├── [4.0K]  Android
+│   │   ├── [4.0K]  lib32
+│   │   │   └── [3.8M]  libfastcv.a
+│   │   └── [4.0K]  lib64
+│   │       └── [4.0M]  libfastcv.a
+│   ├── [ 10K]  License.txt
+│   ├── [ 34K]  Notice.txt
+│   ├── [4.0K]  VS2010
+│   │   ├── [4.0K]  MD
+│   │   │   └── [4.1M]  libfastcv.lib
+│   │   └── [4.0K]  MT
+│   │       └── [4.1M]  libfastcv.lib
+│   ├── [4.0K]  VS2012
+│   │   ├── [4.0K]  lib32
+│   │   │   ├── [4.0K]  MD
+│   │   │   │   └── [4.1M]  libfastcv.lib
+│   │   │   └── [4.0K]  MT
+│   │   │       └── [4.0M]  libfastcv.lib
+│   │   └── [4.0K]  lib64
+│   │       ├── [4.0K]  MD
+│   │       │   └── [4.7M]  libfastcv.lib
+│   │       └── [4.0K]  MT
+│   │           └── [4.7M]  libfastcv.lib
+│   └── [4.0K]  VS2013
+│       ├── [4.0K]  lib32
+│       │   ├── [4.0K]  MD
+│       │   │   └── [4.2M]  libfastcv.lib
+│       │   └── [4.0K]  MT
+│       │       └── [4.1M]  libfastcv.lib
+│       └── [4.0K]  lib64
+│           ├── [4.0K]  MD
+│           │   └── [4.8M]  libfastcv.lib
+│           └── [4.0K]  MT
+│               └── [4.7M]  libfastcv.lib
+└── [873K]  ReleaseNotes.pdf
+</code></pre></td></tr></table>
+</div>
+</div><p>静态库libfastcv.a解压缩可以看到链接前的.o文件，看起来就是一些算法的集合，一般有2个版本：正常的和带V后缀的版本（数据是存在vector里面的）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [ 11K]  fastcvAbsDiffC.o
+├── [ 22K]  fastcvAbsDiffV.o
+├── [ 17K]  fastcvAdaptiveThresholdC.o
+├── [4.9K]  fastcvAdaptiveThresholdV.o
+├── [2.6K]  fastcvAffineC.o
+├── [4.3K]  fastcvAffineV1.o
+├── [ 52K]  fastcvArithmC.o
+├── [ 84K]  fastcvArithmV.o
+├── [2.0K]  fastcvAverageC.o
+├── [4.5K]  fastcvAverageV.o
+├── [9.6K]  fastcvBGCodeBookC.o
+├── [ 13K]  fastcvBitCntC.o
+├── [2.0K]  fastcvBitCntIlpC.o
+├── [5.0K]  fastcvBitCntWrapV.o
+├── [4.6K]  fastcvBitwiseOpC.o
+├── [ 12K]  fastcvBitwiseOpV.o
+├── [ 22K]  fastcvBlurC.o
+├── [ 16K]  fastcvBlurIlpC.o
+├── [ 41K]  fastcvBlurV.o
+├── [1.5K]  fastcvBoundingRectC.o
+├── [1.9K]  fastcvBoundingRectV.o
+├── [3.8K]  fastcvCalib3DC.o
+├── [6.0K]  fastcvCalib3DV.o
+├── [5.4K]  fastcvCalibrateC.o
+├── [1.8K]  fastcvCalibrateV1.o
+├── [3.9K]  fastcvCalibrateV.o
+├── [ 15K]  fastcvChannelC.o
+├── [ 16K]  fastcvChannelV.o
+├── [ 57K]  fastcvColor2C.o
+├── [ 63K]  fastcvColorC.o
+├── [7.1K]  fastcvColorIppPlanarV.o
+├── [6.9K]  fastcvColorIppV.o
+├── [2.3K]  fastcvColorPpfYuvUtilsC.o
+├── [3.3K]  fastcvColorPpfYuvUtilsV.o
+├── [1.6K]  fastcvColorRgb2LabC.o
+├── [2.7K]  fastcvColorRgb2LabV.o
+├── [2.8K]  fastcvColorRgb2RgbV.o
+├── [ 25K]  fastcvColorRgb2YuvC.o
+├── [ 24K]  fastcvColorRgb2YuvV.o
+├── [ 12K]  fastcvColorRgbConversionC.o
+├── [ 17K]  fastcvColorRgbConversionV.o
+├── [ 32K]  fastcvColorV.o
+├── [4.3K]  fastcvColorYuvConversionC.o
+├── [4.8K]  fastcvColorYuvConversionV.o
+├── [ 17K]  fastcvContourC.o
+├── [ 12K]  fastcvContourV.o
+├── [2.6K]  fastcvCopyC.o
+├── [147K]  fastcvCopyV.o
+├── [ 16K]  fastcvCornerSubPixelC.o
+├── [ 11K]  fastcvCornerSubPixelV.o
+├── [4.7K]  fastcvDepthFusionC.o
+├── [5.9K]  fastcvDepthFusionV.o
+├── [2.0K]  fastcvDescriptor2C.o
+├── [4.4K]  fastcvDescriptor2V.o
+├── [7.1K]  fastcvDescriptorC.o
+├── [4.4K]  fastcvDescriptorV.o
+├── [ 40K]  fastcvDotC.o
+├── [ 15K]  fastcvDotV.o
+├── [ 42K]  fastcvEdgeC.o
+├── [1.3K]  fastcvEdgeV2.o
+├── [ 48K]  fastcvEdgeV.o
+├── [8.2K]  fastcvEucldeanC.o
+├── [ 12K]  fastcvEucldeanV.o
+├── [1.3K]  fastcvExt.o
+├── [ 46K]  fastcvFast10C.o
+├── [ 20K]  fastcvFast10V.o
+├── [ 16K]  fastcvFastC.o
+├── [ 35K]  fastcvFastIlpC.o
+├── [ 25K]  fastcvFastV.o
+├── [ 25K]  fastcvFilter1C.o
+├── [ 40K]  fastcvFilter1V.o
+├── [ 89K]  fastcvFilterC.o
+├── [122K]  fastcvFilterV.o
+├── [4.0K]  fastcvFloodFillC.o
+├── [4.1K]  fastcvFloodFillV.o
+├── [ 17K]  fastcvGeomC.o
+├── [ 14K]  fastcvGeomV.o
+├── [ 52K]  fastcvHarrisC.o
+├── [ 65K]  fastcvHarrisV.o
+├── [1.2K]  fastcvHeapStats.o
+├── [ 32K]  fastcvHelper.o
+├── [ 20K]  fastcvHOGC.o
+├── [ 23K]  fastcvHOGV.o
+├── [ 18K]  fastcvHomographyC.o
+├── [ 10K]  fastcvHomographyV.o
+├── [ 16K]  fastcvHoughCircleC.o
+├── [2.0K]  fastcvHoughCircleV.o
+├── [ 25K]  fastcvHoughLineC.o
+├── [5.5K]  fastcvHoughLineV.o
+├── [6.1K]  fastcvHwAndroid.o
+├── [3.4K]  fastcvHW.o
+├── [4.2K]  fastcvImageDiffC.o
+├── [ 17K]  fastcvImageDiffV.o
+├── [ 19K]  fastcvImageIntensityC.o
+├── [ 24K]  fastcvImageIntensityV.o
+├── [9.9K]  fastcvImagePostProcC.o
+├── [2.1K]  fastcvImagePostProcIlpC.o
+├── [5.2K]  fastcvImagePostProcV.o
+├── [ 12K]  fastcvImageSegmentationC.o
+├── [ 13K]  fastcvIntegrateImageC.o
+├── [ 18K]  fastcvIntegrateImageV.o
+├── [6.8K]  fastcvIntegrateImageYuvC.o
+├── [6.1K]  fastcvIntegrateImageYuvV.o
+├── [ 12K]  fastcvIppDwtV.o
+├── [8.2K]  fastcvIppIdwtV.o
+├── [ 21K]  fastcvIppScaleC.o
+├── [ 13K]  fastcvIppScaleV.o
+├── [ 46K]  fastcvIppTransformC.o
+├── [ 23K]  fastcvIppTransformV.o
+├── [ 15K]  fastcvKDTree36s8f32C.o
+├── [2.2K]  fastcvKMeansTreeSearchC.o
+├── [2.7K]  fastcvLBPC.o
+├── [4.9K]  fastcvLBPV.o
+├── [3.6K]  fastcvLinearSearchC.o
+├── [3.8K]  fastcvLogAndroid.o
+├── [ 14K]  fastcvManager_.o
+├── [580K]  fastcvManager.o
+├── [ 18K]  fastcvMeanShiftC.o
+├── [9.9K]  fastcvMeanShiftV.o
+├── [2.3K]  fastcvMemAndroid.o
+├── [ 15K]  fastcvMem.o
+├── [1.7K]  fastcvMotionHistoryC.o
+├── [1.2K]  fastcvMotionHistoryV.o
+├── [ 74K]  fastcvMserFxpC.o
+├── [ 32K]  fastcvMserFxpV.o
+├── [ 26K]  fastcvNCCPatchC.o
+├── [ 14K]  fastcvNCCPatchV.o
+├── [326K]  fastcv.o
+├── [1.4K]  fastcvOpMode.o
+├── [7.6K]  fastcvPolygonC.o
+├── [6.2K]  fastcvPolygonV.o
+├── [8.9K]  fastcvPyramidC.o
+├── [1.9K]  fastcvPyramidV.o
+├── [2.6K]  fastcvRectangleC.o
+├── [7.3K]  fastcvRemapC.o
+├── [ 26K]  fastcvRemapV.o
+├── [5.4K]  fastcvRemoteLibAndroid.o
+├── [3.2K]  fastcvSADC.o
+├── [2.7K]  fastcvSADV.o
+├── [ 52K]  fastcvScaleC.o
+├── [7.0K]  fastcvScaleIlpC.o
+├── [ 75K]  fastcvScaleV.o
+├── [ 29K]  fastcvSegmentMaskC.o
+├── [4.8K]  fastcvSetC.o
+├── [7.3K]  fastcvSetV.o
+├── [ 48K]  fastcvSmoothC.o
+├── [ 93K]  fastcvSmoothV.o
+├── [ 16K]  fastcvSolveC.o
+├── [6.6K]  fastcvSSDC.o
+├── [9.0K]  fastcvSSDV.o
+├── [ 46K]  fastcvSVDC.o
+├── [ 28K]  fastcvSVDV.o
+├── [6.8K]  fastcvSVMPredictC.o
+├── [ 13K]  fastcvSVMPredictV.o
+├── [6.2K]  fastcvThresholdC.o
+├── [9.0K]  fastcvThresholdV.o
+├── [1.2K]  fastcvTimeAndroid.o
+├── [ 27K]  fastcvTrackC.o
+├── [5.6K]  fastcvTrackV.o
+├── [ 47K]  fastcvTransformC.o
+├── [ 53K]  fastcvTransformV.o
+├── [ 36K]  fastcvTrigonometricTable.o
+├── [3.2K]  fastcvUpsampleC.o
+├── [5.6K]  fastcvUpsampleV.o
+├── [1.8K]  fastcvUtils.o
+├── [1.7K]  fastcvVectorC.o
+├── [1.3K]  fastcvVectorV.o
+├── [ 24K]  fastcvWarpC.o
+├── [ 35K]  fastcvWarpV.o
+└── [5.3K]  ionMem.o
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="特征检测">特征检测</h2>
+<p><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html">https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html</a></p>
+<p>快速角点检测，Harris角点检测，canny边缘检测，hough线条检测算法等。API无互相依赖。</p>
+<table>
+<thead>
+<tr>
+<th>Functions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gabea59f5d1aca9023b74862cd682ec2c9">fcvCornerFast9u8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, unsigned int nCornersMax, uint32_t *__restrict nCorners)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners from the image. This function tests the whole image for corners (apart from the border). FAST-9 looks for continuous segments on the pixel ring of 9 pixels or more.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga30a755cdf156bebceaa7f92fd2dc595f">fcvCornerFast9InMasku8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, unsigned int nCornersMax, uint32_t *__restrict nCorners, const uint8_t *__restrict mask, unsigned int maskWidth, unsigned int maskHeight)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners from the image. This function takes a bit mask so that only image areas masked with &lsquo;0&rsquo; are tested for corners (if these areas are also not part of the border). FAST-9 looks for continuous segments on the pixel ring of 9 pixels or more.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga4b8601e616ecd1e835e678087380d5e0">fcvCornerFast10u8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, int32_t barrier, uint32_t border, uint32_t *__restrict xy, uint32_t nCornersMax, uint32_t *__restrict nCorners)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners from the image. This function tests the whole image for corners (apart from the border). FAST-10 looks for continuous segments on the pixel ring of 10 pixels or more.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga9c7a8d01973df7b127f6357916c56d36">fcvCornerFast10InMasku8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, int32_t barrier, uint32_t border, uint32_t *__restrict xy, uint32_t nCornersMax, uint32_t *__restrict nCorners, const uint8_t *__restrict mask, uint32_t maskWidth, uint32_t maskHeight)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners from the image. This function takes a bit mask so that only image areas masked with &lsquo;0&rsquo; are tested for corners (if these areas are also not part of the border). FAST-10 looks for continuous segments on the pixel ring of 10 pixels or more.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gad05d28ef0e15f11cc00cc6322cdc0807">fcvCornerHarrisu8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, unsigned int border, uint32_t *__restrict xy, unsigned int nCornersMax, uint32_t *__restrict nCorners, int threshold)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts Harris corners from the image. This function tests the whole image for corners (apart from the border).</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> unsigned int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga3bd8fdb8b5bbcb5cb9b1ddd0cacccba7">fcvLocalHarrisMaxu8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, unsigned int posX, unsigned int posY, unsigned int *maxX, unsigned int *maxY, int *maxScore)</td>
+</tr>
+<tr>
+<td></td>
+<td>Local Harris Max applies the Harris Corner algorithm on an 11x11 patch within an image to determine if a corner is present.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga7e1b709c4340bb39a7282fa4a86b1dec">fcvCornerHarrisInMasku8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, unsigned int border, uint32_t *__restrict xy, unsigned int nCornersMax, uint32_t *__restrict nCorners, int threshold, const uint8_t *__restrict mask, unsigned int maskWidth, unsigned int maskHeight)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts Harris corners from the image. This function takes a bit mask so that only image areas masked with &lsquo;0&rsquo; are tested for corners (if these areas are also not part of the border).</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga06cf74fb4d7ab67a39219e48fc6d3b15">fcvCornerHarrisAdaptiveu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t border, float32_t *__restrict xy, uint32_t nCornersMax, uint32_t *__restrict nCorners, int32_t threshold)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts Harris corners from the image. This function tests the whole image for corners (apart from the border). It is an improved version which is more robust to low contrast images.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga887fa7b5ca614ef277541817869c1016">fcvCornerHarrisScoreu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, float32_t *__restrict harrisResp, uint32_t respStride, uint32_t *__restrict xy, uint32_t nCornersMax, uint32_t *__restrict nCorners, float32_t threshold, float32_t sensitivity, uint32_t kernelSize, uint32_t blockSize, uint32_t nmsEnabled, float32_t minDistance, uint32_t normalizeResponse)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts Harris corners from the image.  <strong>ATTENTION:</strong> Compared to fcvCornerHarrisu8, this API gives more accurate results in exchange for slower execution time.  .</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga620c775ded5ed47a741f7333decde631">fcvCornerFast9Scoreu8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, uint32_t *__restrict scores, unsigned int nCornersMax, uint32_t *__restrict nCorners)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga1aa689c12ad05c1572077dee048cd2e3">fcvCornerFast9InMaskScoreu8</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, uint32_t *__restrict scores, unsigned int nCornersMax, uint32_t *__restrict nCorners, const uint8_t *__restrict mask, unsigned int maskWidth, unsigned int maskHeight)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga7ae3a905f903f3d88b2e65f9123c96c2">fcvCornerFast9Scoreu8_v2</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, uint32_t *__restrict scores, unsigned int nCornersMax, uint32_t *__restrict nCorners, uint32_t nmsEnabled, void *__restrict tempBuf)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gad7994b883aead15b9cb7a31d47e075e7">fcvCornerFast9InMaskScoreu8_v2</a> (const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, int barrier, unsigned int border, uint32_t *__restrict xy, uint32_t *__restrict scores, unsigned int nCornersMax, uint32_t *__restrict nCorners, const uint8_t *__restrict mask, unsigned int maskWidth, unsigned int maskHeight, uint32_t nmsEnabled, void *__restrict tempBuf)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image based on the mask. The mask specifies pixels to be ignored by the detector.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga7ff9a08e0f13c117a6ae281646e2dfe8">fcvCornerFast10Scoreu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, int32_t barrier, uint32_t border, uint32_t *__restrict xy, uint32_t *__restrict scores, uint32_t nCornersMax, uint32_t *__restrict nCorners, uint32_t nmsEnabled, void *__restrict tempBuf)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga3e6b1c9fe01e0fb47e81f3bed7f93891">fcvCornerFast10InMaskScoreu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, int32_t barrier, uint32_t border, uint32_t *__restrict xy, uint32_t *__restrict scores, uint32_t nCornersMax, uint32_t *__restrict nCorners, const uint8_t *__restrict mask, uint32_t maskWidth, uint32_t maskHeight, uint32_t nmsEnabled, void *__restrict tempBuf)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts FAST corners and scores from the image based on the mask. The mask specifies pixels to be ignored by the detector.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga016a3d6a48da0df24fcd95ff51584a23">fcvBoundingRectangle</a> (const uint32_t *__restrict xy, uint32_t numPoints, uint32_t *rectTopLeftX, uint32_t *rectTopLeftY, uint32_t *rectWidth, uint32_t *rectHeight)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to find the bounding rectangle of a set of points.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> uint32_t</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga95530cbef7719a067c643b84ba4879cb">fcvKMeansTreeSearch36x10s8</a> (const int8_t *__restrict nodeChildrenCenter, const uint32_t *__restrict nodeChildrenInvLenQ32, const uint32_t *__restrict nodeChildrenIndex, const uint8_t *__restrict nodeNumChildren, uint32_t numNodes, const int8_t *__restrict key)</td>
+</tr>
+<tr>
+<td></td>
+<td>Search K-Means tree, where each node connects to up to 10 children, and the center (mean) is a 36-tuple vector of 8-bit signed value.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga3a76fb2bb10c895a2064bb40127bfbc9">fcvLinearSearchPrepare8x36s8</a> (uint32_t *__restrict dbLUT, uint32_t numDBLUT, int8_t *__restrict descDB, uint32_t *__restrict descDBInvLenQ38, uint16_t *__restrict descDBTargetId, uint32_t *__restrict descDBOldIdx, uint32_t numDescDB)</td>
+</tr>
+<tr>
+<td></td>
+<td>Sorts in-place the pairs of &lt;descDB, descDBInvLenQ38 &gt; according to descDBTargetId.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gaed99e08fbcb4617778e61093782e16fc">fcvLinearSearch8x36s8</a> (const uint32_t *__restrict dbLUT, uint32_t numDBLUT, const int8_t *__restrict descDB, const uint32_t *__restrict descDBInvLenQ38, const uint16_t *__restrict descDBTargetId, uint32_t numDescDB, const int8_t *__restrict srcDesc, const uint32_t *__restrict srcDescInvLenQ38, const uint32_t *__restrict srcDescIdx, uint32_t numSrcDesc, const uint16_t *__restrict targetsToIgnore, uint32_t numTargetsToIgnore, uint32_t maxDistanceQ31, uint32_t *__restrict correspondenceDBIdx, uint32_t *__restrict correspondenceSrcDescIdx, uint32_t *__restrict correspondenceDistanceQ31, uint32_t maxNumCorrespondences, uint32_t *__restrict numCorrespondences)</td>
+</tr>
+<tr>
+<td></td>
+<td>Perform linear search of descriptor in a database.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gaada7235aff3fa0cf946b42beeb7a79a3">fcvFindContoursExternalu8</a> (uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxNumContours, uint32_t *__restrict numContours, uint32_t *__restrict numContourPoints, uint32_t **__restrict contourStartPoints, uint32_t *__restrict pointBuffer, uint32_t pointBufferSize, int32_t hierarchy[][4], void *contourHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Finds only extreme outer contours in a binary image. There is no nesting relationship between contours. It sets hierarchy[i][2]=hierarchy[i][3]=-1 for all the contours.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gad87093bd7d5891fd245ca575ce442aa9">fcvFindContoursListu8</a> (uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxNumContours, uint32_t *__restrict numContours, uint32_t *__restrict numContourPoints, uint32_t **__restrict contourStartPoints, uint32_t *__restrict pointBuffer, uint32_t pointBufferSize, void *contourHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Finds contours in a binary image without any hierarchical relationships.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gae44f3a52730736c553afd4017fe47ca8">fcvFindContoursCcompu8</a> (uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxNumContours, uint32_t *__restrict numContours, uint32_t *__restrict holeFlag, uint32_t *__restrict numContourPoints, uint32_t **__restrict contourStartPoints, uint32_t *__restrict pointBuffer, uint32_t pointBufferSize, int32_t hierarchy[][4], void *contourHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Finds contours in a binary image and organizes them into a two-level hierarchy. At the top level, there are external boundaries of the components. At the second level, there are boundaries of the holes. If there is another contour inside a hole of a connected component, it is still put at the top level.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga5d4e2313fdcf516f3c01c0116bca2ec2">fcvFindContoursTreeu8</a> (uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxNumContours, uint32_t *__restrict numContours, uint32_t *__restrict holeFlag, uint32_t *__restrict numContourPoints, uint32_t **__restrict contourStartPoints, uint32_t *__restrict pointBuffer, uint32_t pointBufferSize, int32_t hierarchy[][4], void *contourHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Finds contours in a binary image and reconstructs a full hierarchy of nested contours.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void *</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gaf1f5253f202a848d565982812910c520">fcvFindContoursAllocate</a> (uint32_t srcStride)</td>
+</tr>
+<tr>
+<td></td>
+<td>Allocates assistant and intermediate data for contour.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gacde6ac35845a82848fddc2eac807906a">fcvFindContoursDelete</a> (void *contourHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Deallocates assistant and intermediate data for contour.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga9a5fa39d707934ec3235f551003b4c0a">fcvKDTreeCreate36s8f32</a> (const int8_t *__restrict vectors, const float32_t *__restrict invLengths, int numVectors, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_k_d_tree_datas8f32">fcvKDTreeDatas8f32</a> **kdtrees)</td>
+</tr>
+<tr>
+<td></td>
+<td>create KDTrees for dataset of 36D vectors</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gab157640b0230933b6fa799bf2c52e68c">fcvKDTreeDestroy36s8f32</a> (<a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_k_d_tree_datas8f32">fcvKDTreeDatas8f32</a> *kdtrees)</td>
+</tr>
+<tr>
+<td></td>
+<td>release KDTrees data structures</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga529f1ed0ee090b1f4c37808bc8c89dcc">fcvKDTreeQuery36s8f32</a> (<a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_k_d_tree_datas8f32">fcvKDTreeDatas8f32</a> *kdtrees, const int8_t *__restrict query, float32_t queryInvLen, int maxNNs, float32_t maxDist, int maxChecks, const uint8_t *__restrict mask, int32_t *numNNsFound, int32_t *__restrict NNInds, float32_t *__restrict NNDists)</td>
+</tr>
+<tr>
+<td></td>
+<td>find nearest neighbors (NN) for query</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gae0e4a3da9469abc967d4964af114e999">fcvHoughCircleu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_circle">fcvCircle</a> *__restrict circles, uint32_t *__restrict numCircle, uint32_t maxCircle, uint32_t minDist, uint32_t cannyThreshold, uint32_t accThreshold, uint32_t minRadius, uint32_t maxRadius, void *__restrict data)</td>
+</tr>
+<tr>
+<td></td>
+<td>Finds circles in a grayscale image using Hough transform.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gaed3414f887cf23741add241819354ece">fcvHoughLineu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, float32_t threshold, uint32_t maxLines, uint32_t <em>__restrict pNumLines, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_line">fcvLine</a></em>__restrict pLines)</td>
+</tr>
+<tr>
+<td></td>
+<td>Performs Hough Line detection.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga5fb8e229af2697a01b15b3b42c4e8bf4">fcvImageMomentsu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_moments">fcvMoments</a> *moments, uint8_t binary)</td>
+</tr>
+<tr>
+<td></td>
+<td>Computes weighted average (moment) of the image pixels&rsquo; intensities.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga8c22331068c2c50e96dca0f0b23771fa">fcvImageMomentss32</a> (const int32_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_moments">fcvMoments</a> *moments, uint8_t binary)</td>
+</tr>
+<tr>
+<td></td>
+<td>Computes weighted average (moment) of the image pixels&rsquo; intensities.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga4daa1d20f095187f8d02d03ef3994ea7">fcvImageMomentsf32</a> (const float32_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_moments">fcvMoments</a> *moments, uint8_t binary)</td>
+</tr>
+<tr>
+<td></td>
+<td>Computes weighted average (moment) of the image pixels&rsquo; intensities.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga4f1087cafc57766b142fd32ee920f99e">fcvImageDetectEdgePixelsu8</a> (const int16_t *__restrict gxgy, const uint32_t *__restrict mag, uint32_t gradStride, uint32_t topLeftX, uint32_t topLeftY, uint32_t width, uint32_t height, uint32_t gridSize, float32_t threshold, uint32_t nEdgePixelsMax, uint32_t *__restrict nEdgePixels, uint32_t *__restrict coordEdgePixels)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extracts edge locations from the image. This function tests for edges a grid of pixels within a bounding box.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga7ffc2bc0053143ac857f71b7bf6cb24b">fcvGLBPu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t radius, uint32_t neighbors, uint8_t *__restrict dst, uint32_t dstStride)</td>
+</tr>
+<tr>
+<td></td>
+<td>Computes the Generalized Local Binary Pattern Features for a single channel image.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga9ef684accf47bf47f476ad41596b856e">fcvCornerRefineSubPixu8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t blockWidth, uint32_t blockHeight, uint32_t maxIterations, float32_t stopCriteria, const uint32_t *__restrict xyInitial, uint32_t nCorners, float32_t *__restrict xyOut)</td>
+</tr>
+<tr>
+<td></td>
+<td>Refine corner location.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga9f077b6e1c2f396c5df9d41ab421a67e">fcvGoodFeatureToTracku8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, float32_t distanceMin, uint32_t border, float32_t barrier, uint32_t *__restrict xy, uint32_t maxnumcorners, uint32_t *__restrict numcorners)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extract strong corners from image to track.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#gaba6177ffd653b1b3eda7e22f50f9177a">fcvFindMultipleMaximau8</a> (const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, const float32_t *__restrict pos, const float32_t *__restrict normal, uint32_t maxDistance, uint32_t maxNumMaxima, int32_t minGradient, float32_t maxAngleDiff, float32_t *__restrict maxima, uint32_t *__restrict numMaxima)</td>
+</tr>
+<tr>
+<td></td>
+<td>Find multiple maxima along the normal direction of the line.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__feature__detection.html#ga2627d73c80f56209aefe12e63cac6e05">fcvImageDetectLineSegmentsu8</a> (const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level__v2">fcvPyramidLevel_v2</a> *__restrict srcPyr, uint32_t pyrLevel, uint32_t doBlurImage, float32_t maxLineAngle, uint32_t minLineLength, uint32_t minMagnitude, uint32_t maxLineNum, uint32_t *__restrict indexBuffer, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_line_segment">fcvLineSegment</a> *__restrict lineSegments, uint32_t *__restrict numLineSegments)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extract the straight line segments from the image.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="物体检测">物体检测</h2>
+<p><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html">https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html</a></p>
+<p>基于NCC模板匹配算法的物体检测，少量API需要先init再使用，使用完释放。例如fcvMserInit, fcvMseru8, fcvMserRelease。无继承关系。</p>
+<p>NCC是一种基于统计学计算两组样本数据相关性的算法，其取值范围为[-1, 1]之间，而对图像来说，每个像素点都可以看出是RGB数值，这样整幅图像就可以看成是一个样本数据的集合，如果它有一个子集与另外一个样本数据相互匹配则它的ncc值为1，表示相关性很高，如果是-1则表示完全不相关，基于这个原理，实现图像基于模板匹配识别算法，其中第一步就是要归一化数据，数学公式如下：</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C20151002003931895" alt="img"></p>
+<table>
+<thead>
+<tr>
+<th>Functions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gab82f782805a808e65340c1e069fb029a">fcvDescriptor17x17u8To36s8</a> (const uint8_t *__restrict patch, int8_t *__restrict descriptorChar, int32_t *__restrict descriptorNormSq)</td>
+</tr>
+<tr>
+<td></td>
+<td>Create a 36-dimension gradient based descriptor on 17x17 patch.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga3171f1d42b381f231f0a584425b9766c">fcvMserInit</a> (const unsigned int width, const unsigned int height, unsigned int delta, unsigned int minArea, unsigned int maxArea, float maxVariation, float minDiversity, void **mserHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to initialize MSER. To invoke MSER functionality, 3 functions have to be called: fcvMserInit, fcvMseru8, fcvMserRelease. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { fcvMseru8 (mserHandle,&hellip;); fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gad68be98402e214e70b8718e8ec991489">fcvMserRelease</a> (void *mserHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to release MSER resources.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga72f8e2ac76660fb1b36e8804b27d49f5">fcvMseru8</a> (void *mserHandle, const uint8_t *__restrict srcPtr, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, unsigned int maxContours, unsigned int *__restrict numContours, unsigned int *__restrict numPointsInContour, unsigned int pointsArraySize, unsigned int *__restrict pointsArray)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke MSER. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { fcvMseru8 (mserHandle,&hellip;); fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga1cc4b3ae042289284342491eb7c300be">fcvMserExtu8</a> (void *mserHandle, const uint8_t *__restrict srcPtr, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, unsigned int maxContours, unsigned int *__restrict numContours, unsigned int *__restrict numPointsInContour, unsigned int *__restrict pointsArray, unsigned int pointsArraySize, unsigned int *__restrict contourVariation, int *__restrict contourPolarity, unsigned int *__restrict contourNodeId, unsigned int *__restrict contourNodeCounter)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke MSER, with additional outputs for each contour. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { fcvMserExtu8 (mserHandle,&hellip;); fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga4eb56dbc6f78a3394be58d417761114f">fcvMseru8_v2</a> (void *mserHandle, const uint8_t *__restrict srcPtr, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxContours, uint32_t *__restrict numContours, uint16_t *__restrict recArray, uint32_t *__restrict numPointsInContour, uint32_t pointsArraySize, uint16_t *__restrict pointsArray)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke MSER with a smaller memory footprint and the (optional) output of contour bound boxes. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMseru8_v2 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga624ade2f96b970ee44cbb1eb8232ae23">fcvMserExtu8_v2</a> (void *mserHandle, const uint8_t *__restrict srcPtr, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxContours, uint32_t *__restrict numContours, uint16_t *__restrict recArray, uint32_t *__restrict numPointsInContour, uint32_t pointsArraySize, uint16_t *__restrict pointsArray, uint32_t *__restrict contourVariation, int8_t *__restrict contourPolarity, uint32_t *__restrict contourNodeId, uint32_t *__restrict contourNodeCounter)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke MSER with a smaller memory footprint, the (optional) output of contour bound boxes, and additional information. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMserExtu8_v2 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gaa3561aa1c58816a6289afee01c034d63">fcvMserExtu8_v3</a> (void *mserHandle, const uint8_t *__restrict srcPtr, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxContours, uint32_t *__restrict numContours, uint16_t *__restrict recArray, uint32_t *__restrict staPointsInPath, uint32_t *__restrict numPointsInContour, uint32_t pathArraySize, uint16_t *__restrict pathArray, uint32_t *__restrict contourVariation, int8_t *__restrict contourPolarity, uint32_t *__restrict contourNodeId, uint32_t *__restrict contourNodeCounter)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke MSER with a smaller memory footprint, the (optional) output of contour bound boxes, and additional information. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserInit (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMserExtu8_v3 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga578d455a7b6319286e1d556f53a2c112">fcvMserNN8Init</a> (const uint32_t width, const uint32_t height, uint32_t delta, uint32_t minArea, uint32_t maxArea, float32_t maxVariation, float32_t minDiversity, void **mserHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to initialize 8-neighbor MSER. To invoke 8-neighbor MSER functionality, 3 functions have to be called: fcvMserNN8Init, fcvMserNN8u8, fcvMserRelease. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserNN8Init (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMserNN8u8 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga47c40dc7826a9801ba2aa53b45ffbd49">fcvMserNN8u8</a> (void *mserHandle, const uint8_t *__restrict srcPtr, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxContours, uint32_t *__restrict numContours, uint16_t *__restrict recArray, uint32_t *__restrict numPointsInContour, uint32_t pointsArraySize, uint16_t *__restrict pointsArray)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke 8-neighbor MSER. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserNN8Init (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMserNN8u8 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga2fa5d7ae75dbb5fd34da91232ac86241">fcvMserExtNN8u8</a> (void *mserHandle, const uint8_t *__restrict srcPtr, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t maxContours, uint32_t *__restrict numContours, uint16_t *__restrict recArray, uint32_t *__restrict numPointsInContour, uint32_t pointsArraySize, uint16_t *__restrict pointsArray, uint32_t *__restrict contourVariation, int8_t *__restrict contourPolarity, uint32_t *__restrict contourNodeId, uint32_t *__restrict contourNodeCounter)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to invoke 8-neighbor MSER, , with additional outputs for each contour. Image width has to be greater than 50, and image height has to be greater than 5. Pixels at the image boundary are not processed. If boundary pixels are important for a particular application, please consider padding the input image with dummy pixels of one pixel wide. Here is the typical usage: void *mserHandle; if (fcvMserNN8Init (width,&hellip;&hellip;..,&amp;mserHandle)) { if ( !fcvMserExtNN8u8 (mserHandle,&hellip;) ) { Error handle } fcvMserRelease(mserHandle); }.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gabe5862cdb3562efc93eb381d7661abda">fcvDescriptorSampledMeanAndVar36f32</a> (const float *__restrict src, int first, int last, int32_t *vind, float *__restrict means, float *__restrict vars, float *__restrict temp)</td>
+</tr>
+<tr>
+<td></td>
+<td>compute approximate mean and variance for the range of NFT4 float descriptors where descriptor elements along dimension are treated as random vars</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gae7e7e79173e7c7b503fb5699974452ff">fcvNCCPatchOnCircle8x8u8</a> (const uint8_t *__restrict patch, const uint8_t *__restrict src, unsigned short srcWidth, unsigned short srcHeight, unsigned short search_center_x, unsigned short search_center_y, unsigned short search_radius, uint16_t *best_x, uint16_t *best_y, uint32_t *bestNCC, int findSubPixel, float *subX, float *subY)</td>
+</tr>
+<tr>
+<td></td>
+<td>Searches a 8x8 patch within radius around a center pixel for the max NCC.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga6cd488afcf5a6bd1cba7b6fb4e7d5f4f">fcvNCCPatchOnCircle8x8u8_v2</a> (const uint8_t *__restrict patch, const uint8_t *__restrict src, unsigned short srcWidth, unsigned short srcHeight, unsigned short search_center_x, unsigned short search_center_y, unsigned short search_radius, int filterLowVariance, uint16_t *best_x, uint16_t *best_y, uint32_t *bestNCC, int findSubPixel, float *subX, float *subY)</td>
+</tr>
+<tr>
+<td></td>
+<td>Searches a 8x8 patch within radius around a center pixel for the max NCC.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga7a12456b2970e2b4a7383275dd970947">fcvNCCPatchOnSquare8x8u8</a> (const uint8_t *__restrict patch, const uint8_t *__restrict src, unsigned short srcWidth, unsigned short srcHeight, unsigned short search_center_x, unsigned short search_center_y, unsigned short search_w, uint16_t *best_x, uint16_t *best_y, uint32_t *bestNCC, int doSubPixel, float *subX, float *subY)</td>
+</tr>
+<tr>
+<td></td>
+<td>Searches a 8x8 patch within square region around a center pixel for the max NCC.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga42544cc2e27f8d81fb2960626d978878">fcvNCCPatchOnSquare8x8u8_v2</a> (const uint8_t *__restrict patch, const uint8_t *__restrict src, unsigned short srcWidth, unsigned short srcHeight, unsigned short search_center_x, unsigned short search_center_y, unsigned short search_w, int filterLowVariance, uint16_t *best_x, uint16_t *best_y, uint32_t *bestNCC, int doSubPixel, float *subX, float *subY)</td>
+</tr>
+<tr>
+<td></td>
+<td>Searches a 8x8 patch within square region around a center pixel for the max NCC.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga975d4a9d6b35921fe0833a160812b64f">fcvSumOfAbsoluteDiffs8x8u8</a> (const uint8_t *__restrict patch, const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, uint16_t *__restrict dst)</td>
+</tr>
+<tr>
+<td></td>
+<td>Sum of absolute differences of an image against an 8x8 template.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gabe93d5ebf206034c77ec152e9f577f42">fcvSumOfAbsoluteDiffs8x8u8_v2</a> (const uint8_t *__restrict patch, unsigned int patchStride, const uint8_t *__restrict src, unsigned int srcWidth, unsigned int srcHeight, unsigned int srcStride, uint16_t *__restrict dst, unsigned int dstStride)</td>
+</tr>
+<tr>
+<td></td>
+<td>Sum of absolute differences of an image against an 8x8 template.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga0af1c588201a116f0ac302da8cfc102f">fcvTrackLKOpticalFlowu8</a> (const uint8_t *__restrict src1, const uint8_t *__restrict src2, int srcWidth, int srcHeight, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *src1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *src2Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *dx1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *dy1Pyr, const float *featureXY, float *featureXY_out, int32_t *featureStatus, int featureLen, int windowWidth, int windowHeight, int maxIterations, int nPyramidLevels, float maxResidue, float minDisplacement, float minEigenvalue, int lightingNormalized)</td>
+</tr>
+<tr>
+<td></td>
+<td>Optical flow. Bitwidth optimized implementation.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga38d206c86ecb5737539c3dc3bbb95e04">fcvTrackLKOpticalFlowu8_v2</a> (const uint8_t *__restrict src1, const uint8_t *__restrict src2, uint32_t width, uint32_t height, uint32_t stride, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level__v2">fcvPyramidLevel_v2</a> *src1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level__v2">fcvPyramidLevel_v2</a> *src2Pyr, const float32_t *featureXY, float32_t *featureXY_out, int32_t *featureStatus, int32_t featureLen, int32_t windowWidth, int32_t windowHeight, int32_t maxIterations, int32_t nPyramidLevels)</td>
+</tr>
+<tr>
+<td></td>
+<td>Optical flow (with stride so ROI can be supported)</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga607d0ae30c4428c9d7f4a86698545784">fcvTrackLKOpticalFlowf32</a> (const uint8_t *__restrict src1, const uint8_t *__restrict src2, unsigned int srcWidth, unsigned int srcHeight, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *src1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *src2Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *dx1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level">fcvPyramidLevel</a> *dy1Pyr, const float *featureXY, float *featureXY_out, int32_t *featureStatus, int featureLen, int windowWidth, int windowHeight, int maxIterations, int nPyramidLevels, float maxResidue, float minDisplacement, float minEigenvalue, int lightingNormalized)</td>
+</tr>
+<tr>
+<td></td>
+<td>Optical flow.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> int</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gac9bd821b1927d666af27a26b8c0385f9">fcvTrackBMOpticalFlow16x16u8</a> (const uint8_t *__restrict src1, const uint8_t *__restrict src2, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, uint32_t roiLeft, uint32_t roiTop, uint32_t roiRight, uint32_t roiBottom, uint32_t shiftSize, uint32_t searchWidth, uint32_t searchHeight, uint32_t searchStep, uint32_t usePrevious, uint32_t *numMv, uint32_t *locX, uint32_t *locY, uint32_t *mvX, uint32_t *mvY)</td>
+</tr>
+<tr>
+<td></td>
+<td>Block Optical Flow 16x16 - Tracks all 16x16 blocks in the Region of Interest (ROI) from Source-1 to Source-2. Generates Motion Vectors for blocks where motion is detected.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga0dad786f57060c75cdb4956afef95931">fcvNCCPatchesOnRectu8</a> (const uint8_t *__restrict patches, uint32_t patchWidth, uint32_t patchHeight, const uint8_t *__restrict src, uint32_t srcWidth, uint32_t srcHeight, uint32_t srcStride, const uint32_t *__restrict searchCenterX, const uint32_t *__restrict searchCenterY, uint32_t searchWidth, uint32_t searchHeight, int32_t filterLowVariance, uint32_t *__restrict bestX, uint32_t *__restrict bestY, uint32_t *__restrict bestNCC, int32_t findSubPixel, float32_t *__restrict subX, float32_t *__restrict subY, uint32_t numSearches)</td>
+</tr>
+<tr>
+<td></td>
+<td>Searches a set of patches within the source image for the max NCCs. The search regions are corresponding to the patches in the search list.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga963b3c7b4aad96bb2c15ac3263ca101b">fcvTrackLKOpticalFlowu8_v3</a> (const uint8_t *__restrict src1, const uint8_t *__restrict src2, uint32_t width, uint32_t height, uint32_t stride, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level__v2">fcvPyramidLevel_v2</a> *__restrict src1Pyr, const <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#structfcv_pyramid_level__v2">fcvPyramidLevel_v2</a> *__restrict src2Pyr, const float32_t *__restrict featureXY, const float32_t *__restrict featureXY_estimate, float32_t *__restrict featureXY_out, int32_t *__restrict featureStatus, int32_t featureLen, int32_t windowWidth, int32_t windowHeight, int32_t nPyramidLevels, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a5689c95a3920a0a45bda70562aa7db11">fcvTerminationCriteria</a> termCriteria, int32_t maxIterations, float32_t maxEpsilon, int32_t use_initial_estimate)</td>
+</tr>
+<tr>
+<td></td>
+<td>Optical flow (with stride so ROI can be supported)</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gaca4b60ca7ef2d5b60464dee41af4cd54">fcvExtractHOGu16</a> (const uint16_t *__restrict strength, uint32_t width, uint32_t height, uint32_t strengthStride, const uint16_t *__restrict orientation, uint32_t orientationStride, uint32_t cellSize, uint32_t blockSize, uint32_t blockStep, uint32_t binSize, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a96a938159f8e3fb98c108b301d4d6173">fcvHOGNormMethod</a> normMethod, uint16_t *__restrict hogVector, uint32_t flen, void *handle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Extract Histogram of Oriented Gradients (HOG) descriptor given an image&rsquo;s gradient strength and orientation.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a39574810b4ad6914ee8613424f316283">fcvStatus</a></td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#ga0afbc0cbf2eb1774bc7cf0be267814f1">fcvHOGInit</a> (uint32_t width, uint32_t height, uint32_t cellSize, uint32_t blockSize, uint32_t blockStep, uint32_t binSize, <a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a96a938159f8e3fb98c108b301d4d6173">fcvHOGNormMethod</a> normMethod, uint32_t *vecLength, void **hogHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Calculate the length of the output vector for HOG extraction.</td>
+</tr>
+<tr>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/fastcv_8h.html#a0af785079a7a86fb53f9ee59aac21522">FASTCV_API</a> void</td>
+<td><a href="https://developer.qualcomm.com/docs/fastcv/api/group__object__detection.html#gabcd19e8f54884a326dee860af4508202">fcvHOGDeInit</a> (void *hogHandle)</td>
+</tr>
+<tr>
+<td></td>
+<td>Function to release HOG resources.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="应用示例-1">应用示例</h2>
+<p>参见sample下的fastcvdemo，这是一个标准的android应用，在jni部分调用了fastcv的函数。实现图片的处理及边缘检测。</p>
+<h2 id="版本演进-2">版本演进</h2>
+<p>详见fastcv_releasenotes_1.7.1_may2019.pdf</p>
+<p>版本号为A：B：C格式</p>
+<p>​	A：API发生改变</p>
+<p>​	B：增加新功能，原有API不变</p>
+<p>​	C：实现改变</p>
+<p>1.0.2：第一版</p>
+<p>1.0.3：fcvSumOfSquaredDiffs36x4s8（）改变</p>
+<p>1.0.4：性能优化</p>
+<p>1.1.0：添加_v2后缀新的API</p>
+<p>1.1.1：修复问题，性能优化，添加demo app</p>
+<p>1.2.0：添加图像color类型转换API，fcvColorRGB888ToRGBA8888u8，fcvColorRGB565ToBGR565u8，C接口这里有弊端，类型太多了，没法用模板。</p>
+<p>1.2.1：修复问题，性能优化</p>
+<p>1.2.2：引入llvm编译器，根据当前模式自动选择QDSP或者GPU实现类型。</p>
+<p>1.3：添加更多的API，fcvBilateralFilter5x5u8，fcvBilateralFilter5x5u8</p>
+<p>1.4：fcvFlipu8，fcvFlipu8函数定义改变，上一版本引入</p>
+<p>1.5：fcvElementMultiplyu8u16，fcvElementMultiplyf32函数定义改变，添加大量新的API，fcvBitwiseAndu8，fcvFilterSobel5x5u8s16，fcvIFFTf32等</p>
+<p>1.6：fcvBoxFilterNxNf32函数定义改变，新增fcv2PlaneWarpPerspectiveu8，fcvICPJacobianErrorSE3f32，fcvDepthFusion8x8x8xNs16，fcvImageDetectLineSegmentsu8，fcvFindMultipleMaximau8，fcvScaleDownBy2Gaussian3x3u8</p>
+<p>1.7：新增API，fcvMinMaxLocf32_v2，fcvScaleu8_v2，android支持32，64位</p>
+<p>1.7.1：llvm更新为3.7版本</p>
+<h1 id="参考点">参考点</h1>
+<ol>
+<li>版本号控制策略</li>
+<li>如何新增，作废一个API：引入后缀_V2, _v3，大版本升级后取消老API，_v2转正，取消后缀。</li>
+<li>fastcv提供的算法列表</li>
+<li>自定义算法支持</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-03-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/training/">training</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Google ML Kit分析</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/2020_02-11_nchw%E4%B8%8Enhwc/">
+            <span class="next-text nav-default">NCHW与NHWC</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

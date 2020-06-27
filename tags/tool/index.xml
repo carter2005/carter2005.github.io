@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tool on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/tags/tool/</link>
+    <description>Recent content in tool on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Apr 2020 10:21:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/tags/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tmpfs</title>
+      <link>https://carter2005.github.io/post/2020/2020-04-16_tmpfs/</link>
+      <pubDate>Thu, 16 Apr 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-04-16_tmpfs/</guid>
+      <description>背景 tmpfs是一种基于内存的文件系统，具有速度快，使用简单，大小可调整等优点，在linux，android中获得了广泛的应用。 Linux使</description>
+    </item>
+    
+  </channel>
+</rss>

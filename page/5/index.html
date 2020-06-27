@@ -112,57 +112,63 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-03_consume-cpu/">消耗CPU</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/">如何做CPU算子分析</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-09-03 </span>
-      
+      <span class="post-time"> 2020-01-17 </span>
+      <div class="post-category">
+          <a href="/categories/ai/"> AI </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      for i in `seq 1 $(cat /proc/cpuinfo |grep &ldquo;physical id&rdquo; |wc -l)`; do dd if=/dev/zero of=/dev/null &amp; done
+      1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-09-03_consume-cpu/" class="read-more-link">阅读更多</a>
+      <a href="/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-01_create-mojave-bootable-disk/">create mojave bootable disk</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2020/2020-01-14_%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86/">自动微分</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-09-01 </span>
-      
+      <span class="post-time"> 2020-01-14 </span>
+      <div class="post-category">
+          <a href="/categories/ai/"> AI </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      mojave #根据安装程序大小创建空白dmg包 hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J #装载自定义命名宗卷 hdiutil attach ~/Desktop/macOS\ Mojave.dmg -noverify -mountpoint /Volumes/install #将安装程序写入之 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia &ndash;volume /Volumes/install #卸载得到的Ins
+      背景 反向传播算法的核心是按照梯度下降的方向更新参数，从而取得函数的局部极小值（不能保证获得最优解）。 误差函数，激励函数的表达式可能很复杂，公
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-09-01_create-mojave-bootable-disk/" class="read-more-link">阅读更多</a>
+      <a href="/post/2020/2020-01-14_%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-01_openwrt-for-x86-64/">openwrt for x86-64</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2020/2020-01-13_mnn/">mnn简介</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-09-01 </span>
-      
+      <span class="post-time"> 2020-01-13 </span>
+      <div class="post-category">
+          <a href="/categories/ai/"> AI </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      下载：http://downloads.openwrt.org/releases/18.06.4/targets/x86/64/openwr
+      简介 MNN是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-09-01_openwrt-for-x86-64/" class="read-more-link">阅读更多</a>
+      <a href="/post/2020/2020-01-13_mnn/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

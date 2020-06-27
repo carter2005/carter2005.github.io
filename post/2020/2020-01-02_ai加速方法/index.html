@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AI加速方法 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-02_ai%E5%8A%A0%E9%80%9F%E6%96%B9%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="AI加速方法" />
+<meta property="og:description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-02_ai%E5%8A%A0%E9%80%9F%E6%96%B9%E6%B3%95/" />
+<meta property="article:published_time" content="2020-01-02T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-01-02T10:21:20+08:00" />
+<meta itemprop="name" content="AI加速方法">
+<meta itemprop="description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令">
+<meta itemprop="datePublished" content="2020-01-02T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-02T10:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="6771">
+
+
+
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AI加速方法"/>
+<meta name="twitter:description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">AI加速方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-02 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#汇编">汇编</a></li>
+    <li><a href="#mmx">MMX</a></li>
+    <li><a href="#sse">SSE</a></li>
+    <li><a href="#avx">AVX</a></li>
+    <li><a href="#neon">NEON</a></li>
+    <li><a href="#指令集优化例子">指令集优化例子</a>
+      <ul>
+        <li><a href="#汇编-1">汇编</a></li>
+        <li><a href="#neon-1">neon</a></li>
+        <li><a href="#sse-1">SSE</a></li>
+        <li><a href="#avx-1">avx</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#im2col">im2col</a></li>
+    <li><a href="#winograd">Winograd</a></li>
+    <li><a href="#fft">fft</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#性能分析">性能分析</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#opengl">opengl</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="指令集优化">指令集优化</h1>
+<p>指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令来计算和控制系统，所以指令强弱是衡量CPU性能的重要指标，指令集也成为提高CPU效率的有效工具。</p>
+<p>CPU都有一个基本的指令集，比如说目前英特尔和AMD的绝大部分处理器都使用的是X86指令集，因为它们都源自于X86架构。但无论CPU有多快，X86指令也只能一次处理一个数据，这样效率就很低下，毕竟在很多应用中，数据都是成组出现的，比如一个点的坐标（XYZ）和颜色（RGB）、多声道音频等。为了提高CPU在某些方面的性能，就必须增加一些特殊的指令满足时代进步的需求，这些新增的指令就构成了扩展指令集。该指令集采用单指令多数据(single instruction multiple data,简称 SIMD)扩展技术。</p>
+<p><strong>指令集查询网站</strong>：https://software.intel.com/sites/landingpage/IntrinsicsGuide/</p>
+<h2 id="汇编">汇编</h2>
+<p>最接近硬件的语言</p>
+<h2 id="mmx">MMX</h2>
+<p><strong>MMX</strong>是由<a href="https://zh.wikipedia.org/wiki/%E8%8B%B1%E7%89%B9%E5%B0%94">英特尔</a>开发的一种**<a href="https://zh.wikipedia.org/wiki/%E5%8D%95%E6%8C%87%E4%BB%A4%E6%B5%81%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%B5%81">SIMD</a>**<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E5%AA%92%E4%BD%93">多媒体</a><a href="https://zh.wikipedia.org/wiki/%E6%8C%87%E4%BB%A4%E9%9B%86">指令集</a>，共有57条指令。它于1996年集成在英特尔<a href="https://zh.wikipedia.org/wiki/%E5%A5%94%E8%85%BE">奔腾</a>（Pentium）MMX<a href="https://zh.wikipedia.org/wiki/%E5%A4%84%E7%90%86%E5%99%A8">处理器</a>上，以提高其多媒体数据的处理能力。</p>
+<p>其优点是增加了處理器關於<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E5%AA%92%E4%BD%93">多媒体</a>方面的处理能力，缺点是占用<a href="https://zh.wikipedia.org/wiki/%E6%B5%AE%E7%82%B9%E6%95%B0">浮点数</a><a href="https://zh.wikipedia.org/wiki/%E5%AF%84%E5%AD%98%E5%99%A8">寄存器</a>进行运算（<strong>64位MMX寄存器</strong>实际上就是浮点数寄存器的别名）以至于MMX指令和浮点数操作不能同时工作。为了减少在MMX和浮点数模式切换之间所消耗的时间，程序员们尽可能减少模式切换的次数，也就是说，这两种操作在应用上是互斥的。<a href="https://zh.wikipedia.org/wiki/AMD">AMD</a>在此基础上发展出<a href="https://zh.wikipedia.org/wiki/3DNow!">3D Now!</a>指令集。</p>
+<h2 id="sse">SSE</h2>
+<p>**SSE（Streaming SIMD Extensions）**是<a href="https://zh.wikipedia.org/wiki/%E8%8B%B1%E7%89%B9%E5%B0%94">英特尔</a>在<a href="https://zh.wikipedia.org/wiki/AMD">AMD</a>的<a href="https://zh.wikipedia.org/wiki/3DNow!">3D Now!</a>发布一年之后，在其计算机芯片<a href="https://zh.wikipedia.org/wiki/Pentium_III">Pentium III</a>中引入的指令集，是繼<a href="https://zh.wikipedia.org/wiki/MMX">MMX</a>的擴充指令集。SSE指令集提供了70條新指令。<a href="https://zh.wikipedia.org/wiki/AMD">AMD</a>后来在<a href="https://zh.wikipedia.org/wiki/Athlon">Athlon XP</a>中加入了对这个新指令集的支持。</p>
+<p>SSE加入新的8個128位元暫存器（XMM0～XMM7）。而AMD發表的<a href="https://zh.wikipedia.org/wiki/X86-64">x86-64</a>延伸架構（又稱AMD64）再加入額外8個暫存器。除此之外還有一個新的32位元的控制／狀態暫存器（MXCSR）。不過只能在64位元的模式下才能使用額外8個暫存器。</p>
+<p>SSE（Streaming SIMD Extensions，流式单指令多数据扩展）指令集是1999年英特尔在Pentium III处理器中率先推出的，并将矢量处理能力从64位扩展到了128位。在Willamette核心的Pentium 4中英特尔又将扩展指令集升级到SSE2（2000年），而SSE3指令集（2004年）是从Prescott核心的Pentium 4开始出现。
+SSE4（2007年）指令集是自SSE以来最大的一次指令集扩展，它实际上分成Penryn中出现的SSE4.1和Nehalem中出现的SSE4.2，其中SSE4.1占据了大部分的指令，共有47条，Nehalem中的SSE4指令集更新很少，只有7条指令，这样一共有54条指令，称为SSE4.2。</p>
+<h2 id="avx">AVX</h2>
+<p>2007年8月，AMD抢先宣布了SSE5指令集(SSE到SSE4均为英特尔出品)，英特尔当即黑脸表示不支持SSE5，转而在2008年3月宣布Sandy Bridge微架构将引入全新的AVX指令集，同年4月英特尔公布AVX指令集规范，随后开始不断进行更新，业界普遍认为支持AVX指令集是Sandy Bridge最重要的进步，没有之一。
+AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些AMD SSE5的设计思路，进行扩展和加强，形成一套新一代的完整SIMD指令集规范。</p>
+<p>AVX高级矢量扩展，在SSE的基础上又把寄存器大小扩展为256bit。这次AVX将所有16个128位XMM寄存器扩充为256位的YMM寄存器，从而支持256位的矢量计算。理想状态下，浮点性能最高能达到前代的2倍水平。同时所有的SSE/SSE2/SSE3/SSSE3/SSE4指令是被AVX全面兼容的（AVX不兼容MMX），因此实际操作的是YMM寄存器的低128位，在这一点上与原来的SSE系列指令集无异。</p>
+<ul>
+<li>
+<p>支持256位矢量计算，浮点性能最大提升2倍</p>
+</li>
+<li>
+<p>增强的数据重排，更有效存取数据</p>
+</li>
+<li>
+<p>支持3操作数和4操作数，在矢量和标量代码中能更好使用寄存器</p>
+</li>
+<li>
+<p>支持灵活的不对齐内存地址访问</p>
+</li>
+<li>
+<p>支持灵活的扩展性强的VEX编码方式，可减少代码</p>
+</li>
+</ul>
+<p>AVX2指令集将大多数整数命令操作扩展到256位，并引入了<a href="https://zh.wikipedia.org/wiki/%E7%86%94%E5%90%88%E4%B9%98%E6%B3%95%E7%B4%AF%E7%A7%AF">熔合乘法累积</a>（FMA）运算。<a href="https://zh.wikipedia.org/w/index.php?title=AVX-512&amp;action=edit&amp;redlink=1">AVX-512</a>则使用新的<a href="https://zh.wikipedia.org/w/index.php?title=EVEX%E5%89%8D%E7%BC%80&amp;action=edit&amp;redlink=1">EVEX前缀</a>编码将AVX指令进一步扩展到512位。Intel Xeon Scalable處理器支援AVX-512。</p>
+<h2 id="neon">NEON</h2>
+<p>NEON是一种SIMD(Single Instruction Multiple Data)指令，也就是说，NEON可以把若干源(source)操作数(operand)打包放到一个源寄存器中，对他们执行相同的操作，产生若干目的(dest)操作数，这种方式也叫向量化(vectorization)。</p>
+<p>可能你对这个描述还不够清晰，简单来说，就是：NEON指令优化的精髓就在于同时在不同通道内进行并行运算。通常可用于图像等矩阵数据的循环优化。</p>
+<p>更简单的说，就是，将Neon寄存器分为多个通道，每个通道存储一个数据。一条对Neon寄存器的计算指令，实际上，是对各通道的数据分别的计算指令。即寄存器位宽，直接影响到数据的通道数。</p>
+<p>例如：在ARMv7的NEON unit中，register file总大小是1024-bit，可以划分为16个128-bit的Q-register(Quadword register)或者32个64-bit的D-register(Dualword register)，也就是说，最长的寄存器位宽是128-bit。那么，假设我们采用32-bit单精度浮点数float来做浮点运算，那么可以把最多128/32=4个浮点数打包放到Q-register中做运算，即4个4个参与计算，从而提高吞吐量，减少loop次数。</p>
+<p>neon指令集列表：https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/ARM-NEON-Intrinsics.html#ARM-NEON-Intrinsics</p>
+<p>ARMv7 与 ARMv8的区别</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Carm_arch.png" alt="arm_arch"></p>
+<h2 id="指令集优化例子">指令集优化例子</h2>
+<h3 id="汇编-1">汇编</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-asm" data-lang="asm"><span class="c">#ifdef __aarch64__
+</span><span class="c">#include &#34;MNNAsmGlobal.h&#34;
+</span><span class="c"></span>
+<span class="na">.text</span>
+<span class="na">.align</span> <span class="mi">5</span>
+<span class="nf">asm_function</span> <span class="no">MNNFloat16_Common_4_MatMul</span>
+<span class="err">//</span><span class="nf">void</span> <span class="no">MNNFloat16_Common_4_MatMul</span><span class="p">(</span><span class="no">int16_t</span><span class="p">*</span> <span class="no">dst</span><span class="p">,</span> <span class="no">const</span> <span class="no">int16_t</span><span class="p">*</span> <span class="no">src</span><span class="p">,</span> <span class="no">const</span> <span class="no">int16_t</span><span class="p">*</span> <span class="no">weight</span><span class="p">,</span> <span class="no">size_t</span> <span class="no">icUnit</span><span class="p">,</span> <span class="no">size_t</span> <span class="no">ocUnit</span><span class="p">,</span> <span class="no">size_t</span> <span class="no">ocStep</span><span class="p">,</span> <span class="no">size_t</span> <span class="no">width</span><span class="p">)</span><span class="c">;
+</span><span class="c"></span><span class="err">//</span><span class="no">Auto</span><span class="p">:</span> <span class="no">x0</span><span class="p">:</span> <span class="no">dst</span><span class="p">,</span> <span class="no">x1</span><span class="p">:</span><span class="no">src</span><span class="p">,</span> <span class="no">x2</span><span class="p">:</span><span class="no">weight</span><span class="p">,</span> <span class="no">x3</span><span class="p">:</span><span class="no">icUnit</span>
+<span class="err">//</span><span class="nl">x4:</span> <span class="nf">ocUnit</span><span class="p">,</span> <span class="no">x5</span><span class="p">:</span><span class="no">ocStep</span><span class="p">,</span> <span class="no">x6</span><span class="p">:</span> <span class="no">width</span>
+
+<span class="nf">mov</span> <span class="no">x12</span><span class="p">,</span> <span class="c">#8 // 4*sizeof(__fp16)
+</span><span class="c"></span><span class="no">mul</span> <span class="no">x12</span><span class="p">,</span> <span class="no">x6</span><span class="p">,</span> <span class="no">x12</span>
+
+<span class="na">.macro</span> <span class="no">COMPUTE</span> <span class="no">z0</span> <span class="no">z1</span> <span class="no">z2</span> <span class="no">z3</span> <span class="no">z4</span> <span class="no">z5</span> <span class="no">z6</span> <span class="no">z7</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v0.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x7</span><span class="p">],</span> <span class="c">#16
+</span><span class="c"></span>        <span class="no">fmla</span> <span class="err">\</span><span class="no">z0</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z1</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z0</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z1</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z0</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v1.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x7</span><span class="p">],</span> <span class="c">#16
+</span><span class="c"></span>        <span class="no">fmla</span> <span class="err">\</span><span class="no">z1</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z0</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z1</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z2</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z3</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v0.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x7</span><span class="p">],</span> <span class="c">#16
+</span><span class="c"></span>        <span class="no">fmla</span> <span class="err">\</span><span class="no">z2</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z3</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z2</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z3</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z2</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z3</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z4</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z5</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z4</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z5</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v1.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x7</span><span class="p">],</span> <span class="c">#16
+</span><span class="c"></span>        <span class="no">fmla</span> <span class="err">\</span><span class="no">z4</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z5</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z4</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z5</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+
+
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z6</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z7</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z6</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z7</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z6</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z7</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z6</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="nf">fmla</span> <span class="err">\</span><span class="no">z7</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v1.h</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+<span class="na">.endm</span>
+
+
+<span class="nl">L16:</span>
+<span class="nf">cmp</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#16
+</span><span class="c"></span><span class="no">blt</span> <span class="no">L8</span>
+
+<span class="nf">mov</span> <span class="no">x13</span><span class="p">,</span> <span class="no">x2</span>
+<span class="nf">mov</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x0</span>
+<span class="nf">mov</span> <span class="no">x15</span><span class="p">,</span> <span class="no">x1</span>
+
+<span class="nf">mov</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x4</span>
+
+<span class="nl">LoopOzL16:</span>
+    <span class="nf">movi</span> <span class="no">v31.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v30.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v29.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v28.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v27.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v26.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v25.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v24.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>
+    <span class="nf">movi</span> <span class="no">v23.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v20.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v19.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>
+    <span class="nf">mov</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x1</span>
+    <span class="nf">mov</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x3</span>
+    <span class="nf">mov</span> <span class="no">x9</span><span class="p">,</span> <span class="no">x14</span>
+    <span class="nl">LoopSz16:</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v2.8h</span><span class="p">,</span> <span class="no">v3.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>        <span class="no">ld1</span> <span class="err">{</span><span class="no">v4.8h</span><span class="p">,</span> <span class="no">v5.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>
+        <span class="nf">COMPUTE</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="no">v19.8h</span><span class="p">,</span> <span class="no">v20.8h</span><span class="p">,</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="no">v23.8h</span>
+        <span class="nf">COMPUTE</span> <span class="no">v24.8h</span><span class="p">,</span> <span class="no">v25.8h</span><span class="p">,</span> <span class="no">v26.8h</span><span class="p">,</span> <span class="no">v27.8h</span><span class="p">,</span> <span class="no">v28.8h</span><span class="p">,</span> <span class="no">v29.8h</span><span class="p">,</span> <span class="no">v30.8h</span><span class="p">,</span> <span class="no">v31.8h</span>
+
+        <span class="nf">sub</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x7</span><span class="p">,</span> <span class="c">#128
+</span><span class="c"></span>        <span class="no">add</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x12</span>
+
+        <span class="nf">subs</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x8</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>        <span class="no">bne</span> <span class="no">LoopSz16</span>
+
+    <span class="nf">subs</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x11</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>
+    <span class="nf">st1</span> <span class="err">{</span><span class="no">v16.8h</span><span class="p">,</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="no">v19.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>    <span class="no">st1</span> <span class="err">{</span><span class="no">v20.8h</span><span class="p">,</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="no">v23.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>    <span class="no">st1</span> <span class="err">{</span><span class="no">v24.8h</span><span class="p">,</span> <span class="no">v25.8h</span><span class="p">,</span> <span class="no">v26.8h</span><span class="p">,</span> <span class="no">v27.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>    <span class="no">st1</span> <span class="err">{</span><span class="no">v28.8h</span><span class="p">,</span> <span class="no">v29.8h</span><span class="p">,</span> <span class="no">v30.8h</span><span class="p">,</span> <span class="no">v31.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>
+    <span class="nf">add</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x5</span>
+    <span class="nf">bne</span> <span class="no">LoopOzL16</span>
+
+<span class="nf">sub</span> <span class="no">w6</span><span class="p">,</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#16
+</span><span class="c"></span><span class="no">add</span> <span class="no">x0</span><span class="p">,</span> <span class="no">x0</span><span class="p">,</span> <span class="c">#256 // 16*8*sizeof(float16)
+</span><span class="c"></span><span class="no">add</span> <span class="no">x1</span><span class="p">,</span> <span class="no">x1</span><span class="p">,</span> <span class="c">#128 // 16*4*sizeof(float16)
+</span><span class="c"></span><span class="no">mov</span> <span class="no">x2</span><span class="p">,</span> <span class="no">x13</span>
+
+<span class="nl">L8:</span>
+<span class="nf">cmp</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#8
+</span><span class="c"></span><span class="no">blt</span> <span class="no">L1</span>
+
+<span class="nf">mov</span> <span class="no">x13</span><span class="p">,</span> <span class="no">x2</span>
+<span class="nf">mov</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x0</span>
+<span class="nf">mov</span> <span class="no">x15</span><span class="p">,</span> <span class="no">x1</span>
+
+<span class="nf">mov</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x4</span>
+
+<span class="nl">LoopOzL8:</span>
+    <span class="nf">movi</span> <span class="no">v23.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v20.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v19.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>    <span class="no">movi</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>
+    <span class="nf">mov</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x1</span>
+    <span class="nf">mov</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x3</span>
+    <span class="nf">mov</span> <span class="no">x9</span><span class="p">,</span> <span class="no">x14</span>
+    <span class="nl">LoopSz8:</span>
+        <span class="nf">ld1</span> <span class="err">{</span><span class="no">v2.8h</span><span class="p">,</span> <span class="no">v3.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>        <span class="no">ld1</span> <span class="err">{</span><span class="no">v4.8h</span><span class="p">,</span> <span class="no">v5.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>
+        <span class="nf">COMPUTE</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="no">v19.8h</span><span class="p">,</span> <span class="no">v20.8h</span><span class="p">,</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="no">v23.8h</span>
+        <span class="nf">sub</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x7</span><span class="p">,</span> <span class="c">#64
+</span><span class="c"></span>        <span class="no">add</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x12</span>
+
+        <span class="nf">subs</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x8</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>        <span class="no">bne</span> <span class="no">LoopSz8</span>
+
+    <span class="nf">subs</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x11</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>
+    <span class="nf">st1</span> <span class="err">{</span><span class="no">v16.8h</span><span class="p">,</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v18.8h</span><span class="p">,</span> <span class="no">v19.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>    <span class="no">st1</span> <span class="err">{</span><span class="no">v20.8h</span><span class="p">,</span> <span class="no">v21.8h</span><span class="p">,</span> <span class="no">v22.8h</span><span class="p">,</span> <span class="no">v23.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#64
+</span><span class="c"></span>
+    <span class="nf">add</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x5</span>
+    <span class="nf">bne</span> <span class="no">LoopOzL8</span>
+
+
+<span class="nf">add</span> <span class="no">x0</span><span class="p">,</span> <span class="no">x0</span><span class="p">,</span> <span class="c">#128 // 8*8*sizeof(float16)
+</span><span class="c"></span><span class="no">add</span> <span class="no">x1</span><span class="p">,</span> <span class="no">x1</span><span class="p">,</span> <span class="c">#64 // 8*4*sizeof(float16)
+</span><span class="c"></span><span class="no">mov</span> <span class="no">x2</span><span class="p">,</span> <span class="no">x13</span>
+<span class="nf">sub</span> <span class="no">w6</span><span class="p">,</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#8
+</span><span class="c"></span>
+<span class="nl">L1:</span>
+<span class="nf">cmp</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span><span class="no">beq</span> <span class="no">End</span>
+
+<span class="nl">LoopL1:</span>
+    <span class="nf">mov</span> <span class="no">x13</span><span class="p">,</span> <span class="no">x2</span>
+    <span class="nf">mov</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x0</span>
+    <span class="nf">mov</span> <span class="no">x15</span><span class="p">,</span> <span class="no">x1</span>
+
+    <span class="nf">mov</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x4</span>
+
+    <span class="nl">LoopOzL1:</span>
+        <span class="nf">movi</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>        <span class="no">movi</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="c">#0
+</span><span class="c"></span>
+        <span class="nf">mov</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x1</span>
+        <span class="nf">mov</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x3</span>
+        <span class="nf">mov</span> <span class="no">x9</span><span class="p">,</span> <span class="no">x14</span>
+        <span class="nl">LoopSz1:</span>
+            <span class="nf">ld1</span> <span class="err">{</span><span class="no">v2.8h</span><span class="p">,</span> <span class="no">v3.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>            <span class="no">ld1</span> <span class="err">{</span><span class="no">v4.8h</span><span class="p">,</span> <span class="no">v5.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x2</span><span class="p">],</span> <span class="c">#32
+</span><span class="c"></span>
+            <span class="nf">ld1</span> <span class="err">{</span><span class="no">v0.4h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x7</span><span class="p">],</span> <span class="no">x12</span>
+            <span class="nf">fmla</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v2.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="nf">fmla</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v3.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nf">fmla</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v4.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="nf">fmla</span> <span class="no">v17.8h</span><span class="p">,</span> <span class="no">v5.8h</span><span class="p">,</span> <span class="no">v0.h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+            <span class="nf">subs</span> <span class="no">x8</span><span class="p">,</span> <span class="no">x8</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>            <span class="no">bne</span> <span class="no">LoopSz1</span>
+        <span class="nf">fadd</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v16.8h</span><span class="p">,</span> <span class="no">v17.8h</span>
+        <span class="nf">subs</span> <span class="no">x11</span><span class="p">,</span> <span class="no">x11</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>        <span class="no">st1</span> <span class="err">{</span><span class="no">v16.8h</span><span class="err">}</span><span class="p">,</span> <span class="p">[</span><span class="no">x9</span><span class="p">],</span> <span class="c">#16
+</span><span class="c"></span>        <span class="no">add</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x14</span><span class="p">,</span> <span class="no">x5</span>
+        <span class="nf">bne</span> <span class="no">LoopOzL1</span>
+
+    <span class="nf">subs</span> <span class="no">w6</span><span class="p">,</span> <span class="no">w6</span><span class="p">,</span> <span class="c">#1
+</span><span class="c"></span>    <span class="no">add</span> <span class="no">x0</span><span class="p">,</span> <span class="no">x0</span><span class="p">,</span> <span class="c">#16 // 8*sizeof(float16)
+</span><span class="c"></span>    <span class="no">add</span> <span class="no">x1</span><span class="p">,</span> <span class="no">x1</span><span class="p">,</span> <span class="c">#8 // 4*sizeof(float16)
+</span><span class="c"></span>    <span class="no">mov</span> <span class="no">x2</span><span class="p">,</span> <span class="no">x13</span>
+    <span class="nf">bne</span> <span class="no">LoopL1</span>
+
+<span class="nl">End:</span>
+
+<span class="nf">ret</span>
+
+<span class="c">#endif
+</span><span class="c"></span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="neon-1">neon</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">Matrix</span><span class="o">::</span><span class="n">multi</span><span class="p">(</span><span class="n">Tensor</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">C</span><span class="p">);</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">B</span><span class="p">);</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">A</span><span class="p">);</span>
+
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">host</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">host</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">c</span>       <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">host</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">aw</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">bw</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">cw</span> <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">;</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span>            <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">aLine</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">aw</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">cLine</span>       <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">cw</span><span class="p">;</span>
+<span class="cp">#ifdef MNN_USE_NEON
+</span><span class="cp"></span>        <span class="c1">// firstly, compute 16 together
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">w</span> <span class="o">-</span> <span class="mi">16</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="mi">16</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">bColumn</span>     <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+            <span class="n">float32x4_t</span> <span class="n">sum0</span> <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+            <span class="n">float32x4_t</span> <span class="n">sum1</span> <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+            <span class="n">float32x4_t</span> <span class="n">sum2</span> <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+            <span class="n">float32x4_t</span> <span class="n">sum3</span> <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="k">auto</span> <span class="n">bLine</span> <span class="o">=</span> <span class="n">bColumn</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">bw</span><span class="p">;</span>
+                <span class="n">float32x4_t</span> <span class="n">a0</span>   <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="n">aLine</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="n">float32x4_t</span> <span class="n">b0</span>   <span class="o">=</span> <span class="n">vld1q_f32</span><span class="p">(</span><span class="n">bLine</span><span class="p">);</span>
+                <span class="n">float32x4_t</span> <span class="n">b1</span>   <span class="o">=</span> <span class="n">vld1q_f32</span><span class="p">(</span><span class="n">bLine</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+                <span class="n">float32x4_t</span> <span class="n">b2</span>   <span class="o">=</span> <span class="n">vld1q_f32</span><span class="p">(</span><span class="n">bLine</span> <span class="o">+</span> <span class="mi">8</span><span class="p">);</span>
+                <span class="n">float32x4_t</span> <span class="n">b3</span>   <span class="o">=</span> <span class="n">vld1q_f32</span><span class="p">(</span><span class="n">bLine</span> <span class="o">+</span> <span class="mi">12</span><span class="p">);</span>
+                <span class="n">sum0</span>             <span class="o">=</span> <span class="n">vmlaq_f32</span><span class="p">(</span><span class="n">sum0</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span><span class="p">);</span>
+                <span class="n">sum1</span>             <span class="o">=</span> <span class="n">vmlaq_f32</span><span class="p">(</span><span class="n">sum1</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b1</span><span class="p">);</span>
+                <span class="n">sum2</span>             <span class="o">=</span> <span class="n">vmlaq_f32</span><span class="p">(</span><span class="n">sum2</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b2</span><span class="p">);</span>
+                <span class="n">sum3</span>             <span class="o">=</span> <span class="n">vmlaq_f32</span><span class="p">(</span><span class="n">sum3</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">b3</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">vst1q_f32</span><span class="p">(</span><span class="n">cLine</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">sum0</span><span class="p">);</span>
+            <span class="n">vst1q_f32</span><span class="p">(</span><span class="n">cLine</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">sum1</span><span class="p">);</span>
+            <span class="n">vst1q_f32</span><span class="p">(</span><span class="n">cLine</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span> <span class="n">sum2</span><span class="p">);</span>
+            <span class="n">vst1q_f32</span><span class="p">(</span><span class="n">cLine</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">sum3</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// secondly, compute 4 together
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">w</span> <span class="o">-</span> <span class="mi">4</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">bColumn</span>    <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+            <span class="n">float32x4_t</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="k">auto</span> <span class="n">bLine</span> <span class="o">=</span> <span class="n">bColumn</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">bw</span><span class="p">;</span>
+                <span class="n">float32x4_t</span> <span class="n">a4</span>   <span class="o">=</span> <span class="n">vdupq_n_f32</span><span class="p">(</span><span class="n">aLine</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="n">float32x4_t</span> <span class="n">b4</span>   <span class="o">=</span> <span class="n">vld1q_f32</span><span class="p">(</span><span class="n">bLine</span><span class="p">);</span>
+                <span class="n">sum</span>              <span class="o">=</span> <span class="n">vmlaq_f32</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span> <span class="n">a4</span><span class="p">,</span> <span class="n">b4</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">vst1q_f32</span><span class="p">(</span><span class="n">cLine</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+        <span class="p">}</span>
+<span class="cp">#endif
+</span><span class="cp"></span>        <span class="k">for</span> <span class="p">(;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">;</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">bColumn</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+            <span class="kt">float</span> <span class="n">sum</span>    <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">sum</span> <span class="o">+=</span> <span class="n">aLine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">bColumn</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">bw</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="n">cLine</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sse-1">SSE</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNMatrixAdd</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">widthC4</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">cStride</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">aStride</span><span class="p">,</span>
+                  <span class="n">size_t</span> <span class="n">bStride</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">aStride</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">+</span> <span class="n">bStride</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">cStride</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">widthC4</span><span class="p">;</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">_mm_load_ps</span><span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">_mm_load_ps</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="p">)));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
+                          <span class="n">size_t</span> <span class="n">dst_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">width</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">weight_depth_offset</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">src_depth_step</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">wC4</span>             <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">w4End</span>           <span class="o">=</span> <span class="n">wC4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dz</span> <span class="o">&lt;</span> <span class="n">dst_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">dz</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">float</span><span class="o">*</span> <span class="n">dst_z</span>   <span class="o">=</span> <span class="n">dst</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="n">dst_step</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">weight_dz</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="p">(</span><span class="n">src_depth_quad</span> <span class="o">*</span> <span class="mi">16</span> <span class="o">+</span> <span class="n">weight_depth_offset</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="n">wC4</span><span class="p">;</span> <span class="o">++</span><span class="n">dx</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">float</span><span class="o">*</span> <span class="n">dst_x</span>        <span class="o">=</span> <span class="n">dst_z</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">dst0</span>           <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst1</span>           <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst2</span>           <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst3</span>           <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_dx</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">src_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_z</span>    <span class="o">=</span> <span class="n">src_dx</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="n">src_depth_step</span><span class="p">;</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight_z</span> <span class="o">=</span> <span class="n">weight_dz</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">w0</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w1</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w2</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w3</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span>
+<span class="cp">#define SSE_COMPUTE(v)                                   \
+</span><span class="cp">    {                                                \
+</span><span class="cp">        const float* srcValue = src_z + 4 * v;       \
+</span><span class="cp">        auto s0       = _mm_set1_ps(srcValue[0]);    \
+</span><span class="cp">        auto s1       = _mm_set1_ps(srcValue[1]);    \
+</span><span class="cp">        auto s2       = _mm_set1_ps(srcValue[2]);    \
+</span><span class="cp">        auto s3       = _mm_set1_ps(srcValue[3]);    \
+</span><span class="cp">        auto sw0      = _mm_mul_ps(s0, w0);          \
+</span><span class="cp">        auto sw1      = _mm_mul_ps(s1, w1);          \
+</span><span class="cp">        auto sw2      = _mm_mul_ps(s2, w2);          \
+</span><span class="cp">        auto sw3      = _mm_mul_ps(s3, w3);          \
+</span><span class="cp">        dst##v        = _mm_add_ps(dst##v, sw0);     \
+</span><span class="cp">        dst##v        = _mm_add_ps(dst##v, sw1);     \
+</span><span class="cp">        dst##v        = _mm_add_ps(dst##v, sw2);     \
+</span><span class="cp">        dst##v        = _mm_add_ps(dst##v, sw3);     \
+</span><span class="cp">    }
+</span><span class="cp"></span>
+                <span class="n">SSE_COMPUTE</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                <span class="n">SSE_COMPUTE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">SSE_COMPUTE</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+                <span class="n">SSE_COMPUTE</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dst0</span><span class="p">);</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dst1</span><span class="p">);</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dst2</span><span class="p">);</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dst3</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">w4End</span><span class="p">;</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="o">++</span><span class="n">dx</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">float</span><span class="o">*</span> <span class="n">dst_x</span>  <span class="o">=</span> <span class="n">dst_z</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+
+            <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_dx</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">dx</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">src_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_z</span>    <span class="o">=</span> <span class="n">src_dx</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="n">src_depth_step</span><span class="p">;</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight_z</span> <span class="o">=</span> <span class="n">weight_dz</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">w0</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w1</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w2</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w3</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span>
+
+                <span class="k">auto</span> <span class="n">s0</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s1</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s2</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s3</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+
+                <span class="k">auto</span> <span class="n">sw0</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s0</span><span class="p">,</span> <span class="n">w0</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw1</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">w1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw2</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">w2</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw3</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">w3</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw0</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw1</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw2</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw3</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span><span class="p">,</span> <span class="n">dstValue</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="avx-1">avx</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_AVX_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
+                          <span class="n">size_t</span> <span class="n">dst_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">width</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">weight_depth_offset</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">src_depth_step</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">wC8</span>             <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">w8End</span>           <span class="o">=</span> <span class="n">wC8</span> <span class="o">*</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dz</span> <span class="o">&lt;</span> <span class="n">dst_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">dz</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">float</span><span class="o">*</span> <span class="n">dst_z</span>   <span class="o">=</span> <span class="n">dst</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="n">dst_step</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">weight_dz</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="p">(</span><span class="n">src_depth_quad</span> <span class="o">*</span> <span class="mi">16</span> <span class="o">+</span> <span class="n">weight_depth_offset</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="n">wC8</span><span class="p">;</span> <span class="o">++</span><span class="n">dx</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">float</span><span class="o">*</span> <span class="n">dst_x</span>        <span class="o">=</span> <span class="n">dst_z</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">dst0</span>           <span class="o">=</span> <span class="n">_mm256_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst1</span>           <span class="o">=</span> <span class="n">_mm256_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst2</span>           <span class="o">=</span> <span class="n">_mm256_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">auto</span> <span class="n">dst3</span>           <span class="o">=</span> <span class="n">_mm256_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+            <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_dx</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">src_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_z</span>    <span class="o">=</span> <span class="n">src_dx</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="n">src_depth_step</span><span class="p">;</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight_z</span> <span class="o">=</span> <span class="n">weight_dz</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">w0</span>               <span class="o">=</span> <span class="n">_mm256_broadcast_ps</span><span class="p">((</span><span class="k">const</span> <span class="kr">__m128</span> <span class="o">*</span><span class="p">)(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">0</span><span class="p">));</span>
+                <span class="k">auto</span> <span class="n">w1</span>               <span class="o">=</span> <span class="n">_mm256_broadcast_ps</span><span class="p">((</span><span class="k">const</span> <span class="kr">__m128</span> <span class="o">*</span><span class="p">)(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">));</span>
+                <span class="k">auto</span> <span class="n">w2</span>               <span class="o">=</span> <span class="n">_mm256_broadcast_ps</span><span class="p">((</span><span class="k">const</span> <span class="kr">__m128</span> <span class="o">*</span><span class="p">)(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
+                <span class="k">auto</span> <span class="n">w3</span>               <span class="o">=</span> <span class="n">_mm256_broadcast_ps</span><span class="p">((</span><span class="k">const</span> <span class="kr">__m128</span> <span class="o">*</span><span class="p">)(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">));</span>
+<span class="cp">#define AVX_COMPUTE(v)                                   \
+</span><span class="cp">    {                                                \
+</span><span class="cp">        auto srcValue = _mm256_loadu_ps(src_z + 8 * v); \
+</span><span class="cp">        auto s0       = _mm256_shuffle_ps(srcValue, srcValue, _MM_SHUFFLE(0, 0, 0, 0)); \
+</span><span class="cp">        auto s1       = _mm256_shuffle_ps(srcValue, srcValue, _MM_SHUFFLE(1, 1, 1, 1)); \
+</span><span class="cp">        auto s2       = _mm256_shuffle_ps(srcValue, srcValue, _MM_SHUFFLE(2, 2, 2, 2)); \
+</span><span class="cp">        auto s3       = _mm256_shuffle_ps(srcValue, srcValue, _MM_SHUFFLE(3, 3, 3, 3)); \
+</span><span class="cp">        auto sw0      = _mm256_mul_ps(s0, w0);          \
+</span><span class="cp">        auto sw1      = _mm256_mul_ps(s1, w1);          \
+</span><span class="cp">        auto sw2      = _mm256_mul_ps(s2, w2);          \
+</span><span class="cp">        auto sw3      = _mm256_mul_ps(s3, w3);          \
+</span><span class="cp">        dst##v        = _mm256_add_ps(dst##v, sw0);     \
+</span><span class="cp">        dst##v        = _mm256_add_ps(dst##v, sw1);     \
+</span><span class="cp">        dst##v        = _mm256_add_ps(dst##v, sw2);     \
+</span><span class="cp">        dst##v        = _mm256_add_ps(dst##v, sw3);     \
+</span><span class="cp">    }
+</span><span class="cp"></span>
+                <span class="n">AVX_COMPUTE</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                <span class="n">AVX_COMPUTE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">AVX_COMPUTE</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+                <span class="n">AVX_COMPUTE</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="n">_mm256_storeu_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dst0</span><span class="p">);</span>
+            <span class="n">_mm256_storeu_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dst1</span><span class="p">);</span>
+            <span class="n">_mm256_storeu_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dst2</span><span class="p">);</span>
+            <span class="n">_mm256_storeu_ps</span><span class="p">(</span><span class="n">dst_x</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dst3</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">_mm256_zeroall</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">w8End</span><span class="p">;</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="o">++</span><span class="n">dx</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">float</span><span class="o">*</span> <span class="n">dst_x</span>  <span class="o">=</span> <span class="n">dst_z</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">);</span>
+
+            <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_dx</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">dx</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">src_depth_quad</span><span class="p">;</span> <span class="o">++</span><span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src_z</span>    <span class="o">=</span> <span class="n">src_dx</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="n">src_depth_step</span><span class="p">;</span>
+                <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight_z</span> <span class="o">=</span> <span class="n">weight_dz</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">w0</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w1</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w2</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">w3</span>               <span class="o">=</span> <span class="n">_mm_loadu_ps</span><span class="p">(</span><span class="n">weight_z</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">);</span>
+
+                <span class="k">auto</span> <span class="n">s0</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s1</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s2</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">s3</span>       <span class="o">=</span> <span class="n">_mm_set1_ps</span><span class="p">(</span><span class="n">src_z</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+
+                <span class="k">auto</span> <span class="n">sw0</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s0</span><span class="p">,</span> <span class="n">w0</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw1</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">w1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw2</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">w2</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">sw3</span> <span class="o">=</span> <span class="n">_mm_mul_ps</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">w3</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw0</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw1</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw2</span><span class="p">);</span>
+                <span class="n">dstValue</span> <span class="o">=</span> <span class="n">_mm_add_ps</span><span class="p">(</span><span class="n">dstValue</span><span class="p">,</span> <span class="n">sw3</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">_mm_store_ps</span><span class="p">(</span><span class="n">dst_x</span><span class="p">,</span> <span class="n">dstValue</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="内存布局">内存布局</h1>
+<p>减少缓存miss，提升处理效率。对内存的重新组织（Repacking）可以改进高速缓存命中率，从而提高性能。但是这种重新组织也是有开销的。</p>
+<p>计算核中最小的计算单元处理的是两个 4×4 矩阵相乘。传统的方法由于 𝐾 可能很大，需要对输入内存进行重新组织，防止相邻的访存引起高速缓存冲突</p>
+<h1 id="quantization">quantization</h1>
+<p>量化将网络中主要算子（卷积）由原先的浮点计算转成低精度的Int8计算，减少模型大小并提升性能。</p>
+<p>编译MNN时开启<code>MNN_BUILD_QUANTOOLS</code>宏，即开启量化工具的编译。</p>
+<h1 id="卷积优化">卷积优化</h1>
+<h2 id="im2col">im2col</h2>
+<p><a href="https://www.jianshu.com/p/4907e6c93452">https://www.jianshu.com/p/4907e6c93452</a></p>
+<p><!-- raw HTML omitted -->空间换时间方案，重复放数据，提高cache命中率，以此提高运行速度，但比较浪费内存<!-- raw HTML omitted --></p>
+<p>im2col 是计算机视觉领域中将图片的不同通道（channel）转换成矩阵的列（column）的计算过程。Caffe 在计算卷积时，首先用 im2col 将输入的三维数据转换成二维矩阵，使得卷积计算可表示成两个二维矩阵相乘，从而充分利用已经优化好的 GEMM 库来为各个平台加速卷积计算。</p>
+<p><em>图十二</em>是卷积的 im2col 过程的示例。随着卷积过滤器在输入上滑动，将被使用的那部分输入展开成一行大小为 𝐼𝐶×𝐾𝐻×𝐾𝑊 的向量。在滑动结束后，则得到特征矩阵 (𝐻×𝑊)×(𝐼𝐶×𝐾𝐻×𝐾𝑊) 。将过滤器展开成 (𝑂𝐶)×(𝐼𝐶×𝐾𝐻×𝐾𝑊) 的矩阵，那么卷积即可表示成这两个矩阵相乘的结果（特征矩阵要进行转置操作）。</p>
+<p><img src="..%5Cimage%5Cmnn_im2col.jpg" alt="mnn_im2col"></p>
+<h2 id="winograd">Winograd</h2>
+<p><a href="https://arxiv.org/pdf/1509.09308.pdf">https://arxiv.org/pdf/1509.09308.pdf</a></p>
+<p><!-- raw HTML omitted -->对于现代的CPU，加减乘除都可以在一个指令周期内完成，这种单纯减少乘法的变换（加法会增多），究竟有多少的价值，有待商榷？？论文测试系统是在GPU上实现的，GPU算乘法确实比加法要慢一些，比较适合本算法<!-- raw HTML omitted --></p>
+<p><a href="https://www.cnblogs.com/shine-lee/p/10906535.html">https://www.cnblogs.com/shine-lee/p/10906535.html</a></p>
+<p><img src="..%5Cimage%5CWinograd%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95.png" alt="Winograd快速卷积算法"></p>
+<h2 id="fft">fft</h2>
+<p>对于尺寸较大的卷积核，可以先fft变换为频域，相加后再反变换回来加速。</p>
+<h1 id="矩阵相乘---strassen算法">矩阵相乘 - strassen算法</h1>
+<p>典型矩阵乘法的复杂度是Θ(n^3)，采用分治的思想，可以降为Θ(nlog7) =Θ (n2.81)</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmatrix_strassen.jpg" alt="matrix_strassen"></p>
+<p>矩阵乘法中采用分治法，第一感觉上应该能够有效的提高算法的效率。如上图所示分治法方案，以及对该算法的效率分析。有图可知，算法效率是Θ(n^3)。算法效率并没有提高。</p>
+<p>鉴于上面的分治法方案无法有效提高算法的效率，要想提高算法效率，由主定理方法可知必须想办法将2中递归式中的系数8减少。Strassen提出了一种将系数减少到7的分治法方案，如下图所示。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmatrix_strassen2.jpg" alt="matrix_strassen2"></p>
+<p>效率分析如下：</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmatrix_strassen3.jpg" alt="matrix_strassen3"></p>
+<h2 id="性能分析">性能分析</h2>
+<table>
+<thead>
+<tr>
+<th>矩阵大小</th>
+<th>朴素矩阵算法（秒）</th>
+<th>Strassen算法（秒）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32</td>
+<td>0.003</td>
+<td>0.003</td>
+</tr>
+<tr>
+<td>64</td>
+<td>0.004</td>
+<td>0.004</td>
+</tr>
+<tr>
+<td>128</td>
+<td>0.021</td>
+<td>0.071</td>
+</tr>
+<tr>
+<td>256</td>
+<td>0.09</td>
+<td>0.854</td>
+</tr>
+<tr>
+<td>512</td>
+<td>0.782</td>
+<td>6.408</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>8.908</td>
+<td>52.391</td>
+</tr>
+</tbody>
+</table>
+<p>可以发现：可以看到使用Strassen算法时，耗时不但没有减少，反而剧烈增多，在n=512时计算时间就无法忍受，效果没有朴素矩阵算法好。网上查阅资料，现罗列如下：</p>
+<p>1）采用Strassen算法作递归运算，<strong><!-- raw HTML omitted -->需要创建大量的动态二维数组，其中分配堆内存空间将占用大量计算时间<!-- raw HTML omitted --></strong>，从而掩盖了Strassen算法的优势。</p>
+<p>2）于是对Strassen算法做出改进，设定一个界限。当n&lt;界限时，使用普通法计算矩阵，而不继续分治递归。需要合理设置界限，不同环境（硬件配置）下界限不同。</p>
+<p>3）矩阵乘法一般意义上还是选择的是朴素的方法，只有当矩阵变稠密，而且矩阵的阶数很大时，才会考虑使用Strassen算法。</p>
+<h1 id="gpu加速">GPU加速</h1>
+<p>本质上是类似的，都是GPU计算方案，只是底层API存在差异。</p>
+<p>ios/mac osx：metal</p>
+<p>opencl/opengl/vulken：android，linux，windows</p>
+<h2 id="opengl">opengl</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">GLConvolutionIm2col</span><span class="o">::</span><span class="n">GLConvolutionIm2col</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Op</span> <span class="o">*</span><span class="n">convOp</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">bn</span><span class="p">)</span> <span class="o">:</span> <span class="n">GPUConvolution</span><span class="p">(</span><span class="n">convOp</span><span class="p">,</span> <span class="n">bn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">totalWeightSize</span> <span class="o">=</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">())</span> <span class="o">*</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mInputDepth</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelY</span><span class="p">()</span> <span class="o">*</span> <span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelX</span><span class="p">());</span>
+    <span class="n">mGLBackend</span> <span class="o">=</span> <span class="p">(</span><span class="n">GLBackend</span> <span class="o">*</span><span class="p">)</span><span class="n">bn</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">mKernelBuffer</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GLSSBOBuffer</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">GLSSBOBuffer</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">totalWeightSize</span><span class="p">));</span>
+    <span class="kt">int</span> <span class="n">fw</span>                <span class="o">=</span> <span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelX</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">fh</span>                <span class="o">=</span> <span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelY</span><span class="p">();</span>
+    <span class="n">mIsConv1x1</span> <span class="o">=</span> <span class="p">(</span><span class="n">fw</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">fh</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="nb">true</span> <span class="o">:</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">oc_4</span>         <span class="o">=</span> <span class="n">UP_DIV</span><span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">(),</span> <span class="n">UNIT</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">ic_4</span>      <span class="o">=</span> <span class="n">UP_DIV</span><span class="p">(</span><span class="n">mInputDepth</span><span class="p">,</span> <span class="n">UNIT</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="o">*</span><span class="n">dest</span>           <span class="o">=</span> <span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="p">)</span><span class="n">mKernelBuffer</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">(</span><span class="n">GL_MAP_WRITE_BIT</span> <span class="o">|</span> <span class="n">GL_MAP_INVALIDATE_BUFFER_BIT</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">dest</span><span class="p">){</span>
+        <span class="o">::</span><span class="n">memset</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">totalWeightSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+        <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">source</span> <span class="o">=</span> <span class="n">convOp</span><span class="o">-&gt;</span><span class="n">main_as_Convolution2D</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">weight</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">cur</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="c1">//weight : oc ic -&gt; oc/4 ic/4 ic4 oc4
+</span><span class="c1"></span>        <span class="c1">//weight image : oc_4, ic_4 * ic4 oc4
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">alignedWeightSize</span> <span class="o">=</span> <span class="n">ic_4</span> <span class="o">*</span> <span class="n">fw</span> <span class="o">*</span> <span class="n">fh</span> <span class="o">*</span> <span class="n">UNIT2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">();</span> <span class="o">++</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">b_4</span>      <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">UNIT</span><span class="p">;</span>
+            <span class="kt">float</span> <span class="o">*</span><span class="n">dst_b</span> <span class="o">=</span> <span class="n">dest</span> <span class="o">+</span> <span class="n">b_4</span> <span class="o">*</span> <span class="n">alignedWeightSize</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">mx</span>       <span class="o">=</span> <span class="n">b</span> <span class="o">%</span> <span class="n">UNIT</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">mInputDepth</span><span class="p">;</span> <span class="o">++</span><span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">my</span>       <span class="o">=</span> <span class="n">d</span> <span class="o">%</span> <span class="n">UNIT</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">d_4</span>      <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="n">UNIT</span><span class="p">;</span>
+                <span class="kt">float</span> <span class="o">*</span><span class="n">dst_d</span> <span class="o">=</span> <span class="n">dst_b</span> <span class="o">+</span> <span class="n">d_4</span> <span class="o">*</span> <span class="n">fw</span> <span class="o">*</span> <span class="n">fh</span> <span class="o">*</span> <span class="n">UNIT2</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">fh</span><span class="p">;</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">float</span> <span class="o">*</span><span class="n">dst_y</span> <span class="o">=</span> <span class="n">dst_d</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">fw</span> <span class="o">*</span> <span class="n">UNIT2</span><span class="p">;</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">fw</span><span class="p">;</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="kt">float</span> <span class="o">*</span><span class="n">dst_x</span>          <span class="o">=</span> <span class="n">dst_y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">UNIT2</span><span class="p">;</span>
+                        <span class="n">dst_x</span><span class="p">[</span><span class="n">UNIT</span> <span class="o">*</span> <span class="n">my</span> <span class="o">+</span> <span class="n">mx</span><span class="p">]</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">cur</span><span class="o">++</span><span class="p">];</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">dest</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">mKernelBuffer</span><span class="o">-&gt;</span><span class="n">unmap</span><span class="p">();</span>
+
+    <span class="n">mKernelTexture</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GLTexture</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">GLTexture</span><span class="p">(</span><span class="n">ic_4</span> <span class="o">*</span> <span class="n">UNIT</span><span class="o">*</span><span class="n">fw</span><span class="o">*</span><span class="n">fh</span><span class="p">,</span> <span class="n">oc_4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">((</span><span class="n">GLBackend</span> <span class="o">*</span><span class="p">)</span><span class="n">backend</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">getTextrueFormat</span><span class="p">(),</span> <span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
+    <span class="k">auto</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">mGLBackend</span><span class="o">-&gt;</span><span class="n">getProgram</span><span class="p">(</span><span class="s">&#34;transform_kernel_image&#34;</span><span class="p">,</span> <span class="n">glsl_kernel2image_glsl</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">imageWidth</span> <span class="o">=</span> <span class="n">ROUND_UP</span><span class="p">(</span><span class="n">mInputDepth</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">fw</span><span class="o">*</span><span class="n">fh</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">imageHeight</span> <span class="o">=</span> <span class="n">oc_4</span><span class="p">;</span>
+    <span class="n">transform</span><span class="o">-&gt;</span><span class="n">useProgram</span><span class="p">();</span>
+    <span class="n">glBindImageTexture</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mKernelTexture</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">GL_TRUE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">GL_WRITE_ONLY</span><span class="p">,</span> <span class="p">((</span><span class="n">GLBackend</span> <span class="o">*</span><span class="p">)</span><span class="n">backend</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">getTextrueFormat</span><span class="p">());</span>
+    <span class="n">glBindBufferBase</span><span class="p">(</span><span class="n">GL_SHADER_STORAGE_BUFFER</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mKernelBuffer</span><span class="o">-&gt;</span><span class="n">getId</span><span class="p">());</span>
+    <span class="n">OPENGL_CHECK_ERROR</span><span class="p">;</span>
+    <span class="n">glUniform1i</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">imageWidth</span><span class="p">);</span>
+    <span class="n">OPENGL_CHECK_ERROR</span><span class="p">;</span>
+    <span class="n">glUniform1i</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">imageHeight</span><span class="p">);</span>
+    <span class="n">OPENGL_CHECK_ERROR</span><span class="p">;</span>
+    <span class="p">((</span><span class="n">GLBackend</span> <span class="o">*</span><span class="p">)</span><span class="n">backend</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">compute</span><span class="p">(</span><span class="n">UP_DIV</span><span class="p">(</span><span class="n">imageWidth</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">UP_DIV</span><span class="p">(</span><span class="n">oc_4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">OPENGL_CHECK_ERROR</span><span class="p">;</span>
+
+<span class="c1">//bias
+</span><span class="c1"></span>    <span class="n">mBiasBuffer</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">GLSSBOBuffer</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">())));</span>
+    <span class="kt">float</span><span class="o">*</span> <span class="n">bias</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)(</span><span class="n">mBiasBuffer</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">(</span><span class="n">GL_MAP_WRITE_BIT</span> <span class="o">|</span> <span class="n">GL_MAP_INVALIDATE_BUFFER_BIT</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">bias</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">){</span>
+        <span class="o">::</span><span class="n">memset</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">())</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+        <span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="n">convOp</span><span class="o">-&gt;</span><span class="n">main_as_Convolution2D</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bias</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+                 <span class="n">convOp</span><span class="o">-&gt;</span><span class="n">main_as_Convolution2D</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bias</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">mBiasBuffer</span><span class="o">-&gt;</span><span class="n">unmap</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-01-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/training/">training</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/2020-01-09_python-tips/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">python技巧</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/2020-01-01_reset-auncherpad/">
+            <span class="next-text nav-default">重置launcherpad</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

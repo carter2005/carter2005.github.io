@@ -112,57 +112,57 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-discovery-no-name/">刷机后蓝牙广播没有名字，只显示MAC地址</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-07_clover-customize-boot-icon/">clover自定义启动图标</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-01-30 </span>
+      <span class="post-time"> 2019-09-07 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ
+      GUI，dict下面添加 CustomEntriesDisabledFullTitlewin10HiddenIgnoreImagewin10Path\EFI\Microsoft\Boot\bootmgfw.efiTypeWindowsVolumeWDDisabledFullTitle18.04HiddenIgnoreImageubuntuPathEFI\ubuntu\grubx64.efiTypeLinuxVolume016703F9-502D-487E-BD8D-9B31C5BEACCD
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-01-30_bluetooth-discovery-no-name/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-09-07_clover-customize-boot-icon/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/">蓝牙打电话后播放音乐无声</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-03_consume-cpu/">消耗CPU</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-01-30 </span>
+      <span class="post-time"> 2019-09-03 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c
+      for i in `seq 1 $(cat /proc/cpuinfo |grep &ldquo;physical id&rdquo; |wc -l)`; do dd if=/dev/zero of=/dev/null &amp; done
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-09-03_consume-cpu/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-port-summery/">蓝牙调试总结</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-01_create-mojave-bootable-disk/">create mojave bootable disk</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-01-30 </span>
+      <span class="post-time"> 2019-09-01 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort+116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()+56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()+164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort+68) #04 pc 000000000004d7b4
+      mojave #根据安装程序大小创建空白dmg包 hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J #装载自定义命名宗卷 hdiutil attach ~/Desktop/macOS\ Mojave.dmg -noverify -mountpoint /Volumes/install #将安装程序写入之 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia &ndash;volume /Volumes/install #卸载得到的Ins
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-01-30_bluetooth-port-summery/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-09-01_create-mojave-bootable-disk/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

@@ -112,57 +112,59 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-05-07_bluetooth-name-setup/">蓝牙名称设置</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-11-20_proxmox/">proxmox</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-05-07 </span>
+      <span class="post-time"> 2019-11-20 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;
+      去掉订阅提示 /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索da
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-05-07_bluetooth-name-setup/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-11-20_proxmox/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-03-14_nfc-p2p/">NFC p2p模式</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-10-21_synology-mailplus-server/">基于群晖的mailplus邮件服务器</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-03-14 </span>
+      <span class="post-time"> 2019-10-21 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      NFC p2p模式，也就是常说的Android Beam，主要完成在两个NFC设备之间数据的传递，传输的一方同时也可以接收数据。 P2P模式是在And
+      先决条件 公网IP 个人域名 一台群晖 域名解析 类型：MX 主机记录：@ 记录值：edward.cf MX优先等级：5 类型：CNAME 主机记录：imap 记
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-03-14_nfc-p2p/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-10-21_synology-mailplus-server/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-03-14_nfc/">nfc基础</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-09-24_erofs/">erofs</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2019-03-14 </span>
-      
+      <span class="post-time"> 2019-09-24 </span>
+      <div class="post-category">
+          <a href="/categories/android/"> Android </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      NFC是Near Field Communication（近场通讯）的缩写，是由飞利浦公司和索尼公司共同开发的一种非接触式识别和互联技术，可以在移动设备
+      erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能
     </div>
     <div class="read-more">
-      <a href="/post/2019/2019-03-14_nfc/" class="read-more-link">阅读更多</a>
+      <a href="/post/2019/2019-09-24_erofs/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

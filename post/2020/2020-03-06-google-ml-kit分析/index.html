@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Google ML Kit分析 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Google ML Kit分析" />
+<meta property="og:description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/" />
+<meta property="article:published_time" content="2020-03-06T12:21:20+08:00" />
+<meta property="article:modified_time" content="2020-03-06T12:21:20+08:00" />
+<meta itemprop="name" content="Google ML Kit分析">
+<meta itemprop="description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用">
+<meta itemprop="datePublished" content="2020-03-06T12:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-06T12:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="4955">
+
+
+
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Google ML Kit分析"/>
+<meta name="twitter:description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Google ML Kit分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-06 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-mobile-vision">3.1 mobile vision</a></li>
+    <li><a href="#gms-vision---firebase-ml-kit变化">GMS vision -&gt; FireBase ML Kit变化</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-文件">4.1 文件</a></li>
+    <li><a href="#42-api接口">4.2 API接口</a>
+      <ul>
+        <li><a href="#421-comgooglefirebasemlcommon">4.2.1 com.google.firebase.ml.common</a></li>
+        <li><a href="#422-comgooglefirebasemlcustom">4.2.2 com.google.firebase.ml.custom</a></li>
+        <li><a href="#423-comgooglefirebasemlnaturallanguage">4.2.3 com.google.firebase.ml.naturallanguage</a></li>
+        <li><a href="#424-comgooglefirebasemlvision">4.2.4 com.google.firebase.ml.vision</a></li>
+      </ul>
+    </li>
+    <li><a href="#43-层次结构">4.3 层次结构</a></li>
+    <li><a href="#44-使用方法">4.4 使用方法</a></li>
+    <li><a href="#45-版本变更历史">4.5 版本变更历史</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-ml-kit简介">1. ML Kit简介</h1>
+<p>在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用 ML Kit 的 API 就像调用其他移动原生 SDK 一样简单。简单的文字识别如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">performTextRecognition</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">textDetector</span> <span class="p">=</span> <span class="n">vision</span><span class="p">.</span><span class="n">textDetector</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">uiImage</span> <span class="p">=</span> <span class="n">UIImage</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&#34;demo_image&#34;</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">visionImage</span> <span class="p">=</span> <span class="n">VisionImage</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">uiImage</span><span class="p">!)</span>
+    <span class="kd">let</span> <span class="nv">visionMetaData</span> <span class="p">=</span> <span class="n">VisionImageMetadata</span><span class="p">()</span>
+    <span class="n">visionMetaData</span><span class="p">.</span><span class="n">orientation</span> <span class="p">=</span> <span class="p">.</span><span class="n">bottomRight</span>
+    <span class="n">visionImage</span><span class="p">.</span><span class="n">metadata</span> <span class="p">=</span> <span class="n">visionMetaData</span>
+
+    <span class="n">textDetector</span><span class="p">!.</span><span class="n">detect</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">visionImage</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">guard</span> <span class="n">error</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">features</span> <span class="p">=</span> <span class="n">features</span><span class="p">,</span> <span class="o">!</span><span class="n">features</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Error. You should also check the console for error messages.&#34;</span><span class="p">)</span>
+            <span class="c1">// ...</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Recognized and extracted text</span>
+        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Detected text has: </span><span class="si">\(</span><span class="n">features</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> blocks&#34;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="k">in</span> <span class="n">features</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\&#34;</span><span class="si">\(</span><span class="n">block</span><span class="p">.</span><span class="n">text</span><span class="si">)</span><span class="se">\&#34;</span><span class="s">&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>机器学习套件是一个移动 SDK，它通过一个强大且易用的软件包将 Google 的机器学习专业技术应用到<!-- raw HTML omitted -->Android 和 iOS 应用<!-- raw HTML omitted -->中。无论您是刚开始接触机器学习，还是拥有丰富的相关经验，只需几行代码即可实现所需的功能。您无需具备丰富的神经网络或模型优化知识即可开始使用该套件。另一方面，如果您是一名经验丰富的机器学习开发者，机器学习套件提供了便捷的 API，可帮助您在移动应用中使用自定义 TensorFlow Lite 模型。</p>
+<p>目前ML Kit提供的功能如下：</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304151323970.png" alt="image-20200304151323970"></p>
+<h1 id="2-ml-kit架构">2. ML Kit架构</h1>
+<p>首先，我们注意到，ML Kit是FireBase的一部分，FireBase是一个用于构建移动应用、提供实时数据存储和同步、用户身份验证等功能的平台。</p>
+<p>Firebase成立于2011年，在被Google收购之前，Firebase是一个协助开发者快速构建App，能够提供移动应用专用开发平台及SDK的一款产品，简单的说就是一套集成后台服务工具。在2014年，谷歌收购了Firebase，在2018年的Google I/O大会上，谷歌发表了新版的Firebase，新的Firebase整合了Google既有的云端服务与工具，扩大支援更全面的功能，涵盖<!-- raw HTML omitted -->开发、成长与营收<!-- raw HTML omitted -->三阶段，并整合分析工具，其分析工具专为App所设计，并以事件和使用者分析为主。在开发阶段所提供的后端服务，包括即时资料库(Realtime database)、身份验证(Authentication)、主机(Hosting)、储存(Storage)、云端讯息(Cloud Messaging)及远端配置(Remote Config)等后端服务，并提供Android测试实验室(Test Lab for Android)，以及当机报告等管理App品质的服务。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304152044290.png" alt="image-20200304152044290"></p>
+<p>FireBase平台目前提供的功能列表</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cgoogle_firebase.PNG" alt="google_firebase"></p>
+<p>Ml Kit收费情况，高级功能是收费的</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200304151837087.png" alt="image-20200304151837087"></p>
+<p>ML Kit从功能上可分为三部分，视觉，自然语言处理，自定义模型。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage3.png" alt="img"></p>
+<p>ML Kit运行堆栈，依赖mobile vision，cloud vision，tf lite实现。底层在Android上是通过NN API实现的，IOS上是通过metal实现的。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmllkit_stack.png" alt="mllkit_stack"></p>
+<h1 id="3-ml-kit发展历程">3. ML Kit发展历程</h1>
+<h2 id="31-mobile-vision">3.1 mobile vision</h2>
+<p>mobile vision包含在Google GMS组件内，发布于2017年，<!-- raw HTML omitted -->目前mobile vision已被更加强大的ML Kit代替<!-- raw HTML omitted -->。</p>
+<p>Mobile Vision API 包含四大组件：共用 API（Common Utility API）以及上面介绍的三种特定应用 API。共用 API 提供构建应用通道的基础设施与模块。</p>
+<p>1.Barcode API</p>
+<ul>
+<li>支持 1D 条形码和 2D 二维码类型</li>
+<li>支持多种条形码格式</li>
+<li>应用场景：跟踪并识别任意条形码或二维码</li>
+</ul>
+<p>2.Face API</p>
+<ul>
+<li>捕捉脸部图像，支持不同的角度以及非常夸张的表情</li>
+<li>生成 Facial Landmarks 用于定位等业务</li>
+<li>脸部表情分类</li>
+<li>应用场景：生成用户趣味头像，识别商品并推荐购买方式，等等等等</li>
+</ul>
+<p>3.Text API</p>
+<ul>
+<li>支持 20 种以上拉丁语系语言</li>
+<li>支持段、句、词分析</li>
+<li>应用场景：信用卡信息提取，名片信息提取，实时翻译，等等等等</li>
+</ul>
+<p>SDK包名：</p>
+<p><strong>Common functionality</strong>: com.google.android.gms.vision</p>
+<p><strong>Face detector</strong>: com.google.android.gms.vision.face</p>
+<p><strong>Barcode detector</strong>: com.google.android.gms.vision.barcode</p>
+<p><strong>Text detector</strong>: com.google.android.gms.vision.text</p>
+<p>Google Mobile Vision (GMV) 同时支持 iOS 与 Anriod 平台，用户只需根据 API 与业务需求简单地设定以下三个类即可构建完整的图像处理 Pipeline：设定 Detector 类用于捕捉图像内容；设定 Processor 类允许用户灵活地处理单张或多张图像（即 Focus 模式与 Multi 模式）；最后用户只需完整地重构 Tracker，根据图像信息完成业务逻辑。无论是 iOS 还是 Andriod，遵循以上流程即可构建 GMV 应用。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmobile_vision_work_flow.jpeg" alt="mobile_vision_work_flow"></p>
+<p>上图是完整的流程。摄像头源内部使用了 Camera API，它将图像帧传递给检测器，检测器运行算法来生成检测结果。然后结果被传递给处理器。处理器是首个后处理（post-processing）步骤，它负责筛除、合并、或传递检测到的 item 到相关 Tracker。</p>
+<p>总结来就是两个步骤：</p>
+<ol>
+<li>置追踪管道</li>
+<li>部署 Tracker 实时追踪时间变化。</li>
+</ol>
+<p>图中的 Camera Source、Detector、Processor 都由 Mobile Vision API 提供，用户要做的就是基于自己商业逻辑编写代码，实现 Tracker。</p>
+<h2 id="gms-vision---firebase-ml-kit变化">GMS vision -&gt; FireBase ML Kit变化</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>mobile vision</th>
+<th>ML Kit 2018</th>
+<th>ML Kit 2019</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>状态</td>
+<td>废弃中</td>
+<td>首次发布</td>
+<td>beta</td>
+</tr>
+<tr>
+<td>功能</td>
+<td>条形码扫描<!-- raw HTML omitted -->人脸检测<!-- raw HTML omitted -->文本识别</td>
+<td>条形码扫描<!-- raw HTML omitted -->人脸检测<!-- raw HTML omitted -->文本识别<!-- raw HTML omitted -->图像打标<!-- raw HTML omitted -->地标识别</td>
+<td>条形码扫描<!-- raw HTML omitted -->人脸检测<!-- raw HTML omitted -->文字识别<!-- raw HTML omitted -->图像打标<!-- raw HTML omitted -->对象检测和跟踪<!-- raw HTML omitted -->地标识别<!-- raw HTML omitted -->语言识别<!-- raw HTML omitted -->翻译<!-- raw HTML omitted -->智能回复<!-- raw HTML omitted -->AutoML 模型推断<!-- raw HTML omitted -->自定义模型推断</td>
+</tr>
+<tr>
+<td>云端支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>收费</td>
+<td>免费</td>
+<td>免费</td>
+<td>高级功能消耗云端资源，收费</td>
+</tr>
+<tr>
+<td>应用数量</td>
+<td>多</td>
+<td>非常少</td>
+<td>逐步增多</td>
+</tr>
+</tbody>
+</table>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305162856123.png" alt="image-20200305162856123"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305175116025.png" alt="image-20200305175116025"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305175309720.png" alt="image-20200305175309720"></p>
+<h1 id="4-ml-kit分析">4. ML Kit分析</h1>
+<h2 id="41-文件">4.1 文件</h2>
+<p>ML Kit的开发包和google的其他sdk包一样，放在Google&rsquo;s Maven仓库里，在android工程build.gradle文件里添加引用即可使用。</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>sdk包名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Vision APIs</a></td>
+<td>com.google.firebase:firebase-ml-vision:24.0.1</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Image Labeling Model</a></td>
+<td>com.google.firebase:firebase-ml-vision-image-label-model:19.0.0</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Object Detection and Tracking Model</a></td>
+<td>com.google.firebase:firebase-ml-vision-object-detection-model:19.0.3</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Face Detection Model</a></td>
+<td>com.google.firebase:firebase-ml-vision-face-model:19.0.0</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Barcode Scanning Model</a></td>
+<td>com.google.firebase:firebase-ml-vision-barcode-model:16.0.2</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: AutoML Vision Edge API</a></td>
+<td>com.google.firebase:firebase-ml-vision-automl:18.0.3</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Natural Language APIs</a></td>
+<td>com.google.firebase:firebase-ml-natural-language:22.0.0</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Language Identification Model</a></td>
+<td>com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Translate Model</a></td>
+<td>com.google.firebase:firebase-ml-natural-language-translate-model:20.0.7</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Smart Reply Model</a></td>
+<td>com.google.firebase:firebase-ml-natural-language-smart-reply-model:20.0.7</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/ml-kit">ML Kit: Custom Model APIs</a></td>
+<td>com.google.firebase:firebase-ml-model-interpreter:22.0.1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="42-api接口">4.2 API接口</h2>
+<h3 id="421-comgooglefirebasemlcommon">4.2.1 com.google.firebase.ml.common</h3>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/FirebaseMLException.Code">FirebaseMLException.Code</a></th>
+<th>The set of Firebase ML status codes.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Exceptions</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/FirebaseMLException">FirebaseMLException</a></th>
+<th>A class of exceptions thrown by Firebase Machine Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="4211-comgooglefirebasemlcommonmodeldownload">4.2.1.1 com.google.firebase.ml.common.modeldownload</h4>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseLocalModel">FirebaseLocalModel</a></th>
+<th>Describes a local model created from local or asset files.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseLocalModel.Builder">FirebaseLocalModel.Builder</a></td>
+<td>Builder class of <code>FirebaseLocalModel</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseModelDownloadConditions">FirebaseModelDownloadConditions</a></td>
+<td>Conditions to download remote models.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseModelDownloadConditions.Builder">FirebaseModelDownloadConditions.Builder</a></td>
+<td>Builder of <code>FirebaseModelDownloadConditions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseModelManager">FirebaseModelManager</a></td>
+<td>Manages the registration of remote and local models.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseRemoteModel">FirebaseRemoteModel</a></td>
+<td>Describes a remote model to be downloaded to the device.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/common/modeldownload/FirebaseRemoteModel.Builder">FirebaseRemoteModel.Builder</a></td>
+<td>Builder of <code>FirebaseRemoteModel</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="422-comgooglefirebasemlcustom">4.2.2 com.google.firebase.ml.custom</h3>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelDataType.DataType">FirebaseModelDataType.DataType</a></th>
+<th>Supported data types for <code>FirebaseModelInputs</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseCustomLocalModel">FirebaseCustomLocalModel</a></th>
+<th>Describes a local model created from local or asset files.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseCustomLocalModel.Builder">FirebaseCustomLocalModel.Builder</a></td>
+<td>Builder class of <code>FirebaseCustomLocalModel</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseCustomRemoteModel">FirebaseCustomRemoteModel</a></td>
+<td>Describes a remote model to be downloaded to the device.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseCustomRemoteModel.Builder">FirebaseCustomRemoteModel.Builder</a></td>
+<td>Builder of <code>FirebaseCustomRemoteModel</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelDataType">FirebaseModelDataType</a></td>
+<td>Data types supported by <code>FirebaseModelInputs</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInputOutputOptions">FirebaseModelInputOutputOptions</a></td>
+<td>Configurations for data types and dimensions of input and output data.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInputOutputOptions.Builder">FirebaseModelInputOutputOptions.Builder</a></td>
+<td>Builder class to build <code>FirebaseModelInputOutputOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInputs">FirebaseModelInputs</a></td>
+<td>Input data for <code>FirebaseModelInterpreter</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInputs.Builder">FirebaseModelInputs.Builder</a></td>
+<td>Builder class of <code>FirebaseModelInputs</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInterpreter">FirebaseModelInterpreter</a></td>
+<td>Interpreter to run custom models with TensorFlow Lite (requires API level 16+)A model interpreter is created via <code>getInstance(FirebaseModelInterpreterOptions)</code> Follow the steps below to specify the <code>FirebaseCustomRemoteModel</code> or <code>FirebaseCustomLocalModel</code>, create a <code>FirebaseModelInterpreterOptions</code> and then create a <code>FirebaseModelInterpreter</code> and all the way to running an inference with the model.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInterpreterOptions">FirebaseModelInterpreterOptions</a></td>
+<td>Immutable options to configure model interpreter <code>FirebaseModelInterpreter</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelInterpreterOptions.Builder">FirebaseModelInterpreterOptions.Builder</a></td>
+<td>Builder class of <code>FirebaseModelInterpreterOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/custom/FirebaseModelOutputs">FirebaseModelOutputs</a></td>
+<td>Stores inference results.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="423-comgooglefirebasemlnaturallanguage">4.2.3 com.google.firebase.ml.naturallanguage</h3>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/FirebaseNaturalLanguage">FirebaseNaturalLanguage</a></th>
+<th>Entry class for Firebase machine learning natural language services.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="4231-comgooglefirebasemlnaturallanguagelanguageid">4.2.3.1 com.google.firebase.ml.naturallanguage.languageid</h4>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/languageid/FirebaseLanguageIdentification">FirebaseLanguageIdentification</a></th>
+<th>Entry point for Language Identification.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/languageid/FirebaseLanguageIdentificationOptions">FirebaseLanguageIdentificationOptions</a></td>
+<td>Options for <code>FirebaseLanguageIdentification</code></td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/languageid/FirebaseLanguageIdentificationOptions.Builder">FirebaseLanguageIdentificationOptions.Builder</a></td>
+<td>Builder to create a <code>FirebaseLanguageIdentificationOptions</code> instance.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/languageid/IdentifiedLanguage">IdentifiedLanguage</a></td>
+<td>A language identified by <code>identifyPossibleLanguages(String)</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4232-comgooglefirebasemlnaturallanguagesmartreply">4.2.3.2 com.google.firebase.ml.naturallanguage.smartreply</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/smartreply/SmartReplySuggestionResult.Status">SmartReplySuggestionResult.Status</a></th>
+<th>All possible status codes for a Smart Reply suggestion attempt.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/smartreply/FirebaseSmartReply">FirebaseSmartReply</a></th>
+<th>Entry class for Firebase Smart Reply, which automatically suggests meaningful replies to a user input message.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/smartreply/FirebaseTextMessage">FirebaseTextMessage</a></td>
+<td>Represents a text message from a certain user in a conversation, providing context for SmartReply to generate reply suggestions.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/smartreply/SmartReplySuggestion">SmartReplySuggestion</a></td>
+<td>A suggested reply to a given text.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/smartreply/SmartReplySuggestionResult">SmartReplySuggestionResult</a></td>
+<td>The suggested result from the <code>FirebaseSmartReply</code> for the given text.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4233-comgooglefirebasemlnaturallanguagetranslate">4.2.3.3 com.google.firebase.ml.naturallanguage.translate</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslateLanguage.TranslateLanguage">FirebaseTranslateLanguage.TranslateLanguage</a></th>
+<th>A language supported by the Translate API.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslateLanguage">FirebaseTranslateLanguage</a></th>
+<th>Information about the languages that are supported by the Translate API.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslateRemoteModel">FirebaseTranslateRemoteModel</a></td>
+<td>Information about a downloaded or to-be-downloaded model for translation.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslateRemoteModel.Builder">FirebaseTranslateRemoteModel.Builder</a></td>
+<td>Builder for a <code>FirebaseTranslateRemoteModel</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslator">FirebaseTranslator</a></td>
+<td>Entry point for Translation.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslatorOptions">FirebaseTranslatorOptions</a></td>
+<td>Options for <code>FirebaseTranslator</code></td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/naturallanguage/translate/FirebaseTranslatorOptions.Builder">FirebaseTranslatorOptions.Builder</a></td>
+<td>Builder to create a <code>FirebaseTranslatorOptions</code> instance.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="424-comgooglefirebasemlvision">4.2.4 com.google.firebase.ml.vision</h3>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/FirebaseVision">FirebaseVision</a></th>
+<th>Entry class for Firebase machine learning vision services.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="4241-comgooglefirebasemlvisioncommon">4.2.4.1 com.google.firebase.ml.vision.common</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionImageMetadata.ImageFormat">FirebaseVisionImageMetadata.ImageFormat</a></th>
+<th>Accepted image format of vision APIs.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionImageMetadata.Rotation">FirebaseVisionImageMetadata.Rotation</a></td>
+<td>Indicates the image rotation.</td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionImage">FirebaseVisionImage</a></th>
+<th>Represents an image object that can be used for both on-device and cloud API detectors.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionImageMetadata">FirebaseVisionImageMetadata</a></td>
+<td>Image metadata used by <code>FirebaseVision</code> detectors.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionImageMetadata.Builder">FirebaseVisionImageMetadata.Builder</a></td>
+<td>Builder class of <code>FirebaseVisionImageMetadata</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionLatLng">FirebaseVisionLatLng</a></td>
+<td>An object representing a latitude/longitude pair.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/common/FirebaseVisionPoint">FirebaseVisionPoint</a></td>
+<td>Represent a 2D or 3D point for <code>FirebaseVision</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4242-comgooglefirebasemlvisionautoml">4.2.4.2 com.google.firebase.ml.vision.automl</h4>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/automl/FirebaseAutoMLLocalModel">FirebaseAutoMLLocalModel</a></th>
+<th>Describes a local model created from local or asset files.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/automl/FirebaseAutoMLLocalModel.Builder">FirebaseAutoMLLocalModel.Builder</a></td>
+<td>Builder class of <code>FirebaseAutoMLLocalModel</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/automl/FirebaseAutoMLRemoteModel">FirebaseAutoMLRemoteModel</a></td>
+<td>Describes a remote model to be downloaded to the device.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/automl/FirebaseAutoMLRemoteModel.Builder">FirebaseAutoMLRemoteModel.Builder</a></td>
+<td>Builder of <code>FirebaseAutoMLRemoteModel</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4243-comgooglefirebasemlvisionbarcode">4.2.4.3 com.google.firebase.ml.vision.barcode</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Address.AddressType">FirebaseVisionBarcode.Address.AddressType</a></th>
+<th>Address type constants.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.BarcodeFormat">FirebaseVisionBarcode.BarcodeFormat</a></td>
+<td>Barcode format constants - enumeration of supported barcode formats.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.BarcodeValueType">FirebaseVisionBarcode.BarcodeValueType</a></td>
+<td>Barcode value type constants - enumeration of supported barcode content value typesSupported types include:<code>TYPE_UNKNOWN``TYPE_CONTACT_INFO``TYPE_EMAIL``TYPE_ISBN``TYPE_PHONE``TYPE_PRODUCT``TYPE_SMS``TYPE_TEXT``TYPE_URL``TYPE_WIFI``TYPE_GEO``TYPE_CALENDAR_EVENT``TYPE_DRIVER_LICENSE</code></td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Email.FormatType">FirebaseVisionBarcode.Email.FormatType</a></td>
+<td>Email format type constants.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Phone.FormatType">FirebaseVisionBarcode.Phone.FormatType</a></td>
+<td>Phone number format type constants.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.WiFi.EncryptionType">FirebaseVisionBarcode.WiFi.EncryptionType</a></td>
+<td>Wifi encryption type constants.</td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode">FirebaseVisionBarcode</a></th>
+<th>Represents a single recognized barcode and its value.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Address">FirebaseVisionBarcode.Address</a></td>
+<td>An address.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.CalendarDateTime">FirebaseVisionBarcode.CalendarDateTime</a></td>
+<td>DateTime data type used in calendar events.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.CalendarEvent">FirebaseVisionBarcode.CalendarEvent</a></td>
+<td>A calendar event extracted from QRCode.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.ContactInfo">FirebaseVisionBarcode.ContactInfo</a></td>
+<td>A person&rsquo;s or organization&rsquo;s business card.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.DriverLicense">FirebaseVisionBarcode.DriverLicense</a></td>
+<td>A driver license or ID card.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Email">FirebaseVisionBarcode.Email</a></td>
+<td>An email message from a &lsquo;MAILTO:&rsquo; or similar QRCode type.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.GeoPoint">FirebaseVisionBarcode.GeoPoint</a></td>
+<td>GPS coordinates from a &lsquo;GEO:&rsquo; or similar QRCode type.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.PersonName">FirebaseVisionBarcode.PersonName</a></td>
+<td>A person&rsquo;s name, both formatted version and individual name components.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Phone">FirebaseVisionBarcode.Phone</a></td>
+<td>Phone number info.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.Sms">FirebaseVisionBarcode.Sms</a></td>
+<td>A sms message from a &lsquo;SMS:&rsquo; or similar QRCode type.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.UrlBookmark">FirebaseVisionBarcode.UrlBookmark</a></td>
+<td>A URL and title from a &lsquo;MEBKM:&rsquo; or similar QRCode type.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcode.WiFi">FirebaseVisionBarcode.WiFi</a></td>
+<td>A wifi network parameters from a &lsquo;WIFI:&rsquo; or similar QRCode type.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcodeDetector">FirebaseVisionBarcodeDetector</a></td>
+<td>Recognizes barcodes (in a variety of 1D and 2D formats) in a supplied <code>FirebaseVisionImage</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcodeDetectorOptions">FirebaseVisionBarcodeDetectorOptions</a></td>
+<td>Options for <code>FirebaseVisionBarcodeDetector</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/barcode/FirebaseVisionBarcodeDetectorOptions.Builder">FirebaseVisionBarcodeDetectorOptions.Builder</a></td>
+<td>Builder to build out a <code>FirebaseVisionBarcodeDetectorOptions</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4244-comgooglefirebasemlvisioncloud">4.2.4.4 com.google.firebase.ml.vision.cloud</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/cloud/FirebaseVisionCloudDetectorOptions.ModelType">FirebaseVisionCloudDetectorOptions.ModelType</a></th>
+<th>Model types for cloud vision APIs: <code>STABLE_MODEL</code> and <code>LATEST_MODEL</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/cloud/FirebaseVisionCloudDetectorOptions">FirebaseVisionCloudDetectorOptions</a></th>
+<th>Options for all cloud vision detectors (e.g.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/cloud/FirebaseVisionCloudDetectorOptions.Builder">FirebaseVisionCloudDetectorOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionCloudDetectorOptions</code>.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="42441-comgooglefirebasemlvisioncloudlandmark">4.2.4.4.1 com.google.firebase.ml.vision.cloud.landmark</h5>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/cloud/landmark/FirebaseVisionCloudLandmark">FirebaseVisionCloudLandmark</a></th>
+<th>Represents a detected landmark by <code>FirebaseVisionCloudLandmark</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/cloud/landmark/FirebaseVisionCloudLandmarkDetector">FirebaseVisionCloudLandmarkDetector</a></td>
+<td>Detector for finding popular natural and man-made structures within an image.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4245-comgooglefirebasemlvisiondocument">4.2.4.5 com.google.firebase.ml.vision.document</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.RecognizedBreak.BreakType">FirebaseVisionDocumentText.RecognizedBreak.BreakType</a></th>
+<th>Detected start or end of a structural component type: <code>UNKNOWN</code>, <code>SPACE``SURE_SPACE</code>, <code>EOL_SURE_SPACE</code>, <code>HYPHEN</code>, <code>LINE_BREAK</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionCloudDocumentRecognizerOptions">FirebaseVisionCloudDocumentRecognizerOptions</a></th>
+<th>Represents the cloud document recognizer options.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionCloudDocumentRecognizerOptions.Builder">FirebaseVisionCloudDocumentRecognizerOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionCloudDocumentRecognizerOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText">FirebaseVisionDocumentText</a></td>
+<td>Represents detected text by <code>FirebaseVisionDocumentTextRecognizer</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.Block">FirebaseVisionDocumentText.Block</a></td>
+<td>A logical element on the page.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.Paragraph">FirebaseVisionDocumentText.Paragraph</a></td>
+<td>A structural unit of text representing a number of words in certain order.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.RecognizedBreak">FirebaseVisionDocumentText.RecognizedBreak</a></td>
+<td>Detected start or end of a structural component.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.Symbol">FirebaseVisionDocumentText.Symbol</a></td>
+<td>A single symbol representation.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentText.Word">FirebaseVisionDocumentText.Word</a></td>
+<td>A single word representation.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/document/FirebaseVisionDocumentTextRecognizer">FirebaseVisionDocumentTextRecognizer</a></td>
+<td>Detector for performing optical character recognition(OCR) on an input image by sending the image to Google cloud ML backend.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4246-comgooglefirebasemlvisionface">4.2.4.6 com.google.firebase.ml.vision.face</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceContour.ContourType">FirebaseVisionFaceContour.ContourType</a></th>
+<th>Contour types for face.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions.ClassificationMode">FirebaseVisionFaceDetectorOptions.ClassificationMode</a></td>
+<td>Indicates whether to run additional classifiers for characterizing attributes such as &ldquo;smiling&rdquo; and &ldquo;eyes open&rdquo;.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions.ContourMode">FirebaseVisionFaceDetectorOptions.ContourMode</a></td>
+<td>Sets whether to detect contours or not.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions.LandmarkMode">FirebaseVisionFaceDetectorOptions.LandmarkMode</a></td>
+<td>Sets whether to detect no landmarks or all landmarks.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions.PerformanceMode">FirebaseVisionFaceDetectorOptions.PerformanceMode</a></td>
+<td>Extended option for controlling additional accuracy / speed trade-offs in performing face detection.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceLandmark.LandmarkType">FirebaseVisionFaceLandmark.LandmarkType</a></td>
+<td>Landmark types for face.</td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFace">FirebaseVisionFace</a></th>
+<th>Represents a face detected by <code>FirebaseVisionFaceDetector</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceContour">FirebaseVisionFaceContour</a></td>
+<td>Represent a face contour.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetector">FirebaseVisionFaceDetector</a></td>
+<td>Detector for finding <code>FirebaseVisionFace</code>s in a supplied image.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions">FirebaseVisionFaceDetectorOptions</a></td>
+<td>Options for <code>FirebaseVisionFaceDetector</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceDetectorOptions.Builder">FirebaseVisionFaceDetectorOptions.Builder</a></td>
+<td>Builder class of <code>FirebaseVisionFaceDetectorOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/face/FirebaseVisionFaceLandmark">FirebaseVisionFaceLandmark</a></td>
+<td>Represent a face landmark.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4247-comgooglefirebasemlvisionlabel">4.2.4.7 com.google.firebase.ml.vision.label</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionImageLabeler.ImageLabelerType">FirebaseVisionImageLabeler.ImageLabelerType</a></th>
+<th>Image Labeler types.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionCloudImageLabelerOptions">FirebaseVisionCloudImageLabelerOptions</a></th>
+<th>Options for cloud image labeler.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionCloudImageLabelerOptions.Builder">FirebaseVisionCloudImageLabelerOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionOnDeviceImageLabelerOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionImageLabel">FirebaseVisionImageLabel</a></td>
+<td>Represents an image label detected by<code>FirebaseVisionImageLabeler</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionImageLabeler">FirebaseVisionImageLabeler</a></td>
+<td>Used for finding <code>FirebaseVisionImageLabel</code>s in a supplied image.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionOnDeviceAutoMLImageLabelerOptions">FirebaseVisionOnDeviceAutoMLImageLabelerOptions</a></td>
+<td>Options for on device automl image labeler.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionOnDeviceAutoMLImageLabelerOptions.Builder">FirebaseVisionOnDeviceAutoMLImageLabelerOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionOnDeviceImageLabelerOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionOnDeviceImageLabelerOptions">FirebaseVisionOnDeviceImageLabelerOptions</a></td>
+<td>Options for on device image labeler.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/label/FirebaseVisionOnDeviceImageLabelerOptions.Builder">FirebaseVisionOnDeviceImageLabelerOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionOnDeviceImageLabelerOptions</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4248-comgooglefirebasemlvisionobjects">4.2.4.8 com.google.firebase.ml.vision.objects</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObject.Category">FirebaseVisionObject.Category</a></th>
+<th>Classification category of detected objects.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObjectDetectorOptions.DetectorMode">FirebaseVisionObjectDetectorOptions.DetectorMode</a></td>
+<td>The detector mode which indicates whether detection is for single image or for streaming.</td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObject">FirebaseVisionObject</a></th>
+<th>Represents a detected object by <code>FirebaseVisionObjectDetector</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObjectDetector">FirebaseVisionObjectDetector</a></td>
+<td>Detector for finding <code>FirebaseVisionObject</code>s in a supplied image.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObjectDetectorOptions">FirebaseVisionObjectDetectorOptions</a></td>
+<td>Options for <code>FirebaseVisionObjectDetector</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/objects/FirebaseVisionObjectDetectorOptions.Builder">FirebaseVisionObjectDetectorOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionObjectDetectorOptions</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4249-comgooglefirebasemlvisiontext">4.2.4.9 com.google.firebase.ml.vision.text</h4>
+<p>Annotations</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionCloudTextRecognizerOptions.CloudTextModelType">FirebaseVisionCloudTextRecognizerOptions.CloudTextModelType</a></th>
+<th>Cloud model types for text recognition.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionTextRecognizer.RecognizerType">FirebaseVisionTextRecognizer.RecognizerType</a></td>
+<td>Recognizer types.</td>
+</tr>
+</tbody>
+</table>
+<p>Classes</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionCloudTextRecognizerOptions">FirebaseVisionCloudTextRecognizerOptions</a></th>
+<th>Represent the cloud text recognizer options.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionCloudTextRecognizerOptions.Builder">FirebaseVisionCloudTextRecognizerOptions.Builder</a></td>
+<td>Builder of <code>FirebaseVisionCloudTextRecognizerOptions</code>.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionText">FirebaseVisionText</a></td>
+<td>A hierarchical representation of texts.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionText.Element">FirebaseVisionText.Element</a></td>
+<td>Roughly equivalent to a space-separated &ldquo;word&rdquo; in most Latin languages, or a character in others.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionText.Line">FirebaseVisionText.Line</a></td>
+<td>Represents a line of text.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionText.TextBlock">FirebaseVisionText.TextBlock</a></td>
+<td>A block of text (think of it as a paragraph) as deemed by the OCR engine.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/FirebaseVisionTextRecognizer">FirebaseVisionTextRecognizer</a></td>
+<td>Text recognizer for performing optical character recognition(OCR) on an input image.</td>
+</tr>
+<tr>
+<td><a href="https://firebase.google.com/docs/reference/android/com/google/firebase/ml/vision/text/RecognizedLanguage">RecognizedLanguage</a></td>
+<td>Recognized language for a structural component.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="43-层次结构">4.3 层次结构</h2>
+<p>从包名上看，ML Kit按照功能进行模块划分。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305172528628.png" alt="image-20200305172528628"></p>
+<p>从类关系来看，就是一堆类的组合，前缀有功能标记，都从Object派生出来。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cimage-20200305174421556.png" alt="image-20200305174421556"></p>
+<h2 id="44-使用方法">4.4 使用方法</h2>
+<p>首先在FireBase console创建项目，然后导出FireBase.json配置文件，最后在本地项目内导入FireBase.json配置文件，build.gradle里面添加依赖包就可以开发了。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C10170988-f80c154baa88ccbc.png" alt="ML Kitéæç¤ºæå¾.png"></p>
+<h2 id="45-版本变更历史">4.5 版本变更历史</h2>
+<p>ML Kit尚处在Beta阶段，自从2018年5月发布以来，变化非常多，基本1~2个月一个版本，更新日期如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">November 11, 2019：ML Kit更新
+October 16, 2019：ML Kit更新
+September 26, 2019：ML Kit更新
+September 09, 2019：ML Kit更新
+August 28, 2019：ML Kit更新
+August 16, 2019：ML Kit更新
+July 26, 2019：ML Kit更新
+July 24, 2019：ML Kit更新
+July 12, 2019：ML Kit更新
+June 17, 2019：ML Kit更新
+May 28, 2019：ML Kit更新
+May 7, 2019：ML Kit更新
+March 27, 2019：ML Kit更新
+January 31, 2019：ML Kit更新
+January 30, 2019：ML Kit更新
+January 18, 2019：unity更新
+November 29, 2018：ML Kit更新
+October 16, 2018：ML Kit更新
+October 3, 2018:增加unity版本
+August 13, 2018：ML Kit更新
+June 20, 2018：增加ios版本
+May 23, 2018：ML Kit更新
+May 8, 2018：ML Kit首次发布
+</code></pre></td></tr></table>
+</div>
+</div><p>部分更新列表如下，主要是bug fix和增加新的功能，详细更新历史见 <a href="https://firebase.google.com/support/release-notes/android">https://firebase.google.com/support/release-notes/android</a></p>
+<p>November 22, 2019</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Common version 22.0.1
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Vision version 24.0.1
+Fixed a bug which allowed the use of FirebaseAutoMLRemoteModel when instantiating AutoML FirebaseVisionImageLabeler without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
+ML Kit Barcode Model version 16.0.2
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Object Detection and Tracking Model version 19.0.3
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Model Interpreter version 22.0.1
+Fixed a bug which allowed the use of FirebaseCustomRemoteModel when instantiating FirebaseModelInterpreter without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
+ML Kit Vision AutoML version 18.0.3
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
+</div>
+</div><p>October 16, 2019</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Common version 22.0.0
+This release contains breaking changes. Review details of the changes below.
+Breaking change: Updated FirebaseRemoteModel with the following changes in order to get feature specific handling:
+
+FirebaseRemoteModel and FirebaseLocalModel initializers are disabled. With this release, new subclasses have been added for AutoML, Custom, and Translate SDKs. Use the intializers for those subclasses to create instances of remote and local models.
+initialConditions and updatesConditions are moved out of FirebaseRemoteModel; now specify the downloadConditions in the FirebaseModelManager.download API.
+Breaking change: Updated FirebaseModelManager with the following changes to simplify developer workflow for using remoteModel and localModel:
+
+Simplified the API by eliminating the requirement of advance model registration. FirebaseRemoteModel and FirebaseLocalModel registration APIs are removed.
+deleteDownloadedModel(remoteModel) API is introduced to remove downloaded models not in use to save space.
+Updated downloadRemoteModelIfNeeded(remoteModel) to download(remoteModel, downloadConditions). Download conditions can now be specified directly at the time when the download API is invoked.
+Developers now have full control and flexibility to customize the model download options to fit their needs, including indicating whether to use a remote model or a local model.
+Added isModelDownloaded(remoteModel) API.
+ML Kit Vision version 24.0.0
+This release contains breaking changes. Review details of the changes below.
+Added FirebaseAutoMLRemoteModel and FirebaseAutoMLLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
+
+Breaking change: Updated the initializers for FirebaseVisionOnDeviceAutoMLImageLabelerOptions to be initialized with either a FirebaseAutoMLRemoteModel or a FirebaseAutoMLLocalModel, but not both.
+
+Breaking change: Implicit model downloading is no longer available through the AutoML FirebaseVisionImageLabeler. You must invoke the download(remoteModel, downloadConditions) API from ModelManager to download any FirebaseAutoMLRemoteModel.
+
+Enhanced barcode scanner with better speed and accuracy. The enhancements are available in the firebase-ml-vision-barcode-model v16.0.1 and later.
+
+ML Kit Vision AutoML version 18.0.2
+Warning: Due to an issue in ML Kit Vision AutoML v18.0.2, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Barcode Model version 16.0.1
+Updated the Barcode implementation with the newly added Barcode Model, which comes with significant improvements in both latency and accuracy. Also added API to access the raw bytes for non UTF-8 encoded barcode data. To learn more, refer to the ML Kit documentation.
+ML Kit Object Detection and Tracking Model version 19.0.2
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Model Interpreter version 22.0.0
+Warning: Due to an issue in ML Kit Model Interpreter v22.0.0, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
+This release contains breaking changes. Review details of the changes below.
+Added FirebaseCustomRemoteModel and FirebaseCustomLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
+
+Breaking change: Replace FirebaseModelOptions with FirebaseModelInterpreterOptions. Note that FirebaseModelInterpreterOptions can only be initialized with either a FirebaseCustomRemoteModel or a FirebaseCustomLocalModel, but not both.
+
+Breaking change: Implicit model downloading is no longer available through the FirebaseModelInterpreter. You must invoke the download(remoteModel, downloadConditions) API from FirebaseModelManager to download any FirebaseCustomRemoteModel.
+
+ML Kit Natural Language version 22.0.0
+This release contains breaking changes. Review details of the changes below.
+Breaking change: Updated FirebaseTranslateRemoteModel with the following changes to simplify the developer workflow:
+
+Removed the setFirebaseApp method in Builder. A custom FirebaseApp is now supported through the getInstance method in FirebaseModelManager.
+Removed the setDownloadConditions method in Builder. Download conditions are now passed to the download method in FirebaseModelManager.
+Breaking change: Removed FirebaseTranslateModelManager. Translate models are now handled through FirebaseModelManager.
+
+ML Kit Language Identification Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Smart Reply Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Translate Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
+</div>
+</div><p>September 26, 2019</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Natural Language version 21.0.3
+Internal changes to ensure functionality alignment with other SDK releases.
+ML Kit Language Identification Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Smart Reply Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Translate Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
+</div>
+</div><p>.</p>
+<p>August 16, 2018：ML Kit version 17.0.0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">- Unified and enhanced on-device and cloud text recognition API.
+- Enhanced cloud document scanning API.
+</code></pre></td></tr></table>
+</div>
+</div><p>June 12, 2018：ML Kit version 16.0.0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Improved custom model downloading logic to handle user cancellation.
+</code></pre></td></tr></table>
+</div>
+</div><p>May 8, 2018：ML Kit首次发布</p>
+<h1 id="5-总结">5 总结</h1>
+<p>•       对外API接口：java SDK包</p>
+<p>•       开放方式：Google Android SDK，仅开放接口，实现闭源。</p>
+<p>•       模型情况：系统提供或者用户自定义</p>
+<p>•       集成方式：用户集成SDK，调用API接口方式集成</p>
+<p>•       部署位置：云端或者移动设备上</p>
+<p>•       升级：按业务场景单独更新对应SDK模块。</p>
+<p>•       演进：尚处于beta阶段，未来以修复bug，增加新的应用场景为主。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-03-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/training/">training</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/2020-03-09_synology-hide-boot-disk/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">群晖隐藏启动盘</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/">
+            <span class="next-text nav-default">高通AI体系分析</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何做CPU算子分析 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="如何做CPU算子分析" />
+<meta property="og:description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" />
+<meta property="article:published_time" content="2020-01-17T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-01-17T10:21:20+08:00" />
+<meta itemprop="name" content="如何做CPU算子分析">
+<meta itemprop="description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art">
+<meta itemprop="datePublished" content="2020-01-17T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-17T10:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="10493">
+
+
+
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何做CPU算子分析"/>
+<meta name="twitter:description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何做CPU算子分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-17 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-ai定义">2.1 AI定义</a></li>
+    <li><a href="#22-发展历程">2.2 发展历程</a></li>
+    <li><a href="#23-深度学习算法">2.3 深度学习算法</a></li>
+    <li><a href="#24-深度学习应用">2.4 深度学习应用</a>
+      <ul>
+        <li><a href="#241-计算机视觉">2.4.1 计算机视觉</a></li>
+        <li><a href="#242-自然语言处理">2.4.2 自然语言处理</a></li>
+        <li><a href="#243-强化学习">2.4.3 强化学习</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-神经网络">3.1 神经网络</a>
+      <ul>
+        <li><a href="#311-神经元模型">3.1.1 神经元模型</a></li>
+        <li><a href="#312-两层神经网络">3.1.2 两层神经网络</a></li>
+      </ul>
+    </li>
+    <li><a href="#32-python">3.2 python</a></li>
+    <li><a href="#33-tensorflow">3.3 tensorflow</a></li>
+    <li><a href="#34-caffepytorch">3.4 caffe/pytorch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-特点">4.1 特点</a>
+      <ul>
+        <li><a href="#411-轻量性">4.1.1 轻量性</a></li>
+        <li><a href="#412-通用性">4.1.2 通用性</a></li>
+        <li><a href="#413-高性能">4.1.3 高性能</a></li>
+        <li><a href="#414-易用性">4.1.4 易用性</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-架构">4.2 架构</a></li>
+    <li><a href="#43-用法">4.3 用法</a></li>
+    <li><a href="#44-源码分析">4.4 源码分析</a>
+      <ul>
+        <li><a href="#441-代码路径">4.4.1 代码路径</a></li>
+        <li><a href="#442-backend后端实现">4.4.2 backend后端实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#45-总结">4.5 总结</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-算子定义">5.1 算子定义</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#52-mnn实现分析">5.2 MNN实现分析</a></li>
+    <li><a href="#53-ir接口分析">5.3 IR接口分析</a></li>
+    <li><a href="#54-加速情况分析">5.4 加速情况分析</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-前言">1. 前言</h1>
+<p>本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的<!-- raw HTML omitted -->第一份指导<!-- raw HTML omitted -->文件。</p>
+<h1 id="2-深度学习">2. 深度学习</h1>
+<p>相信大家都听说过人工智能（Artificial Intelligence，简称AI），但什么是AI？它有什么作用，研究方向有哪些，涉及到哪些技术？大家一定有数不清的问题要问，下面我将逐一回答。</p>
+<h2 id="21-ai定义">2.1 AI定义</h2>
+<p><strong>==人工智能是让机器获得像人类一样具有思考和推理机制的智能技术==</strong>，这一概念最早出现在1956 年召开的达特茅斯会议上。这是一项极具挑战性的任务，人类目前尚无法对人脑的工作机制有全面、科学的认知，希望能制造达到人脑水平的智能机器无疑是难于上青天。即使如此，在某个方面呈现出类似、接近甚至超越人类智能水平的机器被证明是可行的。</p>
+<p>信息技术是人类历史上的第三次工业革命，计算机、互联网、智能家居等技术的普及极大地方便了人们的日常生活。通过编程的方式，人类可以将提前设计好的交互逻辑交给机器重复且快速地执行，从而将人类从简单枯燥的重复劳动工作中解脱出来。但是对于需要较高智能水平的任务，如人脸识别、聊天机器人、自动驾驶等任务，很难设计明确的逻辑规则，传统的编程方式显得力不从心，而人工智能是有望解决此问题的关键技术。</p>
+<h2 id="22-发展历程">2.2 发展历程</h2>
+<p>人工智能的发展主要经历过三个阶段，每个阶段都代表了人们从不同的角度尝试实现人工智能的探索足迹。早期，人们试图通过总结、归纳出一些逻辑规则，并将逻辑规则以计算机程序的方式实现，来开发出智能系统。但是这种显式的规则往往过于简单，并且很难表达复杂、抽象的概念和规则。这一阶段被称为推理期。</p>
+<p>1970 年代，科学家们尝试通过知识库加推理的方式解决人工智能，通过构建庞大复杂的专家系统来模拟人类专家的智能水平。这些明确指定规则的方式存在一个最大的难题，就是很多复杂、抽象的概念无法用具体的代码实现。比如人类对图片的识别、对语言的理解过程，根本无法通过既定规则模拟。为了解决这类问题，一门通过让机器自动从数据中学习规则的研究学科诞生了，称为机器学习，并在1980 年代成为人工智能中的热门学科。在机器学习中，有一门通过神经网络来学习复杂、抽象逻辑的方向，称为神经网络。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt="神经网络发展史"></p>
+<p>神经网络方向的研究经历了两起两落。2012 年开始，由于效果极为显著，应用深层神经网络技术在计算机视觉、自然语言处理、机器人等领域取得了重大突破，部分任务上甚至超越了人类智能水平，开启了以深层神经网络为代表的人工智能的第三次复兴。深层神经网络有了一个新名字，叫作深度学习。一般来讲，神经网络和深度学习的本质区别并不大，深度学习特指基于深层神经网络实现的模型或算法。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cai_relation.png" alt="image-20200117100858762"></p>
+<h2 id="23-深度学习算法">2.3 深度学习算法</h2>
+<p>基于规则的系统一般会编写显式的规则逻辑，这些逻辑一般是针对特定的任务设计的，并不适合其他任务。传统的机器学习算法一般会人为设计具有一定通用性的特征检测方法，如SIFT、HOG 特征，这些特征能够适合某一类的任务，具有一定的通用性，但是如何设计特征方法，以及特征方法的优劣性是问题的关键。神经网络的出现，使得人为设计特征这一部分工作可以通过神经网络让机器自动学习完成，不需要人类干预。但是浅层的神经网络的特征提取能力较为有限，而深层的神经网络擅长提取高层、抽象的特征，因此具有更好的性能表现。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cai_different_method.png" alt="image-20200117101334197"></p>
+<h2 id="24-深度学习应用">2.4 深度学习应用</h2>
+<h3 id="241-计算机视觉">2.4.1 计算机视觉</h3>
+<ul>
+<li>图片识别(Image Classification) 是常见的分类问题。神经网络的输入为图片数据，输出值为当前样本属于每个类别的概率分布。通常选取概率值最大的类别作为样本的预测类别。图片识别是最早成功应用深度学习的任务之一，经典的网络模型有VGG 系列、Inception 系列、ResNet 系列等。</li>
+<li>目标检测(Object Detection) 是指通过算法自动检测出图片中常见物体的大致位置，通常用边界框(Bounding box)表示，并分类出边界框中物体的类别信息。常见的目标检测算法有RCNN、Fast RCNN、Faster  CNN、Mask RCNN、SSD、YOLO 系列等。</li>
+<li>语义分割(Semantic Segmentation) 是通过算法自动分割并识别出图片中的内容，可以将语义分割理解为每个像素点的分类问题，分析每个像素点的物体的类别信息。常见的语义分割模型有FCN、U-net、SegNet、DeepLab 系列等。</li>
+<li>视频理解(Video Understanding) 随着深度学习在2D 图片的相关任务上取得较好的效果，具有时间维度信息的3D 视频理解任务受到越来越多的关注。常见的视频理解任务有视频分类、行为检测、视频主体抽取等。常用的模型有C3D、TSN、DOVF、TS_LSTM等。</li>
+<li>图片生成(Image Generation) 通过学习真实图片的分布，并从学习到的分布中采样而获得逼真度较高的生成图片。目前常见的生成模型有VAE 系列、GAN 系列等。其中GAN 系列算法近年来取得了巨大的进展，最新GAN 模型产生的图片效果达到了肉眼难辨真伪的程度。</li>
+</ul>
+<h3 id="242-自然语言处理">2.4.2 自然语言处理</h3>
+<ul>
+<li>机器翻译(Machine Translation) 过去的机器翻译算法通常是基于统计机器翻译模型，这也是2016 年前Google 翻译系统采用的技术。2016 年11 月，Google 基于Seq2Seq 模型上线了Google 神经机器翻译系统(GNMT)，首次实现了源语言到目标语言的直译技术，在多项任务上获得了50~90%的效果提升。常用的机器翻译模型有Seq2Seq、BERT、GPT、GPT-2 等，其中OpenAI 提出的GPT-2 模型参数量高达15 亿个，甚至发布之初以技术安全考虑为由拒绝开源GPT-2 模型。</li>
+<li>聊天机器人(Chatbot) 聊天机器人也是自然语言处理的一项主流任务，机器自动学习与人类对话，对于人类的简单诉求提供满意的自动回复，提高客户的服务效率和服务质量等。常应用在咨询系统、娱乐系统、智能家居等中。</li>
+</ul>
+<h3 id="243-强化学习">2.4.3 强化学习</h3>
+<ul>
+<li>虚拟游戏 相对于真实环境，虚拟游戏平台既可以训练、测试强化学习算法，又可以避免无关因素干扰，同时也能将实验代价降到最低。目前常用的虚拟游戏平台有OpenAI Gym、OpenAI Universe、OpenAI Roboschool、DeepMind OpenSpiel、MuJoCo 等，常用的强化学习算法有DQN、A3C、A2C、PPO 等。在围棋领域，DeepMind AlaphGo 程序已经超越人类围棋专家；在Dota2 和星际争霸游戏上，OpenAI 和DeepMind 开发的智能程序也在限制规则下战胜了职业队伍。</li>
+<li>机器人(Robotics) 在真实环境中，机器人的控制也取得了一定的进展。如UC Berkeley实验室在机器人领域的Imitation Learning、Meta Learning、Few-shot Learning 等方向上取得了不少进展。美国波士顿动力公司在机器人应用中取得喜人的成就，其制造的机器人在复杂地形行走、多智能体协作等任务上表现良好(图 1.19)。</li>
+<li>自动驾驶(Autonomous Driving) 被认为是强化学习短期内能技术落地的一个应用方向，很多公司投入大量资源在自动驾驶上，如百度、Uber、Google 无人车等，其中百度的无人巴士“阿波龙”已经在北京、雄安、武汉等地展开试运营。</li>
+</ul>
+<h1 id="3-必备的基础知识">3. 必备的基础知识</h1>
+<h2 id="31-神经网络">3.1 神经网络</h2>
+<h3 id="311-神经元模型">3.1.1 神经元模型</h3>
+<p>详见  <a href="https://www.cnblogs.com/maybe2030/p/5597716.html">https://www.cnblogs.com/maybe2030/p/5597716.html</a></p>
+<p>生物神经元模型，是现代深度学习的基石。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E5%85%83.png" alt="1575616572055"></p>
+<p>抽象神经元模型</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8D%95%E5%85%83.PNG" alt="神经网络单元"></p>
+<p>参数𝜃 = {𝑤1, 𝑤2, 𝑤3, . . . , 𝑤𝑛, 𝑏}确定了神经元的状态，通过固定𝜃参数即可确定此神经元的处理逻辑。当神经元输入节点数𝑛 = 1(单输入)时，神经元数学模型可进一步简化为：
+𝑦 = 𝑤𝑥 + 𝑏</p>
+<h3 id="312-两层神经网络">3.1.2 两层神经网络</h3>
+<p>两层神经网络除了包含一个输入层，一个输出层以外，还增加了一个中间层。此时，中间层和输出层都是计算层。当增加一个计算层以后，两层神经网络不仅可以解决异或问题，而且具有非常好的非线性分类效果。</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C.png" alt="1575617816143"></p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5C%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E6%95%88%E6%9E%9C.PNG" alt="两层网络效果"></p>
+<h2 id="32-python">3.2 python</h2>
+<p><a href="https://www.runoob.com/python3/python3-tutorial.html">https://www.runoob.com/python3/python3-tutorial.html</a></p>
+<p>python速查表</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cpython_quick.png" alt="python_quick"></p>
+<h2 id="33-tensorflow">3.3 tensorflow</h2>
+<p>tensorflow是google主导的，目前最火的开源深度学习框架。</p>
+<p>速查表：https://aicheatsheets.com/static/pdfs/tensorflow_v_2.0.pdf</p>
+<p>API文档：https://www.tensorflow.org/api_docs/python/tf</p>
+<h2 id="34-caffepytorch">3.4 caffe/pytorch</h2>
+<p>caffe是由加州大学伯克利分校的贾扬清博士于2013年在Github上发布的深度学习框架。</p>
+<p>caffe2是在2017年4月18日开幕的 F8 年度开发者大会上，Facebook 发布的一款全新的开源深度学习框架，目前已经并入pytorch。</p>
+<p>pytorch文档：https://pytorch.org/docs/stable/rpc.html</p>
+<h1 id="4-mnn">4. MNN</h1>
+<p><a href="https://github.com/alibaba/MNN">MNN</a>是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等20多个App中使用，覆盖直播、短视频、搜索推荐、商品图像搜索、互动营销、权益发放、安全风控等场景。此外，IoT等场景下也有若干应用。</p>
+<p>==MNN是重点参考对象，需要特别关注。==</p>
+<h2 id="41-特点">4.1 特点</h2>
+<p><img src="..%5Cimage%5Cmnn_status.png" alt="img"></p>
+<p><img src="..%5Cimage%5Cmnn_design.png" alt="img"></p>
+<p><img src="..%5Cimage%5Cmnn_convert.png" alt="img"></p>
+<p><img src="..%5Cimage%5Cmnn_quantization.png" alt="img"></p>
+<p><img src="..%5Cimage%5Cmnn_character.png" alt="img"></p>
+<h3 id="411-轻量性">4.1.1 轻量性</h3>
+<ul>
+<li>针对端侧设备特点深度定制和裁剪，无任何依赖，可以方便地部署到移动设备和各种嵌入式设备中。</li>
+<li>iOS平台：armv7+arm64静态库大小5MB左右，链接生成可执行文件增加大小620KB左右，metallib文件600KB左右。</li>
+<li>Android平台：so大小400KB左右，OpenCL库400KB左右，Vulkan库400KB左右。</li>
+</ul>
+<h3 id="412-通用性">4.1.2 通用性</h3>
+<ul>
+<li>支持<code>Tensorflow</code>、<code>Caffe</code>、<code>ONNX</code>等主流模型文件格式，支持<code>CNN</code>、<code>RNN</code>、<code>GAN</code>等常用网络。</li>
+<li>支持86个<code>Tensorflow</code>Op、34个<code>Caffe</code>Op；各计算设备支持的MNN Op数：CPU 71个，Metal 55个，OpenCL 29个，Vulkan 31个。</li>
+<li>支持iOS 8.0+、Android 4.3+和具有POSIX接口的嵌入式设备。</li>
+<li>支持异构设备混合计算，目前支持CPU和GPU，可以动态导入GPU Op插件，替代CPU Op的实现。</li>
+</ul>
+<h3 id="413-高性能">4.1.3 高性能</h3>
+<ul>
+<li>不依赖任何第三方计算库，依靠大量手写汇编实现核心运算，充分发挥ARM CPU的算力。</li>
+<li>iOS设备上可以开启GPU加速（Metal），常用模型上快于苹果原生的CoreML。</li>
+<li>Android上提供了<code>OpenCL</code>、<code>Vulkan</code>、<code>OpenGL</code>三套方案，尽可能多地满足设备需求，针对主流GPU（<code>Adreno</code>和<code>Mali</code>）做了深度调优。</li>
+<li>卷积、转置卷积算法高效稳定，对于任意形状的卷积均能高效运行，广泛运用了 Winograd 卷积算法，对3x3 -&gt; 7x7之类的对称卷积有高效的实现。</li>
+<li>针对ARM v8.2的新架构额外作了优化，新设备可利用半精度计算的特性进一步提速。</li>
+</ul>
+<h3 id="414-易用性">4.1.4 易用性</h3>
+<ul>
+<li>有高效的图像处理模块，覆盖常见的形变、转换等需求，一般情况下，无需额外引入libyuv或opencv库处理图像。</li>
+<li>支持回调机制，可以在网络运行中插入回调，提取数据或者控制运行走向。</li>
+<li>支持只运行网络中的一部分，或者指定CPU和GPU间并行运行。</li>
+</ul>
+<h2 id="42-架构">4.2 架构</h2>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_architecture.png" alt="architecture.png"></p>
+<p>MNN可以分为Converter和Interpreter两部分。</p>
+<p>Converter由Frontends和Graph Optimize构成。前者负责支持不同的训练框架，MNN当前支持Tensorflow(Lite)、Caffe和ONNX(PyTorch/MXNet的模型可先转为ONNX模型再转到MNN)；后者通过算子融合、算子替代、布局调整等方式优化图。</p>
+<p>Interpreter由Engine和Backends构成。前者负责模型的加载、计算图的调度；后者包含各计算设备下的内存分配、Op实现。在Engine和Backends中，MNN应用了多种优化方案，包括在卷积和反卷积中应用Winograd算法、在矩阵乘法中应用Strassen算法、低精度计算、Neon优化、手写汇编、多线程优化、内存复用、异构计算等。</p>
+<h2 id="43-用法">4.3 用法</h2>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_usage.png" alt="concept.png"></p>
+<ul>
+<li>训练</li>
+</ul>
+<p>在训练框架上，根据训练数据训练出模型的阶段。虽然当前MNN也提供了训练模型的能力，但主要用于端侧训练或模型调优。在数据量较大时，依然建议使用成熟的训练框架，如TensorFlow、PyTorch等。除了自行训练外，也可以直接利用开源的预训练模型。</p>
+<ul>
+<li>转换</li>
+</ul>
+<p>将其他训练框架模型转换为MNN模型的阶段。MNN当前支持Tensorflow(Lite)、Caffe和ONNX的模型转换。模型转换工具可以参考<a href="https://www.yuque.com/mnn/cn/cvrt_linux">编译文档</a>和<a href="https://www.yuque.com/mnn/cn/model_convert">使用说明</a>。支持转换的算子，可以参考<a href="https://www.yuque.com/mnn/en/ops">算子列表文档</a>；在遇到不支持的算子时，可以尝试<a href="https://www.yuque.com/mnn/cn/customize_op">自定义算子</a>，或在Github上给我们<a href="https://github.com/alibaba/MNN/issues/74">提交issue</a>。</p>
+<p>此外，<a href="https://www.yuque.com/mnn/cn/model_dump">模型打印工具</a>可以用于输出模型结构，辅助调试。</p>
+<p>除模型转换外，MNN也提供了<a href="https://www.yuque.com/mnn/cn/tool_quantize">模型量化工具</a>，可以对浮点模型进行量化压缩。</p>
+<ul>
+<li>推理</li>
+</ul>
+<p>在端侧加载MNN模型进行推理的阶段。端侧运行库的编译请参考各平台的编译文档：<a href="https://www.yuque.com/mnn/cn/build_ios">iOS</a>、<a href="https://www.yuque.com/mnn/cn/build_android">Android</a>、<a href="https://www.yuque.com/mnn/cn/build_linux">Linux/macOS/Ubuntu</a>、<a href="https://www.yuque.com/mnn/cn/build_windows">Windows</a>。我们提供了<a href="https://github.com/alibaba/MNN/tree/master/doc/API">API接口文档</a>，也详细说明了<a href="https://www.yuque.com/mnn/cn/create_session">会话创建</a>、<a href="https://www.yuque.com/mnn/cn/input">数据输入</a>、<a href="https://www.yuque.com/mnn/cn/run_session">执行推理</a>、<a href="https://www.yuque.com/mnn/cn/output">数据输出</a>相关的接口和参数。</p>
+<h2 id="44-源码分析">4.4 源码分析</h2>
+<h3 id="441-代码路径">4.4.1 代码路径</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3rd_party</td>
+<td>第三方工具</td>
+</tr>
+<tr>
+<td>benchmark</td>
+<td>性能测试工具</td>
+</tr>
+<tr>
+<td>cmake</td>
+<td>编译相关</td>
+</tr>
+<tr>
+<td>CMakeLists.txt</td>
+<td>编译相关</td>
+</tr>
+<tr>
+<td>demo</td>
+<td>demo</td>
+</tr>
+<tr>
+<td>doc</td>
+<td>文档</td>
+</tr>
+<tr>
+<td>express</td>
+<td></td>
+</tr>
+<tr>
+<td>include</td>
+<td>头文件</td>
+</tr>
+<tr>
+<td>project</td>
+<td>android，ios，linux工程</td>
+</tr>
+<tr>
+<td>pymnn</td>
+<td>python包</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>模型，图片等资源</td>
+</tr>
+<tr>
+<td>schema</td>
+<td>描述文件，编译相关</td>
+</tr>
+<tr>
+<td>source</td>
+<td>核心算法库</td>
+</tr>
+<tr>
+<td>test</td>
+<td>测试相关</td>
+</tr>
+<tr>
+<td>tools</td>
+<td>converter模型转换，quantization量化等工具</td>
+</tr>
+</tbody>
+</table>
+<p>重点关注source目录，source下面有5个目录，分别为</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend</td>
+<td>CPU，GPU加速后端</td>
+</tr>
+<tr>
+<td>core</td>
+<td>核心框架，backend，session，pipeline，execution，schedule等框架</td>
+</tr>
+<tr>
+<td>cv</td>
+<td>图像库，各种颜色格式，图像格式转换，</td>
+</tr>
+<tr>
+<td>math</td>
+<td>matrix，vertex，wingored基本运算</td>
+</tr>
+<tr>
+<td>shape</td>
+<td>算子shape计算</td>
+</tr>
+</tbody>
+</table>
+<h3 id="442-backend后端实现">4.4.2 backend后端实现</h3>
+<ul>
+<li>arm82：这个目录下面是arm处理器的优化cpu算子，包含1X1的卷积，矩阵优化汇编等几个优化实现。</li>
+<li>cpu：通用的cpu后端实现，包含x86的asm，sse，avx等优化实现</li>
+<li>metal：Apple GPU加速方案，只能用于ios， macos，属于底层语言，性能比较好。</li>
+<li>opencl， opengl：Khronos开源GPU加速高级API， 兼容多种平台，开销较大，逐步被淘汰中。</li>
+<li>vulkan：Khronos最新的底层GPU加速API，是AMD mantle的后续版本，未来的趋势。</li>
+</ul>
+<h2 id="45-总结">4.5 总结</h2>
+<p>==算子分析关注source/shape，source/backend目录即可。==</p>
+<h1 id="5-cpu算子分析">5. CPU算子分析</h1>
+<p>所谓的算子，其实就是某种运算，例如常见的加减乘除，平方，开根号等操作，当然，这些比较简单，也有复杂的，例如卷积。</p>
+<p>算子的功能各异，命名也没有统一标准，我们需要了解不同框架的实现细节，才能更精确地在IR中定义并实现，大致来讲，拿到一个算子，我们可以按照下述步骤来分析。</p>
+<p>在这里我们以exp算子为例，讲述分析过程，其他算子类似。</p>
+<h2 id="51-算子定义">5.1 算子定义</h2>
+<p>对于算子定义，我们定义一个模板，第一步就是弄清楚算子的功能和输入输出</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="center">功能描述</th>
+<th>输入参数</th>
+<th>输出参数</th>
+<th>返回值</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">MNN定义</td>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">tensorflow定义</td>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">caffe/pytorch定义</td>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>mnn定义可以去https://www.yuque.com/mnn/en/ops搜索算子名称exp</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Cmnn_op_define.png" alt="image-20200117143019395"></p>
+<p>由MNN文档可以看出，tensorflow的exp算子，MNN和caffe是用UnaryOp实现的，UnaryOp其实支持好几种类型的运算：rsqrt，square，neg，exp，sqrt等，是个大的集合，输入输出对象都是是float32类型的浮点数，数据支持NHWC或者NCHW存贮格式。</p>
+<p>接下来，我们去tensorflow文档 <a href="https://www.tensorflow.org/api_docs/python/tf">https://www.tensorflow.org/api_docs/python/tf</a> 里面搜索exp，可以找到</p>
+<p><img src="D:%5C%E9%BC%8E%E6%A1%A5%5Cdocument%5Cimage%5Ctensorflow_op3.png" alt="image-20200117144021744"></p>
+<p>跳转tensorflow::ops::Exp的定义，我们能看到tensorflow对该算子的定义，功能描述及使用例子。重点部分见代码中文注释，以下类同。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#include &lt;math_ops.h&gt; # 说明用math命名空间的实现</span>
+<span class="n">Computes</span> <span class="n">exponential</span> <span class="n">of</span> <span class="n">x</span> <span class="n">element</span><span class="o">-</span><span class="n">wise</span><span class="o">.</span>
+
+<span class="n">Summary</span>
+\<span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="n">x</span>\<span class="p">)</span><span class="o">.</span>
+
+<span class="n">This</span> <span class="n">function</span> <span class="n">computes</span> <span class="n">the</span> <span class="n">exponential</span> <span class="n">of</span> <span class="n">every</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">tensor</span><span class="o">.</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">where</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">tensor</span><span class="o">.</span> <span class="n">e</span> <span class="n">denotes</span> <span class="n">Euler</span><span class="s1">&#39;s number and is approximately equal to 2.718281. Output is positive for any real input.</span>
+
+  <span class="c1"># 使用例子</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">7.389056</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="n">array</span><span class="p">([</span><span class="mf">7.389056</span><span class="p">,</span> <span class="mf">2980.958</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  
+
+<span class="c1"># 复数计算公式</span>
+<span class="n">For</span> <span class="nb">complex</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">the</span> <span class="n">exponential</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="k">as</span> <span class="n">follows</span><span class="p">:</span>
+
+  <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">iy</span><span class="p">)</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="n">x</span> <span class="o">*</span> <span class="n">e</span><span class="o">^</span><span class="n">iy</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos</span> <span class="n">y</span> <span class="o">+</span> <span class="n">i</span> <span class="n">sin</span> <span class="n">y</span><span class="p">)</span>
+  
+
+<span class="n">Let</span><span class="s1">&#39;s consider complex number 1+1j as an example. e^1 * (cos 1 + i sin 1) = 2.7182818284590 * (0.54030230586+0.8414709848j)</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1j</span><span class="p">)</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423j</span>
+  
+
+<span class="n">Arguments</span><span class="p">:</span>
+
+<span class="n">scope</span><span class="p">:</span> <span class="n">A</span> <span class="n">Scope</span> <span class="nb">object</span>
+<span class="n">Returns</span><span class="p">:</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="n">The</span> <span class="n">y</span> <span class="n">tensor</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="y">从该文档可以看出，exp算子是计算输入的e指数。
+$$
+y</h1>
+<p>e
+^x
+$$
+这个算子需要包含math_ops.h，说明它是靠tensorflow::math下面的函数实现的，我们继续跳转到tf.math.exp的文档</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Computes</span> <span class="n">exponential</span> <span class="n">of</span> <span class="n">x</span> <span class="n">element</span><span class="o">-</span><span class="n">wise</span><span class="o">.</span> <span class="o">.</span>
+
+<span class="n">Aliases</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span>
+
+<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="bp">None</span>
+<span class="p">)</span>
+
+<span class="n">Used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">guide</span><span class="p">:</span>
+<span class="n">Writing</span> <span class="n">custom</span> <span class="n">layers</span> <span class="ow">and</span> <span class="n">models</span> <span class="k">with</span> <span class="n">Keras</span>
+<span class="n">Eager</span> <span class="n">execution</span>
+<span class="n">Used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">tutorials</span><span class="p">:</span>
+<span class="n">Convolutional</span> <span class="n">Variational</span> <span class="n">Autoencoder</span>
+
+<span class="n">This</span> <span class="n">function</span> <span class="n">computes</span> <span class="n">the</span> <span class="n">exponential</span> <span class="n">of</span> <span class="n">every</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">tensor</span><span class="o">.</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">where</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">tensor</span><span class="o">.</span> <span class="n">e</span> <span class="n">denotes</span> <span class="n">Euler</span><span class="s1">&#39;s number and is approximately equal to 2.718281. Output is positive for any real input.</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">7.389056</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="n">array</span><span class="p">([</span><span class="mf">7.389056</span><span class="p">,</span> <span class="mf">2980.958</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">For</span> <span class="nb">complex</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">the</span> <span class="n">exponential</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="k">as</span> <span class="n">follows</span><span class="p">:</span>
+
+<span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">iy</span><span class="p">)</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="n">x</span> <span class="o">*</span> <span class="n">e</span><span class="o">^</span><span class="n">iy</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos</span> <span class="n">y</span> <span class="o">+</span> <span class="n">i</span> <span class="n">sin</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">Let</span><span class="s1">&#39;s consider complex number 1+1j as an example. e^1 * (cos 1 + i sin 1) = 2.7182818284590 * (0.54030230586+0.8414709848j)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1j</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423j</span>
+
+<span class="n">Args</span><span class="p">:</span>
+<span class="n">x</span><span class="p">:</span> <span class="n">A</span> <span class="n">Tensor</span><span class="o">.</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">types</span><span class="p">:</span> <span class="n">bfloat16</span><span class="p">,</span> <span class="n">half</span><span class="p">,</span> <span class="n">float32</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">complex64</span><span class="p">,</span> <span class="n">complex128</span><span class="o">.</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">A</span> <span class="n">name</span> <span class="k">for</span> <span class="n">the</span> <span class="n">operation</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Returns</span><span class="p">:</span>
+<span class="n">A</span> <span class="n">Tensor</span><span class="o">.</span> <span class="n">Has</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">type</span> <span class="k">as</span> <span class="n">x</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>重点关注输入输出，发现类型输入输入tensor类型一致，输入支持bfloat16, half, float32, float64, complex64, complex128.</p>
+<p>最后，我们去https://pytorch.org/docs/stable/rpc.html搜索pytorch关于exp的定义，跳转到toych.exp</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">torch.exp(input, out=None) → Tensor
+Returns a new tensor with the exponential of the elements of the input tensor input.
+
+y_{i} = e^{x_{i}}
+y 
+i
+​	
+ =e 
+x 
+i
+​	
+ 
+ 
+Parameters
+input (Tensor) – the input tensor.
+
+out (Tensor, optional) – the output tensor.
+
+Example:
+
+&gt;&gt;&gt; torch.exp(torch.tensor([0, math.log(2.)]))
+tensor([ 1.,  2.])
+</code></pre></td></tr></table>
+</div>
+</div><p>pytorch的文档只是指出了exp是做什么用的，对输入输出并没有特别的描述。没办法，只能去看代码，在pytorch里面搜索exp，找到caffe2/operators/exp_op.cc，能看到要求输入输出为1个，且类型，shape相同。输入输出为float类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">REGISTER_CPU_OPERATOR</span><span class="p">(</span>
+    <span class="n">Exp</span><span class="p">,</span>
+    <span class="n">UnaryElementwiseOp</span><span class="o">&lt;</span><span class="n">TensorTypes</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">CPUContext</span><span class="p">,</span> <span class="n">ExpFunctor</span><span class="o">&lt;</span><span class="n">CPUContext</span><span class="o">&gt;&gt;</span><span class="p">);</span>
+
+<span class="n">OPERATOR_SCHEMA</span><span class="p">(</span><span class="n">Exp</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">NumInputs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">// 一个输入
+</span><span class="c1"></span>    <span class="p">.</span><span class="n">NumOutputs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 一个输出
+</span><span class="c1"></span>    <span class="p">.</span><span class="n">AllowInplace</span><span class="p">({{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">}})</span>
+    <span class="p">.</span><span class="n">IdenticalTypeAndShape</span><span class="p">()</span>  <span class="c1">// 类型，shape需要相同
+</span><span class="c1"></span>    <span class="p">.</span><span class="n">SetDoc</span><span class="p">(</span><span class="n">R</span><span class="s">&#34;DOC(</span>
+<span class="n">Calculates</span> <span class="n">the</span> <span class="n">exponential</span> <span class="n">of</span> <span class="n">the</span> <span class="n">given</span> <span class="n">input</span> <span class="nf">tensor</span> <span class="p">(</span><span class="err">$</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="err">$</span><span class="p">),</span> <span class="n">element</span><span class="o">-</span><span class="n">wise</span><span class="p">.</span> <span class="n">This</span>
+<span class="n">operation</span> <span class="n">can</span> <span class="n">be</span> <span class="n">done</span> <span class="n">in</span> <span class="n">an</span> <span class="n">in</span><span class="o">-</span><span class="n">place</span> <span class="n">fashion</span> <span class="n">too</span><span class="p">,</span> <span class="n">by</span> <span class="n">providing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">input</span>
+<span class="n">and</span> <span class="n">output</span> <span class="n">blobs</span><span class="p">.</span>
+
+<span class="n">Github</span> <span class="nl">Link</span><span class="p">:</span>
+<span class="o">-</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/pytorch/pytorch/blob/master/caffe2/operators/exp_op.cc
+</span><span class="c1"></span>
+<span class="o">&lt;</span><span class="n">details</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">summary</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="n">Example</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">summary</span><span class="o">&gt;</span>
+
+<span class="o">**</span><span class="n">Code</span><span class="o">**</span>
+
+<span class="err">```</span>
+
+<span class="n">workspace</span><span class="p">.</span><span class="n">ResetWorkspace</span><span class="p">()</span>
+
+<span class="n">op</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">CreateOperator</span><span class="p">(</span>
+    <span class="s">&#34;Exp&#34;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s">&#34;X&#34;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">&#34;X&#34;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">workspace</span><span class="p">.</span><span class="n">FeedBlob</span><span class="p">(</span><span class="s">&#34;X&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)).</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&#34;X before running op:&#34;</span><span class="p">,</span> <span class="n">workspace</span><span class="p">.</span><span class="n">FetchBlob</span><span class="p">(</span><span class="s">&#34;X&#34;</span><span class="p">))</span>
+<span class="n">workspace</span><span class="p">.</span><span class="n">RunOperatorOnce</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&#34;X after running op:&#34;</span><span class="p">,</span> <span class="n">workspace</span><span class="p">.</span><span class="n">FetchBlob</span><span class="p">(</span><span class="s">&#34;X&#34;</span><span class="p">))</span>
+
+<span class="err">```</span>
+
+<span class="o">**</span><span class="n">Result</span><span class="o">**</span>
+
+<span class="err">```</span>
+
+<span class="n">X</span> <span class="n">before</span> <span class="n">running</span> <span class="nl">op</span><span class="p">:</span>
+<span class="p">[[</span><span class="mf">0.5821691</span>  <span class="mf">0.07719802</span> <span class="mf">0.50159824</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.40952456</span> <span class="mf">0.36788362</span> <span class="mf">0.84887683</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.02472685</span> <span class="mf">0.65730894</span> <span class="mf">0.9066397</span> <span class="p">]]</span>
+<span class="n">X</span> <span class="n">after</span> <span class="n">running</span> <span class="nl">op</span><span class="p">:</span>
+<span class="p">[[</span><span class="mf">1.7899168</span> <span class="mf">1.080256</span>  <span class="mf">1.6513585</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.5061016</span> <span class="mf">1.4446739</span> <span class="mf">2.3370204</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.0250351</span> <span class="mf">1.9295927</span> <span class="mf">2.4759884</span><span class="p">]]</span>
+
+<span class="err">```</span>
+
+<span class="o">&lt;/</span><span class="n">details</span><span class="o">&gt;</span>
+
+<span class="p">)</span><span class="n">DOC</span><span class="s">&#34;)</span>
+    <span class="p">.</span><span class="n">Input</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#34;X&#34;</span><span class="p">,</span> <span class="s">&#34;*(type: Tensor`&lt;float&gt;`)* Input tensor.&#34;</span><span class="p">)</span>  <span class="c1">// 输入为float类型
+</span><span class="c1"></span>    <span class="p">.</span><span class="n">Output</span><span class="p">(</span>              <span class="c1">// 输出也为float类型
+</span><span class="c1"></span>        <span class="mi">0</span><span class="p">,</span>
+        <span class="s">&#34;Y&#34;</span><span class="p">,</span>
+        <span class="s">&#34;*(type: Tensor`&lt;float&gt;`)* The exponential of the input tensor computed &#34;</span>
+        <span class="s">&#34;element-wise.&#34;</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">InheritOnnxSchema</span><span class="p">();</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">GetExpGradient</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GradientMakerBase</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">GradientMakerBase</span><span class="o">::</span><span class="n">GradientMakerBase</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">OperatorDef</span><span class="o">&gt;</span> <span class="n">GetGradientDefs</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">SingleGradientDef</span><span class="p">(</span>
+        <span class="s">&#34;Mul&#34;</span><span class="p">,</span>
+        <span class="s">&#34;&#34;</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">O</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">GO</span><span class="p">(</span><span class="mi">0</span><span class="p">)},</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">GI</span><span class="p">(</span><span class="mi">0</span><span class="p">)});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace
+</span></code></pre></td></tr></table>
+</div>
+</div><p>caffe/pytorch文档确实没有tensorflow完整，可能需要去看源码才能知道有什么约束。</p>
+<p>综上分析，我们可以整理出来算子定义的表格，对算子的功能及约束就心里有数了。</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="center">功能描述</th>
+<th>输入参数</th>
+<th>输出参数</th>
+<th>返回值</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">MNN定义</td>
+<td align="center">计算e指数</td>
+<td>float32</td>
+<td>float32</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">tensorflow定义</td>
+<td align="center">计算e指数</td>
+<td>bfloat16, half, float32, float64, complex64, complex128</td>
+<td>bfloat16, half, float32, float64, complex64, complex128</td>
+<td></td>
+<td>输入输出类型，shape一样</td>
+</tr>
+<tr>
+<td align="left">caffe/pytorch定义</td>
+<td align="center">计算e指数</td>
+<td>float</td>
+<td>float</td>
+<td></td>
+<td>输入输出类型，shape一样</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-mnn实现分析">5.2 MNN实现分析</h2>
+<p>从上节知道MNN中exp算子是由unary算子实现的，本节我们将看MNN的代码实现。首先去MNN代码树source/shape下面搜索有unary子串的文件，或者直接搜索算子名字OpType_UnaryOp。对exp算子而言，搜索不到任何信息，因为exp算子比较简单，输入输出的shape是一样的，无需改变，所以没有特别的实现。</p>
+<p>这块我们用另外一个算子cast来解释，cast算子其实就是高级语言里面的类型转换，例如int转换为float格式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">CastSizeComputer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">SizeComputer</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// onComputeSize虚函数更新tensor参数信息
+</span><span class="c1"></span>    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">onComputeSize</span><span class="p">(</span><span class="k">const</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Op</span><span class="o">*</span> <span class="n">op</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">inputs</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">outputs</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">output</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">auto</span> <span class="n">input</span>  <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="n">TensorUtils</span><span class="o">::</span><span class="n">copyShape</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+        <span class="c1">// float -&gt; int8情况，输出类型需要改为int8类型
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">OpType_FloatToInt8</span> <span class="o">==</span> <span class="n">op</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">output</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">().</span><span class="n">type</span> <span class="o">=</span> <span class="n">halide_type_of</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">();</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// int8 -&gt; float情况，输出类型需要改为float类型
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">OpType_Int8ToFloat</span> <span class="o">==</span> <span class="n">op</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">output</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">().</span><span class="n">type</span> <span class="o">=</span> <span class="n">halide_type_of</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">opParam</span> <span class="o">=</span> <span class="n">op</span><span class="o">-&gt;</span><span class="n">main_as_CastParam</span><span class="p">();</span>
+        <span class="c1">// 通用类型转换，输出设置为dest类型
+</span><span class="c1"></span>        <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">setType</span><span class="p">(</span><span class="n">opParam</span><span class="o">-&gt;</span><span class="n">dstT</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">// CastSizeComputer算子其实注册了3种类型的转换，cast， float -&gt; int8, int8 -&gt; float
+</span><span class="c1"></span><span class="n">REGISTER_SHAPE</span><span class="p">(</span><span class="n">CastSizeComputer</span><span class="p">,</span> <span class="n">OpType_Cast</span><span class="p">);</span>
+<span class="n">REGISTER_SHAPE</span><span class="p">(</span><span class="n">CastSizeComputer</span><span class="p">,</span> <span class="n">OpType_FloatToInt8</span><span class="p">);</span>
+<span class="n">REGISTER_SHAPE</span><span class="p">(</span><span class="n">CastSizeComputer</span><span class="p">,</span> <span class="n">OpType_Int8ToFloat</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果算子的shape大小发生变化，这里也需要设置好。</p>
+<p>有了算子的shape，类型信息，我们再回到exp算子的实现代码，这回在source/backend/cpu下面搜索OpType_UnaryOp，我们可以找到source/backend/cpu/CPUUnary.cpp，这个文件其实就是借用C++模板实现了逐个元素计算单目操作符exp之类的算子，代码其实很简单，重点部分请参见中文注释。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span><span class="lnt">346
+</span><span class="lnt">347
+</span><span class="lnt">348
+</span><span class="lnt">349
+</span><span class="lnt">350
+</span><span class="lnt">351
+</span><span class="lnt">352
+</span><span class="lnt">353
+</span><span class="lnt">354
+</span><span class="lnt">355
+</span><span class="lnt">356
+</span><span class="lnt">357
+</span><span class="lnt">358
+</span><span class="lnt">359
+</span><span class="lnt">360
+</span><span class="lnt">361
+</span><span class="lnt">362
+</span><span class="lnt">363
+</span><span class="lnt">364
+</span><span class="lnt">365
+</span><span class="lnt">366
+</span><span class="lnt">367
+</span><span class="lnt">368
+</span><span class="lnt">369
+</span><span class="lnt">370
+</span><span class="lnt">371
+</span><span class="lnt">372
+</span><span class="lnt">373
+</span><span class="lnt">374
+</span><span class="lnt">375
+</span><span class="lnt">376
+</span><span class="lnt">377
+</span><span class="lnt">378
+</span><span class="lnt">379
+</span><span class="lnt">380
+</span><span class="lnt">381
+</span><span class="lnt">382
+</span><span class="lnt">383
+</span><span class="lnt">384
+</span><span class="lnt">385
+</span><span class="lnt">386
+</span><span class="lnt">387
+</span><span class="lnt">388
+</span><span class="lnt">389
+</span><span class="lnt">390
+</span><span class="lnt">391
+</span><span class="lnt">392
+</span><span class="lnt">393
+</span><span class="lnt">394
+</span><span class="lnt">395
+</span><span class="lnt">396
+</span><span class="lnt">397
+</span><span class="lnt">398
+</span><span class="lnt">399
+</span><span class="lnt">400
+</span><span class="lnt">401
+</span><span class="lnt">402
+</span><span class="lnt">403
+</span><span class="lnt">404
+</span><span class="lnt">405
+</span><span class="lnt">406
+</span><span class="lnt">407
+</span><span class="lnt">408
+</span><span class="lnt">409
+</span><span class="lnt">410
+</span><span class="lnt">411
+</span><span class="lnt">412
+</span><span class="lnt">413
+</span><span class="lnt">414
+</span><span class="lnt">415
+</span><span class="lnt">416
+</span><span class="lnt">417
+</span><span class="lnt">418
+</span><span class="lnt">419
+</span><span class="lnt">420
+</span><span class="lnt">421
+</span><span class="lnt">422
+</span><span class="lnt">423
+</span><span class="lnt">424
+</span><span class="lnt">425
+</span><span class="lnt">426
+</span><span class="lnt">427
+</span><span class="lnt">428
+</span><span class="lnt">429
+</span><span class="lnt">430
+</span><span class="lnt">431
+</span><span class="lnt">432
+</span><span class="lnt">433
+</span><span class="lnt">434
+</span><span class="lnt">435
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++">
+<span class="k">namespace</span> <span class="n">MNN</span> <span class="p">{</span>
+<span class="n">CPUUnary</span><span class="o">::</span><span class="n">CPUUnary</span><span class="p">(</span><span class="n">Backend</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="n">UnaryOpOperation</span> <span class="n">type</span><span class="p">)</span> <span class="o">:</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Execution</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">mType</span><span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// nothing to do
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="n">ErrorCode</span> <span class="n">CPUUnary</span><span class="o">::</span><span class="n">onResize</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="n">outputs</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="k">auto</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">();</span>
+    <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">halide_type_of</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">||</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">halide_type_of</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 逐元素计算函数f
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Func</span><span class="p">,</span> <span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">static</span> <span class="n">ErrorCode</span> <span class="n">_unaryOp</span><span class="p">(</span><span class="n">Tensor</span> <span class="o">*</span><span class="n">input</span><span class="p">,</span> <span class="n">Tensor</span> <span class="o">*</span><span class="n">output</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Func</span> <span class="n">f</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="n">T</span> <span class="o">*</span><span class="n">inputData</span> <span class="o">=</span> <span class="n">input</span><span class="o">-&gt;</span><span class="n">host</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">T</span> <span class="o">*</span><span class="n">outputData</span>      <span class="o">=</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span><span class="p">)</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">().</span><span class="n">host</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">elementSize</span> <span class="o">=</span> <span class="n">input</span><span class="o">-&gt;</span><span class="n">elementSize</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">elementSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">outputData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">inputData</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnarySquare</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryRsqrt</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnarySqrt</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryNeg</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">// exp算子计算模板
+</span><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryExp</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAbs</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryCeil</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">ceil</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryRecipocal</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryLog1p</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">log</span><span class="p">((</span><span class="n">T</span><span class="p">)</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryLog</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">log</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryCos</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">cosf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnarySin</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">sinf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryTan</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">tanf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryATan</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">atanf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryFloor</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">floor</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnarySign</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryBNLL</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span> <span class="o">:</span> <span class="n">log</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAcosh</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">acoshf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnarySinh</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">sinhf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAsinh</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">asinhf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAtanh</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">atanhf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryRound</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">roundf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryCosh</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">coshf</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">evalPoly</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">kErfTCoefficient</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">poly</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">kErfTCoefficient</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">poly</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">erfImpl</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Coefficients for by erf(f32), from Cephes. tensorflow
+</span><span class="c1"></span>    <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">kErfTCoefficient</span> <span class="p">{</span>
+            <span class="o">+</span><span class="mf">7.853861353153693E-5</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.010193625184903E-4</span><span class="p">,</span> <span class="o">+</span><span class="mf">5.188327685732524E-3</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">2.685381193529856E-2</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.128358514861418E-1</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.761262582423300E-1</span><span class="p">,</span>
+            <span class="o">+</span><span class="mf">1.128379165726710E+0</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="nf">evalPoly</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">kErfTCoefficient</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">T</span> <span class="n">erfcImpl</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Coefficients for erfc(f32), from Cephes. tensorflow
+</span><span class="c1"></span>    <span class="k">const</span> <span class="kt">double</span> <span class="n">kMaxlog</span> <span class="o">=</span> <span class="mf">88.72283905206835</span><span class="p">;</span>
+    <span class="c1">// erfc(x) = exp(-x^2) P(1/x^2), 1 &lt; x &lt; 2
+</span><span class="c1"></span>    <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">kErfcPCoefficient</span><span class="p">{</span>
+            <span class="o">+</span><span class="mf">2.326819970068386E-2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.387039388740657E-1</span><span class="p">,</span> <span class="o">+</span><span class="mf">3.687424674597105E-1</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">5.824733027278666E-1</span><span class="p">,</span> <span class="o">+</span><span class="mf">6.210004621745983E-1</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.944515323274145E-1</span><span class="p">,</span>
+            <span class="o">+</span><span class="mf">3.404879937665872E-1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.741127028184656E-1</span><span class="p">,</span> <span class="o">+</span><span class="mf">5.638259427386472E-1</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="c1">// erfc(x) = exp(-x^2) R(1/x^2), 2 &lt;= x &lt; kMaxlog
+</span><span class="c1"></span>    <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">kErfcRCoefficient</span><span class="p">{</span>
+            <span class="o">-</span><span class="mf">1.047766399936249E+1</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.297719955372516E+1</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.495518717768503E+0</span><span class="p">,</span>
+            <span class="o">+</span><span class="mf">2.921019019210786E+0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.015265279202700E+0</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.218463358204948E-1</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">2.820767439740514E-1</span><span class="p">,</span> <span class="o">+</span><span class="mf">5.641895067754075E-1</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="kt">float</span> <span class="n">absX</span> <span class="o">=</span> <span class="n">fabsf</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">z</span> <span class="o">=</span> <span class="n">expf</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">q</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">absX</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">q</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">absX</span> <span class="o">&lt;</span> <span class="mf">2.0f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">evalPoly</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">kErfcPCoefficient</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">evalPoly</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">kErfcRCoefficient</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">yClamp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">z</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">kMaxlog</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">yClamp</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">yClamp</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">T</span><span class="p">(</span><span class="mf">2.0f</span> <span class="o">-</span> <span class="n">yClamp</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">T</span><span class="p">(</span><span class="n">yClamp</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryErf</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">erfImpl</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">T</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span> <span class="o">-</span> <span class="n">erfcImpl</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryErfc</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">T</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">erfcImpl</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">T</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span> <span class="o">-</span> <span class="n">erfImpl</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryErfinv</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// referenced from tensorflow
+</span><span class="c1"></span>    <span class="k">const</span> <span class="kt">int</span> <span class="n">kDegree</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">w_less_than_5_constants</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mf">2.81022636e-08</span><span class="n">f</span><span class="p">,</span>  <span class="mf">3.43273939e-07</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.5233877e-06</span><span class="n">f</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">4.39150654e-06</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.00021858087f</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.00125372503f</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">0.00417768164f</span><span class="p">,</span>  <span class="mf">0.246640727f</span><span class="p">,</span>    <span class="mf">1.50140941f</span><span class="p">};</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">w_greater_than_5_constants</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">-</span><span class="mf">0.000200214257f</span><span class="p">,</span> <span class="mf">0.000100950558f</span><span class="p">,</span> <span class="mf">0.00134934322f</span><span class="p">,</span>
+            <span class="o">-</span><span class="mf">0.00367342844f</span><span class="p">,</span>  <span class="mf">0.00573950773f</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.0076224613f</span><span class="p">,</span>
+            <span class="mf">0.00943887047f</span><span class="p">,</span>   <span class="mf">1.00167406f</span><span class="p">,</span>     <span class="mf">2.83297682f</span><span class="p">};</span>
+
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// Compute logarithm of (1+arg) using log1p(arg) which is more precise than
+</span><span class="c1"></span>        <span class="c1">// log(1+arg) when arg is close to zero. For more details, see
+</span><span class="c1"></span>        <span class="c1">// https://en.cppreference.com/w/cpp/numeric/math/log1p
+</span><span class="c1"></span>        <span class="k">auto</span> <span class="n">w</span> <span class="o">=</span> <span class="o">-</span><span class="n">log1p</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">);</span>
+        <span class="kt">bool</span> <span class="n">lt</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">coefficient</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">lt</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">w_less_than_5_constants</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">w_greater_than_5_constants</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">lt</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">coefficient</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kDegree</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">coefficient</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span> <span class="o">*</span> <span class="n">w</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">fabsf</span><span class="p">(</span><span class="n">fabsf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">infinity</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryExpm1</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">expm1</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAsin</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">asin</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">UnaryAcos</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">unary_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">acos</span><span class="p">((</span><span class="n">T</span><span class="p">)(</span><span class="n">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// 算子计算函数
+</span><span class="c1"></span><span class="n">ErrorCode</span> <span class="n">CPUUnary</span><span class="o">::</span><span class="n">onExecute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">input</span>  <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">auto</span> <span class="n">output</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">auto</span> <span class="n">dtype</span>  <span class="o">=</span> <span class="n">input</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">().</span><span class="n">code</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">halide_type_int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">mType</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="nl">UnaryOpOperation_ABS</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAbs</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+            <span class="k">case</span> <span class="nl">UnaryOpOperation_NEG</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryNeg</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+            <span class="k">case</span> <span class="nl">UnaryOpOperation_SQUARE</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySquare</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="n">MNN_ERROR</span><span class="p">(</span><span class="s">&#34;Int-Unary not support %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">mType</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">NO_ERROR</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">mType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_SQUARE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySquare</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_RSQRT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryRsqrt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_NEG</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryNeg</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="c1">// exp类型的算子，把UnaryExp当做模板参数传给模板函数实现计算
+</span><span class="c1"></span>        <span class="k">case</span> <span class="nl">UnaryOpOperation_EXP</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryExp</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_COS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryCos</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_SIN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySin</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_TAN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryTan</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ATAN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryATan</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_SQRT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySqrt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ABS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAbs</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_CEIL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryCeil</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_RECIPROCAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryRecipocal</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_LOG1P</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryLog1p</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_LOG</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryLog</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_FLOOR</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryFloor</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_BNLL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryBNLL</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ACOSH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAcosh</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_SINH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySinh</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ASINH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAsinh</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ATANH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAtanh</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_SIGN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnarySign</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ROUND</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryRound</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_COSH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryCosh</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ERF</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryErf</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ERFC</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryErfc</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ERFINV</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryErfinv</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_EXPM1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryExpm1</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ASIN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAsin</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">case</span> <span class="nl">UnaryOpOperation_ACOS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_unaryOp</span><span class="o">&lt;</span><span class="n">UnaryAcos</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">CPUUnaryCreator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CPUBackend</span><span class="o">::</span><span class="n">Creator</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="n">Execution</span> <span class="o">*</span><span class="n">onCreate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Op</span> <span class="o">*</span><span class="n">op</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">backend</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="c1">// 创建算子
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="nf">CPUUnary</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">op</span><span class="o">-&gt;</span><span class="n">main_as_UnaryOp</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">opType</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">REGISTER_CPU_OP_CREATOR</span><span class="p">(</span><span class="n">CPUUnaryCreator</span><span class="p">,</span> <span class="n">OpType_UnaryOp</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="53-ir接口分析">5.3 IR接口分析</h2>
+<p>上节已经了解了MNN的实现，本节评估IR接口定义是否合理，是否存在需要改进的地方</p>
+<p>首先，去include/graph/op/math_defs.h搜索exp，得到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/*
+ * Computes exponential of &#39;x&#39; element-wise. y = e^x
+ * &lt;Input&gt;
+ *    x : Input tensor
+ * &lt;Output&gt;
+ *    y : Output tensor
+ * &lt;Added in HiAI version&gt;
+ *    100.310.010.013
+ */
+REG_OP(Exp)
+.INPUT(x, TensorType({ DT_FLOAT, DT_DOUBLE}))
+.OUTPUT(y, TensorType({ DT_FLOAT, DT_DOUBLE}))
+.OP_END()
+</code></pre></td></tr></table>
+</div>
+</div><p>可见IR对exp的定义也是float，double浮点类型，一个输入，一个输出，不存在问题</p>
+<h2 id="54-加速情况分析">5.4 加速情况分析</h2>
+<p>标准的cpu算子可能存在arm neon，x86 SSE， AVX等多种优化方式，需要看算子实现中是否依赖了MNN下述目录中的函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">source/backend/arm82/
+source/backend/cpu/arm
+source/backend/cpu/x86_x64
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-gpu算子分析">6. GPU算子分析</h1>
+<p>MNN支持GPU加速，存在metal， Opengl， opencl， vulkan几个后端，他们的地位和CPU相同，但在支持的算子数目，输入输出，类型上存在一定的差异，需要逐个分析，相信大家有了CPU算子分析的经验，可以类推到GPU算子上，本文就不深入展开了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-01-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/training/">training</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/2020_02-11_nchw%E4%B8%8Enhwc/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">NCHW与NHWC</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/2020-01-14_%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86/">
+            <span class="next-text nav-default">自动微分</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

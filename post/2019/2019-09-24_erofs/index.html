@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>erofs - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-09-24_erofs/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="erofs" />
+<meta property="og:description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-09-24_erofs/" />
+<meta property="article:published_time" content="2019-09-24T10:21:20+08:00" />
+<meta property="article:modified_time" content="2019-09-24T10:21:20+08:00" />
+<meta itemprop="name" content="erofs">
+<meta itemprop="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能">
+<meta itemprop="datePublished" content="2019-09-24T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-24T10:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="1366">
+
+
+
+<meta itemprop="keywords" content="file system," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="erofs"/>
+<meta name="twitter:description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">erofs</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-24 </span>
+        <div class="post-category">
+            <a href="/categories/android/"> Android </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#erofs">erofs</a></li>
+    <li><a href="#编译参数">编译参数</a></li>
+    <li><a href="#overlay">overlay</a></li>
+    <li><a href="#分区格式判断">分区格式判断</a></li>
+    <li><a href="#手工mount">手工mount</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="erofs">erofs</h2>
+<p>erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。</p>
+<p>性能测试见下表，Kirin970 (A73 Big-core 2361Mhz, A53 little-core 0Mhz, DDR 1866Mhz)</p>
+<table>
+<thead>
+<tr>
+<th>compression</th>
+<th>EROFS seq read</th>
+<th>EXT4 seq read</th>
+<th>EROFS random read</th>
+<th>EXT4 random read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ratio</td>
+<td>bw[MB/s]</td>
+<td>bw[MB/s]</td>
+<td>bw[MB/s] (20%)</td>
+<td>bw[MB/s] (20%)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>546.7</td>
+<td>544.3</td>
+<td>157.7</td>
+<td>57.9</td>
+</tr>
+<tr>
+<td>10</td>
+<td>535.7</td>
+<td>521.0</td>
+<td>152.7</td>
+<td>62.0</td>
+</tr>
+<tr>
+<td>15</td>
+<td>529.0</td>
+<td>520.3</td>
+<td>125.0</td>
+<td>65.0</td>
+</tr>
+<tr>
+<td>26</td>
+<td>418.0</td>
+<td>526.3</td>
+<td>97.6</td>
+<td>63.7</td>
+</tr>
+<tr>
+<td>35</td>
+<td>367.7</td>
+<td>511.7</td>
+<td>89.0</td>
+<td>63.7</td>
+</tr>
+<tr>
+<td>48</td>
+<td>415.7</td>
+<td>500.7</td>
+<td>78.2</td>
+<td>61.2</td>
+</tr>
+<tr>
+<td>53</td>
+<td>423.0</td>
+<td>566.7</td>
+<td>72.8</td>
+<td>62.9</td>
+</tr>
+<tr>
+<td>66</td>
+<td>334.3</td>
+<td>537.3</td>
+<td>69.8</td>
+<td>58.3</td>
+</tr>
+<tr>
+<td>76</td>
+<td>387.3</td>
+<td>546.0</td>
+<td>65.2</td>
+<td>56.0</td>
+</tr>
+<tr>
+<td>85</td>
+<td>306.3</td>
+<td>546.0</td>
+<td>63.8</td>
+<td>57.7</td>
+</tr>
+<tr>
+<td>94</td>
+<td>345.0</td>
+<td>589.7</td>
+<td>59.2</td>
+<td>49.9</td>
+</tr>
+<tr>
+<td>100</td>
+<td>579.7</td>
+<td>556.7</td>
+<td>62.1</td>
+<td>57.7</td>
+</tr>
+</tbody>
+</table>
+<p>测试结果上看低压缩比的下性能比传统EXT4要好近3倍，高压缩比的情况下性能也与EXT4相当</p>
+<h2 id="编译参数">编译参数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">subproduct=EROFS export_para=UPDATE_PRODUCT_EROFS:true export_para=SYSTEMIMAGE_FS_TYPE:erofs
+</code></pre></td></tr></table>
+</div>
+</div><p>特别注意：preload功能也需要打开，否则mount会卡在preload处，后续的一些分区无法自动mount上来。</p>
+<h2 id="overlay">overlay</h2>
+<p>只读分区用于发布系统无可厚非，但在调试阶段将极大地降低调试效率，为解决这个问题，引入了overlay机制。例如，vendor分区会有对应的overlay分区，那个分区负责保存可写的内容。目前，root包会打开overlay机制方便调试。</p>
+<p><img src="http://hi3ms-image.huawei.com/hi/showimage-1430144789-68345-7e1e2a5be0cab7f8895c9b3df030eb34.jpg" alt="overlay"></p>
+<p>/system是由/system_lower和/x目录拼起来的, 其中/x目录在上层, /system_lower在下层。往/system的写操作会在/x目录中生效, /x有多大, 就能往/system目录写多大。</p>
+<p>x分区的选择:</p>
+<ol>
+<li>
+<p>system分区由于有system-as-root方案，x分区是用cache分区作为x分区的，所以cache分区的大小限制了可以往system分区push多大的文件</p>
+</li>
+<li>
+<p>除system分区外，其他分区的 x分区采用分区中除了erofs文件系统和verifyboot数据的内容, 映射成一个device-mapper设备</p>
+</li>
+</ol>
+<h2 id="分区格式判断">分区格式判断</h2>
+<ol>
+<li>simg2img转换镜像</li>
+<li>使用下面脚本检测magic</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash -
+</span><span class="cp"></span><span class="c1">#===============================================================================</span>
+#
+<span class="c1">#          FILE: get_erofs.sh</span>
+#
+<span class="c1">#         USAGE: ./get_erofs.sh</span>
+#
+<span class="c1">#   DESCRIPTION:</span>
+#
+<span class="c1">#       OPTIONS: ---</span>
+<span class="c1">#  REQUIREMENTS: ---</span>
+<span class="c1">#          BUGS: ---</span>
+<span class="c1">#         NOTES: ---</span>
+<span class="c1">#        AUTHOR: YOUR NAME (),</span>
+<span class="c1">#  ORGANIZATION:</span>
+<span class="c1">#       CREATED: 03/01/2019 10:35:26 AM</span>
+<span class="c1">#      REVISION:  ---</span>
+<span class="c1">#===============================================================================</span>
+
+<span class="nb">set</span> -o nounset                                  <span class="c1"># Treat unset variables as an error</span>
+
+<span class="nv">RET_IS_UNKNOWN</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">RET_IS_DIR</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">RET_IS_SPARSE</span><span class="o">=</span><span class="m">2</span>
+<span class="nv">RET_IS_EXT4</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">RET_IS_GZIP</span><span class="o">=</span><span class="m">4</span>
+<span class="nv">VERSION</span><span class="o">=</span>1.20190307.0
+
+usage<span class="o">(){</span>
+	<span class="nb">echo</span> <span class="s2">&#34;check_file_type.sh version:</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;usage&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	check_file_type.sh &lt;image&gt;&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;notes:&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	1. xxd V1.10 27oct98 by Juergen Weigert is depend&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	   Current xxd is: &#34;</span>	
+	<span class="nb">echo</span> -n <span class="s2">&#34;	   &#34;</span>
+	xxd --version
+	<span class="nb">echo</span> <span class="s2">&#34;	2.simg2img is depend&#34;</span>
+	<span class="nb">exit</span> <span class="m">1</span>
+<span class="o">}</span>
+
+checkcmd<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -n <span class="s2">&#34;check cmd : </span><span class="nv">$1</span><span class="s2"> &#34;</span>
+    <span class="k">if</span> <span class="nb">hash</span> <span class="nv">$1</span> &gt; /dev/null 2&gt;<span class="p">&amp;</span>1<span class="p">;</span> <span class="k">then</span>
+    	<span class="nb">echo</span> <span class="s2">&#34;found&#34;</span>
+        <span class="k">return</span> <span class="m">0</span>
+    <span class="k">else</span>
+        pr_red <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> not found&#34;</span>
+        usage
+        <span class="nb">exit</span> <span class="m">1</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+check_file_type<span class="o">(){</span>
+    <span class="nb">local</span> <span class="nv">src</span><span class="o">=</span><span class="nv">$1</span>
+
+    <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$1</span><span class="s2">&#34;</span>
+    <span class="k">if</span> <span class="o">[</span> -d <span class="nv">$src</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;</span><span class="nv">$src</span><span class="s2"> is dir ret=</span><span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1"># &#34;dir&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep sparse &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is sparse img ret=</span><span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;sparse&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep ext4 &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is ext4 img ret=</span><span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;raw ext4&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep gzip &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is gizp img ret=</span><span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;gzip&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span>
+    <span class="k">fi</span>
+    <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span>
+<span class="o">}</span>
+
+is_erofs_img<span class="o">(){</span>
+	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
+
+	<span class="nb">echo</span> <span class="s2">&#34;check img: </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2">&#34;</span>
+	<span class="c1">#xxd should be xxd V1.10 27oct98 by Juergen Weigert</span>
+	<span class="nv">magic_erofs</span><span class="o">=</span><span class="k">$(</span>xxd -s +1024 -l4 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
+	<span class="nv">magic_ext4</span><span class="o">=</span><span class="k">$(</span>xxd -s +1080 -l2 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
+
+	<span class="k">if</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span> <span class="o">==</span> e2e1f5e0
+	<span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EROFS&#34;</span>
+		<span class="k">return</span> <span class="m">0</span>
+	<span class="k">elif</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span> <span class="o">==</span> 53ef
+	<span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EXT4&#34;</span>
+		<span class="k">return</span> <span class="m">0</span>
+	<span class="k">else</span>
+		<span class="nb">echo</span> <span class="s2">&#34;magic_erofs: </span><span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span><span class="s2">&#34;</span>
+		<span class="nb">echo</span> <span class="s2">&#34;magic_ext4 : </span><span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span><span class="s2">&#34;</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is unknow, NOT EROFS or EXT4 !!&#34;</span>
+		<span class="k">return</span> <span class="m">1</span>
+	<span class="k">fi</span>
+<span class="o">}</span>
+
+main<span class="o">()</span> <span class="o">{</span>
+	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
+	<span class="nv">filename_raw</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>_raw
+	check_file_type <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+	<span class="nv">file_type</span><span class="o">=</span><span class="nv">$?</span>
+
+	<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+		<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+			<span class="nb">exit</span> <span class="m">1</span>
+		<span class="k">fi</span>
+
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a dir, ERROR !!&#34;</span>
+		<span class="nb">exit</span> <span class="m">1</span>
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a EXT4!!&#34;</span>
+		<span class="nb">exit</span> <span class="m">1</span>
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		<span class="c1">#rm -f ${filename_raw}</span>
+
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nv">tempdir</span><span class="o">=</span>.erofs_temp
+		<span class="nv">filename_zip</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.zip
+		mkdir <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
+		cp <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
+		<span class="nb">cd</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
+		gunzip <span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
+		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		<span class="nb">cd</span> ..
+		<span class="c1">#rm -rf ${tempdir}</span>
+		<span class="nb">exit</span> <span class="m">0</span>
+	<span class="k">else</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is unknown file type !!&#34;</span>
+		<span class="nb">exit</span> <span class="m">1</span>
+	<span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> !<span class="o">=</span> <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+	usage
+<span class="k">fi</span>
+
+checkcmd simg2img
+
+<span class="k">if</span> <span class="o">[</span> ! -e <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+	<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is NOT exist !!!&#34;</span>
+	usage
+	<span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+main <span class="nv">$1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="手工mount">手工mount</h2>
+<ol>
+<li>使用make命令编译生成 erofs.ko文件</li>
+<li>执行  sudo insmod erofs.ko</li>
+<li>使用 工具 simg2img 将sparse格式转化为unsparse格式</li>
+<li>挂载镜像，命令 mount -t erofs something somewhere -o loop</li>
+</ol>
+<blockquote>
+<p><a href="http://hi3ms-image.huawei.com/hi/3msimage/download-1434827189-58807-7a43faf792dfa3861b75b87cab4b1d45.bin?type=group_wiki">http://hi3ms-image.huawei.com/hi/3msimage/download-1434827189-58807-7a43faf792dfa3861b75b87cab4b1d45.bin?type=group_wiki</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/file-system/">file system</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/2019-10-21_synology-mailplus-server/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">基于群晖的mailplus邮件服务器</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2019/2019-09-07_clover-customize-boot-icon/">
+            <span class="next-text nav-default">clover自定义启动图标</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
