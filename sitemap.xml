@@ -2,21 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://carter2005.github.io/</loc>
-    <lastmod>2020-06-09T10:21:20+08:00</lastmod>
+    <loc>https://carter2005.github.io/categories/android/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2020-06-09T10:21:20+08:00</lastmod>
+    <loc>https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/categories/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/tags/makefile/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://carter2005.github.io/post/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/tags/</loc>
+    <lastmod>2020-07-01T15:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2020-06-09T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -44,21 +79,7 @@
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/categories/</loc>
-    <lastmod>2020-04-16T10:21:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://carter2005.github.io/categories/linux/</loc>
-    <lastmod>2020-04-16T10:21:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://carter2005.github.io/tags/</loc>
     <lastmod>2020-04-16T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -235,13 +256,6 @@
   <url>
     <loc>https://carter2005.github.io/post/2019/2019-10-21_synology-mailplus-server/</loc>
     <lastmod>2019-10-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://carter2005.github.io/categories/android/</loc>
-    <lastmod>2019-09-24T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

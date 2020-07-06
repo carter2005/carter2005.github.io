@@ -6,10 +6,19 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Jun 2020 10:21:20 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 15:21:20 +0800</lastBuildDate>
     
 	<atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android.bp条件编译</title>
+      <link>https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Wed, 01 Jul 2020 15:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/</guid>
+      <description>Android的makefile越来越多的开始使用Android .bp，它的好处是编译速度快，计算依赖比Android.mk快速的多。 但是，</description>
+    </item>
     
     <item>
       <title>git多仓库管理</title>
