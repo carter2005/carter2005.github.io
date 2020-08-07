@@ -6,10 +6,19 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 01 Jul 2020 15:21:20 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TLS</title>
+      <link>https://carter2005.github.io/post/2020/2020-08-07_tls/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-08-07_tls/</guid>
+      <description>TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati</description>
+    </item>
     
     <item>
       <title>Android.bp条件编译</title>

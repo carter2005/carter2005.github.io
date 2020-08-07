@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.73.0 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/" />
@@ -45,9 +45,10 @@
 <meta property="og:description" content="carter&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://carter2005.github.io/" />
-<meta property="og:updated_time" content="2020-07-01T15:21:20+08:00" />
+<meta property="og:updated_time" content="2020-08-07T00:00:00+00:00" />
 <meta itemprop="name" content="carter&#39;s blog">
-<meta itemprop="description" content="carter&#39;s blog"><meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="carter&#39;s blog">
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="carter&#39;s blog"/>
 <meta name="twitter:description" content="carter&#39;s blog"/>
 
@@ -112,6 +113,25 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-06-18_html-width-height-detect/">网页宽高测试</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-06-18 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      源码如下 &lt;!doctype html&gt; p.innerHTML = o.toString ? o.toString() : o; el.appendChild(p); } function outputData() { var el = document.getElementById('log'); el.innerHTML = ''; log('screen.width: ' + screen.width); log('screen.height: ' + screen.height); log('window.outerWidth: ' + window.outerWidth); log('window.outerHeight: ' + window.outerHeight); log('window.innerWidth: ' + window.innerWidth); log('window.innerHeight: ' + window.innerHeight); log('document.documentElement.clientWidth: ' + document.documentElement.clientWidth); log('document.documentElement.clientHeight: ' + document.documentElement.clientHeight); var box = document.getElementById('box'); log('div#box width: ' + box.offsetWidth); log('window.devicePixelRatio: ' + window.devicePixelRatio);
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/2019-06-18_html-width-height-detect/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2019/2019-05-20_bluetooth-file-transfer/">蓝牙文件传输防止重入的方法</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-05-28 </span>
@@ -144,25 +164,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2019/2019-05-23_ethernet-cable/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-05-07_bluetooth-name-setup/">蓝牙名称设置</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-05-07 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-05-07_bluetooth-name-setup/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
