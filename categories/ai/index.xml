@@ -6,10 +6,19 @@
     <description>Recent content in AI on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 01 Apr 2020 10:21:20 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2020 10:00:20 +0800</lastBuildDate>
     
 	<atom:link href="https://carter2005.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AI加速卡</title>
+      <link>https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/</link>
+      <pubDate>Thu, 20 Aug 2020 10:00:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/</guid>
+      <description>广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。 分类 按照任务划分，AI芯片可以分为训练</description>
+    </item>
     
     <item>
       <title>neurala简介</title>

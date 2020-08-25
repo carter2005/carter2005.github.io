@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AI加速卡 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。 分类 按照任务划分，AI芯片可以分为训练" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="AI加速卡" />
+<meta property="og:description" content="广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。 分类 按照任务划分，AI芯片可以分为训练" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/" />
+<meta property="article:published_time" content="2020-08-20T10:00:20+08:00" />
+<meta property="article:modified_time" content="2020-08-20T10:00:20+08:00" />
+<meta itemprop="name" content="AI加速卡">
+<meta itemprop="description" content="广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。 分类 按照任务划分，AI芯片可以分为训练">
+<meta itemprop="datePublished" content="2020-08-20T10:00:20+08:00" />
+<meta itemprop="dateModified" content="2020-08-20T10:00:20+08:00" />
+<meta itemprop="wordCount" content="1218">
+
+
+
+<meta itemprop="keywords" content="research," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AI加速卡"/>
+<meta name="twitter:description" content="广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。 分类 按照任务划分，AI芯片可以分为训练"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">AI加速卡</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-20 </span>
+        <div class="post-category">
+            <a href="/categories/ai/"> AI </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#分类">分类</a></li>
+    <li><a href="#硬件方案">硬件方案</a></li>
+    <li><a href="#软件框架">软件框架</a>
+      <ul>
+        <li><a href="#寒武纪---cambricon-neuware">寒武纪 - Cambricon NeuWare</a></li>
+        <li><a href="#燧原-topsrider">燧原 TopsRider</a></li>
+        <li><a href="#amd-rocm">AMD ROCm</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>广义上来讲，包括像GPU、FPGA以及 ASIC（专用芯片）这些提供AI算力的芯片都可以称之为AI芯片。</p>
+<h2 id="分类">分类</h2>
+<p>按照任务划分，AI芯片可以分为训练芯片和推理芯片；</p>
+<table>
+<thead>
+<tr>
+<th>任务类别</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练芯片</td>
+<td>对算力、精度和通用性要求较高，一般部署在云端，多采用“CPU+加速芯片”这类异构计算模式</td>
+</tr>
+<tr>
+<td>推理芯片</td>
+<td>更加注重综合性能，更考虑算力耗能、延时、成本等因素，在云端和边终端都可以部署</td>
+</tr>
+</tbody>
+</table>
+<p>按部署位置划分，可以分为<a href="http://www.ceconline.com/SCHART/%D4%C6%B6%CB.HTM"><strong>云端</strong></a>芯片、边缘侧和终端芯片。</p>
+<table>
+<thead>
+<tr>
+<th>部署位置</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>云端芯片</td>
+<td>部署在公有云、私有云和混合云等大型数据中心，能满足海量数据处理和大规模计算，可通过多处理器并行完成各类AI算法的计算和传输，具有通用性</td>
+</tr>
+<tr>
+<td>边缘/终端侧芯片</td>
+<td>要求体积小、能耗少、性能略低，主要用于摄像头、手机、边缘服务器等终端设备中，满足有限的AI能力</td>
+</tr>
+</tbody>
+</table>
+<h2 id="硬件方案">硬件方案</h2>
+<table>
+<thead>
+<tr>
+<th>厂商</th>
+<th>类型</th>
+<th>性能</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nvidia</td>
+<td>GPU+ASIC</td>
+<td></td>
+<td>AI算法训练的主要芯片配置是GPU+ASIC，全球主流的云端硬件平台都在使用英伟达的GPU 进行加速。而在推理服务上，主要还是采用CPU+GPU的方式进行异构计算，这得益于GPU强大的并行计算能力、通用性以及成熟的开发环境，但GPU的高能耗和昂贵成本，也成为众多云厂商的心中隐痛</td>
+</tr>
+<tr>
+<td>google</td>
+<td>tpu</td>
+<td></td>
+<td>TPU與同期的CPU和GPU相比，可以提供15-30倍的性能提升，以及30-80倍的效率（性能/瓦特）提升。</td>
+</tr>
+<tr>
+<td>高通</td>
+<td>Cloud AI 100</td>
+<td>350TOPS</td>
+<td>每瓦特性能提升10倍</td>
+</tr>
+<tr>
+<td>amazon</td>
+<td>AWS Inferentia</td>
+<td>128TOPS</td>
+<td>在AI推理实例inf1可搭载16个Inferentia芯片，提供最高2000TOPS算力</td>
+</tr>
+<tr>
+<td>阿里巴巴</td>
+<td>含光800</td>
+<td></td>
+<td>主要用于和电商业务相关的云端视觉场景，在RESNET50基准测试中获得单芯片性能第一的成绩。</td>
+</tr>
+<tr>
+<td>华为</td>
+<td>Atlas900</td>
+<td>256-1024PFLOPS@F16</td>
+<td>集成了数千颗昇腾910芯片，相当于50万台PC计算能力的强劲算力</td>
+</tr>
+<tr>
+<td>燧原科技</td>
+<td>云燧T10</td>
+<td>20TFLOPS</td>
+<td>可以为大中小型数据中心提供了单节点、单机柜、集群三种模</td>
+</tr>
+<tr>
+<td>寒武纪</td>
+<td>思元290</td>
+<td></td>
+<td>理论峰值性能与华为昇腾 910 相当</td>
+</tr>
+<tr>
+<td>intel</td>
+<td>Nervana AI 芯片</td>
+<td></td>
+<td>都是专为云端环境特制的 ASIC 芯片，可以「几乎线性地」并接多个芯片，加速 AI 模型的开发。</td>
+</tr>
+<tr>
+<td>amd</td>
+<td>Instinct mi 50</td>
+<td>13.3TFLOPS</td>
+<td>支持ROCm开放平台</td>
+</tr>
+<tr>
+<td>赛灵思</td>
+<td>versal ACAP芯片</td>
+<td></td>
+<td>Versal作为业界首款自适应计算加速平台，它的性能远远超过传统的中央处理器（CPU）、图像处理器（GPU）和现场可编程门阵列（FPGA）</td>
+</tr>
+<tr>
+<td></td>
+<td>训练芯片“昆仑818-300”、推理芯片“昆仑818-100”</td>
+<td>在150瓦的功率下能实现260 TOPS的处理能力</td>
+<td>百度第一次发布XPU是在2017年加州Hot Chips大会上，这是一款256核、基于FPGA的云计算加速芯片，合作伙伴是赛思灵（Xilinx）。2018年7月4日，百度AI开发者大会上，“昆仑”首次面世</td>
+</tr>
+</tbody>
+</table>
+<h2 id="软件框架">软件框架</h2>
+<h3 id="寒武纪---cambricon-neuware">寒武纪 - Cambricon NeuWare</h3>
+<p><img src="https://pic1.zhimg.com/80/v2-8708f650676c9e26bea4478817cf1360_720w.jpg" alt="img"></p>
+<p>在 Cambricon NeuWare 的支持下，开发者可实现跨云、边、端硬件平台的 AI 应用开发，以 “一处开发、处处运行” 的模式，大幅提升 AI 应用在不同硬件平台的开发效率和部署速度，同时也使云、边、端异构硬件资源的统一管理、调度和协同计算成为可能。</p>
+<h3 id="燧原-topsrider">燧原 TopsRider</h3>
+<p><img src="https://site-static.enflame-tech.com/enflame_back/public/uploads/c_video_img/images/product/product_4.png" alt="img"></p>
+<h3 id="amd-rocm">AMD ROCm</h3>
+<p><img src="https://rocmdocs.amd.com/en/latest/_images/ROCmComp.png" alt="ROCm框架"></p>
+<p><img src="https://rocmdocs.amd.com/en/latest/_images/ROCm_Stack.png" alt="runtime"></p>
+<p>Important features include the following:</p>
+<ul>
+<li>Multi-GPU coarse-grain shared virtual memory</li>
+<li>Process concurrency and preemption</li>
+<li>Large memory allocations</li>
+<li>HSA signals and atomics</li>
+<li>User-mode queues and DMA</li>
+<li>Standardized loader and code-object format</li>
+<li>Dynamic and offline-compilation support</li>
+<li>Peer-to-peer multi-GPU operation with RDMA support</li>
+<li>Profiler trace and event-collection API</li>
+<li>Systems-management API and tools</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/research/">research</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/2020-08-07_tls/">
+            <span class="next-text nav-default">TLS</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
