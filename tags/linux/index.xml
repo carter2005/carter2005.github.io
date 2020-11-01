@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on carter&#39;s blog</title>
-    <link>https://carter2005.github.io/categories/linux/</link>
-    <description>Recent content in Linux on carter&#39;s blog</description>
+    <title>linux on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/tags/linux/</link>
+    <description>Recent content in linux on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Nov 2020 10:21:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 10:21:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Armbian 20.10</title>
       <link>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</link>
@@ -14,15 +14,6 @@
       
       <guid>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</guid>
       <description>1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为</description>
-    </item>
-    
-    <item>
-      <title>tmpfs</title>
-      <link>https://carter2005.github.io/post/2020/2020-04-16_tmpfs/</link>
-      <pubDate>Thu, 16 Apr 2020 10:21:20 +0800</pubDate>
-      
-      <guid>https://carter2005.github.io/post/2020/2020-04-16_tmpfs/</guid>
-      <description>背景 tmpfs是一种基于内存的文件系统，具有速度快，使用简单，大小可调整等优点，在linux，android中获得了广泛的应用。 Linux使</description>
     </item>
     
   </channel>

@@ -6,7 +6,16 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 20 Aug 2020 10:00:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 10:21:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Armbian 20.10</title>
+      <link>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</link>
+      <pubDate>Sun, 01 Nov 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</guid>
+      <description>1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为</description>
+    </item>
+    
     <item>
       <title>AI加速卡</title>
       <link>https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/</link>

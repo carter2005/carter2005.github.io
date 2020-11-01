@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>carter&#39;s blog</title>
+  <title>Armbian 20.10 - carter&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="carter2005" /><meta name="description" content="carter&#39;s blog" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="carter2005" /><meta name="description" content="1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
-<link rel="canonical" href="https://carter2005.github.io/" />
-  <link href="https://carter2005.github.io/index.xml" rel="alternate" type="application/rss+xml" title="carter&#39;s blog" />
-  <link href="https://carter2005.github.io/index.xml" rel="feed" type="application/rss+xml" title="carter&#39;s blog" />
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,16 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="carter&#39;s blog" />
-<meta property="og:description" content="carter&#39;s blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://carter2005.github.io/" />
-<meta property="og:updated_time" content="2020-11-01T10:21:20+08:00" />
-<meta itemprop="name" content="carter&#39;s blog">
-<meta itemprop="description" content="carter&#39;s blog">
+<meta property="og:title" content="Armbian 20.10" />
+<meta property="og:description" content="1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/" />
+<meta property="article:published_time" content="2020-11-01T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-11-01T10:21:20+08:00" />
+<meta itemprop="name" content="Armbian 20.10">
+<meta itemprop="description" content="1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为">
+<meta itemprop="datePublished" content="2020-11-01T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2020-11-01T10:21:20+08:00" />
+<meta itemprop="wordCount" content="113">
+
+
+
+<meta itemprop="keywords" content="linux," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="carter&#39;s blog"/>
-<meta name="twitter:description" content="carter&#39;s blog"/>
+<meta name="twitter:title" content="Armbian 20.10"/>
+<meta name="twitter:description" content="1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -110,78 +116,81 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2017/2017-09-21_android-overlay/">android_overlay机制</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-09-21 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      android overlay机制，主要是用来不修改代码从而实现资源替换，主题定制等需求。可定制资源一般为下面几类： 系统设置（字符串，功能开关等） 本地化资
-    </div>
-    <div class="read-more">
-      <a href="/post/2017/2017-09-21_android-overlay/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Armbian 20.10</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2017/2017-09-21_gitbook/">gitbook搭建</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-09-21 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非
-    </div>
-    <div class="read-more">
-      <a href="/post/2017/2017-09-21_gitbook/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-01 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> linux </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2017/2017-09-19_sougou-crash/">Linux下sogou输入法崩溃</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-09-19 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      在Ubuntu14.05上，sogou输入法经常莫名其妙的开机就崩溃了，然后就没法输入中文了。可以通过清理fcitx和sogou的临时文件解
-    </div>
-    <div class="read-more">
-      <a href="/post/2017/2017-09-19_sougou-crash/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <p>1 修改extlinux下面的extlinux.conf</p>
+<p>LABEL Armbian
+LINUX /zImage
+INITRD /uInitrd</p>
+<p>FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb
+APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0</p>
+<p>2 复制U盘根目录u-boot-s905x-s912为u-boot.ext
+3 开机按任意键，输入run usb_boot启动，startx进桌面</p>
 
-    </section>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-11-01
+        
+    </span>
+  </p>
   
-  <nav class="pagination">
-    <a class="prev" href="/page/23/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/25/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/">
+            <span class="next-text nav-default">AI加速卡</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>
