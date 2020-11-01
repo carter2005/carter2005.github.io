@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-08-07_tls/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati">
 <meta itemprop="datePublished" content="2020-08-07T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-08-07T00:00:00+00:00" />
-<meta itemprop="wordCount" content="844">
+<meta itemprop="wordCount" content="843">
 
 
 
@@ -206,16 +206,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">        if (ELF_ST_TYPE(s-&gt;st_info) == STT_TLS) {
-          DL_ERR(&#34;unsupported ELF TLS symbol \&#34;%s\&#34; referenced by \&#34;%s\&#34;&#34;,
-                 sym_name, get_realpath());
-          return false;
-        }
-        if (!relocating_linker) {
-          if (d-&gt;d_tag == DT_TLSDESC_GOT || d-&gt;d_tag == DT_TLSDESC_PLT) {
-           DL_ERR(&#34;unsupported ELF TLS DT entry in \&#34;%s\&#34;&#34;, get_realpath());
-            return false;
-         }
+<pre class="chroma"><code class="language-php" data-lang="php">        <span class="k">if</span> <span class="p">(</span><span class="nx">ELF_ST_TYPE</span><span class="p">(</span><span class="nx">s</span><span class="o">-&gt;</span><span class="na">st_info</span><span class="p">)</span> <span class="o">==</span> <span class="nx">STT_TLS</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">DL_ERR</span><span class="p">(</span><span class="s2">&#34;unsupported ELF TLS symbol </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2"> referenced by </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">,</span>
+                 <span class="nx">sym_name</span><span class="p">,</span> <span class="nx">get_realpath</span><span class="p">());</span>
+          <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">relocating_linker</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="o">-&gt;</span><span class="na">d_tag</span> <span class="o">==</span> <span class="nx">DT_TLSDESC_GOT</span> <span class="o">||</span> <span class="nx">d</span><span class="o">-&gt;</span><span class="na">d_tag</span> <span class="o">==</span> <span class="nx">DT_TLSDESC_PLT</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nx">DL_ERR</span><span class="p">(</span><span class="s2">&#34;unsupported ELF TLS DT entry in </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nx">get_realpath</span><span class="p">());</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+         <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>对于errno处理比较特殊，专门放到了tcb中，相关的代码如下：</p>

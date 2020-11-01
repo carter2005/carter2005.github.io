@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" />
@@ -138,7 +138,7 @@
       <p>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ_RES_EVT时，构造的消息内只存在mac，dev_class，dev_type。</p>
 <p>static void btif_dm_search_devices_evt(uint16_t event, char* p_param) {
 tBTA_DM_SEARCH* p_search_data;
-BTIF_TRACE_EVENT(&quot;%s event=%s&rdquo;, __func__, dump_dm_search_event(event));</p>
+BTIF_TRACE_EVENT(&quot;%s event=%s&quot;, __func__, dump_dm_search_event(event));</p>
 <p>switch (event) {
 case BTA_DM_DISC_RES_EVT: {
 p_search_data = (tBTA_DM_SEARCH*)p_param;

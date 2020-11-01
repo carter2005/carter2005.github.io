@@ -6,11 +6,7 @@
     <description>Recent content in Posts on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 20 Aug 2020 10:00:20 +0800</lastBuildDate>
-    
-	<atom:link href="https://carter2005.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 20 Aug 2020 10:00:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI加速卡</title>
       <link>https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/</link>
@@ -350,7 +346,7 @@
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</guid>
-      <description>java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;</description>
+      <description>java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;</description>
     </item>
     
     <item>
@@ -737,7 +733,7 @@
       <pubDate>Wed, 30 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://carter2005.github.io/post/2017/2017-08-30_property-length/</guid>
-      <description>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;quot;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.</description>
+      <description>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;ldquo;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.</description>
     </item>
     
     <item>

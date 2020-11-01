@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C">
 <meta itemprop="datePublished" content="2019-01-02T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-01-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="12215">
+<meta itemprop="wordCount" content="12208">
 
 
 
@@ -156,7 +156,7 @@
 <p>上节中我们讲到，Git分为porcelain命令和plumbing命令，而porcelain命令是基于plumbing来实现的。为了进一步的理解Git的底层原理，我们将在这一节中详细的探讨Git对象的存储格式以及plumbing命令。如果把Git比作Linux操作系统，那plumbing命令就有点类似于shell命令，而上层的procelain命令便是利用shell命令编写的一系列的系统功能或工具，如你自定义的自动化运维工具等。在接下来的介绍中，我们将试着如何利用plumbing命令，而不是porcelain命令，来完成Git的暂存和提交工作，并利用log查看提交记录。首先，我们从Git的对象介绍开始。</p>
 <p><strong>Git对象</strong></p>
 <p>在之前我们提到过，Git是一套<strong>内容寻址</strong>（content-addressable）文件系统，那么Git是怎么进行寻址呢？其实，寻址无非就是查找，而Git采用HashTable的方式进行查找，也就是说，Git只是通过简单的存储键值对（key-value pair）的方式来实现内容寻址的，而key就是<strong>文件（头+内容）的哈希值</strong>（采用sha-1的方式，40位），value就是<strong>经过压缩后的文件内容</strong>。因此，在接下来的实践中，我们会经常通过40位的hash值来进行plumbing操作，几乎每一个plumbing命令都需要通过key来指定所要操作的对象。</p>
-<p>Git对象的类型包括：<strong>BLOB、tree对象、commit对象</strong>。BLOB对象可以存储几乎所有的文件类型，全称为binary large object，顾名思义，就是大的二进制表示的对象，这种对象类型和数据库中的BLOB类型（经常用来在数据库中存储图片、视频等）是一样的，当作一种数据类型即可；tree对象是用来组织BLOB对象的一种数据类型，你完全可以把它想象成二叉树中的树节点，只不过Git中的树不是二叉树，而是&quot;多叉树&rdquo;；commit对象表示每一次的提交操作，由tree对象衍生，每一个commit对象表示一次提交，在创建的过程中可以指定该commit对象的父节点，这样所有的commit操作便可以连接在一起，而这些commit对象便组成了提交树，branch只不过是这个树中的某一个子树罢了。如果你能理解commit树，那Git几乎就已经理解了一半了。</p>
+<p>Git对象的类型包括：<strong>BLOB、tree对象、commit对象</strong>。BLOB对象可以存储几乎所有的文件类型，全称为binary large object，顾名思义，就是大的二进制表示的对象，这种对象类型和数据库中的BLOB类型（经常用来在数据库中存储图片、视频等）是一样的，当作一种数据类型即可；tree对象是用来组织BLOB对象的一种数据类型，你完全可以把它想象成二叉树中的树节点，只不过Git中的树不是二叉树，而是&quot;多叉树&quot;；commit对象表示每一次的提交操作，由tree对象衍生，每一个commit对象表示一次提交，在创建的过程中可以指定该commit对象的父节点，这样所有的commit操作便可以连接在一起，而这些commit对象便组成了提交树，branch只不过是这个树中的某一个子树罢了。如果你能理解commit树，那Git几乎就已经理解了一半了。</p>
 <p>Git对象的存储方式也很简单，基本可以用如下表达式来表示：</p>
 <p>Key = sha1(file_header + file_content)</p>
 <p>Value = zlib(file_content)</p>
@@ -221,7 +221,7 @@
 <p>图5 Git的基本工作流程图</p>
 <p><strong>Git log</strong></p>
 <p>在提交了若干更新之后，又或者克隆了某个项目，想回顾下提交历史，可以使用 git log 命令查看。默认不用任何参数的话，git log会按提交时间列出所有的更新，最近的更新排在最上面。一般情况下，我会使用如下命令来打印log中的提交日志记录：</p>
-<p>git log &ndash;pretty=format:&quot;%h %s&rdquo; &ndash;graph</p>
+<p>git log &ndash;pretty=format:&quot;%h %s&quot; &ndash;graph</p>
 <p>其中。&ndash;pretty选项指定打印的格式，%h表示列出每个提交对象的短的sha1值（40位中的前6位）；&ndash;graph选项表示使用图的方式来打印日志记录。打印的结果如下图所示：</p>
 <p><img src="http://p3.pstatp.com/large/pgc-image/2ae2ef17feb042818d33a4ec585b6f7e" alt="深入理解git原理"></p>
 <p>也可以使用Git的GUI来显示Git的提交历史，在仓库中右键选择Git GUI，然后选择菜单栏上的 repository&ndash;&gt;visual all branch history 选项，即可以显示所有分支的提交记录。如下图所示：</p>
@@ -231,7 +231,7 @@
 <p><img src="http://p1.pstatp.com/large/pgc-image/351cd0ff19b5446e804fd4023a0cf423" alt="深入理解git原理"></p>
 <p>Forking工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能push代码到仅有的中央仓库中。 开发者push到自己的服务端仓库，而只有项目维护者才能push到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。</p>
 <p><strong>Git rebase</strong></p>
-<p>把一个分支中的修改整合到另一个分支的办法有两种，第一种是我们常用的git merge操作，而第二种便是本节要讲的rebase（中文翻译为衍合）。该命令的原理是，回到两个分支最近的共同祖先，根据当前分支（也就是要进行衍合的分支experiment）后续的历次提交对象（这里只有一个 C3），生成一系列文件补丁，然后以基底分支（也就是主干分支master）最后一个提交对象（C4）为新的出发点，逐个应用之前准备好的补丁文件，最后会生成一个新的合并提交对象（C3&rsquo;），从而改写 experiment 的提交历史，使它成为 master 分支的直接下游。如下图所示：</p>
+<p>把一个分支中的修改整合到另一个分支的办法有两种，第一种是我们常用的git merge操作，而第二种便是本节要讲的rebase（中文翻译为衍合）。该命令的原理是，回到两个分支最近的共同祖先，根据当前分支（也就是要进行衍合的分支experiment）后续的历次提交对象（这里只有一个 C3），生成一系列文件补丁，然后以基底分支（也就是主干分支master）最后一个提交对象（C4）为新的出发点，逐个应用之前准备好的补丁文件，最后会生成一个新的合并提交对象（C3'），从而改写 experiment 的提交历史，使它成为 master 分支的直接下游。如下图所示：</p>
 <p><img src="http://p1.pstatp.com/large/pgc-image/75a0dfc9f6724992b475c7f9a596deca" alt="深入理解git原理"></p>
 <p>一般我们使用rebase的目的，是想要得到一个能在远程分支上干净应用的补丁，比如某些项目你不是维护者，但想帮点忙的话，最好用rebase：先在自己的一个分支里进行开发，当准备向主项目提交补丁的时候，根据最新的 origin/master 进行一次衍合操作然后再提交，这样维护者就不需要做任何整合工作（实际上是<strong>把解决分支补丁同最新主干代码之间冲突的责任，化转为由提交补丁的人来解决</strong>），只需根据你提供的仓库地址作一次快进合并，或者直接采纳你提交的补丁。</p>
 <p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用git add命令去更新这些内容的索引， 然后，你无需执行git-commit，只要执行git rebase –continue，这样git会继续应用(apply)余下的补丁。如果要舍弃本次衍合，只需要git rebase &ndash;abort即可。切记，<strong>一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行rebase操作</strong>。</p>

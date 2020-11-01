@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-11-20_proxmox/" />
@@ -147,7 +147,7 @@
 </div>
     <div class="post-content">
       <h3 id="去掉订阅提示">去掉订阅提示</h3>
-<p>/usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索data.status!='Active&rsquo;，然后修改为false</p>
+<p>/usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索data.status!=&lsquo;Active&rsquo;，然后修改为false</p>
 <p>sed -i &ldquo;s/data.status !== &lsquo;Active&rsquo;/false/&rdquo; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js</p>
 <h3 id="更新">更新</h3>
 <p>rm -f /etc/apt/sources.list.d/pve-enterprise.list
@@ -157,7 +157,7 @@ apt update
 apt-get install vim</p>
 <p> </p>
 <h3 id="e1000e网卡">e1000e网卡</h3>
-<p>打开/usr/share/perl5/PVE/QemuServer.pm，添加&rsquo;e1000e&rsquo;
+<p>打开/usr/share/perl5/PVE/QemuServer.pm，添加&rsquo;e1000e'
 找到my $nic_model_list = [&lsquo;rtl8139&rsquo;, &lsquo;ne2k_pci&rsquo;, &lsquo;e1000&rsquo;, &lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&lsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&lsquo;e1000-82540em&rsquo;, &lsquo;e1000-82544gc&rsquo;, &lsquo;e1000-82545em&rsquo;];
 修改为my $nic_model_list = [&lsquo;rtl8139&rsquo;, &lsquo;ne2k_pci&rsquo;, &lsquo;e1000&rsquo;, &lsquo;e1000e&rsquo;,&lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&lsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&lsquo;e1000-82540em&rsquo;, &lsquo;e1000-82544gc&rsquo;, &lsquo;e1000-82545em&rsquo;];</p>
 <p>打开/usr/share/pve-manager/js/pvemanagerlib.js，添加|e1000e|

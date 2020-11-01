@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-05-20_bluetooth-file-transfer/" />
@@ -185,11 +185,11 @@ Log.d(mTag, &ldquo;AcceptThread ended for: &quot; + mServerSocket);
 }</p>
 <p>public boolean BluetoothOppService::onConnect(BluetoothDevice device, BluetoothSocket socket) {</p>
 <p>if (D) {
-Log.d(TAG, &quot; onConnect BluetoothSocket :&rdquo; + socket + &quot; \n :device :&rdquo; + device);
+Log.d(TAG, &quot; onConnect BluetoothSocket :&rdquo; + socket + &quot; \n :device :&quot; + device);
 }
 // 有传输后拒绝新的连接请求
 if (!mAcceptNewConnections) {
-Log.d(TAG, &quot; onConnect BluetoothSocket :&rdquo; + socket + &quot; rejected&rdquo;);
+Log.d(TAG, &quot; onConnect BluetoothSocket :&quot; + socket + &quot; rejected&quot;);
 return false;
 }
 BluetoothObexTransport transport = new BluetoothObexTransport(socket);

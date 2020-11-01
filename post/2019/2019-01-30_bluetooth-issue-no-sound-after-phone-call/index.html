@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" />
@@ -180,7 +180,7 @@ case A2DP_CTRL_CMD_START:
 * while in a call, and respond with BAD_STATE.
 */
 if (!bluetooth::headset::IsCallIdle()) {
-APPL_TRACE_WARNING(&quot;%s: A2DP command %s failed as call state is busy&rdquo;,
+APPL_TRACE_WARNING(&quot;%s: A2DP command %s failed as call state is busy&quot;,
 __func__,
 audio_a2dp_hw_dump_ctrl_event((tA2DP_CTRL_CMD)cmd));
 status = A2DP_CTRL_ACK_INCALL_FAILURE;

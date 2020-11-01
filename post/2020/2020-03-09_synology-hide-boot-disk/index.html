@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.77.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/" />
@@ -144,9 +144,9 @@
 <h1 id="虚拟环境">虚拟环境</h1>
 <p>esxi/proxmox虚拟机环境下，是没办法U盘引导的，都是转换成vmdk磁盘镜像，挂载在第一个sata控制器的0位置（数据盘挂在第二个sata控制器上）引导的，这种情况下，需要修改grub.cfg里面的sata_args参数，并用<strong>最后一项esxi环境启动</strong></p>
 <p>3617：</p>
-<p>set sata_args='sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=0C00 SataPortMap=26 SasIdxMap=1&rsquo;</p>
+<p>set sata_args=&lsquo;sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=0C00 SataPortMap=26 SasIdxMap=1&rsquo;</p>
 <p>918：</p>
-<p>set sata_args='sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=1000 SataPortMap=26 SasIdxMap=1&rsquo;</p>
+<p>set sata_args=&lsquo;sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=1000 SataPortMap=26 SasIdxMap=1&rsquo;</p>
 <p> </p>
 <p>SataPortMap：每个sata控制器的接口数量，对上例3617，第一个控制器2个端口，第二个4个端口</p>
 <p>SasIdxMap：每个sata控制器命名索引，对上例3617，第一个sata控制器为sdb，第二个sda</p>
