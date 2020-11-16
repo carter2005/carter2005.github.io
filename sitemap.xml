@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://carter2005.github.io/categories/kernel/</loc>
+    <lastmod>2020-11-01T10:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://carter2005.github.io/categories/linux/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -38,6 +45,13 @@
   
   <url>
     <loc>https://carter2005.github.io/post/</loc>
+    <lastmod>2020-11-01T10:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.77.0 with theme even" />
+<meta name="generator" content="Hugo 0.78.2 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/" />
@@ -113,6 +113,25 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-05-07_bluetooth-name-setup/">蓝牙名称设置</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-05-07 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/2019-05-07_bluetooth-name-setup/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2019/2019-03-14_nfc-p2p/">NFC p2p模式</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-03-14 </span>
@@ -145,25 +164,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2019/2019-03-14_nfc/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-discovery-no-name/">刷机后蓝牙广播没有名字，只显示MAC地址</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-01-30 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-01-30_bluetooth-discovery-no-name/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

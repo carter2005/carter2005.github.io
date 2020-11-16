@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kernel on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/categories/kernel/</link>
+    <description>Recent content in kernel on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 01 Nov 2020 10:21:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/categories/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>spin_lock</title>
+      <link>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</link>
+      <pubDate>Sun, 01 Nov 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</guid>
+      <description>spin lock是一种死等的锁机制。当发生访问资源冲突的时候，可以有两个选择：一个是死等，一个是挂起当前进程，调度其他进程执行。spin lock是</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -16,5 +16,14 @@
       <description>1 修改extlinux下面的extlinux.conf LABEL Armbian LINUX /zImage INITRD /uInitrd FDT /dtb/amlogic/meson-gxl-s905d-phicomm-n1.dtb APPEND root=LABEL=ROOTFSrootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0no_console_suspend consoleblank=0 fsck.fix=yes fsck.repair=yes net.ifnames=0 2 复制U盘根目录u-boot-s905x-s912为</description>
     </item>
     
+    <item>
+      <title>spin_lock</title>
+      <link>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</link>
+      <pubDate>Sun, 01 Nov 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</guid>
+      <description>spin lock是一种死等的锁机制。当发生访问资源冲突的时候，可以有两个选择：一个是死等，一个是挂起当前进程，调度其他进程执行。spin lock是</description>
+    </item>
+    
   </channel>
 </rss>

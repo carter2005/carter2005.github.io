@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>spin_lock</title>
+      <link>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</link>
+      <pubDate>Sun, 01 Nov 2020 10:21:20 +0800</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-11-1_spin_lock/</guid>
+      <description>spin lock是一种死等的锁机制。当发生访问资源冲突的时候，可以有两个选择：一个是死等，一个是挂起当前进程，调度其他进程执行。spin lock是</description>
+    </item>
+    
+    <item>
       <title>AI加速卡</title>
       <link>https://carter2005.github.io/post/2020/2020-08-20_ai%E5%8A%A0%E9%80%9F%E5%8D%A1/</link>
       <pubDate>Thu, 20 Aug 2020 10:00:20 +0800</pubDate>
