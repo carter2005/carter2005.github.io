@@ -2,14 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</loc>
-    <lastmod>2020-11-01T10:21:20+08:00</lastmod>
+    <loc>https://carter2005.github.io/</loc>
+    <lastmod>2020-11-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/</loc>
+    <loc>https://carter2005.github.io/post/2020/2020-11-21_ioremap/</loc>
+    <lastmod>2020-11-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/</loc>
+    <lastmod>2020-11-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,13 +52,6 @@
   
   <url>
     <loc>https://carter2005.github.io/tags/linux/</loc>
-    <lastmod>2020-11-01T10:21:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://carter2005.github.io/post/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

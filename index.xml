@@ -6,7 +6,16 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Nov 2020 10:21:20 +0800</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ioremap</title>
+      <link>https://carter2005.github.io/post/2020/2020-11-21_ioremap/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2020/2020-11-21_ioremap/</guid>
+      <description>硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地</description>
+    </item>
+    
     <item>
       <title>Armbian 20.10</title>
       <link>https://carter2005.github.io/post/2020/2020-11-01_armbian-20.10/</link>

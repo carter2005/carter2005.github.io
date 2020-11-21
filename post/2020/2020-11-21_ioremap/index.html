@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>carter&#39;s blog</title>
+  <title>ioremap - carter&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="carter2005" /><meta name="description" content="carter&#39;s blog" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="carter2005" /><meta name="description" content="硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.78.2 with theme even" />
 
 
-<link rel="canonical" href="https://carter2005.github.io/" />
-  <link href="https://carter2005.github.io/index.xml" rel="alternate" type="application/rss+xml" title="carter&#39;s blog" />
-  <link href="https://carter2005.github.io/index.xml" rel="feed" type="application/rss+xml" title="carter&#39;s blog" />
+<link rel="canonical" href="https://carter2005.github.io/post/2020/2020-11-21_ioremap/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,16 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="carter&#39;s blog" />
-<meta property="og:description" content="carter&#39;s blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://carter2005.github.io/" />
-<meta property="og:updated_time" content="2020-11-21T00:00:00+00:00" />
-<meta itemprop="name" content="carter&#39;s blog">
-<meta itemprop="description" content="carter&#39;s blog">
+<meta property="og:title" content="ioremap" />
+<meta property="og:description" content="硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-11-21_ioremap/" />
+<meta property="article:published_time" content="2020-11-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-21T00:00:00+00:00" />
+<meta itemprop="name" content="ioremap">
+<meta itemprop="description" content="硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地">
+<meta itemprop="datePublished" content="2020-11-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="248">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="carter&#39;s blog"/>
-<meta name="twitter:description" content="carter&#39;s blog"/>
+<meta name="twitter:title" content="ioremap"/>
+<meta name="twitter:description" content="硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -110,78 +116,84 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-08_github/">github的一小步，微软的一大步</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-01-08 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      长久以来，被微软收购的软件公司结局都不太妙，自从去年收购github以来，市场一直有各种负面猜测，不少人甚至转向了gitlab（好像被goo
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-01-08_github/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ioremap</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-02_understand-git/">深入理解git原理</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-01-02 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-01-02_understand-git/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-21 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2018/2018-12-31_understand-cnn/">如何从信号角度理解卷积神经网络？</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-12-31 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      随着复杂又有效的神经网络架构的涌现，卷积神经网络的表现已经超越了 SIFT 和SURF 等传统的数字图像处理方法。在计算机视觉领域，学术界的研究重点已经
-    </div>
-    <div class="read-more">
-      <a href="/post/2018/2018-12-31_understand-cnn/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <p>硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式：</p>
+<ul>
+<li>IO映射：寄存器被映射到专门的IO地址空间，通过专门的函数来读写</li>
+<li>内存映射：寄存器被映射到虚拟内存空间，cpu可以像访问内存一样操作，更为方便。</li>
+</ul>
+<p>ioremap方式虽然也将寄存器映射到了虚拟的内存空间，但是要特别的注意，<!-- raw HTML omitted -->映射的虚拟地址是不能cpu直接访问的，得通过专门的函数访问<!-- raw HTML omitted -->（x86似乎直接访问也没问题，但在arm上，memset之类的函数是汇编优化实现的，会导致crash）。</p>
+<ul>
+<li>readb/writeb</li>
+<li>readw/writew</li>
+<li>readl/writel</li>
+<li>readq/writeq</li>
+<li>memcpy_fromio</li>
+<li>memcpy_toio</li>
+<li>memset_io</li>
+</ul>
 
-    </section>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-11-21
+        
+    </span>
+  </p>
   
-  <nav class="pagination">
-    <a class="prev" href="/page/16/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/18/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/2020-11-01_armbian-20.10/">
+            <span class="next-text nav-default">Armbian 20.10</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>
