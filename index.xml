@@ -13,7 +13,7 @@
       <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://carter2005.github.io/post/2020/2020-11-21_ioremap/</guid>
-      <description>硬件寄存器包括控制寄存器、状态寄存器、数据寄存器几类，它们通常是连续编址的，cpu访问寄存器有2种方式： IO映射：寄存器被映射到专门的IO地</description>
+      <description>硬件一般是通过寄存器，片上内存对外提供服务的，kernel根据PCIE设备config space来初始化设备。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15</description>
     </item>
     
     <item>
