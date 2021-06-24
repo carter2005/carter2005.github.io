@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.79.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" />
@@ -42,19 +42,15 @@
 <meta property="og:title" content="如何做CPU算子分析" />
 <meta property="og:description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" />
-<meta property="article:published_time" content="2020-01-17T10:21:20+08:00" />
-<meta property="article:modified_time" content="2020-01-17T10:21:20+08:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-17_%E5%A6%82%E4%BD%95%E5%81%9Acpu%E7%AE%97%E5%AD%90%E5%88%86%E6%9E%90/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-01-17T10:21:20&#43;08:00" />
+<meta property="article:modified_time" content="2020-01-17T10:21:20&#43;08:00" />
+
 <meta itemprop="name" content="如何做CPU算子分析">
-<meta itemprop="description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art">
-<meta itemprop="datePublished" content="2020-01-17T10:21:20+08:00" />
-<meta itemprop="dateModified" content="2020-01-17T10:21:20+08:00" />
+<meta itemprop="description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art"><meta itemprop="datePublished" content="2020-01-17T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-17T10:21:20&#43;08:00" />
 <meta itemprop="wordCount" content="10493">
-
-
-
-<meta itemprop="keywords" content="training," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何做CPU算子分析"/>
 <meta name="twitter:description" content="1. 前言 本文的目的，是引导新入职同事快速融入环境，掌握足够的基础知识，尽快开展工作的第一份指导文件。 2. 深度学习 相信大家都听说过人工智能（Art"/>
 
@@ -536,8 +532,8 @@
 
 <span class="n">Let</span><span class="s1">&#39;s consider complex number 1+1j as an example. e^1 * (cos 1 + i sin 1) = 2.7182818284590 * (0.54030230586+0.8414709848j)</span>
 
-  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1j</span><span class="p">)</span>
-  <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423j</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423</span><span class="n">j</span>
   
 
 <span class="n">Arguments</span><span class="p">:</span>
@@ -602,7 +598,7 @@ $$
 
 <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
     <span class="n">x</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 
 <span class="n">Used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">guide</span><span class="p">:</span>
@@ -625,8 +621,8 @@ $$
 
 <span class="n">Let</span><span class="s1">&#39;s consider complex number 1+1j as an example. e^1 * (cos 1 + i sin 1) = 2.7182818284590 * (0.54030230586+0.8414709848j)</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1j</span><span class="p">)</span>
-<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423j</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="mf">1.4686939399158851</span><span class="o">+</span><span class="mf">2.2873552871788423</span><span class="n">j</span>
 
 <span class="n">Args</span><span class="p">:</span>
 <span class="n">x</span><span class="p">:</span> <span class="n">A</span> <span class="n">Tensor</span><span class="o">.</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">types</span><span class="p">:</span> <span class="n">bfloat16</span><span class="p">,</span> <span class="n">half</span><span class="p">,</span> <span class="n">float32</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">complex64</span><span class="p">,</span> <span class="n">complex128</span><span class="o">.</span>
@@ -1972,7 +1968,7 @@ source/backend/cpu/x86_x64
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -1992,7 +1988,7 @@ source/backend/cpu/x86_x64
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
 
 
 

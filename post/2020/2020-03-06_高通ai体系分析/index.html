@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.79.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" />
@@ -42,19 +42,15 @@
 <meta property="og:title" content="高通AI体系分析" />
 <meta property="og:description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" />
-<meta property="article:published_time" content="2020-03-06T10:21:20+08:00" />
-<meta property="article:modified_time" content="2020-03-06T10:21:20+08:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-03-06T10:21:20&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-06T10:21:20&#43;08:00" />
+
 <meta itemprop="name" content="高通AI体系分析">
-<meta itemprop="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能">
-<meta itemprop="datePublished" content="2020-03-06T10:21:20+08:00" />
-<meta itemprop="dateModified" content="2020-03-06T10:21:20+08:00" />
+<meta itemprop="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能"><meta itemprop="datePublished" content="2020-03-06T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-06T10:21:20&#43;08:00" />
 <meta itemprop="wordCount" content="12911">
-
-
-
-<meta itemprop="keywords" content="training," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="高通AI体系分析"/>
 <meta name="twitter:description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能"/>
 
@@ -1353,7 +1349,7 @@ cropped/notice_sign.raw   0.154364 459 brass
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_MoveOriginTo</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="n">float32_t</span> <span class="n">origin</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_Clear</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_IntegrateDepthMap</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span>
-   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_IntegrateDepthMapUInt16</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint16_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvVM_IntegrateDepthMapUInt16</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint16_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span>
    <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithPoint</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> 
    <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithBox</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
    <span class="n">MV_API</span> <span class="n">MV_COLLISION</span> <span class="n">mvVM_CheckCollisionWithLine</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span>
@@ -1383,11 +1379,11 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="nf">mvCAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCamCfg</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_Deinitialize</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddGyro</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddFrame</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddTrackedPoints</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddGyro</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddFrame</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddTrackedPoints</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
    <span class="n">float64_t</span> <span class="n">MV_API</span> <span class="n">mvCAC_FisheyeToPolynomial</span><span class="p">(</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfg</span><span class="p">,</span>
-   <span class="n">float32_t</span> <span class="n">MV_API</span> <span class="n">mvCAC_ScoreSceneTexture</span><span class="p">(</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
+   <span class="n">float32_t</span> <span class="n">MV_API</span> <span class="n">mvCAC_ScoreSceneTexture</span><span class="p">(</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>mvCPA.h</p>
@@ -1401,7 +1397,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="nf">mvCPA_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCPA_Configuration</span><span class="o">*</span> <span class="n">cpaConfig</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvCPA_Deinitialize</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_AddFrame</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
+   <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_AddFrame</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_GetValues</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">exposure</span><span class="p">,</span>
 </code></pre></td></tr></table>
 </div>
@@ -1423,11 +1419,11 @@ cropped/notice_sign.raw   0.154364 459 brass
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="nf">mvDFSParameters</span><span class="p">();</span>
    <span class="n">MV_API</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="nf">mvDFS_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvStereoConfiguration</span><span class="o">*</span> <span class="n">nConfig</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_Deinitialize</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFS_GetDepths</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pxlsCamL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFS_GetDepths</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pxlsCamL</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetDepthsION</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fileDesc</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">hostPtr</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetRectifyingRotations</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">rot1</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetDepthCameraConfiguration</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetRectifiedImages</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">rectL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_GetRectifiedImages</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">rectL</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_EnableRectAdjustment</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">params</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_DisableRectAdjustment</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">obj</span> <span class="p">);</span>
 </code></pre></td></tr></table>
@@ -1443,7 +1439,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="nf">mvDFT_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvDFT_Configuration</span><span class="o">*</span> <span class="n">nConfig</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_Deinitialize</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_AddImage</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pxls</span> <span class="p">);</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_AddImage</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pxls</span> <span class="p">);</span>
    <span class="kt">bool</span> <span class="n">MV_API</span> <span class="nf">mvDFT_GetResult</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvDFT_Data</span><span class="o">*</span> <span class="n">data</span> <span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
@@ -1458,7 +1454,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="nf">mvSAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfgL</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_Deinitialize</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_AddFrame</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">pixelsL</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_AddFrame</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pixelsL</span><span class="p">,</span>
    <span class="n">MV_TRACKING_STATE</span> <span class="n">MV_API</span> <span class="n">mvSAC_GetCalibration</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
 </code></pre></td></tr></table>
 </div>
@@ -1501,13 +1497,13 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="nf">mvSRW_Writer_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">folderPath</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_Deinitialize</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Writer_AddImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddStereoImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddAccel</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGyro</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsTimeSync</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsVelocity</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddCameraSettings</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Writer_AddImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddStereoImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddAccel</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGyro</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsTimeSync</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddGpsVelocity</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddCameraSettings</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddAttitude</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddCameraParameters</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
    <span class="n">MV_API</span> <span class="n">mvSRW_Reader</span><span class="o">*</span> <span class="n">mvSRW_Reader_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">configDir</span> <span class="p">);</span>
@@ -1551,11 +1547,11 @@ cropped/notice_sign.raw   0.154364 459 brass
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="nf">mvVISLAM_Initialize</span><span class="p">(</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_Deinitialize</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_AddImage</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddAccel</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGyro</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span>
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPSvelocity</span><span class="p">(</span><span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
-   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPStimeSync</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_AddImage</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddAccel</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGyro</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPSvelocity</span><span class="p">(</span><span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> 
+   <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddGPStimeSync</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> 
    <span class="n">mvVISLAMPose</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_GetPose</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">int</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_HasUpdatedPointCloud</span><span class="p">(</span> <span class="n">mvVISLAM</span> <span class="o">*</span><span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">int</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_GetPointCloud</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvVISLAMMapPoint</span><span class="o">*</span> <span class="n">pPoints</span><span class="p">,</span>
@@ -2730,7 +2726,7 @@ cropped/notice_sign.raw   0.154364 459 brass
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -2750,7 +2746,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
 
 
 

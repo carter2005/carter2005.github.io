@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.79.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-11-13_top/" />
@@ -42,19 +42,15 @@
 <meta property="og:title" content="top" />
 <meta property="og:description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-13_top/" />
-<meta property="article:published_time" content="2017-11-13T00:00:00+00:00" />
-<meta property="article:modified_time" content="2017-11-13T00:00:00+00:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-13_top/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-11-13T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2017-11-13T00:00:00&#43;00:00" />
+
 <meta itemprop="name" content="top">
-<meta itemprop="description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy">
-<meta itemprop="datePublished" content="2017-11-13T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-11-13T00:00:00+00:00" />
+<meta itemprop="description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy"><meta itemprop="datePublished" content="2017-11-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-11-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="360">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="top"/>
 <meta name="twitter:description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy"/>
 
@@ -187,17 +183,17 @@
                            cputime_t cputime_scaled)
     {
             int index;
-      
+
             /* Add user time to process. */
             p-&gt;utime += cputime;
             p-&gt;utimescaled += cputime_scaled;
             account_group_user_time(p, cputime);
-      
+
             index = (TASK_NICE(p) &gt; 0) ? CPUTIME_NICE : CPUTIME_USER;
-      
+
             /* Add user time to cpustat. */
             task_group_account_field(p, index, (__force u64) cputime);
-      
+
             /* Account for user time used */
             acct_account_cputime(p);
     }
@@ -299,7 +295,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -319,7 +315,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
 
 
 

@@ -6,7 +6,25 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>watchdog: BUG: soft lockup - CPU#0 stuck for 22s</title>
+      <link>https://carter2005.github.io/post/2021/2021-06-24_watchdog_soft_lockup/</link>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2021/2021-06-24_watchdog_soft_lockup/</guid>
+      <description>在仿真平台调试代码的时候，遇到了memset导致cpu stuck 22秒的问题，kernel crash log如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 [ 4028.140669] watchdog: BUG:</description>
+    </item>
+    
+    <item>
+      <title>新增systemd服务</title>
+      <link>https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/</link>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/</guid>
+      <description>systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。</description>
+    </item>
+    
     <item>
       <title>ioremap</title>
       <link>https://carter2005.github.io/post/2020/2020-11-21_ioremap/</link>

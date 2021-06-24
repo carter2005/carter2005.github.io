@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>开篇 - carter&#39;s blog</title>
+  <title>新增systemd服务 - carter&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="carter2005" /><meta name="description" content="考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。 wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。 H" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="carter2005" /><meta name="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
-<link rel="canonical" href="https://carter2005.github.io/post/2017/2017-07-26_begin/" />
+<link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="开篇" />
-<meta property="og:description" content="考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。 wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。 H" />
+<meta property="og:title" content="新增systemd服务" />
+<meta property="og:description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-07-26_begin/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-07-26T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-07-26T00:00:00&#43;00:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-24T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-06-24T00:00:00&#43;00:00" />
 
-<meta itemprop="name" content="开篇">
-<meta itemprop="description" content="考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。 wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。 H"><meta itemprop="datePublished" content="2017-07-26T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-07-26T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="156">
+<meta itemprop="name" content="新增systemd服务">
+<meta itemprop="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"><meta itemprop="datePublished" content="2021-06-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-06-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="379">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="开篇"/>
-<meta name="twitter:description" content="考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。 wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。 H"/>
+<meta name="twitter:title" content="新增systemd服务"/>
+<meta name="twitter:description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -115,10 +115,10 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">开篇</h1>
+      <h1 class="post-title">新增systemd服务</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2017-07-26 </span>
+        <span class="post-time"> 2021-06-24 </span>
         
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -129,20 +129,125 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#gitblog网址">gitblog网址</a></li>
+    <li><a href="#特性">特性</a></li>
+    <li><a href="#常用命令">常用命令</a></li>
+    <li><a href="#新增synergy服务">新增synergy服务</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>考虑了很久，决定记录下来日常的开发心得，工具选择就成了个问题。</p>
+      <p>systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。</p>
+<h2 id="特性">特性</h2>
 <ul>
-<li>wordpress界面很炫，但实在太慢了，老笔记本上跑的群晖根本应付不过来。</li>
-<li>Hugo静态网页看着不错，但是需要执行它自己的建站命令，否则没法动态更新。</li>
-<li>gitblog集上述二者所长，简单，方便，集成到Apache2上很容易，就它了。</li>
+<li>系统引导时实现服务并行启动，实现快速开机。</li>
+<li>按需启动守护进程。</li>
+<li>能自动保存系统状态快照。</li>
+<li>基于依赖关系定义服务控制逻辑（自动化的服务依赖关系管理）。</li>
+<li>同时采用 socket 式与 D-Bus 总线式激活服务。</li>
 </ul>
-<h2 id="gitblog网址">gitblog网址</h2>
-<p><a href="http://gitblog.cn/"></a><a href="http://gitblog.cn/">http://gitblog.cn/</a></p>
+<h2 id="常用命令">常用命令</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 重新加载systemd
+systemctl daemon-reload
+
+# 开机启动
+systemctl enable mysqld
+
+# 关闭开机启动
+systemctl disable mysqld
+
+# 启动服务
+systemctl start mysqld
+
+# 停止服务
+systemctl stop mysqld
+
+# 重启服务
+systemctl restart mysqld
+
+# 查看服务状态
+systemctl status mysqld
+systemctl is-active sshd.service
+
+# 结束服务进程(服务无法停止时)
+systemctl kill mysqld
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="新增synergy服务">新增synergy服务</h2>
+<ol>
+<li>
+<p>新增/lib/systemd/system/synergy.service</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[Unit]
+Description=Synergy for sharing mouse and keyboard
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/synergys -f --log /run/synergy.log --debug WARNING --name taylor-debug-pc -c /etc/synergy/synergy.conf --address :24800
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>启用synergy服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
+systemctl enable synergy
+systemctl start synergy
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
 
     </div>
 
@@ -154,7 +259,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2017-07-26
+        2021-06-24
         
     </span>
   </p>
@@ -164,12 +269,16 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/2017/2017-07-28_nmap/">
+        <a class="prev" href="/post/2021/2021-06-24_watchdog_soft_lockup/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">服务器开放的端口号</span>
+            <span class="prev-text nav-default">watchdog: BUG: soft lockup - CPU#0 stuck for 22s</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
+        <a class="next" href="/post/2020/2020-11-21_ioremap/">
+            <span class="next-text nav-default">ioremap</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
       </nav>
     </footer>
   </article>

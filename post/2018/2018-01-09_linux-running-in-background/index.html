@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.79.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-01-09_linux-running-in-background/" />
@@ -42,19 +42,15 @@
 <meta property="og:title" content="Linux后台程序管理" />
 <meta property="og:description" content="通常情况下，Linux终端执行的命令是运行在前台的，一个命令执行完毕，才可以执行下一个命令，且终端一关闭，进程会被kill掉。但是，有时候希" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-01-09_linux-running-in-background/" />
-<meta property="article:published_time" content="2018-01-09T00:00:00+00:00" />
-<meta property="article:modified_time" content="2018-01-09T00:00:00+00:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-01-09_linux-running-in-background/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-01-09T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2018-01-09T00:00:00&#43;00:00" />
+
 <meta itemprop="name" content="Linux后台程序管理">
-<meta itemprop="description" content="通常情况下，Linux终端执行的命令是运行在前台的，一个命令执行完毕，才可以执行下一个命令，且终端一关闭，进程会被kill掉。但是，有时候希">
-<meta itemprop="datePublished" content="2018-01-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2018-01-09T00:00:00+00:00" />
+<meta itemprop="description" content="通常情况下，Linux终端执行的命令是运行在前台的，一个命令执行完毕，才可以执行下一个命令，且终端一关闭，进程会被kill掉。但是，有时候希"><meta itemprop="datePublished" content="2018-01-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-01-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="696">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux后台程序管理"/>
 <meta name="twitter:description" content="通常情况下，Linux终端执行的命令是运行在前台的，一个命令执行完毕，才可以执行下一个命令，且终端一关闭，进程会被kill掉。但是，有时候希"/>
 
@@ -182,28 +178,28 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。
-  
+
 安装supervisor
-  
+
 Debian / Ubuntu可以直接通过apt安装：
-  
+
 <span class="c1"># apt-get install supervisor</span>
 然后，给我们自己开发的应用程序编写一个配置文件，让supervisor来管理它。每个进程的配置文件都可以单独分拆，放在/etc/supervisor/conf.d/目录下，以.conf作为扩展名，例如，app.conf定义了一个gunicorn的进程：
-  
+
 <span class="o">[</span>program:app<span class="o">]</span>
 <span class="nv">command</span><span class="o">=</span>/usr/bin/gunicorn -w <span class="m">1</span> wsgiapp:application
 <span class="nv">directory</span><span class="o">=</span>/srv/www
 <span class="nv">user</span><span class="o">=</span>www-data
 其中，进程app定义在<span class="o">[</span>program:app<span class="o">]</span>中，command是命令，directory是进程的当前目录，user是进程运行的用户身份。
-  
+
 重启supervisor，让配置文件生效，然后运行命令supervisorctl启动进程：
-  
+
 <span class="c1"># supervisorctl start app</span>
 停止进程：
-  
+
 <span class="c1"># supervisorctl stop app</span>
 如果要在命令行中使用变量，就需要自己先编写一个shell脚本：
-  
+
 <span class="c1">#!/bin/sh</span>
 /usr/bin/gunicorn -w <span class="sb">`</span>grep -c ^processor /proc/cpuinfo<span class="sb">`</span> wsgiapp:application
 然后，加上x权限，再把command指向该shell脚本即可。
@@ -288,7 +284,7 @@ Debian / Ubuntu可以直接通过apt安装：
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -308,7 +304,7 @@ Debian / Ubuntu可以直接通过apt安装：
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
 
 
 

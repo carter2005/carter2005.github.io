@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.79.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-30_property-length/" />
@@ -42,19 +42,15 @@
 <meta property="og:title" content="fingerprint越界" />
 <meta property="og:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-30_property-length/" />
-<meta property="article:published_time" content="2017-08-30T00:00:00+00:00" />
-<meta property="article:modified_time" content="2017-08-30T00:00:00+00:00" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-30_property-length/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-08-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2017-08-30T00:00:00&#43;00:00" />
+
 <meta itemprop="name" content="fingerprint越界">
-<meta itemprop="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.">
-<meta itemprop="datePublished" content="2017-08-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-08-30T00:00:00+00:00" />
+<meta itemprop="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py."><meta itemprop="datePublished" content="2017-08-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-08-30T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="104">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="fingerprint越界"/>
 <meta name="twitter:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py."/>
 
@@ -161,17 +157,17 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">Edit build/tools/post_process_props.py. Change lines as follows:
-  
+
 PROP_NAME_MAX = 31
 # PROP_VALUE_MAX = 91
 PROP_VALUE_MAX = 128
 Edit bionic/libc/include/sys/system_properties.h. Change lines as follows:
-  
+
 #define PROP_NAME_MAX   32
 // #define PROP_VALUE_MAX  92
 #define PROP_VALUE_MAX  128
 Do
-  
+
 make clean
 make
 </code></pre></td></tr></table>
@@ -255,7 +251,7 @@ make
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2020
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -275,7 +271,7 @@ make
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
 
 
 
