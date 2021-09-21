@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-13_mnn/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="简介 MNN是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-13_mnn/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-01-13T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2020-01-13T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2020-01-13T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-01-13T10:21:20+08:00" />
 
 <meta itemprop="name" content="mnn简介">
-<meta itemprop="description" content="简介 MNN是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等"><meta itemprop="datePublished" content="2020-01-13T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2020-01-13T10:21:20&#43;08:00" />
+<meta itemprop="description" content="简介 MNN是一个轻量级的深度神经网络推理引擎，在端侧加载深度神经网络模型进行推理预测。目前，MNN已经在阿里巴巴的手机淘宝、手机天猫、优酷等"><meta itemprop="datePublished" content="2020-01-13T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2020-01-13T10:21:20+08:00" />
 <meta itemprop="wordCount" content="14212">
 <meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="mnn简介"/>
@@ -276,7 +276,7 @@
 <p>在<code>schema/default/MNN.fbs</code>文件的OpType列表里追加算子名称，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -284,7 +284,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">enum OpType : int {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">enum OpType : int {
     AbsVal,
     QuantizedAdd,
     ...
@@ -297,7 +297,7 @@
 <p>首先，在<code>schema/default/MNN.fbs</code>文件的OpParameter列表里追加算子参数名称，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -306,7 +306,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">union OpParameter {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">union OpParameter {
     QuantizedAdd,
     ArgMax,
     AsString,
@@ -318,7 +318,7 @@
 </div><p>而后，添加参数描述。如果算子来自Caffe，选择<code>CaffeOps.fbs</code>；如果算子来自TensorFlow，就使用<code>TensorflowOp.fbs</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -329,7 +329,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">table MyCustomOpParam {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">table MyCustomOpParam {
     padX:int;
     padY:int;
     kernelX:int;
@@ -352,7 +352,7 @@
 <p>直接声明示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -362,7 +362,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOpTf : public tfOpConverter {                                             
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOpTf : public tfOpConverter {                                             
     public:                                                                       
         virtual void run(MNN::OpT *dstOp, TmpNode *srcNode, TmpGraph *tempGraph);
         MyCustomOpTf() {}                                                                   
@@ -375,31 +375,31 @@
 </div><p>等效宏定义示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_CONVERTER(MyCustomOpTf);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_CONVERTER(MyCustomOpTf);
 </code></pre></td></tr></table>
 </div>
 </div><p>需要实现<code>run</code>、析构、<code>opType</code>和<code>type</code>函数。其中，<code>run</code>函数用于解析模型的proto文件得到参数，然后赋值给flatbuffer自定义参数。参数<code>srcNode</code>保存有输入输出节点信息，可以根据输入输出节点在<code>tempGraph</code>中找到<code>TmpNode</code>。调用函数<code>find_attr_value(const tensorflow::NodeDef&amp; node, const char* key, tensorflow::AttrValue&amp; value)</code>获得对应参数的值。</p>
 <p>注册转换类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_CONVERTER(MyCustomOpTf, MyCustomOp);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_CONVERTER(MyCustomOpTf, MyCustomOp);
 </code></pre></td></tr></table>
 </div>
 </div><p>\2. 添加映射</p>
 <p>在<code>OpMapper.hpp</code>中添加相应的TensorFlow Op名字到MNN Op名字的映射：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#34;OpName1&#34;, MNN::OpType_MyCustomOp},
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{&#34;OpName1&#34;, MNN::OpType_MyCustomOp},
 {&#34;OpName2&#34;, MNN::OpType_MyCustomOp},
 </code></pre></td></tr></table>
 </div>
@@ -411,16 +411,16 @@
 <p>宏定义示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_COVERTER(MyCustomOpTflite);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_COVERTER(MyCustomOpTflite);
 </code></pre></td></tr></table>
 </div>
 </div><p>需要实现函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -430,7 +430,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">MyCustomOpTflite::opType(bool quantizedModel);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">MyCustomOpTflite::opType(bool quantizedModel);
 MyCustomOpTflite::type(bool quantizedModel);
 MyCustomOpTflite::run(MNN::OpT *dstOp, 
                       const std::unique_ptr&lt;tflite::OperatorT&gt; &amp;tfliteOp, 
@@ -443,14 +443,14 @@ MyCustomOpTflite::run(MNN::OpT *dstOp,
 </div><p>其中，<code>run</code>函数相比TensorFlow的版本，多一个<code>quantizedModel</code>参数。若<code>qu</code><img src="" alt="img"><code>antizedModel</code>为true，则模型为量化模型，需转为相应的量化Op；若为false，转为浮点Op。在run函数中需要设置输入、输出tensor的index：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">// set input output index
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// set input output index
 dstOp-&gt;inputIndexes.resize(1);
 dstOp-&gt;outputIndexes.resize(1);
 dstOp-&gt;inputIndexes[0]  = tfliteOp-&gt;inputs[0];
@@ -460,11 +460,11 @@ dstOp-&gt;outputIndexes[0] = tfliteOp-&gt;outputs[0];
 </div><p>注册转换类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">using namespace tflite;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using namespace tflite;
 REGISTER_CONVERTER(MyCustomOpTflite, BuiltinOperator_OPName);
 </code></pre></td></tr></table>
 </div>
@@ -474,7 +474,7 @@ REGISTER_CONVERTER(MyCustomOpTflite, BuiltinOperator_OPName);
 <p>类声明示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -486,7 +486,7 @@ REGISTER_CONVERTER(MyCustomOpTflite, BuiltinOperator_OPName);
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOp : public OpConverter {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOp : public OpConverter {
 public:
     virtual void run(MNN::OpT* dstOp, 
                      const caffe::LayerParameter&amp; parameters, 
@@ -502,10 +502,10 @@ public:
 <p>注册转换类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">static OpConverterRegister&lt;MyCustomOp&gt; a(&#34;MyCustomOp&#34;);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static OpConverterRegister&lt;MyCustomOp&gt; a(&#34;MyCustomOp&#34;);
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="onnx模型转换">ONNX模型转换</h3>
@@ -514,23 +514,23 @@ public:
 <p>类声明示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_CONVERTER(MyCustomOpOnnx);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">DECLARE_OP_CONVERTER(MyCustomOpOnnx);
 </code></pre></td></tr></table>
 </div>
 </div><p>需要实现函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">MNN::OpType MyCustomOpOnnx::opType();
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">MNN::OpType MyCustomOpOnnx::opType();
 MNN::OpParameter MyCustomOpOnnx::type();
 void MyCustomOpOnnx::run(MNN::OpT* dstOp, 
                          const onnx::NodeProto* onnxNode, 
@@ -541,10 +541,10 @@ void MyCustomOpOnnx::run(MNN::OpT* dstOp,
 <p>注册转换类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_CONVERTER(MyCustomOpOnnx, MyCustomOp);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_CONVERTER(MyCustomOpOnnx, MyCustomOp);
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="3-添加维度计算">3. 添加维度计算</h2>
@@ -556,7 +556,7 @@ void MyCustomOpOnnx::run(MNN::OpT* dstOp,
 <p>在<code>/source/shape</code>下添加ShapeMyCustomOp.cpp：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -575,7 +575,7 @@ void MyCustomOpOnnx::run(MNN::OpT* dstOp,
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOpSizeComputer : public SizeComputer {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MyCustomOpSizeComputer : public SizeComputer {
 public:
     virtual bool onComputeSize(const MNN::Op* op, const std::vector&lt;Tensor*&gt;&amp; inputs,
                                const std::vector&lt;Tensor*&gt;&amp; outputs) const override {
@@ -599,10 +599,10 @@ public:
 <p>注册计算类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_SHAPE(MyCustomOpSizeComputer, OpType_MyCustomOp);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">REGISTER_SHAPE(MyCustomOpSizeComputer, OpType_MyCustomOp);
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="4-添加实现">4. 添加实现</h2>
@@ -614,7 +614,7 @@ public:
 <p>\1. 实现类声明</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -625,7 +625,7 @@ public:
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class CPUMyCustomOp : public Execution {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class CPUMyCustomOp : public Execution {
 public:
     // 若执行onExecute需要使用缓存，在此函数中申请，若无可不声明
     virtual ErrorCode onResize(const std::vector&lt;Tensor *&gt; &amp;inputs, 
@@ -642,7 +642,7 @@ public:
 <p>\3. 注册实现类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -654,7 +654,7 @@ public:
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class CPUMyCustomOpCreator : public CPUBackend::Creator {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class CPUMyCustomOpCreator : public CPUBackend::Creator {
 public:
     virtual Execution *onCreate(const std::vector&lt;Tensor *&gt; &amp;inputs, 
                                 const std::vector&lt;Tensor *&gt; &amp;outputs, 
@@ -673,7 +673,7 @@ REGISTER_CPU_OP_CREATOR(CPUMyCustomOpCreator, OpType_MyCustomOp);
 <p>在<code>source/backend/Metal</code>目录下添加<code>MetalMyCustomOp.hpp</code>和<code>MetalMyCustomOp.cpp</code>，并添加进Xcode工程：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -682,7 +682,7 @@ REGISTER_CPU_OP_CREATOR(CPUMyCustomOpCreator, OpType_MyCustomOp);
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class MetalMyCustomOp : public Execution {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MetalMyCustomOp : public Execution {
 public:
     virtual ErrorCode onResize(const std::vector&lt;Tensor *&gt; &amp;inputs, 
                                const std::vector&lt;Tensor *&gt; &amp;outputs) override;
@@ -695,23 +695,23 @@ public:
 <p>不同于CPU Tensor将数据存储在host指针中，Metal数据指针存放在<code>deviceId</code>中，deviceId上存储的是<code>id&lt;MTLBuffer&gt;</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">auto buffer = (__bridge id&lt;MTLBuffer&gt;)(void *)tensor-&gt;deviceId();
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">auto buffer = (__bridge id&lt;MTLBuffer&gt;)(void *)tensor-&gt;deviceId();
 </code></pre></td></tr></table>
 </div>
 </div><p>Metal Op的特定参数等可以通过<code>id&lt;MTLBuffer&gt;</code>存储。buffer数据类型可以与tensor不同，buffer甚至可以混合多种数据类型，只需保证创建时指定了正确的长度即可。例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">auto buffer = [context newDeviceBuffer:2 * sizeof(int) + 2 * sizeof(__fp16) access:CPUWriteOnly];
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">auto buffer = [context newDeviceBuffer:2 * sizeof(int) + 2 * sizeof(__fp16) access:CPUWriteOnly];
 ((__fp16 *)buffer.contents)[0] = mAlpha / mLocalSize;  // alpha
 ((__fp16 *)buffer.contents)[1] = mBeta;                // beta
 ((int *)buffer.contents)[1] = mLocalSize;              // local size
@@ -741,7 +741,7 @@ public:
 <p>使用Metal时，<strong>如非特殊情况，禁止自行创建device和library</strong>。加载library、编译function都是耗时行为，<strong>MNNMetalContext</strong>上做了必要的缓存优化。通过context执行Metal的示例如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -752,7 +752,7 @@ public:
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">auto context   = (__bridge MNNMetalContext *)backend-&gt;context();
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">auto context   = (__bridge MNNMetalContext *)backend-&gt;context();
 auto kernel    = /* metal kernel name NSString */;
 auto encoder   = [context encoder];
 auto bandwidth = [context load:kernel encoder:encoder];
@@ -766,7 +766,7 @@ auto bandwidth = [context load:kernel encoder:encoder];
 </div><p>\4. 注册实现类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -776,7 +776,7 @@ auto bandwidth = [context load:kernel encoder:encoder];
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class MetalMyCustomOpCreator : public MetalBackend::Creator {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MetalMyCustomOpCreator : public MetalBackend::Creator {
 public:
     virtual Execution *onCreate(const std::vector&lt;Tensor *&gt; &amp;inputs, 
                                 const MNN::Op *op, Backend *backend) const {
@@ -793,7 +793,7 @@ REGISTER_METAL_OP_CREATOR(MetalMyCustomOpCreator, OpType_MyCustomOp);
 <p>在目录<code>source/backend/vulkan/execution/</code>下添加<code>VulkanMyCustomOp.hpp</code>和<code>VulkanMyCustomOp.cpp</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -810,7 +810,7 @@ REGISTER_METAL_OP_CREATOR(MetalMyCustomOpCreator, OpType_MyCustomOp);
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class VulkanMyCustomOp : public VulkanBasicExecution {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class VulkanMyCustomOp : public VulkanBasicExecution {
 public:
     VulkanMyCustomOp(const Op* op, Backend* bn);
     virtual ~VulkanMyCustomOp();
@@ -832,7 +832,7 @@ private:
 <p>\4. 注册实现类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -846,7 +846,7 @@ private:
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class VulkanMyCustomOpCreator : public VulkanBackend::Creator {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class VulkanMyCustomOpCreator : public VulkanBackend::Creator {
 public:
     virtual Execution* onCreate(const std::vector&lt;Tensor*&gt;&amp; inputs, 
                                 const MNN::Op* op,
@@ -867,7 +867,7 @@ static bool gResistor = []() {
 <p>在目录<code>source/backend/opencl/execution/</code>下添加<code>MyCustomOp.h</code>和<code>MyCustomOp.cpp</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -877,7 +877,7 @@ static bool gResistor = []() {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">template &lt;typename T&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">template &lt;typename T&gt;
 class MyCustomOp : public Execution {
 public:
     virtual ErrorCode onResize(const std::vector&lt;Tensor *&gt; &amp;inputs, 
@@ -892,10 +892,10 @@ public:
 <p>\4. 注册实现类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">OpenCLCreatorRegister&lt;TypedCreator&lt;MyCustomOp&lt;cl_data_t&gt;&gt;&gt; __my_custom_op(OpType_MyCustomOp);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">OpenCLCreatorRegister&lt;TypedCreator&lt;MyCustomOp&lt;cl_data_t&gt;&gt;&gt; __my_custom_op(OpType_MyCustomOp);
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="添加opengl实现">添加OpenGL实现</h3>
@@ -905,7 +905,7 @@ public:
 <p>在<code>source/backend/opengl/execution/</code>目录下添加<code>GLMyCustomOp.h</code>和<code>GLMyCustomOp.cpp</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -919,7 +919,7 @@ public:
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">class GLMyCustomOp : public Execution {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class GLMyCustomOp : public Execution {
 public:
     GLMyCustomOp(const std::vector&lt;Tensor *&gt; &amp;inputs, const Op *op, Backend *bn);
     virtual ~GLMyCustomOp();
@@ -938,10 +938,10 @@ private:
 <p>\4. 注册实现类-</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">GLCreatorRegister&lt;TypedCreator&lt;GLMyCustomOp&gt;&gt; __my_custom_op(OpType_MyCustomOp);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">GLCreatorRegister&lt;TypedCreator&lt;GLMyCustomOp&gt;&gt; __my_custom_op(OpType_MyCustomOp);
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="矩阵相乘">矩阵相乘</h1>
@@ -953,23 +953,23 @@ private:
 <p>常用的方式是分行处理，对于C的第一行，可以按如下方式处理：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">C(0,j) += A(0,i)*B(i,j)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">C(0,j) += A(0,i)*B(i,j)
 </code></pre></td></tr></table>
 </div>
 </div><p>对于行主序矩阵，每一行的数据是连续存储的，我们自然可以考虑使用SIMD指令，一次处理4个(假设是Float32)数据的相乘:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">float32x4_t a0   = vdupq_n_f32(aLine[i]);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">float32x4_t a0   = vdupq_n_f32(aLine[i]);
 float32x4_t b0   = vld1q_f32(bLine);
 float32x4_t sum0 = vdupq_n_f32(0.0);
 sum0             = vmlaq_f32(sum0, a0, b0);
@@ -979,16 +979,16 @@ vst1q_f32(cLine, sum0);
 </div><p>需要注意的一点是，如果w不能被4整除，那么需要处理边界，逐个点进行计算并赋值：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">C(0,j) += A(0,i) * B(i,j)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">C(0,j) += A(0,i) * B(i,j)
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="mnn实现">MNN实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1066,7 +1066,7 @@ vst1q_f32(cLine, sum0);
 </span><span class="lnt">76
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">void Matrix::multi(Tensor* C, const Tensor* A, const Tensor* B) {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">void Matrix::multi(Tensor* C, const Tensor* A, const Tensor* B) {
     MNN_ASSERT(NULL != C);
     MNN_ASSERT(NULL != B);
     MNN_ASSERT(NULL != A);
@@ -1275,7 +1275,7 @@ vst1q_f32(cLine, sum0);
 <h3 id="mnn实现-1">mnn实现</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -1502,7 +1502,7 @@ vst1q_f32(cLine, sum0);
 </span><span class="lnt">225
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">ErrorCode</span> <span class="n">CPUInterp</span><span class="o">::</span><span class="n">onExecute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">ErrorCode</span> <span class="n">CPUInterp</span><span class="o">::</span><span class="n">onExecute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="o">&amp;</span><span class="n">input</span>  <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">();</span>
     <span class="k">auto</span> <span class="o">&amp;</span><span class="n">output</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">();</span>
 
@@ -1734,7 +1734,7 @@ vst1q_f32(cLine, sum0);
 <p>对于shape匹配的tensor，运算可以自动扩展到每个元素，例如下面的操作</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1746,7 +1746,7 @@ vst1q_f32(cLine, sum0);
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">y</span>
@@ -1768,7 +1768,7 @@ vst1q_f32(cLine, sum0);
 <p>framework通过SizeComputer::computeOutputSize调用算子op的onComputeSize（）函数更新shape信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1800,7 +1800,7 @@ vst1q_f32(cLine, sum0);
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">bool</span> <span class="n">SizeComputer</span><span class="o">::</span><span class="n">computeOutputSize</span><span class="p">(</span><span class="k">const</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Op</span><span class="o">*</span> <span class="n">op</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">inputs</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">bool</span> <span class="n">SizeComputer</span><span class="o">::</span><span class="n">computeOutputSize</span><span class="p">(</span><span class="k">const</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Op</span><span class="o">*</span> <span class="n">op</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">inputs</span><span class="p">,</span>
                                      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">computeFactory</span> <span class="o">=</span> <span class="n">SizeComputerSuite</span><span class="o">::</span><span class="n">get</span><span class="p">();</span>
     <span class="c1">// When op is nullptr, it means a copy op
@@ -1835,7 +1835,7 @@ vst1q_f32(cLine, sum0);
 </div><p>以BinaryOpComputer为例，它支持2个输入tensor的加，减，极大，极小之类的运算</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1853,7 +1853,7 @@ vst1q_f32(cLine, sum0);
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Binary
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Binary
 Inputs:
 • input0: float32|int32
 • input1: float32|int32
@@ -1875,7 +1875,7 @@ Tensorflow op:
 <p>查看BinaryOpComputer::onComputeSize()函数，里面有对输入tensor的shape检查，如果2者维度不一样，将尽可能的做broadcast</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1954,7 +1954,7 @@ Tensorflow op:
 </span><span class="lnt">77
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">BinaryOpComputer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">SizeComputer</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">BinaryOpComputer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">SizeComputer</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">static</span> <span class="kt">bool</span> <span class="n">outputBool</span><span class="p">(</span><span class="kt">int</span> <span class="n">operation</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">operation</span> <span class="o">==</span> <span class="n">BinaryOpOperation_GREATER_EQUAL</span><span class="p">)</span> <span class="p">{</span>
@@ -2036,14 +2036,14 @@ Tensorflow op:
 </div><p>onComputeSize（）函数首先设置输出变量的类型，再检查两个输入的维度，如果input0比较小的话，交换两个输入以方便后续代码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">if (input0-&gt;dimensions() &lt; input1-&gt;dimensions()) {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">if (input0-&gt;dimensions() &lt; input1-&gt;dimensions()) {
             auto temp = input0;
             input0 = input1;
             input1 = temp;
@@ -2053,18 +2053,18 @@ Tensorflow op:
 </div><p>如果输入变量维度不一致，首先计算维度的最大值和差异值</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span> 
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span> 
 <span class="k">const</span> <span class="kt">int</span> <span class="n">diffDimension</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来一个循环，计算可以broadcast的维度，与之前机制中的算法相同</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2081,7 +2081,7 @@ Tensorflow op:
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">maxDimensions</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">maxDimensions</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">auto</span> <span class="n">input0Length</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="c1">// 输入0的第i位维度
 </span><span class="c1"></span>            <span class="k">auto</span> <span class="n">input1Length</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// 输入1的第i位维度默认为1
 </span><span class="c1"></span>            <span class="c1">// input共有部分维度
@@ -2101,17 +2101,17 @@ Tensorflow op:
 </div><p>最后，将输出buffer的维度调整为最大值</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">buffer.dimensions = maxDimensions;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">buffer.dimensions = maxDimensions;
 </code></pre></td></tr></table>
 </div>
 </div><p>然后再看具体的计算过程 source/backend/cpu/CPUBinary.cpp</p>
 <p>算子onExecute（）函数根据传入的计算类型，调用相应模板完成计算</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2175,7 +2175,7 @@ Tensorflow op:
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
 <span class="n">ErrorCode</span> <span class="n">CPUBinary</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">onExecute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">*&gt;&amp;</span> <span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">nullptr</span> <span class="o">!=</span> <span class="n">mEltWise</span><span class="p">.</span><span class="n">get</span><span class="p">())</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">mEltWise</span><span class="o">-&gt;</span><span class="n">onExecute</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">);</span>
@@ -2242,7 +2242,7 @@ Tensorflow op:
 </div><p>上述计算的核心是_binaryOp（）函数，发现不是相同类型的输入，那么根据之前计算的输出tensor shape参数循环计算结果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2337,7 +2337,7 @@ Tensorflow op:
 </span><span class="lnt">93
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Tin</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Tout</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Func</span><span class="o">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Tin</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Tout</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Func</span><span class="o">&gt;</span>
 <span class="k">static</span> <span class="n">ErrorCode</span> <span class="n">_binaryOp</span><span class="p">(</span><span class="n">Tensor</span><span class="o">*</span> <span class="n">input0</span><span class="p">,</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">input1</span><span class="p">,</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">output</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">Func</span> <span class="n">f</span><span class="p">;</span>
 
@@ -2438,7 +2438,7 @@ Tensorflow op:
 <p>看source/backend/metal/MetalBinary.mm里面的MetalBinary::onExecute（）函数，如果shape不一致，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -2565,7 +2565,7 @@ Tensorflow op:
 </span><span class="lnt">125
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">ErrorCode</span> <span class="n">MetalBinary</span><span class="p">::</span><span class="n">onExecute</span><span class="p">(</span><span class="n">const</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="p">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="p">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="n">const</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="p">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="p">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="n">ErrorCode</span> <span class="n">MetalBinary</span><span class="p">::</span><span class="n">onExecute</span><span class="p">(</span><span class="n">const</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="p">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="p">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="n">const</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="p">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="p">&amp;</span><span class="n">outputs</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">auto</span> <span class="n">backend</span> <span class="p">=</span> <span class="n">static_cast</span><span class="p">&lt;</span><span class="n">MetalBackend</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">this</span><span class="p">-&gt;</span><span class="n">backend</span><span class="p">());</span>
     <span class="n">auto</span> <span class="n">context</span> <span class="p">=</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">MNNMetalContext</span> <span class="o">*</span><span class="p">)</span><span class="n">backend</span><span class="p">-&gt;</span><span class="n">context</span><span class="p">();</span>
     <span class="n">auto</span> <span class="n">input0</span> <span class="p">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input1</span> <span class="p">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">output</span> <span class="p">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
@@ -2696,7 +2696,7 @@ Tensorflow op:
 <p>vulkan后端不支持broadcast，只是为NHWC和NC4HW4 做了优化</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -2818,7 +2818,7 @@ Tensorflow op:
 </span><span class="lnt">120
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">ErrorCode VulkanBinary::onEncode(const std::vector&lt;Tensor*&gt;&amp; inputs, const std::vector&lt;Tensor*&gt;&amp; outputs,
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ErrorCode VulkanBinary::onEncode(const std::vector&lt;Tensor*&gt;&amp; inputs, const std::vector&lt;Tensor*&gt;&amp; outputs,
                                  const VulkanCommandPool::Buffer* cmdBuffer) {
     MNN_ASSERT(2 == inputs.size());
     MNN_ASSERT(1 == outputs.size());
@@ -2944,7 +2944,7 @@ Tensorflow op:
 <p>用EltwiseExecution实现的binaryop</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2992,7 +2992,7 @@ Tensorflow op:
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">EltwiseCreator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">OpenCLBackend</span><span class="o">::</span><span class="n">Creator</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">EltwiseCreator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">OpenCLBackend</span><span class="o">::</span><span class="n">Creator</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">virtual</span> <span class="n">Execution</span> <span class="o">*</span><span class="n">onCreate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">outputs</span><span class="p">,</span>
                                 <span class="k">const</span> <span class="n">MNN</span><span class="o">::</span><span class="n">Op</span> <span class="o">*</span><span class="n">op</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">backend</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
@@ -3043,7 +3043,7 @@ Tensorflow op:
 </div><p>EltwiseExecution初始化的时候传进来mBroadcast参数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -3051,7 +3051,7 @@ Tensorflow op:
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">EltwiseExecution</span><span class="o">::</span><span class="n">EltwiseExecution</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">compute</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">backend</span><span class="p">,</span> <span class="kt">float</span> <span class="n">operatorData</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">broadCast</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">EltwiseExecution</span><span class="o">::</span><span class="n">EltwiseExecution</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">compute</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">backend</span><span class="p">,</span> <span class="kt">float</span> <span class="n">operatorData</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">broadCast</span><span class="p">)</span>
     <span class="o">:</span> <span class="n">CommonExecution</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">mBroadCast</span> <span class="o">=</span> <span class="n">broadCast</span><span class="p">;</span>
     <span class="n">mOperatorData</span> <span class="o">=</span> <span class="n">operatorData</span><span class="p">;</span>
@@ -3062,7 +3062,7 @@ Tensorflow op:
 </div><p>EltwiseExecution::onResize（）函数根据数据存贮类型加载不同的opencl shader完成计算</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3118,7 +3118,7 @@ Tensorflow op:
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"> <span class="k">if</span> <span class="p">(</span><span class="n">mBroadCast</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"> <span class="k">if</span> <span class="p">(</span><span class="n">mBroadCast</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">nhwc_0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nhwc_1</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="p">{</span>
                     <span class="k">if</span> <span class="p">(</span><span class="n">nhwc_0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
                         <span class="n">unit</span><span class="p">.</span><span class="n">kernel</span> <span class="o">=</span> <span class="p">(</span><span class="n">wh_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">wh_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span>
@@ -3177,7 +3177,7 @@ Tensorflow op:
 </div><p>opencl shader</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3209,7 +3209,7 @@ Tensorflow op:
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__kernel void binary_same_channel_broadcast(__read_only image2d_t input0, __read_only image2d_t input1, __write_only image2d_t output,
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">__kernel void binary_same_channel_broadcast(__read_only image2d_t input0, __read_only image2d_t input1, __write_only image2d_t output,
                     int4 shape, int2 whInput0, int2 whInput1, int2 whOutput) {
     int2 pos = (int2)(get_global_id(0), get_global_id(1));
     int4 nhwc = (int4)(pos.y/shape.y, pos.y%shape.y, pos.x%shape.z, pos.x/shape.z);

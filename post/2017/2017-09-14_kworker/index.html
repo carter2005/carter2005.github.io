@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-14_kworker/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="kworker进程 kworker进程是内核工作线程的占位符进程，它执行大部分内核的实际处理，特别是在有中断，定时器，I/O等的情况下，这些进" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-14_kworker/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-09-14T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-09-14T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-09-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-14T00:00:00+00:00" />
 
 <meta itemprop="name" content="kworker">
-<meta itemprop="description" content="kworker进程 kworker进程是内核工作线程的占位符进程，它执行大部分内核的实际处理，特别是在有中断，定时器，I/O等的情况下，这些进"><meta itemprop="datePublished" content="2017-09-14T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-09-14T00:00:00&#43;00:00" />
+<meta itemprop="description" content="kworker进程 kworker进程是内核工作线程的占位符进程，它执行大部分内核的实际处理，特别是在有中断，定时器，I/O等的情况下，这些进"><meta itemprop="datePublished" content="2017-09-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-09-14T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1049">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="kworker"/>
@@ -148,14 +148,14 @@
 <p>我们可以通过 ps | grep kworker 命令来查看所有 worker 对应的内核线程，normal worker_pool 对应内核线程 (worker_thread()) 的命名规则是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">snprintf(id_buf, sizeof(id_buf), &#34;%d:%d%s&#34;, pool-&gt;cpu, id,
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">snprintf(id_buf, sizeof(id_buf), &#34;%d:%d%s&#34;, pool-&gt;cpu, id,
      pool-&gt;attrs-&gt;nice &lt; 0  ? &#34;H&#34; : &#34;&#34;);
 
 worker-&gt;task = kthread_create_on_node(worker_thread, worker, pool-&gt;node,
@@ -165,14 +165,14 @@ worker-&gt;task = kthread_create_on_node(worker_thread, worker, pool-&gt;node,
 </div><p>so 类似名字是 normal worker_pool：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">shell@PRO5:/ $ ps | grep &#34;kworker&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">shell@PRO5:/ $ ps | grep &#34;kworker&#34;
 root      14    2     0      0     worker_thr 0000000000 S kworker/1:0H     // cpu1 高优先级 worker_pool 的第 0 个 worker 进程
 root      17    2     0      0     worker_thr 0000000000 S kworker/2:0      // cpu2 低优先级 worker_pool 的第 0 个 worker 进程
 root      18    2     0      0     worker_thr 0000000000 S kworker/2:0H     // cpu2 高优先级 worker_pool 的第 0 个 worker 进程
@@ -187,13 +187,13 @@ root      23699 2     0      0     worker_thr 0000000000 S kworker/0:1      //
 <p>unbound worker_pool 对应内核线程 (worker_thread()) 的命名规则是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">snprintf(id_buf, sizeof(id_buf), &#34;u%d:%d&#34;, pool-&gt;id, id);
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">snprintf(id_buf, sizeof(id_buf), &#34;u%d:%d&#34;, pool-&gt;id, id);
 
 worker-&gt;task = kthread_create_on_node(worker_thread, worker, pool-&gt;node,
                       &#34;kworker/%s&#34;, id_buf);
@@ -209,7 +209,7 @@ worker-&gt;task = kthread_create_on_node(worker_thread, worker, pool-&gt;node,
 <p>通过kworker监视处理器负载(使用top或某些东西)，并在高负载的时刻执行echo l &gt; /proc/sysrq-trigger创建回溯。 (在Ubuntu上，这需要您使用sudo -s登录)。做几次，然后在dmesg输出结束时观看回溯。看看在CPU返回中经常发生的事情，希望它指向您的问题的根源。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -224,7 +224,7 @@ worker-&gt;task = kthread_create_on_node(worker_thread, worker, pool-&gt;node,
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">示例：e1000e。在我的情况下，我几乎每次发现一个这样的回溯：
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">示例：e1000e。在我的情况下，我几乎每次发现一个这样的回溯：
 
 Call Trace:
  delay_tsc+0x4a/0x80
@@ -245,28 +245,28 @@ Call Trace:
 <p>安装perf：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install linux-tools-common linux-tools-3.11.0-15-generic
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install linux-tools-common linux-tools-3.11.0-15-generic
 </code></pre></td></tr></table>
 </div>
 </div><p>在所有CPU上记录大约10秒的回溯：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo perf record -g -a sleep 10
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo perf record -g -a sleep 10
 </code></pre></td></tr></table>
 </div>
 </div><p>分析录音：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo perf report
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo perf report
 </code></pre></td></tr></table>
 </div>
 </div></li>

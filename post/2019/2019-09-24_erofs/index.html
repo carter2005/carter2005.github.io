@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-09-24_erofs/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2019/2019-09-24_erofs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-09-24T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2019-09-24T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2019-09-24T10:21:20+08:00" />
+<meta property="article:modified_time" content="2019-09-24T10:21:20+08:00" />
 
 <meta itemprop="name" content="erofs">
-<meta itemprop="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能"><meta itemprop="datePublished" content="2019-09-24T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-09-24T10:21:20&#43;08:00" />
+<meta itemprop="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能"><meta itemprop="datePublished" content="2019-09-24T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2019-09-24T10:21:20+08:00" />
 <meta itemprop="wordCount" content="1366">
 <meta itemprop="keywords" content="file system," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="erofs"/>
@@ -252,10 +252,10 @@
 <h2 id="编译参数">编译参数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">subproduct=EROFS export_para=UPDATE_PRODUCT_EROFS:true export_para=SYSTEMIMAGE_FS_TYPE:erofs
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">subproduct=EROFS export_para=UPDATE_PRODUCT_EROFS:true export_para=SYSTEMIMAGE_FS_TYPE:erofs
 </code></pre></td></tr></table>
 </div>
 </div><p>特别注意：preload功能也需要打开，否则mount会卡在preload处，后续的一些分区无法自动mount上来。</p>
@@ -279,7 +279,7 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -444,7 +444,7 @@
 </span><span class="lnt">163
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash -
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash -
 </span><span class="cp"></span><span class="c1">#===============================================================================</span>
 <span class="c1">#</span>
 <span class="c1">#          FILE: get_erofs.sh</span>

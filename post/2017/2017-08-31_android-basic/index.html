@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-31_android-basic/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="android源码下载 众所周知，android是由google开发的，但是，国内没法访问google的服务器下载源码，解决办法有2个 通过vp" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-31_android-basic/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-08-31T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-08-31T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-08-31T00:00:00+00:00" />
 
 <meta itemprop="name" content="android基础">
-<meta itemprop="description" content="android源码下载 众所周知，android是由google开发的，但是，国内没法访问google的服务器下载源码，解决办法有2个 通过vp"><meta itemprop="datePublished" content="2017-08-31T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-08-31T00:00:00&#43;00:00" />
+<meta itemprop="description" content="android源码下载 众所周知，android是由google开发的，但是，国内没法访问google的服务器下载源码，解决办法有2个 通过vp"><meta itemprop="datePublished" content="2017-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-08-31T00:00:00+00:00" />
 <meta itemprop="wordCount" content="540">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="android基础"/>
@@ -151,12 +151,12 @@
 <p>下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
 chmod +x repo
 为了方便可以将其拷贝到你的PATH里。
 </code></pre></td></tr></table>
@@ -166,13 +166,13 @@ chmod +x repo
 <p>更新</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">repo的运行过程中会尝试访问官方的git源更新自己，如果想使用tuna的镜像源进行更新，可以将如下内容复制到你的~/.bashrc里
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo的运行过程中会尝试访问官方的git源更新自己，如果想使用tuna的镜像源进行更新，可以将如下内容复制到你的~/.bashrc里
 
 export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 并重启终端模拟器。
@@ -186,10 +186,10 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 <p>初始化:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">repo init -u https://aosp.tuna.tsinghua.edu.cn/mirror/manifest --mirror
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo init -u https://aosp.tuna.tsinghua.edu.cn/mirror/manifest --mirror
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -197,10 +197,10 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 <p>同步源码树:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">repo sync
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo sync
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -212,12 +212,12 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 <p>本文以android 8.0为例，首先创建Android_src文件夹，然后在该文件夹内运行</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">    repo init -u git://10.27.9.37/platform/manifest -b android-8.0.0_r4
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    repo init -u git://10.27.9.37/platform/manifest -b android-8.0.0_r4
     repo sync -c -j 8     # -c参数强制只下载android-8.0.0_r4这个branch，可以减少网络压力  -j 8表明8个下载线程，可以加快下载速度
     repo start master --all
 </code></pre></td></tr></table>
@@ -225,12 +225,12 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 </div><h2 id="编译">编译</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">    .build/envsetup.sh
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    .build/envsetup.sh
     lunch     # 选择编译设备
     make -j 8     # 8个线程编译，线程数一般是cpu的2倍
 </code></pre></td></tr></table>

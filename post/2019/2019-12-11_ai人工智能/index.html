@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-12-11_ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="人工智能定义 1946年2月14日，第一台计算机ENIAC诞生，在此后的70多年里，伴随着微处理器技术，互联网技术，计算机产业发展迅速，极大地" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2019/2019-12-11_ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-12-11T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2019-12-11T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2019-12-11T10:21:20+08:00" />
+<meta property="article:modified_time" content="2019-12-11T10:21:20+08:00" />
 
 <meta itemprop="name" content="人工智能">
-<meta itemprop="description" content="人工智能定义 1946年2月14日，第一台计算机ENIAC诞生，在此后的70多年里，伴随着微处理器技术，互联网技术，计算机产业发展迅速，极大地"><meta itemprop="datePublished" content="2019-12-11T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2019-12-11T10:21:20&#43;08:00" />
+<meta itemprop="description" content="人工智能定义 1946年2月14日，第一台计算机ENIAC诞生，在此后的70多年里，伴随着微处理器技术，互联网技术，计算机产业发展迅速，极大地"><meta itemprop="datePublished" content="2019-12-11T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2019-12-11T10:21:20+08:00" />
 <meta itemprop="wordCount" content="13589">
 <meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="人工智能"/>
@@ -541,12 +541,12 @@ CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始�
 <p>话说在Android占领了移动端后，Google开源了TensorFlow，希望占领AI端。TF的特点是可以支持多种设备，大到GPU、CPU，小到平板和手机都可以跑起来TF。而且TF的使用很方便，几行代码就能开始跑模型，这让神经网络的入门变得非常简单。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">安装CPU版本：输入命令：pip3 install tensorflow
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">安装CPU版本：输入命令：pip3 install tensorflow
 
 安装CPU/GPU版本：输入命令：pip install tf-nightly
 </code></pre></td></tr></table>
@@ -581,7 +581,7 @@ CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始�
 <p>lenet手写体识别</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -674,7 +674,7 @@ CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始�
 </span><span class="lnt">91
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">from tensorflow.examples.tutorials.mnist import input_data
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True)
 
 
@@ -770,7 +770,7 @@ print(&#34;test accuracy %g&#34;%accuracy.eval(feed_dict={
 </div><p>测试程序：加载手写图片，处理成28X28大小，再送入进行识别</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -875,7 +875,7 @@ print(&#34;test accuracy %g&#34;%accuracy.eval(feed_dict={
 </span><span class="lnt">103
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">from PIL import Image, ImageFilter
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">from PIL import Image, ImageFilter
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import cv2

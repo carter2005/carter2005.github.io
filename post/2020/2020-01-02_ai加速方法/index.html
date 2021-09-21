@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-02_ai%E5%8A%A0%E9%80%9F%E6%96%B9%E6%B3%95/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-02_ai%E5%8A%A0%E9%80%9F%E6%96%B9%E6%B3%95/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-01-02T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2020-01-02T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2020-01-02T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-01-02T10:21:20+08:00" />
 
 <meta itemprop="name" content="AI加速方法">
-<meta itemprop="description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令"><meta itemprop="datePublished" content="2020-01-02T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2020-01-02T10:21:20&#43;08:00" />
+<meta itemprop="description" content="指令集优化 指令集是指CPU能执行的所有指令的集合，每一指令对应一种操作，任何程序最终要编译成一条条指令才能让CPU识别并执行。CPU依靠指令"><meta itemprop="datePublished" content="2020-01-02T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2020-01-02T10:21:20+08:00" />
 <meta itemprop="wordCount" content="6771">
 <meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AI加速方法"/>
@@ -211,7 +211,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 <h3 id="汇编-1">汇编</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -425,7 +425,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">212
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-asm" data-lang="asm"><span class="c">#ifdef __aarch64__
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="c">#ifdef __aarch64__
 </span><span class="c">#include &#34;MNNAsmGlobal.h&#34;
 </span><span class="c"></span>
 <span class="na">.text</span>
@@ -642,7 +642,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </div><h3 id="neon-1">neon</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -721,7 +721,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">77
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">Matrix</span><span class="o">::</span><span class="n">multi</span><span class="p">(</span><span class="n">Tensor</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">Matrix</span><span class="o">::</span><span class="n">multi</span><span class="p">(</span><span class="n">Tensor</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="o">*</span> <span class="n">B</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">C</span><span class="p">);</span>
     <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">B</span><span class="p">);</span>
     <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">A</span><span class="p">);</span>
@@ -803,7 +803,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </div><h3 id="sse-1">SSE</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -816,7 +816,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNMatrixAdd</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">widthC4</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">cStride</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">aStride</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNMatrixAdd</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">C</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">widthC4</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">cStride</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">aStride</span><span class="p">,</span>
                   <span class="n">size_t</span> <span class="n">bStride</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">aStride</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
@@ -831,7 +831,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -916,7 +916,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">83
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_SSE_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
                           <span class="n">size_t</span> <span class="n">dst_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">width</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">weight_depth_offset</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">src_depth_step</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">wC4</span>             <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span>
@@ -1004,7 +1004,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </div><h3 id="avx-1">avx</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1090,7 +1090,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">84
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_AVX_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">_AVX_MNNGemmFloatCommon_4</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">dst</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">weight</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">src_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">dst_step</span><span class="p">,</span>
                           <span class="n">size_t</span> <span class="n">dst_depth_quad</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">width</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">weight_depth_offset</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">src_depth_step</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">wC8</span>             <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span>
@@ -1257,7 +1257,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 <h2 id="opengl">opengl</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1325,7 +1325,7 @@ AVX（Advanced Vector Extensions，高级矢量扩展）指令集借鉴了一些
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">GLConvolutionIm2col</span><span class="o">::</span><span class="n">GLConvolutionIm2col</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Op</span> <span class="o">*</span><span class="n">convOp</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">bn</span><span class="p">)</span> <span class="o">:</span> <span class="n">GPUConvolution</span><span class="p">(</span><span class="n">convOp</span><span class="p">,</span> <span class="n">bn</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">GLConvolutionIm2col</span><span class="o">::</span><span class="n">GLConvolutionIm2col</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Op</span> <span class="o">*</span><span class="n">convOp</span><span class="p">,</span> <span class="n">Backend</span> <span class="o">*</span><span class="n">bn</span><span class="p">)</span> <span class="o">:</span> <span class="n">GPUConvolution</span><span class="p">(</span><span class="n">convOp</span><span class="p">,</span> <span class="n">bn</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">totalWeightSize</span> <span class="o">=</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">outputCount</span><span class="p">())</span> <span class="o">*</span> <span class="n">ALIGN_UP4</span><span class="p">(</span><span class="n">mInputDepth</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelY</span><span class="p">()</span> <span class="o">*</span> <span class="n">mCommon</span><span class="o">-&gt;</span><span class="n">kernelX</span><span class="p">());</span>
     <span class="n">mGLBackend</span> <span class="o">=</span> <span class="p">(</span><span class="n">GLBackend</span> <span class="o">*</span><span class="p">)</span><span class="n">bn</span><span class="p">;</span>
     <span class="k">auto</span> <span class="n">mKernelBuffer</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GLSSBOBuffer</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">GLSSBOBuffer</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">totalWeightSize</span><span class="p">));</span>

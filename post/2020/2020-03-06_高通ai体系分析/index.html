@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06_%E9%AB%98%E9%80%9Aai%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-03-06T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2020-03-06T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2020-03-06T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-03-06T10:21:20+08:00" />
 
 <meta itemprop="name" content="高通AI体系分析">
-<meta itemprop="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能"><meta itemprop="datePublished" content="2020-03-06T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2020-03-06T10:21:20&#43;08:00" />
+<meta itemprop="description" content="高通AI发展历史 https://www.qualcomm.com/media/documents/files/making-ai-ubiquitous.pdf 硬件 各种手机芯片：660，710，855，865 qualcomm cloud AI 100：2019年发布，7nm专用人工智能处理器，350 tops性能"><meta itemprop="datePublished" content="2020-03-06T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2020-03-06T10:21:20+08:00" />
 <meta itemprop="wordCount" content="12911">
 <meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="高通AI体系分析"/>
@@ -231,7 +231,7 @@
 <p>c++，java接口，so形式</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -273,7 +273,7 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">── [4.0K]  zdl
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">── [4.0K]  zdl
     ├── [4.0K]  DiagLog
     │   ├── [2.2K]  IDiagLog.hpp
     │   └── [2.1K]  Options.hpp
@@ -662,7 +662,7 @@ A user, who loads a model into Snapdragon NPE and selects the AIP runtime as a t
 <p>SNPE provides Android binaries for armeabi-v7a and arm64-v8a architectures. For each architecture, there are binaries compiled with clang6.0 using libc++ STL implementation. The following shows the commands to select the desired binaries:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -671,7 +671,7 @@ A user, who loads a model into Snapdragon NPE and selects the AIP runtime as a t
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># architecture: armeabi-v7a - compiler: clang - STL: libc++
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># architecture: armeabi-v7a - compiler: clang - STL: libc++
 export SNPE_TARGET_ARCH=arm-android-clang6.0
 export SNPE_TARGET_STL=libc++_shared.so
 
@@ -685,7 +685,7 @@ export SNPE_TARGET_STL=libc++_shared.so
 <p>Push SNPE libraries and the prebuilt snpe-net-run executable to /data/local/tmp/snpeexample on the Android target.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -702,7 +702,7 @@ export SNPE_TARGET_STL=libc++_shared.so
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">export SNPE_TARGET_ARCH=arm-android-clang6.0
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export SNPE_TARGET_ARCH=arm-android-clang6.0
 export SNPE_TARGET_STL=libc++_shared.so
 
 adb shell &#34;mkdir -p /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin&#34;
@@ -723,7 +723,7 @@ adb push $SNPE_ROOT/bin/$SNPE_TARGET_ARCH/snpe-net-run \
 <p>Set up the library path, the path variable, and the target architecture in adb shell to run the executable with the -h argument to see its description.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -731,7 +731,7 @@ adb push $SNPE_ROOT/bin/$SNPE_TARGET_ARCH/snpe-net-run \
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
 export SNPE_TARGET_ARCH=arm-android-clang6.0
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
 export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
@@ -743,7 +743,7 @@ exit
 <p>To execute the Inception v3 classification model on Android target follow these steps:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -752,7 +752,7 @@ exit
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd $SNPE_ROOT/models/inception_v3
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd $SNPE_ROOT/models/inception_v3
 mkdir data/rawfiles &amp;&amp; cp data/cropped/*.raw data/rawfiles/
 adb shell &#34;mkdir -p /data/local/tmp/inception_v3&#34;
 adb push data/rawfiles /data/local/tmp/inception_v3/cropped
@@ -766,7 +766,7 @@ rm -rf data/rawfiles
 <p>The Android C++ executable is run with the following commands:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -775,7 +775,7 @@ rm -rf data/rawfiles
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
 export SNPE_TARGET_ARCH=arm-android-clang6.0
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
 export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
@@ -787,21 +787,21 @@ exit
 </div><p>The executable will create the results folder: /data/local/tmp/inception_v3/output. To pull the output:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android
 </code></pre></td></tr></table>
 </div>
 </div><p>Check the classification results by running the following python script:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
                                                    -o output_android/ \
                                                    -l data/imagenet_slim_labels.txt
 </code></pre></td></tr></table>
@@ -809,7 +809,7 @@ exit
 </div><p>The output should look like the following, showing classification results for all the images.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -817,7 +817,7 @@ exit
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
 cropped/trash_bin.raw     0.850245 413 ashcan
 cropped/plastic_cup.raw   0.972899 648 measuring cup
 cropped/chairs.raw        0.286483 832 studio couch
@@ -830,7 +830,7 @@ cropped/notice_sign.raw   0.138857 459 brass
 Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (See <a href="dsp_runtime.html">DSP Runtime Environment</a> for details.)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -840,7 +840,7 @@ Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (S
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
 export SNPE_TARGET_ARCH=arm-android-clang6.0
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
 export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
@@ -853,21 +853,21 @@ exit
 </div><p>Pull the output into an output_android_dsp directory.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_dsp
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_dsp
 </code></pre></td></tr></table>
 </div>
 </div><p>Check the classification results by running the following python script:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
                                                    -o output_android_dsp/ \
                                                    -l data/imagenet_slim_labels.txt
 </code></pre></td></tr></table>
@@ -875,7 +875,7 @@ exit
 </div><p>The output should look like the following, showing classification results for all the images.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -883,7 +883,7 @@ exit
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
 cropped/trash_bin.raw     0.639935 413 ashcan
 cropped/plastic_cup.raw   0.937354 648 measuring cup
 cropped/chairs.raw        0.275142 832 studio couch
@@ -901,7 +901,7 @@ Refer to <a href="tutorial_setup.html#tutorial_setup_inception_v3">Getting Incep
 Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (See <a href="dsp_runtime.html">DSP Runtime Environment</a> for details.)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -911,7 +911,7 @@ Note the extra environment variable ADSP_LIBRARY_PATH must be set to use DSP. (S
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb shell
 export SNPE_TARGET_ARCH=arm-android-clang6.0
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
 export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
@@ -924,21 +924,21 @@ exit
 </div><p>Pull the output into an output_android_aip directory.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_aip
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">adb pull /data/local/tmp/inception_v3/output output_android_aip
 </code></pre></td></tr></table>
 </div>
 </div><p>Check the classification results by running the following python script:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python scripts/show_inceptionv3_classifications.py -i data/target_raw_list.txt \
                                                    -o output_android_aip/ \
                                                    -l data/imagenet_slim_labels.txt
 </code></pre></td></tr></table>
@@ -946,7 +946,7 @@ exit
 </div><p>The output should look like the following, showing classification results for all the images.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -954,7 +954,7 @@ exit
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Classification results
 cropped/trash_bin.raw     0.683813 413 ashcan
 cropped/plastic_cup.raw   0.971473 648 measuring cup
 cropped/chairs.raw        0.429178 832 studio couch
@@ -1238,7 +1238,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <p>每项功能对应一个头文件，so库按照模块分成独立的库发布</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1267,7 +1267,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  bin
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  bin
 │   ├── [3.3M]  mvCACPlayback
 │   ├── [174K]  mvDFSPlayback
 │   ├── [610K]  mvDFTPlayback
@@ -1300,7 +1300,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <p>mv.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1309,7 +1309,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">mvVersion</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">mvVersion</span><span class="p">(</span> <span class="kt">void</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvPose6DETto6DRT</span><span class="p">(</span> <span class="n">mvPose6DET</span><span class="o">*</span> <span class="n">pose</span><span class="p">,</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">mvPose</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvPose6DRTto6DET</span><span class="p">(</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">pose</span><span class="p">,</span> <span class="n">mvPose6DET</span><span class="o">*</span> <span class="n">mvPose</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvMultiplyPose6DRT</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">mvPose6DRT</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span>
@@ -1321,7 +1321,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvVM.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1343,7 +1343,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVM</span><span class="o">*</span> <span class="nf">mvVM_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">sampleDistance</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVM</span><span class="o">*</span> <span class="nf">mvVM_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">float32_t</span> <span class="n">sampleDistance</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_Deinitialize</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_GetSampleDistance</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="n">float32_t</span> <span class="n">sampleDistance</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="nf">mvVM_MoveOriginTo</span><span class="p">(</span> <span class="n">mvVM</span><span class="o">*</span> <span class="n">map</span><span class="p">,</span> <span class="n">float32_t</span> <span class="n">origin</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
@@ -1368,7 +1368,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvCAC.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1377,7 +1377,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="nf">mvCAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCamCfg</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="nf">mvCAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCamCfg</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_Deinitialize</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddGyro</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvCAC_AddFrame</span><span class="p">(</span> <span class="n">mvCAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">timestamp</span><span class="p">,</span>
@@ -1389,13 +1389,13 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvCPA.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="nf">mvCPA_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCPA_Configuration</span><span class="o">*</span> <span class="n">cpaConfig</span> <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="nf">mvCPA_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCPA_Configuration</span><span class="o">*</span> <span class="n">cpaConfig</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvCPA_Deinitialize</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_AddFrame</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pixels</span><span class="p">,</span>
    <span class="n">MV_API</span> <span class="kt">void</span> <span class="n">mvCPA_GetValues</span><span class="p">(</span> <span class="n">mvCPA</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">float32_t</span><span class="o">*</span> <span class="n">exposure</span><span class="p">,</span>
@@ -1404,7 +1404,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvDFS.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1416,7 +1416,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="nf">mvDFSParameters</span><span class="p">();</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="nf">mvDFSParameters</span><span class="p">();</span>
    <span class="n">MV_API</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="nf">mvDFS_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvStereoConfiguration</span><span class="o">*</span> <span class="n">nConfig</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvDFS_Deinitialize</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFS_GetDepths</span><span class="p">(</span> <span class="n">mvDFS</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pxlsCamL</span><span class="p">,</span>
@@ -1431,13 +1431,13 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvDFT.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="nf">mvDFT_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvDFT_Configuration</span><span class="o">*</span> <span class="n">nConfig</span> <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="nf">mvDFT_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvDFT_Configuration</span><span class="o">*</span> <span class="n">nConfig</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_Deinitialize</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvDFT_AddImage</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pxls</span> <span class="p">);</span>
    <span class="kt">bool</span> <span class="n">MV_API</span> <span class="nf">mvDFT_GetResult</span><span class="p">(</span> <span class="n">mvDFT</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="n">mvDFT_Data</span><span class="o">*</span> <span class="n">data</span> <span class="p">);</span>
@@ -1446,13 +1446,13 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvSAC.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="nf">mvSAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfgL</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="nf">mvSAC_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="n">mvCameraConfiguration</span><span class="o">*</span> <span class="n">pCfgL</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_Deinitialize</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSAC_AddFrame</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pixelsL</span><span class="p">,</span>
    <span class="n">MV_TRACKING_STATE</span> <span class="n">MV_API</span> <span class="n">mvSAC_GetCalibration</span><span class="p">(</span> <span class="n">mvSAC</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span>
@@ -1461,7 +1461,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvSRW.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1495,7 +1495,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="nf">mvSRW_Writer_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">folderPath</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="nf">mvSRW_Writer_Initialize</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">folderPath</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_Deinitialize</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvSRW_Writer_AddImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvSRW_Writer_AddStereoImage</span><span class="p">(</span> <span class="n">mvSRW_Writer</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
@@ -1532,7 +1532,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>mvVISLAM.h</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1545,7 +1545,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="nf">mvVISLAM_Initialize</span><span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">MV_API</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="nf">mvVISLAM_Initialize</span><span class="p">(</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_Deinitialize</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span> <span class="p">);</span>
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="nf">mvVISLAM_AddImage</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span> 
    <span class="kt">void</span> <span class="n">MV_API</span> <span class="n">mvVISLAM_AddAccel</span><span class="p">(</span> <span class="n">mvVISLAM</span><span class="o">*</span> <span class="n">pObj</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">time</span><span class="p">,</span>
@@ -1635,7 +1635,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 <p>一个头文件，一个静态库</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1675,7 +1675,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  inc
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">├── [4.0K]  inc
 │   └── [1.3M]  fastcv.h
 ├── [4.0K]  lib
 │   ├── [4.0K]  Android
@@ -1718,7 +1718,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </div><p>静态库libfastcv.a解压缩可以看到链接前的.o文件，看起来就是一些算法的集合，一般有2个版本：正常的和带V后缀的版本（数据是存在vector里面的）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -1890,7 +1890,7 @@ cropped/notice_sign.raw   0.154364 459 brass
 </span><span class="lnt">170
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── [ 11K]  fastcvAbsDiffC.o
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">├── [ 11K]  fastcvAbsDiffC.o
 ├── [ 22K]  fastcvAbsDiffV.o
 ├── [ 17K]  fastcvAdaptiveThresholdC.o
 ├── [4.9K]  fastcvAdaptiveThresholdV.o

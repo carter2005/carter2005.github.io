@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-08_android-timing-intent/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="四种和时间相关的广播 1 2 3 4 5 6 1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34; 2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34; 3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34; 4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34; 处理逻辑都集中在AlarmManagerService.java里面，下文代" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-08_android-timing-intent/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-09-08T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-09-08T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-08T00:00:00+00:00" />
 
 <meta itemprop="name" content="Android与时间相关广播">
-<meta itemprop="description" content="四种和时间相关的广播 1 2 3 4 5 6 1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34; 2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34; 3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34; 4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34; 处理逻辑都集中在AlarmManagerService.java里面，下文代"><meta itemprop="datePublished" content="2017-09-08T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-09-08T00:00:00&#43;00:00" />
+<meta itemprop="description" content="四种和时间相关的广播 1 2 3 4 5 6 1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34; 2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34; 3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34; 4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34; 处理逻辑都集中在AlarmManagerService.java里面，下文代"><meta itemprop="datePublished" content="2017-09-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-09-08T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1054">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Android与时间相关广播"/>
@@ -141,7 +141,7 @@
       <h2 id="四种和时间相关的广播">四种和时间相关的广播</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -149,7 +149,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34;
 2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34;
 3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34;
 4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34;
@@ -160,7 +160,7 @@
 </div><h2 id="action_time_tick和action_date_changed">ACTION_TIME_TICK和ACTION_DATE_CHANGED</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -242,7 +242,7 @@
 </span><span class="lnt">80
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">ACTION_TIME_TICK      每分钟发送一次
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ACTION_TIME_TICK      每分钟发送一次
 ACTION_DATE_CHANGED   日期发生改变时发送
 
 public void onStart() {
@@ -327,16 +327,16 @@ class ClockReceiver extends BroadcastReceiver {
 </div><h2 id="action_time_changed">ACTION_TIME_CHANGED</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">设置时间的时候发送
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">设置时间的时候发送
 </code></pre></td></tr></table>
 </div>
 </div><p>public void run() { ArrayList triggerList = new ArrayList();</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -363,7 +363,7 @@ class ClockReceiver extends BroadcastReceiver {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">        while (true)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">        while (true)
         {
             int result = waitForAlarm(mNativeData);
 
@@ -393,7 +393,7 @@ class ClockReceiver extends BroadcastReceiver {
 </div><h2 id="action_timezone_changed">ACTION_TIMEZONE_CHANGED</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -458,7 +458,7 @@ class ClockReceiver extends BroadcastReceiver {
 </span><span class="lnt">63
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">时区改变时发送
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">时区改变时发送
 
 public void onStart() {
     mNativeData = init();

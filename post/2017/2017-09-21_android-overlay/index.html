@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-21_android-overlay/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="android overlay机制，主要是用来不修改代码从而实现资源替换，主题定制等需求。可定制资源一般为下面几类： 系统设置（字符串，功能开关等） 本地化资" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-21_android-overlay/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-09-21T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-09-21T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-21T00:00:00+00:00" />
 
 <meta itemprop="name" content="android_overlay机制">
-<meta itemprop="description" content="android overlay机制，主要是用来不修改代码从而实现资源替换，主题定制等需求。可定制资源一般为下面几类： 系统设置（字符串，功能开关等） 本地化资"><meta itemprop="datePublished" content="2017-09-21T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-09-21T00:00:00&#43;00:00" />
+<meta itemprop="description" content="android overlay机制，主要是用来不修改代码从而实现资源替换，主题定制等需求。可定制资源一般为下面几类： 系统设置（字符串，功能开关等） 本地化资"><meta itemprop="datePublished" content="2017-09-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-09-21T00:00:00+00:00" />
 <meta itemprop="wordCount" content="406">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="android_overlay机制"/>
@@ -151,7 +151,7 @@
 <p>修改产品配置makefile（device/vendor-name/device-name/product-name.mk），添加</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -159,7 +159,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">PRODUCT_PACKAGE_OVERLAYS :=  device/vendor-name/device-name/product-name/overlay
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">PRODUCT_PACKAGE_OVERLAYS :=  device/vendor-name/device-name/product-name/overlay
 或
 DEVICE_PACKAGE_OVERLAYS :=  device/vendor-name/device-name/product-name/overlay
 
@@ -176,10 +176,10 @@ PRODUCT_PACKAGE_OVERLAYS &gt; DEVICE_PACKAGE_OVERLAYS
 <p>检查资源是否替换成功，可以通过aapt dump资源来查看</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">aapt l -a Home.apk
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">aapt l -a Home.apk
 </code></pre></td></tr></table>
 </div>
 </div></li>

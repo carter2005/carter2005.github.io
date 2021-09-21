@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-09_python-tips/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="安装 官方源非常慢，建议更改为清华的 临时使用 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package 注意，simple 不能少, 是 https 而不是 http 设为默认 升级 pip 到最新的版本 (&gt;=10.0.0) 后进行配置： 1 2 pip install" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-01-09_python-tips/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-01-09T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-01-09T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-01-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-09T00:00:00+00:00" />
 
 <meta itemprop="name" content="python技巧">
-<meta itemprop="description" content="安装 官方源非常慢，建议更改为清华的 临时使用 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package 注意，simple 不能少, 是 https 而不是 http 设为默认 升级 pip 到最新的版本 (&gt;=10.0.0) 后进行配置： 1 2 pip install"><meta itemprop="datePublished" content="2020-01-09T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-01-09T00:00:00&#43;00:00" />
+<meta itemprop="description" content="安装 官方源非常慢，建议更改为清华的 临时使用 1 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package 注意，simple 不能少, 是 https 而不是 http 设为默认 升级 pip 到最新的版本 (&gt;=10.0.0) 后进行配置： 1 2 pip install"><meta itemprop="datePublished" content="2020-01-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-01-09T00:00:00+00:00" />
 <meta itemprop="wordCount" content="236">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="python技巧"/>
@@ -145,10 +145,10 @@
 <h3 id="临时使用">临时使用</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 </code></pre></td></tr></table>
 </div>
 </div><p>注意，<code>simple</code> 不能少, 是 <code>https</code> 而不是 <code>http</code></p>
@@ -156,21 +156,21 @@
 <p>升级 pip 到最新的版本 (&gt;=10.0.0) 后进行配置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install pip -U
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install pip -U
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 </code></pre></td></tr></table>
 </div>
 </div><p>如果您到 pip 默认源的网络连接较差，临时使用本镜像站来升级 pip：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="lsb_release损坏">lsb_release损坏</h1>

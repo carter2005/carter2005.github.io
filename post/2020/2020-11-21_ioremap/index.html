@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-11-21_ioremap/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="硬件一般是通过寄存器，片上内存对外提供服务的，kernel根据PCIE设备config space来初始化设备。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-11-21_ioremap/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-11-21T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-11-21T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-11-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-21T00:00:00+00:00" />
 
 <meta itemprop="name" content="ioremap">
-<meta itemprop="description" content="硬件一般是通过寄存器，片上内存对外提供服务的，kernel根据PCIE设备config space来初始化设备。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"><meta itemprop="datePublished" content="2020-11-21T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-11-21T00:00:00&#43;00:00" />
+<meta itemprop="description" content="硬件一般是通过寄存器，片上内存对外提供服务的，kernel根据PCIE设备config space来初始化设备。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"><meta itemprop="datePublished" content="2020-11-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-21T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2771">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ioremap"/>
@@ -140,7 +140,7 @@
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2JpbWcuY2hpbmFhZXQuY29tL2p1c3RseHkvYmxvZy8yMDE4MDMzMS8xMDAwMDE5NDQ1LTYzNjU4MTIyMzgwMzY3NDIxMjI1Njk1MzYucG5nLWc1NjA?x-oss-process=image/format,png" alt="blob.png"></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -160,7 +160,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -xxx
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -xxx
 01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
 00: <span class="m">36</span> 1e <span class="m">01</span> <span class="m">00</span> <span class="m">06</span> <span class="m">04</span> <span class="m">11</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">12</span> <span class="m">10</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
 10: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a2 <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a1 0c <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
@@ -182,7 +182,7 @@ f0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -204,7 +204,7 @@ f0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -v
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -v
 01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
         Subsystem: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span>
         Flags: bus master, fast devsel, latency 0, IRQ <span class="m">16</span>
@@ -310,14 +310,14 @@ Write-back（回写模式）在数据更新时只写入缓存Cache。只在数�
 </table>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define ioremap(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define ioremap(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
 </span><span class="cp">#define ioremap_nocache(addr, size)	__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
 </span><span class="cp">#define ioremap_wc(addr, size)		__ioremap((addr), (size), __pgprot(PROT_NORMAL_NC))
 </span><span class="cp">#define ioremap_wt(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-09-11T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2018-09-11T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2018-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-09-11T00:00:00+00:00" />
 
 <meta itemprop="name" content="Lets_encrypt泛域名证书">
-<meta itemprop="description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt"><meta itemprop="datePublished" content="2018-09-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2018-09-11T00:00:00&#43;00:00" />
+<meta itemprop="description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt"><meta itemprop="datePublished" content="2018-09-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-09-11T00:00:00+00:00" />
 <meta itemprop="wordCount" content="416">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Lets_encrypt泛域名证书"/>
@@ -144,16 +144,16 @@
 <h2 id="安装">安装</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl https://get.acme.sh | sh
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl https://get.acme.sh | sh
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="申请证书">申请证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -163,7 +163,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">export DP_Id=&#34;ID数字&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export DP_Id=&#34;ID数字&#34;
 export DP_Key=&#34;Token字符串&#34;
 ./acme.sh --issue -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34; --dns dns_dp  
     --cert-file /usr/syno/etc/certificate/system/default/cert.pem 
@@ -176,16 +176,16 @@ export DP_Key=&#34;Token字符串&#34;
 </div><h2 id="更新证书">更新证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">./acme.sh --renew -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">./acme.sh --renew -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34;
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="nas自动更新所有证书">nas自动更新所有证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -221,7 +221,7 @@ export DP_Key=&#34;Token字符串&#34;
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cert_root_dir=&#34;/usr/syno/etc/certificate&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cert_root_dir=&#34;/usr/syno/etc/certificate&#34;
 package_cert_dir=&#34;/usr/local/etc/certificate&#34;
 default_cert_dir=&#34;$cert_root_dir/system/default&#34;
 

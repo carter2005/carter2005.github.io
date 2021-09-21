@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-05-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2019-05-07T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2019-05-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-05-07T00:00:00+00:00" />
 
 <meta itemprop="name" content="蓝牙名称设置">
-<meta itemprop="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;"><meta itemprop="datePublished" content="2019-05-07T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-05-07T00:00:00&#43;00:00" />
+<meta itemprop="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;"><meta itemprop="datePublished" content="2019-05-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-05-07T00:00:00+00:00" />
 <meta itemprop="wordCount" content="709">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="蓝牙名称设置"/>

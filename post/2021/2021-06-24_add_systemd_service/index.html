@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-06-24T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-06-24T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-06-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-06-24T00:00:00+00:00" />
 
 <meta itemprop="name" content="新增systemd服务">
-<meta itemprop="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"><meta itemprop="datePublished" content="2021-06-24T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2021-06-24T00:00:00&#43;00:00" />
+<meta itemprop="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"><meta itemprop="datePublished" content="2021-06-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-06-24T00:00:00+00:00" />
 <meta itemprop="wordCount" content="379">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="新增systemd服务"/>
@@ -149,7 +149,7 @@
 <h2 id="常用命令">常用命令</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -175,7 +175,7 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 重新加载systemd
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 重新加载systemd
 systemctl daemon-reload
 
 # 开机启动
@@ -207,7 +207,7 @@ systemctl kill mysqld
 <p>新增/lib/systemd/system/synergy.service</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -219,7 +219,7 @@ systemctl kill mysqld
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[Unit]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[Unit]
 Description=Synergy for sharing mouse and keyboard
 After=network.target
 
@@ -236,12 +236,12 @@ WantedBy=multi-user.target
 <p>启用synergy服务</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
 systemctl enable synergy
 systemctl start synergy
 </code></pre></td></tr></table>

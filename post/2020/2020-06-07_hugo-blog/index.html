@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-06-07_hugo-blog/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="之前使用wordpress记录博客，依赖php，占用资源挺多的，在搬瓦工vps上运行也谈不上快，最主要的是申请的tk域名不会被搜索引擎引用，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-06-07_hugo-blog/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-06-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-06-07T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-06-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-07T00:00:00+00:00" />
 
 <meta itemprop="name" content="基于hugo的个人博客系统">
-<meta itemprop="description" content="之前使用wordpress记录博客，依赖php，占用资源挺多的，在搬瓦工vps上运行也谈不上快，最主要的是申请的tk域名不会被搜索引擎引用，"><meta itemprop="datePublished" content="2020-06-07T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-06-07T00:00:00&#43;00:00" />
+<meta itemprop="description" content="之前使用wordpress记录博客，依赖php，占用资源挺多的，在搬瓦工vps上运行也谈不上快，最主要的是申请的tk域名不会被搜索引擎引用，"><meta itemprop="datePublished" content="2020-06-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-06-07T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1188">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于hugo的个人博客系统"/>
@@ -144,7 +144,7 @@
 <h1 id="生成站点">生成站点</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -161,7 +161,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># hugo new site blog</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># hugo new site blog</span>
 <span class="c1"># cd blog</span>
 <span class="c1"># tree</span>
 .
@@ -185,12 +185,12 @@
 <p>去 <a href="http://themes.gohugo.io/">themes.gohugo.io</a> 选择喜欢的主题，下载到 themes 目录中，然后在 config.toml 中配置 <code>theme = &quot;even&quot;</code> 即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git clone https://github.com/olOwOlo/hugo-theme-even themes/even  # 下载主题</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git clone https://github.com/olOwOlo/hugo-theme-even themes/even  # 下载主题</span>
 <span class="c1"># rm -rf themes/even/.git  # 清理主题git</span>
 <span class="c1"># cp themes/even/exampleSite/config.toml .  # 复制主题配置</span>
 </code></pre></td></tr></table>
@@ -200,11 +200,11 @@
 <p>hugo生成的静态网页放在public目录，这个目录无需提交到blog仓库，添加.gitignore文件忽略</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cat ~/blog/.gitignore </span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cat ~/blog/.gitignore </span>
 public
 </code></pre></td></tr></table>
 </div>
@@ -212,13 +212,13 @@ public
 <h2 id="生成发布key">生成发布key</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;</span><span class="k">$(</span>git config user.email<span class="k">)</span><span class="s2">&#34;</span> -f gh-pages -N <span class="s2">&#34;&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;</span><span class="k">$(</span>git config user.email<span class="k">)</span><span class="s2">&#34;</span> -f gh-pages -N <span class="s2">&#34;&#34;</span>
 <span class="c1"># You will get 2 files:</span>
 <span class="c1">#   gh-pages.pub (public key)</span>
 <span class="c1">#   gh-pages     (private key)</span>
@@ -229,7 +229,7 @@ public
 <p>新建.github/workflows/deploy.yml文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -264,7 +264,7 @@ public
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># cat .github/workflows/deploy.yml 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># cat .github/workflows/deploy.yml 
 name: deploy hugo blog github action
 
 # 当master分支发生push事件时执行下面任务

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-08-07_tls/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-08-07_tls/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-08-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-08-07T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-08-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-07T00:00:00+00:00" />
 
 <meta itemprop="name" content="TLS">
-<meta itemprop="description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati"><meta itemprop="datePublished" content="2020-08-07T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-08-07T00:00:00&#43;00:00" />
+<meta itemprop="description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati"><meta itemprop="datePublished" content="2020-08-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-08-07T00:00:00+00:00" />
 <meta itemprop="wordCount" content="843">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TLS"/>
@@ -142,11 +142,11 @@
 <p>在bionic中errno的定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"> <span class="kt">int</span><span class="o">*</span> <span class="nf">__errno</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">__attribute_const__</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"> <span class="kt">int</span><span class="o">*</span> <span class="nf">__errno</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">__attribute_const__</span><span class="p">;</span>
  <span class="cp">#define errno (*__errno())
 </span></code></pre></td></tr></table>
 </div>
@@ -155,11 +155,11 @@
 还有就是使用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">__thread</span> <span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">__thread</span> <span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
 <span class="k">thread_local</span> <span class="kt">int</span> <span class="n">tls_var</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
@@ -175,13 +175,13 @@
 <p>目前bionic不支持ELF TLS，因此在编译时使用了-emulated-tls，相关的soong代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go">            <span class="c1">// Work around bug in Clang that doesn&#39;t pass correct emulated
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">            <span class="c1">// Work around bug in Clang that doesn&#39;t pass correct emulated
 </span><span class="c1"></span>            <span class="c1">// TLS option to target. See b/72706604 or
 </span><span class="c1"></span>            <span class="c1">// https://github.com/android-ndk/ndk/issues/498.
 </span><span class="c1"></span>            <span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span><span class="p">,</span> <span class="s">&#34;-Wl,-plugin-opt,-emulated-tls&#34;</span><span class="p">)</span>
@@ -190,7 +190,7 @@
 </div><p>libc中相关的处理，对于tls的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -202,7 +202,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">        <span class="k">if</span> <span class="p">(</span><span class="nx">ELF_ST_TYPE</span><span class="p">(</span><span class="nx">s</span><span class="o">-&gt;</span><span class="na">st_info</span><span class="p">)</span> <span class="o">==</span> <span class="nx">STT_TLS</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php">        <span class="k">if</span> <span class="p">(</span><span class="nx">ELF_ST_TYPE</span><span class="p">(</span><span class="nx">s</span><span class="o">-&gt;</span><span class="na">st_info</span><span class="p">)</span> <span class="o">==</span> <span class="nx">STT_TLS</span><span class="p">)</span> <span class="p">{</span>
           <span class="nx">DL_ERR</span><span class="p">(</span><span class="s2">&#34;unsupported ELF TLS symbol </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2"> referenced by </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">,</span>
                  <span class="nx">sym_name</span><span class="p">,</span> <span class="nx">get_realpath</span><span class="p">());</span>
           <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
@@ -217,7 +217,7 @@
 </div><p>对于errno处理比较特殊，专门放到了tcb中，相关的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -252,7 +252,7 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Well-known TLS slots. What data goes in which slot is arbitrary unless otherwise noted.
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Well-known TLS slots. What data goes in which slot is arbitrary unless otherwise noted.
 </span><span class="c1"></span><span class="k">enum</span> <span class="p">{</span>
   <span class="n">TLS_SLOT_SELF</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// The kernel requires this specific slot for x86.
 </span><span class="c1"></span>  <span class="n">TLS_SLOT_THREAD_ID</span><span class="p">,</span>

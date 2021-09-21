@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-01_ssh-proxy/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="前提条件 有一个ssh账号，现阶段互联网上还是有不少的的公司提供免费vps，云平台的，一般都提供ssh访问账号。 该服务器在墙外，墙内的虽然也能" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-01_ssh-proxy/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-09-01T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-09-01T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-09-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-01T00:00:00+00:00" />
 
 <meta itemprop="name" content="ssh代理">
-<meta itemprop="description" content="前提条件 有一个ssh账号，现阶段互联网上还是有不少的的公司提供免费vps，云平台的，一般都提供ssh访问账号。 该服务器在墙外，墙内的虽然也能"><meta itemprop="datePublished" content="2017-09-01T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-09-01T00:00:00&#43;00:00" />
+<meta itemprop="description" content="前提条件 有一个ssh账号，现阶段互联网上还是有不少的的公司提供免费vps，云平台的，一般都提供ssh访问账号。 该服务器在墙外，墙内的虽然也能"><meta itemprop="datePublished" content="2017-09-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-09-01T00:00:00+00:00" />
 <meta itemprop="wordCount" content="205">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ssh代理"/>
@@ -147,10 +147,10 @@
 <p>安装expect，自动化ssh登录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install expect
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install expect
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -158,7 +158,7 @@
 <p>运行下述脚本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -172,7 +172,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">#!/usr/bin/expect
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#!/usr/bin/expect
 
 set timeout 10
 spawn /usr/bin/ssh -D 6300 -g -p 42043 cabox@host12.codeanyhost.com

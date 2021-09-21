@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_watchdog_soft_lockup/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="在仿真平台调试代码的时候，遇到了memset导致cpu stuck 22秒的问题，kernel crash log如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 [ 4028.140669] watchdog: BUG:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2021/2021-06-24_watchdog_soft_lockup/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-06-24T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-06-24T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-06-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-06-24T00:00:00+00:00" />
 
 <meta itemprop="name" content="watchdog: BUG: soft lockup - CPU#0 stuck for 22s">
-<meta itemprop="description" content="在仿真平台调试代码的时候，遇到了memset导致cpu stuck 22秒的问题，kernel crash log如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 [ 4028.140669] watchdog: BUG:"><meta itemprop="datePublished" content="2021-06-24T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2021-06-24T00:00:00&#43;00:00" />
+<meta itemprop="description" content="在仿真平台调试代码的时候，遇到了memset导致cpu stuck 22秒的问题，kernel crash log如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 [ 4028.140669] watchdog: BUG:"><meta itemprop="datePublished" content="2021-06-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-06-24T00:00:00+00:00" />
 <meta itemprop="wordCount" content="972">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="watchdog: BUG: soft lockup - CPU#0 stuck for 22s"/>
@@ -134,7 +134,7 @@
       <p>在仿真平台调试代码的时候，遇到了memset导致cpu stuck 22秒的问题，kernel crash log如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -155,7 +155,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[ 4028.140669] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [insmod:30243]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[ 4028.140669] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [insmod:30243]
 [ 4028.140678] Modules linked in: enflame(OE+) vboxsf sb_edac crct10dif_pclmul crc32_pclmul ghash_clmulni_intel snd_intel8x0 pcbc snd_ac97_codec aesni_intel ac97_bus snd_pcm snd_seq_midi aes_x86_64 vboxvideo(C) crypto_simd snd_seq_midi_event glue_helper cryptd snd_rawmidi ttm snd_seq snd_seq_device drm_kms_helper input_leds lpc_ich intel_rapl_perf snd_timer serio_raw drm fb_sys_fops snd syscopyarea sysfillrect i2c_piix4 mac_hid sysimgblt vboxguest soundcore nfsd auth_rpcgss nfs_acl lockd grace parport_pc sunrpc ppdev lp parport autofs4 psmouse ahci libahci e1000 video [last unloaded: enflame]
 [ 4028.140733] CPU: 0 PID: 30243 Comm: insmod Tainted: G        WC OE    4.15.0-142-generic #146~16.04.1-Ubuntu
 [ 4028.140734] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
@@ -180,7 +180,7 @@
 <p>调查发现，Linux内核对于每一个cpu都有一个监控进程，叫做watchdog（看门狗）。通过ps –ef | grep watchdog能够看见，进程名称是watchdog/X的形式，X对应cpu编号。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -191,7 +191,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">root        11     2  0 13:32 ?        00:00:00 [watchdog/0]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">root        11     2  0 13:32 ?        00:00:00 [watchdog/0]
 root        14     2  0 13:32 ?        00:00:00 [watchdog/1]
 root        20     2  0 13:32 ?        00:00:00 [watchdog/2]
 root        26     2  0 13:32 ?        00:00:00 [watchdog/3]

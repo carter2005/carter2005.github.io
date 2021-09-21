@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="背景 随着项目日益复杂，开发人员的增多，用单独的git做项目管理会遇到不少问题 产生单人维护一个模块的需求，对应一个或者有限的几个git，这样逻" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-06-09T10:21:20&#43;08:00" />
-<meta property="article:modified_time" content="2020-06-09T10:21:20&#43;08:00" />
+<meta property="article:published_time" content="2020-06-09T10:21:20+08:00" />
+<meta property="article:modified_time" content="2020-06-09T10:21:20+08:00" />
 
 <meta itemprop="name" content="git多仓库管理">
-<meta itemprop="description" content="背景 随着项目日益复杂，开发人员的增多，用单独的git做项目管理会遇到不少问题 产生单人维护一个模块的需求，对应一个或者有限的几个git，这样逻"><meta itemprop="datePublished" content="2020-06-09T10:21:20&#43;08:00" />
-<meta itemprop="dateModified" content="2020-06-09T10:21:20&#43;08:00" />
+<meta itemprop="description" content="背景 随着项目日益复杂，开发人员的增多，用单独的git做项目管理会遇到不少问题 产生单人维护一个模块的需求，对应一个或者有限的几个git，这样逻"><meta itemprop="datePublished" content="2020-06-09T10:21:20+08:00" />
+<meta itemprop="dateModified" content="2020-06-09T10:21:20+08:00" />
 <meta itemprop="wordCount" content="3749">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git多仓库管理"/>
@@ -182,30 +182,30 @@
 <h2 id="安装repo">安装repo</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
 $ chmod a+x ~/bin/repo
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="初始化manifest">初始化manifest</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.1_r1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.1_r1
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="下载代码">下载代码</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ repo sync
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ repo sync
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="提交代码">提交代码</h2>
@@ -215,7 +215,7 @@ $ chmod a+x ~/bin/repo
 <p>将一个已存在的Git仓库添加为正在工作的仓库的子模块，可以使用<code>git submodule add  []</code>命令。默认情况下，子模块会将子项目放在一个与仓库同名的目录中。我们也可以通过在命令结尾添加一个<code>path</code>来指定放到其他地方。如果这时运行<code>git status</code>，你会注意到2件事情。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -225,7 +225,7 @@ $ chmod a+x ~/bin/repo
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git status
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git status
 On branch master
 Your branch is up-to-date with &#39;origin/master&#39;.
 Changes to be committed:
@@ -238,12 +238,12 @@ Changes to be committed:
 </div><p>首先应当注意到新的<code>.gitmodules</code>文件。该文件保存了子模块的<code>url</code>与本地目录之间的映射：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[submodule &#34;themes/Hacker&#34;]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[submodule &#34;themes/Hacker&#34;]
     path = themes/Hacker
     url = /private/tmp/remote/Hacker.git
 </code></pre></td></tr></table>
@@ -251,7 +251,7 @@ Changes to be committed:
 </div><p>在<code>git status</code>输出中列出的另一个是项目文件夹记录。如果你运行<code>git diff</code>，会看到类似下面的信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -261,7 +261,7 @@ Changes to be committed:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git diff --cached themes/Hacker
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git diff --cached themes/Hacker
 diff --git a/themes/Hacker b/themes/Hacker
 new file mode 160000
 index 0000000..98260cd
@@ -274,7 +274,7 @@ index 0000000..98260cd
 </div><p>除了<code>git status</code>看到的差异外，还有个隐藏的变化在<code>.git/config</code>中：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -292,7 +292,7 @@ index 0000000..98260cd
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cat .git/config 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ cat .git/config 
 [core]
     repositoryformatversion = 0
     filemode = true
@@ -315,7 +315,7 @@ index 0000000..98260cd
 <p>当你克隆一个含有子模块的项目时，默认会包含该子模块目录，但其中还没有任何文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -325,7 +325,7 @@ index 0000000..98260cd
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
 Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
 <span class="k">done</span>.
 $ <span class="nb">cd</span> feilongwang.org/themes/Hacker/
@@ -338,7 +338,7 @@ drwxr-xr-x <span class="m">4</span> wangfeilong wheel <span class="m">136</span>
 </div><p>你必须运行两个命令：<code>git submodule init</code>用来初始化本地配置文件，而<code>git submodule update</code>则从该项目中抓取所有数据并检出父项目中列出的合适的提交。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -346,7 +346,7 @@ drwxr-xr-x <span class="m">4</span> wangfeilong wheel <span class="m">136</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ git submodule init
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git submodule init
 Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
 $ git submodule update
 Cloning into <span class="s1">&#39;/private/tmp/feilongwang.org/themes/Hacker&#39;</span>...
@@ -358,7 +358,7 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 <p>不过还有更简单一点的方式。如果给<code>git clone</code>命令传递<code>--recursive</code>选项，它就会自动初始化并更新仓库中的每一个子模块。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -367,7 +367,7 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ git clone --recursive /private/tmp/remote/feilongwang.org.git
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone --recursive /private/tmp/remote/feilongwang.org.git
 Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
 <span class="k">done</span>.
 Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
@@ -389,7 +389,7 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 <p>一段时间之后，子项目可能有大量新的代码，父项目也想使用这些代码。此时父项目的维护者只需执行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -402,7 +402,7 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ git subtree pull --prefix<span class="o">=</span>themes/Hacker /private/tmp/remote/Hacker.git master --squash 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git subtree pull --prefix<span class="o">=</span>themes/Hacker /private/tmp/remote/Hacker.git master --squash 
 remote: Counting objects: 8, <span class="k">done</span>.
 remote: Compressing objects: 100% <span class="o">(</span>8/8<span class="o">)</span>, <span class="k">done</span>.
 remote: Total <span class="m">8</span> <span class="o">(</span>delta 6<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
@@ -420,7 +420,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 <p>当我们开发一个项目若干时间后，希望将某个目录单独出一个项目来开发，同时又保留这部分代码历史提交记录，使用<code>git subtree split</code>可以很轻松的完成这个操作。以Hexo博客分离Hacker主题为例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -438,7 +438,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="nb">split</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span> <span class="o">--</span><span class="n">branch</span> <span class="n">hacker</span>
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="nb">split</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span> <span class="o">--</span><span class="n">branch</span> <span class="n">hacker</span>
 <span class="no">Created</span> <span class="n">branch</span> <span class="s1">&#39;hacker&#39;</span>
 <span class="mi">843147</span><span class="n">f3181399b06528251451bc498e01425f34</span>
 <span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">a</span>
@@ -461,7 +461,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 <p>如果我们在使用子项目的过程中，对子项目做了一些改动，同时我们又希望子项目的其他使用者也能共享这些改动，此时可以将我们的改动提交到子项目的远程仓库中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -473,7 +473,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="n">push</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="n">Hacker</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="n">push</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="n">Hacker</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
 <span class="n">git</span> <span class="n">push</span> <span class="k">using</span><span class="o">:</span>  <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
 <span class="n">Counting</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">301</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
 <span class="n">Delta</span> <span class="n">compression</span> <span class="k">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="p">.</span>
@@ -491,7 +491,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 <p>我们可以通过<code>gits prepare</code>初始化父项目，然后通过<code>gits attach</code>命令来添加Slave项目。如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -502,7 +502,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
 <span class="no">Cloning</span> <span class="n">into</span> <span class="s1">&#39;feilongwang.org&#39;</span><span class="o">...</span>
 <span class="n">done</span><span class="o">.</span>
 <span class="err">$</span> <span class="n">cd</span> <span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span>
@@ -516,7 +516,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </div><p>可以看出，当执行<code>gits prepare</code>命令时，它会在父项目的根目录下添加一个空的<code>.gitslave</code>文件。然后我们可以执行<code>gits attach REPOSITORY LOCALPATH</code>来添加Slave项目：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -538,7 +538,7 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="err">$</span> <span class="n">gits</span> <span class="n">attach</span> <span class="p">../</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span>
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="err">$</span> <span class="n">gits</span> <span class="n">attach</span> <span class="p">../</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span>
 <span class="n">Cloning</span> <span class="k">into</span> <span class="err">&#39;</span><span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span><span class="err">&#39;</span><span class="p">...</span>
 <span class="n">done</span><span class="p">.</span>
 <span class="na">[master 2e059b2]</span> <span class="n">gits</span> <span class="n">adding</span> <span class="s">&#34;../Hacker.git&#34;</span> <span class="s">&#34;themes/Hacker&#34;</span>
@@ -564,14 +564,14 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 <p>我们可以使用<code>gits clone</code>来克隆带有Slave仓库的项目，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ gits clone /private/tmp/remote/feilongwang.org.git
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ gits clone /private/tmp/remote/feilongwang.org.git
 Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
 <span class="k">done</span>.
 Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
@@ -581,7 +581,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </div><p>我们看到Git的克隆操作顺序在父项目与子项目中被执行。如果一开始你并知道要克隆的项目带有Slave仓库而直接将父项目克隆下来，此时我们可以通过<code>git populate</code>来进一步克隆Slave仓库，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -599,7 +599,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
 Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
 <span class="k">done</span>.
 $ <span class="nb">cd</span> feilongwang.org/
@@ -620,12 +620,12 @@ drwxr-xr-x  <span class="m">6</span> wangfeilong wheel  <span class="m">204</spa
 </div><p>此时我们发现子项目并没有被克隆。执行<code>gits populate</code>将克隆所有子项目：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ gits populate
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ gits populate
 Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 <span class="k">done</span>.
 </code></pre></td></tr></table>
@@ -634,7 +634,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 <p>我们对父项目和子项目做些修改、提交并将这些改动push到服务端，只需将对应的<code>git</code>命令换成<code>gits</code>，它会顺序在所有仓库中执行对应的<code>git</code>命令，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -653,7 +653,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">echo</span> <span class="err">“</span><span class="o">*.</span><span class="n">iml</span><span class="s2">&#34; &gt;&gt; .gitignore
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">echo</span> <span class="err">“</span><span class="o">*.</span><span class="n">iml</span><span class="s2">&#34; &gt;&gt; .gitignore
 </span><span class="s2">$ echo “*.iml&#34;</span> <span class="o">&gt;&gt;</span> <span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span><span class="o">/.</span><span class="n">gitignore</span>
 <span class="err">$</span> <span class="err">$</span> <span class="n">gits</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
 <span class="err">$</span> <span class="n">gits</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&#34;Ignore *.iml&#34;</span>
@@ -676,7 +676,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 <p>如果你想更新服务端最新代码，可以使用<code>gits pull</code>命令，它会将所有仓库代码都同步为服务端最新状态，如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -687,7 +687,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">$</span><span class="w"> </span><span class="n">gits</span><span class="w"> </span><span class="n">pull</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">$</span><span class="w"> </span><span class="n">gits</span><span class="w"> </span><span class="n">pull</span><span class="w">
 </span><span class="w"></span><span class="n">On</span>: <span class="p">(</span><span class="n">feilongwang</span><span class="p">.</span><span class="n">org</span><span class="p">)</span>:
   <span class="nc">Already</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="p">.</span><span class="w">
 </span><span class="w"></span><span class="n">On</span>: <span class="nc">themes</span><span class="o">/</span><span class="n">Hacker</span>:

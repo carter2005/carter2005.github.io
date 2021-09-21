@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-08-31T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2017-08-31T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2017-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-08-31T00:00:00+00:00" />
 
 <meta itemprop="name" content="gitblog">
-<meta itemprop="description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的"><meta itemprop="datePublished" content="2017-08-31T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-08-31T00:00:00&#43;00:00" />
+<meta itemprop="description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的"><meta itemprop="datePublished" content="2017-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-08-31T00:00:00+00:00" />
 <meta itemprop="wordCount" content="211">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gitblog"/>
@@ -143,19 +143,19 @@
 <h2 id="安装ubuntu-1404--apache2--php">安装ubuntu 14.04 + apache2 + php</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install apache2 libapache2-mod-php5 php5
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install apache2 libapache2-mod-php5 php5
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="开启rewrite">开启rewrite</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
 </code></pre></td></tr></table>
 </div>
 </div><ol>
@@ -163,10 +163,10 @@
 <p>修改/etc/apache2/apache2.conf,文件末尾添加</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -174,14 +174,14 @@
 <p>apache2.conf搜索directory字段，添加</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Directory /var/www/html&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Directory /var/www/html&gt;
     Options Indexes FollowSymLinks
     AllowOverride All
     Require all granted
@@ -193,7 +193,7 @@
 <p>网站根目录下添加.htaccess,内容如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -201,7 +201,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">RewriteEngine on
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -214,10 +214,10 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
 <h2 id="重启apache2服务">重启apache2服务</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">/etc/init.d/apache2 restart 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/etc/init.d/apache2 restart 
 </code></pre></td></tr></table>
 </div>
 </div>

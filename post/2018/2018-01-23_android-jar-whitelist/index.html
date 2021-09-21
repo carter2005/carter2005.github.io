@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-01-23_android-jar-whitelist/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="移植pixel experience rom的时候，发现编译framweork.jar会报错 1 check package ××× ExtendedFace is not in whitelist 在网上搜索了一下，这个错误是build/core" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2018/2018-01-23_android-jar-whitelist/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-01-23T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2018-01-23T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2018-01-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-23T00:00:00+00:00" />
 
 <meta itemprop="name" content="android_jar包白名单">
-<meta itemprop="description" content="移植pixel experience rom的时候，发现编译framweork.jar会报错 1 check package ××× ExtendedFace is not in whitelist 在网上搜索了一下，这个错误是build/core"><meta itemprop="datePublished" content="2018-01-23T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2018-01-23T00:00:00&#43;00:00" />
+<meta itemprop="description" content="移植pixel experience rom的时候，发现编译framweork.jar会报错 1 check package ××× ExtendedFace is not in whitelist 在网上搜索了一下，这个错误是build/core"><meta itemprop="datePublished" content="2018-01-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-01-23T00:00:00+00:00" />
 <meta itemprop="wordCount" content="195">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="android_jar包白名单"/>
@@ -134,10 +134,10 @@
       <p>移植pixel experience rom的时候，发现编译framweork.jar会报错</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">check</span> <span class="kn">package</span> <span class="err">×××</span> <span class="nx">ExtendedFace</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">in</span> <span class="nx">whitelist</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">check</span> <span class="kn">package</span> <span class="err">×××</span> <span class="nx">ExtendedFace</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">in</span> <span class="nx">whitelist</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在网上搜索了一下，这个错误是build/core/tasks/check_boot_jars/check_boot_jars.py打印的，同目录下还有一个package_whitelist.txt文件，如果添加的jar包名字不是标准的com.android开头的，那么需要添加到这个txt内。</p>

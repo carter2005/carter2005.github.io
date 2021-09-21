@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.0 with theme even" />
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-18_broadcast/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="背景 tf，PyTorch，numpy的广播其实和python的是一样的，算子支持广播的话可以简化代码（减少准备数据的代码），减少内存消耗。 例" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-18_broadcast/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-03-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-03-18T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-03-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-18T00:00:00+00:00" />
 
 <meta itemprop="name" content="广播机制">
-<meta itemprop="description" content="背景 tf，PyTorch，numpy的广播其实和python的是一样的，算子支持广播的话可以简化代码（减少准备数据的代码），减少内存消耗。 例"><meta itemprop="datePublished" content="2020-03-18T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-18T00:00:00&#43;00:00" />
+<meta itemprop="description" content="背景 tf，PyTorch，numpy的广播其实和python的是一样的，算子支持广播的话可以简化代码（减少准备数据的代码），减少内存消耗。 例"><meta itemprop="datePublished" content="2020-03-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-18T00:00:00+00:00" />
 <meta itemprop="wordCount" content="977">
 <meta itemprop="keywords" content="algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="广播机制"/>
@@ -138,7 +138,7 @@
 <p>例如，一个3 * 3的张量，减去一个常量，如果不支持广播，需要先将常量复制成3 * 3的，然后2个张量做减法。支持广播的话，3 * 3的张量可以直接减去1的张量。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -158,7 +158,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span>
@@ -183,7 +183,7 @@
 <p><img src="/post/image/image-20200227110311665.png" alt="image-20200227110311665"></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -207,7 +207,7 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++">	    <span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++">	    <span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
         <span class="k">const</span> <span class="kt">int</span> <span class="n">diffDimension</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
 
         <span class="c1">// else broadcast
@@ -235,7 +235,7 @@
 <p>核心是计算stride，对于可以广播的维度，它对应的shape值是1，stride为0，这样其实索引的还是原先的数据。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -290,7 +290,7 @@
 </span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 输入shape不同，通过广播方式计算，核心是计算dim及stride，广播最多支持6维
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 输入shape不同，通过广播方式计算，核心是计算dim及stride，广播最多支持6维
 </span><span class="c1"></span><span class="cp">#define MAX_DIM 6
 </span><span class="cp"></span>            <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_DIM</span><span class="p">);</span>
             <span class="kt">int</span> <span class="n">dims</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
