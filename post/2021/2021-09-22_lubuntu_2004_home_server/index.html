@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>lubuntu 20.04 home_server - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="lubuntu 20.04 home_server" />
+<meta property="og:description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="lubuntu 20.04 home_server">
+<meta itemprop="description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu"><meta itemprop="datePublished" content="2021-09-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-09-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="544">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="lubuntu 20.04 home_server"/>
+<meta name="twitter:description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">lubuntu 20.04 home_server</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-22 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lubuntu-20043安装">lubuntu 20.04.3安装</a></li>
+    <li><a href="#root登录">root登录</a></li>
+    <li><a href="#ssh-root登录">SSH root登录</a></li>
+    <li><a href="#socket5代理">socket5代理</a></li>
+    <li><a href="#设置git代理">设置git代理</a></li>
+    <li><a href="#webssh2">WebSSH2</a></li>
+    <li><a href="#x11vnc">x11vnc</a></li>
+    <li><a href="#novnc">noVNC</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="lubuntu-20043安装">lubuntu 20.04.3安装</h2>
+<p>lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubuntu没什么差别，注意界面全部选择英文。</p>
+<h2 id="root登录">root登录</h2>
+<p>修改/etc/sddm.conf文件，User改成root即可。记得给root设置一个密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo -s
+# passwd root
+# vim /etc/sddm.conf
+
+root@y450:/usr/local/bin# cat /etc/sddm.conf
+[Autologin]
+User=root
+Session=Lubuntu
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="ssh-root登录">SSH root登录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apt install openssh-server
+sed -i &#39;s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g&#39;   /etc/ssh/sshd_config
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="socket5代理">socket5代理</h2>
+<p>把基于ssh，kcptun的代理脚本放进去就可以</p>
+<h2 id="设置git代理">设置git代理</h2>
+<p>可以显著加快github下载速度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git config --global http.proxy &#39;socks5://192.168.1.29:6500&#39;
+git config --global https.proxy &#39;socks5://192.168.1.29:6500&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="webssh2">WebSSH2</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+apt-get -y install nodejs
+npm config set registry &#34;https://registry.npm.taobao.org&#34;
+
+cd /usr/local/bin/
+git clone https://github.com/billchurch/WebSSH2.git WebSSH2
+cd WebSSH2/app/
+cp config.json.sample config.json
+npm install --production
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="x11vnc">x11vnc</h2>
+<p>安装并设置密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apt-get -y install x11vnc
+x11vnc -storepasswd /etc/x11vnc.pass
+</code></pre></td></tr></table>
+</div>
+</div><p>lubuntu使用的sddm窗口管理器，它的auth文件时随机变化的uuid，使用systemctl管理很难，总是各种各样的错误，还是用rc.local脚本启动比较的方便。</p>
+<p>编辑/lib/systemd/system/rc-local.service，添加install部分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[Install]
+WantedBy=multi-user.target
+Alias=rc-local.service
+</code></pre></td></tr></table>
+</div>
+</div><p>添加/etc/rc.local文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>
+x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<span class="k">)</span>  -forever -bg -o /run/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> <span class="p">&amp;</span>
+
+<span class="nb">exit</span> <span class="m">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>启用服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
+systemctl enable rc-local
+systemctl start rc-local
+systemctl status rc-local
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="novnc">noVNC</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd /usr/local/bin/
+git clone https://github.com/novnc/noVNC.git noVNC
+rm -rf .key
+mkdir -p .key
+scp -r root@192.168.1.88:/usr/syno/etc/certificate/system/default/*  .key/
+/usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 &amp;
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-09-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2021/2021-09-20_arm_memset_crash/">
+            <span class="next-text nav-default">arm memset crash</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

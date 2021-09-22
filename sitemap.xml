@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://carter2005.github.io/post/2021/2021-09-22_arm_memset_crash/</loc>
+    <loc>https://carter2005.github.io/</loc>
     <lastmod>2021-09-22T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/</loc>
+    <loc>https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/</loc>
     <lastmod>2021-09-22T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -18,6 +18,13 @@
   <url>
     <loc>https://carter2005.github.io/post/</loc>
     <lastmod>2021-09-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2021/2021-09-20_arm_memset_crash/</loc>
+    <lastmod>2021-09-20T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
