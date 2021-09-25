@@ -49,7 +49,7 @@
 <meta itemprop="name" content="lubuntu 20.04 home_server">
 <meta itemprop="description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu"><meta itemprop="datePublished" content="2021-09-22T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-22T00:00:00+00:00" />
-<meta itemprop="wordCount" content="544">
+<meta itemprop="wordCount" content="548">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="lubuntu 20.04 home_server"/>
 <meta name="twitter:description" content="lubuntu 20.04.3安装 lubuntu 20.04更换了lxqt界面，比以前的版本好看了很多，但消耗的资源依旧很少，特别适合有些年龄的硬件。安装和普通的ubu"/>
@@ -285,6 +285,7 @@ systemctl status rc-local
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd /usr/local/bin/
@@ -293,6 +294,7 @@ rm -rf .key
 mkdir -p .key
 scp -r root@192.168.1.88:/usr/syno/etc/certificate/system/default/*  .key/
 /usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 &amp;
+apt install python3-numpy
 </code></pre></td></tr></table>
 </div>
 </div>
