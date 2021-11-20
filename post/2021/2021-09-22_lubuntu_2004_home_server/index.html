@@ -409,7 +409,7 @@ nohup npm start &gt; /run/webssh2.log <span class="p">&amp;</span> 2&gt;<span cl
 /usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 <span class="p">&amp;</span>
 
 <span class="c1"># ali yunpan</span>
-java -jar /usr/local/bin/webdav-aliyundriver-2.4.2.jar --aliyundrive.refresh-token<span class="o">=</span>a5b6c4e7cb8f4476a77c6e51065adfb5 --aliyundrive.auth.user-name<span class="o">=</span>wang --aliyundrive.auth.password<span class="o">=</span><span class="m">5529467</span> <span class="p">&amp;</span>
+java -jar /usr/local/bin/webdav-aliyundriver-2.4.2.jar --aliyundrive.refresh-token<span class="o">=</span>a5b6c4e7cb8f4476a77c6e51065adfb5 --aliyundrive.auth.user-name<span class="o">=</span>wang --aliyundrive.auth.password<span class="o">=</span>XXXXXXX <span class="p">&amp;</span>
 
 sleep <span class="m">5</span>
 x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<span class="k">)</span>  -forever -bg -o /run/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> <span class="p">&amp;</span>
