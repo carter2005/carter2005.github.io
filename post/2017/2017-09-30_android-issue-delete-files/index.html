@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-30_android-issue-delete-files/" />
@@ -140,11 +140,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">opendir();
-while (readdir())
-    unlink();
-closedir();
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">opendir();
+</span></span><span class="line"><span class="cl">while (readdir())
+</span></span><span class="line"><span class="cl">    unlink();
+</span></span><span class="line"><span class="cl">closedir();
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>出现这种问题的原因是在遍历文件目录的过程中，如果删除了一些文件，**readdir（）**的返回结果是不可预期的，可能导致while循环提前结束，从而遗留了一些文件。</p>
 <p>这个问题是和具体的文件系统相关的，yaffs2上可能会出现，ext4似乎不会。</p>
@@ -236,7 +236,7 @@ closedir();
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -256,7 +256,7 @@ closedir();
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

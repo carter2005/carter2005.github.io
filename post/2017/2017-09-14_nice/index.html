@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-14_nice/" />
@@ -156,8 +156,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">busybox ps -eo &#34;pid,pri,nice,comm&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">busybox ps -eo &#34;pid,pri,nice,comm&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="android中的nice">Android中的nice</h2>
 <p>由于Android基于Linux Kernel，在Android中也存在nice值。但是一般情况下我们无法控制，原因如下：</p>
@@ -194,27 +194,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Android中的线程优先级别目前规定了如下，了解了进程优先级与nice值的关系，那么线程优先级与值之间的关系也就更加容易理解。
-
-THREAD_PRIORITY_DEFAULT，默认的线程优先级，值为0。
-THREAD_PRIORITY_LOWEST，最低的线程级别，值为19。
-THREAD_PRIORITY_BACKGROUND 后台线程建议设置这个优先级，值为10。
-THREAD_PRIORITY_FOREGROUND 用户正在交互的UI线程，代码中无法设置该优先级，系统会按照情况调整到该优先级，值为-2。
-THREAD_PRIORITY_DISPLAY 也是与UI交互相关的优先级界别，但是要比THREAD_PRIORITY_FOREGROUND优先，代码中无法设置，由系统按照情况调整，值为-4。
-THREAD_PRIORITY_URGENT_DISPLAY 显示线程的最高级别，用来处理绘制画面和检索输入事件，代码中无法设置成该优先级。值为-8。
-THREAD_PRIORITY_AUDIO 声音线程的标准级别，代码中无法设置为该优先级，值为 -16。
-THREAD_PRIORITY_URGENT_AUDIO 声音线程的最高级别，优先程度较THREAD_PRIORITY_AUDIO要高。代码中无法设置为该优先级。值为-19。
-THREAD_PRIORITY_MORE_FAVORABLE 相对THREAD_PRIORITY_DEFAULT稍微优先，值为-1。
-THREAD_PRIORITY_LESS_FAVORABLE 相对THREAD_PRIORITY_DEFAULT稍微落后一些，值为1。
-使用Android API为线程设置优先级也很简单，只需要在线程执行时调用android.os.Process.setThreadPriority方法即可。这种在线程运行时进行修改优先级，效果类似renice。
-new Thread () {
-    @Override
-    public void run() {
-      super.run();
-        android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-    }
-}.start();
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Android中的线程优先级别目前规定了如下，了解了进程优先级与nice值的关系，那么线程优先级与值之间的关系也就更加容易理解。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_DEFAULT，默认的线程优先级，值为0。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_LOWEST，最低的线程级别，值为19。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_BACKGROUND 后台线程建议设置这个优先级，值为10。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_FOREGROUND 用户正在交互的UI线程，代码中无法设置该优先级，系统会按照情况调整到该优先级，值为-2。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_DISPLAY 也是与UI交互相关的优先级界别，但是要比THREAD_PRIORITY_FOREGROUND优先，代码中无法设置，由系统按照情况调整，值为-4。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_URGENT_DISPLAY 显示线程的最高级别，用来处理绘制画面和检索输入事件，代码中无法设置成该优先级。值为-8。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_AUDIO 声音线程的标准级别，代码中无法设置为该优先级，值为 -16。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_URGENT_AUDIO 声音线程的最高级别，优先程度较THREAD_PRIORITY_AUDIO要高。代码中无法设置为该优先级。值为-19。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_MORE_FAVORABLE 相对THREAD_PRIORITY_DEFAULT稍微优先，值为-1。
+</span></span><span class="line"><span class="cl">THREAD_PRIORITY_LESS_FAVORABLE 相对THREAD_PRIORITY_DEFAULT稍微落后一些，值为1。
+</span></span><span class="line"><span class="cl">使用Android API为线程设置优先级也很简单，只需要在线程执行时调用android.os.Process.setThreadPriority方法即可。这种在线程运行时进行修改优先级，效果类似renice。
+</span></span><span class="line"><span class="cl">new Thread () {
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void run() {
+</span></span><span class="line"><span class="cl">      super.run();
+</span></span><span class="line"><span class="cl">        android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}.start();
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -231,15 +231,15 @@ new Thread () {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Java为Thread提供了三个级别的设置，
-
-MAX_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_URGENT_DISPLAY，值为10。
-MIN_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_LOWEST，值为0。
-NORM_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_DEFAULT，值为5。
-使用setPriority我们可以为某个线程设置优先级，使用getPriority可以获得某个线程的优先级。
-
-在Android系统中，不建议使用Java原生的API，因为Android提供的API划分的级别更多，更适合在Android系统中进行设定细致的优先级。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Java为Thread提供了三个级别的设置，
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">MAX_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_URGENT_DISPLAY，值为10。
+</span></span><span class="line"><span class="cl">MIN_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_LOWEST，值为0。
+</span></span><span class="line"><span class="cl">NORM_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_DEFAULT，值为5。
+</span></span><span class="line"><span class="cl">使用setPriority我们可以为某个线程设置优先级，使用getPriority可以获得某个线程的优先级。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在Android系统中，不建议使用Java原生的API，因为Android提供的API划分的级别更多，更适合在Android系统中进行设定细致的优先级。
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -276,35 +276,35 @@ NORM_PRIORITY，相当于android.os.Process.THREAD_PRIORITY_DEFAULT，值为5。
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Android API的线程优先级和Java原生API的优先级是相对独立的，比如使用android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)后，使用Java原生API,Thread.getPriority()得到的值不会改变。如下面代码：
-new Thread() {
-    @Override
-    public void run() {
-        super.run();
-        Log.i(LOGTAG, &#34;Java Thread Priority Before=&#34; + Thread.currentThread().getPriority());
-        Process.setThreadPriority(Process.THREAD_PRIORITY_LOWEST);
-        Log.i(LOGTAG, &#34;Java Thread Priority=&#34; + Thread.currentThread().getPriority());
-    }
-}.start();
-
-上述代码的运行日志为
-
-I/MainActivity( 3679): Java Thread Priority Before=5
-I/MainActivity( 3679): Java Thread Priority=5
-
-由于上面的这一点缺陷，导致我们在分析ANR trace时需要注意，在下面的ANR日志信息中，prio=5中proi的值对应的Java原生API的线程优先级。而nice=-6中的nice表示的Android API版本的线程优先级。
-
-&#34;main&#34; prio=5 tid=1 NATIVE
-  | group=&#34;main&#34; sCount=1 dsCount=0 obj=0x41690f18 self=0x4167e650
-  | sysTid=1765 nice=-6 sched=0/0 cgrp=apps handle=1074196888
-  | state=S schedstat=( 0 0 0 ) utm=5764 stm=3654 core=2
-  #00  pc 00022624  /system/lib/libc.so (__futex_syscall3+8)
-  #01  pc 0000f054  /system/lib/libc.so (__pthread_cond_timedwait_relative+48)
-  #02  pc 0000f0b4  /system/lib/libc.so (__pthread_cond_timedwait+64)
-避免ANR
-
-我在之前的文章说说Android中的ANR中提到使用WorkerThread处理耗时IO操作，同时将WorkerThread的优先级降低，对于耗时IO操作，比如读取数据库，文件等，我们可以设置该workerThread优先级为THREAD_PRIORITY_BACKGROUND，以此降低与主线程竞争的能力。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Android API的线程优先级和Java原生API的优先级是相对独立的，比如使用android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)后，使用Java原生API,Thread.getPriority()得到的值不会改变。如下面代码：
+</span></span><span class="line"><span class="cl">new Thread() {
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void run() {
+</span></span><span class="line"><span class="cl">        super.run();
+</span></span><span class="line"><span class="cl">        Log.i(LOGTAG, &#34;Java Thread Priority Before=&#34; + Thread.currentThread().getPriority());
+</span></span><span class="line"><span class="cl">        Process.setThreadPriority(Process.THREAD_PRIORITY_LOWEST);
+</span></span><span class="line"><span class="cl">        Log.i(LOGTAG, &#34;Java Thread Priority=&#34; + Thread.currentThread().getPriority());
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">上述代码的运行日志为
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">I/MainActivity( 3679): Java Thread Priority Before=5
+</span></span><span class="line"><span class="cl">I/MainActivity( 3679): Java Thread Priority=5
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">由于上面的这一点缺陷，导致我们在分析ANR trace时需要注意，在下面的ANR日志信息中，prio=5中proi的值对应的Java原生API的线程优先级。而nice=-6中的nice表示的Android API版本的线程优先级。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&#34;main&#34; prio=5 tid=1 NATIVE
+</span></span><span class="line"><span class="cl">  | group=&#34;main&#34; sCount=1 dsCount=0 obj=0x41690f18 self=0x4167e650
+</span></span><span class="line"><span class="cl">  | sysTid=1765 nice=-6 sched=0/0 cgrp=apps handle=1074196888
+</span></span><span class="line"><span class="cl">  | state=S schedstat=( 0 0 0 ) utm=5764 stm=3654 core=2
+</span></span><span class="line"><span class="cl">  #00  pc 00022624  /system/lib/libc.so (__futex_syscall3+8)
+</span></span><span class="line"><span class="cl">  #01  pc 0000f054  /system/lib/libc.so (__pthread_cond_timedwait_relative+48)
+</span></span><span class="line"><span class="cl">  #02  pc 0000f0b4  /system/lib/libc.so (__pthread_cond_timedwait+64)
+</span></span><span class="line"><span class="cl">避免ANR
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">我在之前的文章说说Android中的ANR中提到使用WorkerThread处理耗时IO操作，同时将WorkerThread的优先级降低，对于耗时IO操作，比如读取数据库，文件等，我们可以设置该workerThread优先级为THREAD_PRIORITY_BACKGROUND，以此降低与主线程竞争的能力。
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -383,7 +383,7 @@ I/MainActivity( 3679): Java Thread Priority=5
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -403,7 +403,7 @@ I/MainActivity( 3679): Java Thread Priority=5
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

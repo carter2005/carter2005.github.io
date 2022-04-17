@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-31_android-basic/" />
@@ -156,10 +156,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
-chmod +x repo
-为了方便可以将其拷贝到你的PATH里。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
+</span></span><span class="line"><span class="cl">chmod +x repo
+</span></span><span class="line"><span class="cl">为了方便可以将其拷贝到你的PATH里。
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -172,11 +172,11 @@ chmod +x repo
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo的运行过程中会尝试访问官方的git源更新自己，如果想使用tuna的镜像源进行更新，可以将如下内容复制到你的~/.bashrc里
-
-export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
-并重启终端模拟器。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">repo的运行过程中会尝试访问官方的git源更新自己，如果想使用tuna的镜像源进行更新，可以将如下内容复制到你的~/.bashrc里
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
+</span></span><span class="line"><span class="cl">并重启终端模拟器。
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -189,8 +189,8 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo init -u https://aosp.tuna.tsinghua.edu.cn/mirror/manifest --mirror
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">repo init -u https://aosp.tuna.tsinghua.edu.cn/mirror/manifest --mirror
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -200,8 +200,8 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">repo sync
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">repo sync
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -217,10 +217,10 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    repo init -u git://10.27.9.37/platform/manifest -b android-8.0.0_r4
-    repo sync -c -j 8     # -c参数强制只下载android-8.0.0_r4这个branch，可以减少网络压力  -j 8表明8个下载线程，可以加快下载速度
-    repo start master --all
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    repo init -u git://10.27.9.37/platform/manifest -b android-8.0.0_r4
+</span></span><span class="line"><span class="cl">    repo sync -c -j 8     # -c参数强制只下载android-8.0.0_r4这个branch，可以减少网络压力  -j 8表明8个下载线程，可以加快下载速度
+</span></span><span class="line"><span class="cl">    repo start master --all
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="编译">编译</h2>
 <div class="highlight"><div class="chroma">
@@ -230,10 +230,10 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    .build/envsetup.sh
-    lunch     # 选择编译设备
-    make -j 8     # 8个线程编译，线程数一般是cpu的2倍
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    .build/envsetup.sh
+</span></span><span class="line"><span class="cl">    lunch     # 选择编译设备
+</span></span><span class="line"><span class="cl">    make -j 8     # 8个线程编译，线程数一般是cpu的2倍
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -312,7 +312,7 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -332,7 +332,7 @@ export REPO_URL=&#39;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&#39;
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

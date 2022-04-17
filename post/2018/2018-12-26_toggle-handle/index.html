@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-12-26_toggle-handle/" />
@@ -153,13 +153,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;label class=&#34;toggle toggle-green item-toggle-main&#34; effect-playabled=&#34;true&#34; ng-click=&#34;&#34;&gt;
-    &lt;input type=&#34;checkbox&#34; ng-change=&#34;checkFlightMode()&#34; ng-model=&#34;flightModeState.checked&#34; id=&#34;flightModeId&#34; ng-disabled=&#34;flightModeToggleDisabled&#34;&gt;
-    &lt;div class=&#34;track&#34;&gt;
-        &lt;div class=&#34;handle&#34;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/label&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;label class=&#34;toggle toggle-green item-toggle-main&#34; effect-playabled=&#34;true&#34; ng-click=&#34;&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;input type=&#34;checkbox&#34; ng-change=&#34;checkFlightMode()&#34; ng-model=&#34;flightModeState.checked&#34; id=&#34;flightModeId&#34; ng-disabled=&#34;flightModeToggleDisabled&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;div class=&#34;track&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;div class=&#34;handle&#34;&gt;&lt;/div&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;/label&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>很简单的html实现，查看class对应的css发现</p>
 <div class="highlight"><div class="chroma">
@@ -179,20 +179,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.toggle .track {
-  width: 4.5rem;
-  height: 2.2rem;
-
-  -webkit-transition-duration: 0s;
-          transition-duration: 0s;
-
-  border: .1rem solid #e6e6e6;
-  background: #e6e6e6;
-  left: auto;
-  right: 1.2rem;
-  position: absolute;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.toggle .track {
+</span></span><span class="line"><span class="cl">  width: 4.5rem;
+</span></span><span class="line"><span class="cl">  height: 2.2rem;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  -webkit-transition-duration: 0s;
+</span></span><span class="line"><span class="cl">          transition-duration: 0s;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  border: .1rem solid #e6e6e6;
+</span></span><span class="line"><span class="cl">  background: #e6e6e6;
+</span></span><span class="line"><span class="cl">  left: auto;
+</span></span><span class="line"><span class="cl">  right: 1.2rem;
+</span></span><span class="line"><span class="cl">  position: absolute;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后三行是新加的代码，修改了track的位置计算方法，对应的handle却没有修改，从而导致了差异。</p>
 <h2 id="相关知识">相关知识</h2>
@@ -222,26 +222,26 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;style&gt; 
-.user
-{
-    font-size: 30px;
-    background-color:red;
-}
-.login
-{
-    background-color:blue;
-}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;div class=&#39;user&#39;&gt;你好。这是一个 DIV 元素，class=&#39;user&#39;。&lt;/div&gt;
-&lt;div class=&#39;login&#39;&gt;你好。这是一个 DIV 元素，class=&#39;login&#39;。&lt;/div&gt;
-&lt;div class=&#39;user login&#39;&gt;你好。这是一个 DIV 元素，class=&#39;user login&#39;。&lt;/div&gt;
-
-&lt;/body&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;style&gt; 
+</span></span><span class="line"><span class="cl">.user
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    font-size: 30px;
+</span></span><span class="line"><span class="cl">    background-color:red;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">.login
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    background-color:blue;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">&lt;/style&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;div class=&#39;user&#39;&gt;你好。这是一个 DIV 元素，class=&#39;user&#39;。&lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;div class=&#39;login&#39;&gt;你好。这是一个 DIV 元素，class=&#39;login&#39;。&lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;div class=&#39;user login&#39;&gt;你好。这是一个 DIV 元素，class=&#39;user login&#39;。&lt;/div&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>css类选择器，空格分隔表示从属关系，否则表示同时具备</li>
@@ -317,74 +317,74 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">HTML：
-&lt;div class=&#34;nav&#34;&gt;
-    &lt;div class=&#34;w&#34;&gt;
-        &lt;div class=&#34;user-info&#34;&gt;
-            &lt;span class=&#34;user not-login&#34;&gt;
-                &lt;span class=&#34;link js-login&#34;&gt;登录&lt;/span&gt;
-                &lt;span class=&#34;link js-register&#34;&gt;注册&lt;/span&gt;
-            &lt;/span&gt;
-            &lt;span class=&#34;user login&#34;&gt;
-                &lt;span class=&#34;link-text&#34;&gt;
-                    欢迎，
-                    &lt;span class=&#34;username&#34;&gt;&lt;/span&gt;&lt;/span&gt;
-                &lt;span class=&#34;link&#34;&gt;退出&lt;/span&gt;
-            &lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;!-- 右侧的导航链接 --&gt;
-        &lt;ul class=&#34;nav-list&#34;&gt;
-            &lt;li class=&#34;nav-item&#34;&gt;
-                &lt;a class=&#34;link&#34; href=&#34;./cart.html&#34;&gt;
-                    &lt;i class=&#34;fa fa-shopping-cart&#34;&gt;&lt;/i&gt;
-                    购物车(&lt;span class=&#34;cart-cont&#34;&gt;0&lt;/span&gt;)
-                &lt;/a&gt;
-            &lt;/li&gt;
-            &lt;li class=&#34;nav-item&#34;&gt;
-                &lt;a class=&#34;link&#34; href=&#34;./order-list.html&#34;&gt;我的订单&lt;/a&gt;
-            &lt;/li&gt;
-            &lt;li class=&#34;nav-item&#34;&gt;
-                &lt;a class=&#34;link&#34; href=&#34;./user-center.html&#34;&gt;我的MMall&lt;/a&gt;
-            &lt;/li&gt;
-            &lt;li class=&#34;nav-item&#34;&gt;
-                &lt;a class=&#34;link&#34; href=&#34;./about.html&#34;&gt;关于MMall&lt;/a&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-CSS：
-.nav{
-    background: #eee;
-    height: 30px;
-    line-height: 30px;
-}
-
-/* 用户部分 */
-.nav .user{
-    float: left;
-}
-.nav .user.login{
-    display: none;
-}
-.nav .user .link{
-    margin-right: 5px;
-}
-
-/* 导航链接部分 */
-.nav .nav-list{
-    float: right;
-}
-.nav .nav-list .nav-item{
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.nav .user（中间有空格）匹配到class含有nav的元素下面的class含有user的元素，是&lt;span class=&#34;user not-login&#34;&gt;和&lt;span class=&#34;user login&#34;&gt;。
-.user.login（中间没有空格）匹配到class同时含有user和login的元素，是&lt;span class=&#34;user login&#34;&gt;。
-.nav .user.login（.nav和.user中间有空格，.user和.login中间没有空格）匹配到class含有nav的元素下面的class同时含有user和login的元素，是&lt;span class=&#34;user login&#34;&gt;。   
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HTML：
+</span></span><span class="line"><span class="cl">&lt;div class=&#34;nav&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;div class=&#34;w&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;div class=&#34;user-info&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;span class=&#34;user not-login&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;span class=&#34;link js-login&#34;&gt;登录&lt;/span&gt;
+</span></span><span class="line"><span class="cl">                &lt;span class=&#34;link js-register&#34;&gt;注册&lt;/span&gt;
+</span></span><span class="line"><span class="cl">            &lt;/span&gt;
+</span></span><span class="line"><span class="cl">            &lt;span class=&#34;user login&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;span class=&#34;link-text&#34;&gt;
+</span></span><span class="line"><span class="cl">                    欢迎，
+</span></span><span class="line"><span class="cl">                    &lt;span class=&#34;username&#34;&gt;&lt;/span&gt;&lt;/span&gt;
+</span></span><span class="line"><span class="cl">                &lt;span class=&#34;link&#34;&gt;退出&lt;/span&gt;
+</span></span><span class="line"><span class="cl">            &lt;/span&gt;
+</span></span><span class="line"><span class="cl">        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        &lt;!-- 右侧的导航链接 --&gt;
+</span></span><span class="line"><span class="cl">        &lt;ul class=&#34;nav-list&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;a class=&#34;link&#34; href=&#34;./cart.html&#34;&gt;
+</span></span><span class="line"><span class="cl">                    &lt;i class=&#34;fa fa-shopping-cart&#34;&gt;&lt;/i&gt;
+</span></span><span class="line"><span class="cl">                    购物车(&lt;span class=&#34;cart-cont&#34;&gt;0&lt;/span&gt;)
+</span></span><span class="line"><span class="cl">                &lt;/a&gt;
+</span></span><span class="line"><span class="cl">            &lt;/li&gt;
+</span></span><span class="line"><span class="cl">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;a class=&#34;link&#34; href=&#34;./order-list.html&#34;&gt;我的订单&lt;/a&gt;
+</span></span><span class="line"><span class="cl">            &lt;/li&gt;
+</span></span><span class="line"><span class="cl">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;a class=&#34;link&#34; href=&#34;./user-center.html&#34;&gt;我的MMall&lt;/a&gt;
+</span></span><span class="line"><span class="cl">            &lt;/li&gt;
+</span></span><span class="line"><span class="cl">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;a class=&#34;link&#34; href=&#34;./about.html&#34;&gt;关于MMall&lt;/a&gt;
+</span></span><span class="line"><span class="cl">            &lt;/li&gt;
+</span></span><span class="line"><span class="cl">        &lt;/ul&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;/div&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CSS：
+</span></span><span class="line"><span class="cl">.nav{
+</span></span><span class="line"><span class="cl">    background: #eee;
+</span></span><span class="line"><span class="cl">    height: 30px;
+</span></span><span class="line"><span class="cl">    line-height: 30px;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* 用户部分 */
+</span></span><span class="line"><span class="cl">.nav .user{
+</span></span><span class="line"><span class="cl">    float: left;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">.nav .user.login{
+</span></span><span class="line"><span class="cl">    display: none;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">.nav .user .link{
+</span></span><span class="line"><span class="cl">    margin-right: 5px;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* 导航链接部分 */
+</span></span><span class="line"><span class="cl">.nav .nav-list{
+</span></span><span class="line"><span class="cl">    float: right;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">.nav .nav-list .nav-item{
+</span></span><span class="line"><span class="cl">    display: inline-block;
+</span></span><span class="line"><span class="cl">    margin-left: 5px;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.nav .user（中间有空格）匹配到class含有nav的元素下面的class含有user的元素，是&lt;span class=&#34;user not-login&#34;&gt;和&lt;span class=&#34;user login&#34;&gt;。
+</span></span><span class="line"><span class="cl">.user.login（中间没有空格）匹配到class同时含有user和login的元素，是&lt;span class=&#34;user login&#34;&gt;。
+</span></span><span class="line"><span class="cl">.nav .user.login（.nav和.user中间有空格，.user和.login中间没有空格）匹配到class含有nav的元素下面的class同时含有user和login的元素，是&lt;span class=&#34;user login&#34;&gt;。   
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="修复">修复</h2>
 <p>鉴于handle位于toggle内部，修改对应的css，添加后面4行</p>
@@ -407,22 +407,22 @@ CSS：
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.toggle .handle {
-  top: 16px;
-  left: 297px;
-  width: 1.8rem;
-  height: 1.8rem;
-
-  transition: 0.3s cubic-bezier(0, 1.1, 1, 1.1);
-
-  box-shadow: none;
-
-  top: 0.1rem;
-  left: 0.2rem;
-  right: 1.2rem;
-  position: absolute;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.toggle .handle {
+</span></span><span class="line"><span class="cl">  top: 16px;
+</span></span><span class="line"><span class="cl">  left: 297px;
+</span></span><span class="line"><span class="cl">  width: 1.8rem;
+</span></span><span class="line"><span class="cl">  height: 1.8rem;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  transition: 0.3s cubic-bezier(0, 1.1, 1, 1.1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  box-shadow: none;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  top: 0.1rem;
+</span></span><span class="line"><span class="cl">  left: 0.2rem;
+</span></span><span class="line"><span class="cl">  right: 1.2rem;
+</span></span><span class="line"><span class="cl">  position: absolute;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -501,7 +501,7 @@ CSS：
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -521,7 +521,7 @@ CSS：
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

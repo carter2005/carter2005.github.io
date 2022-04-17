@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-11-20_proxmox/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="proxmox">
 <meta itemprop="description" content="去掉订阅提示 /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索da"><meta itemprop="datePublished" content="2019-11-20T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-11-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="518">
+<meta itemprop="wordCount" content="524">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="proxmox"/>
 <meta name="twitter:description" content="去掉订阅提示 /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js里面搜索da"/>
@@ -153,20 +153,20 @@ apt update
 apt-get install vim</p>
 <p> </p>
 <h3 id="e1000e网卡">e1000e网卡</h3>
-<p>打开/usr/share/perl5/PVE/QemuServer.pm，添加&rsquo;e1000e'
-找到my $nic_model_list = [&lsquo;rtl8139&rsquo;, &lsquo;ne2k_pci&rsquo;, &lsquo;e1000&rsquo;, &lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&lsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&lsquo;e1000-82540em&rsquo;, &lsquo;e1000-82544gc&rsquo;, &lsquo;e1000-82545em&rsquo;];
-修改为my $nic_model_list = [&lsquo;rtl8139&rsquo;, &lsquo;ne2k_pci&rsquo;, &lsquo;e1000&rsquo;, &lsquo;e1000e&rsquo;,&lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&lsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&lsquo;e1000-82540em&rsquo;, &lsquo;e1000-82544gc&rsquo;, &lsquo;e1000-82545em&rsquo;];</p>
+<p>打开/usr/share/perl5/PVE/QemuServer.pm，添加&rsquo;e1000e&rsquo;
+找到my $nic_model_list = [&lsquo;rtl8139&rsquo;, &rsquo;ne2k_pci&rsquo;, &rsquo;e1000&rsquo;, &lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&rsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&rsquo;e1000-82540em&rsquo;, &rsquo;e1000-82544gc&rsquo;, &rsquo;e1000-82545em&rsquo;];
+修改为my $nic_model_list = [&lsquo;rtl8139&rsquo;, &rsquo;ne2k_pci&rsquo;, &rsquo;e1000&rsquo;, &rsquo;e1000e&rsquo;,&lsquo;pcnet&rsquo;,  &lsquo;virtio&rsquo;,&rsquo;ne2k_isa&rsquo;, &lsquo;i82551&rsquo;, &lsquo;i82557b&rsquo;, &lsquo;i82559er&rsquo;, &lsquo;vmxnet3&rsquo;,&rsquo;e1000-82540em&rsquo;, &rsquo;e1000-82544gc&rsquo;, &rsquo;e1000-82545em&rsquo;];</p>
 <p>打开/usr/share/pve-manager/js/pvemanagerlib.js，添加|e1000e|
 找到if ((match_res = p.match(/^(ne2k_pci|e1000|e1000-82540em|e1000-82544gc|e1000-82545em|vmxnet3|rtl8139|pcnet|virtio|ne2k_isa|i82551|i82557b|i82559er)(=([0-9a-f]{2}(:[0-9a-f]{2}){5}))?$/i)) !== null)。
 修改为if ((match_res = p.match(/^(ne2k_pci|e1000|e1000e|e1000-82540em|e1000-82544gc|e1000-82545em|vmxnet3|rtl8139|pcnet|virtio|ne2k_isa|i82551|i82557b|i82559er)(=([0-9a-f]{2}(:[0-9a-f]{2}){5}))?$/i)) !== null)。</p>
-<p>接下来还是在pvemanagerlib.js里，添加[&lsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;]
+<p>接下来还是在pvemanagerlib.js里，添加[&rsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;]
 找到
 Ext.define(&lsquo;PVE.form.NetworkCardSelector&rsquo;, {
 extend: &lsquo;PVE.form.KVComboBox&rsquo;,
 alias: [&lsquo;widget.PVE.form.NetworkCardSelector&rsquo;],
 comboItems: [
-[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;],
-[&lsquo;virtio&rsquo;, &lsquo;VirtIO (&rsquo; + gettext(&lsquo;paravirtualized&rsquo;) + &lsquo;)'],
+[&rsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;],
+[&lsquo;virtio&rsquo;, &lsquo;VirtIO (&rsquo; + gettext(&lsquo;paravirtualized&rsquo;) + &lsquo;)&rsquo;],
 [&lsquo;rtl8139&rsquo;, &lsquo;Realtek RTL8139&rsquo;],
 [&lsquo;vmxnet3&rsquo;, &lsquo;VMware vmxnet3&rsquo;]</p>
 <p>});
@@ -175,15 +175,15 @@ Ext.define(&lsquo;PVE.form.NetworkCardSelector&rsquo;, {
 extend: &lsquo;PVE.form.KVComboBox&rsquo;,
 alias: [&lsquo;widget.PVE.form.NetworkCardSelector&rsquo;],
 comboItems: [
-[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;],
-[&lsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;],
-[&lsquo;virtio&rsquo;, &lsquo;VirtIO (&rsquo; + gettext(&lsquo;paravirtualized&rsquo;) + &lsquo;)'],
+[&rsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;],
+[&rsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;],
+[&lsquo;virtio&rsquo;, &lsquo;VirtIO (&rsquo; + gettext(&lsquo;paravirtualized&rsquo;) + &lsquo;)&rsquo;],
 [&lsquo;rtl8139&rsquo;, &lsquo;Realtek RTL8139&rsquo;],
 [&lsquo;vmxnet3&rsquo;, &lsquo;VMware vmxnet3&rsquo;]</p>
 <p>});</p>
-<p>sed -i &ldquo;s/&lsquo;e1000&rsquo;,/&lsquo;e1000&rsquo;,&lsquo;e1000e&rsquo;,/&rdquo; /usr/share/perl5/PVE/QemuServer.pm
+<p>sed -i &ldquo;s/&rsquo;e1000&rsquo;,/&rsquo;e1000&rsquo;,&rsquo;e1000e&rsquo;,/&rdquo; /usr/share/perl5/PVE/QemuServer.pm
 sed -i &ldquo;s/e1000|/e1000|e1000e|/&rdquo; /usr/share/pve-manager/js/pvemanagerlib.js
-sed -i &ldquo;s/\[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],/\[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],\n\[&lsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;\],/&rdquo; /usr/share/pve-manager/js/pvemanagerlib.js</p>
+sed -i &ldquo;s/\[&rsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],/\[&rsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],\n\[&rsquo;e1000e&rsquo;, &lsquo;Intel e1000e&rsquo;\],/&rdquo; /usr/share/pve-manager/js/pvemanagerlib.js</p>
 <h3 id="总结">总结</h3>
 <ul>
 <li>驱动比较齐全，硬件兼容性好</li>
@@ -269,7 +269,7 @@ sed -i &ldquo;s/\[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],/\[&lsquo;e10
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -289,7 +289,7 @@ sed -i &ldquo;s/\[&lsquo;e1000&rsquo;, &lsquo;Intel E1000&rsquo;\],/\[&lsquo;e10
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

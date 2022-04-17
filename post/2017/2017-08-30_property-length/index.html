@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-30_property-length/" />
@@ -156,21 +156,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Edit build/tools/post_process_props.py. Change lines as follows:
-
-PROP_NAME_MAX = 31
-# PROP_VALUE_MAX = 91
-PROP_VALUE_MAX = 128
-Edit bionic/libc/include/sys/system_properties.h. Change lines as follows:
-
-#define PROP_NAME_MAX   32
-// #define PROP_VALUE_MAX  92
-#define PROP_VALUE_MAX  128
-Do
-
-make clean
-make
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Edit build/tools/post_process_props.py. Change lines as follows:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PROP_NAME_MAX = 31
+</span></span><span class="line"><span class="cl"># PROP_VALUE_MAX = 91
+</span></span><span class="line"><span class="cl">PROP_VALUE_MAX = 128
+</span></span><span class="line"><span class="cl">Edit bionic/libc/include/sys/system_properties.h. Change lines as follows:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#define PROP_NAME_MAX   32
+</span></span><span class="line"><span class="cl">// #define PROP_VALUE_MAX  92
+</span></span><span class="line"><span class="cl">#define PROP_VALUE_MAX  128
+</span></span><span class="line"><span class="cl">Do
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make clean
+</span></span><span class="line"><span class="cl">make
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -251,7 +251,7 @@ make
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -271,7 +271,7 @@ make
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

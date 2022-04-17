@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="深入理解git原理">
 <meta itemprop="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C"><meta itemprop="datePublished" content="2019-01-02T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-01-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="12208">
+<meta itemprop="wordCount" content="12214">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="深入理解git原理"/>
 <meta name="twitter:description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C"/>
@@ -227,7 +227,7 @@
 <p><img src="http://p1.pstatp.com/large/pgc-image/351cd0ff19b5446e804fd4023a0cf423" alt="深入理解git原理"></p>
 <p>Forking工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能push代码到仅有的中央仓库中。 开发者push到自己的服务端仓库，而只有项目维护者才能push到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。</p>
 <p><strong>Git rebase</strong></p>
-<p>把一个分支中的修改整合到另一个分支的办法有两种，第一种是我们常用的git merge操作，而第二种便是本节要讲的rebase（中文翻译为衍合）。该命令的原理是，回到两个分支最近的共同祖先，根据当前分支（也就是要进行衍合的分支experiment）后续的历次提交对象（这里只有一个 C3），生成一系列文件补丁，然后以基底分支（也就是主干分支master）最后一个提交对象（C4）为新的出发点，逐个应用之前准备好的补丁文件，最后会生成一个新的合并提交对象（C3'），从而改写 experiment 的提交历史，使它成为 master 分支的直接下游。如下图所示：</p>
+<p>把一个分支中的修改整合到另一个分支的办法有两种，第一种是我们常用的git merge操作，而第二种便是本节要讲的rebase（中文翻译为衍合）。该命令的原理是，回到两个分支最近的共同祖先，根据当前分支（也就是要进行衍合的分支experiment）后续的历次提交对象（这里只有一个 C3），生成一系列文件补丁，然后以基底分支（也就是主干分支master）最后一个提交对象（C4）为新的出发点，逐个应用之前准备好的补丁文件，最后会生成一个新的合并提交对象（C3&rsquo;），从而改写 experiment 的提交历史，使它成为 master 分支的直接下游。如下图所示：</p>
 <p><img src="http://p1.pstatp.com/large/pgc-image/75a0dfc9f6724992b475c7f9a596deca" alt="深入理解git原理"></p>
 <p>一般我们使用rebase的目的，是想要得到一个能在远程分支上干净应用的补丁，比如某些项目你不是维护者，但想帮点忙的话，最好用rebase：先在自己的一个分支里进行开发，当准备向主项目提交补丁的时候，根据最新的 origin/master 进行一次衍合操作然后再提交，这样维护者就不需要做任何整合工作（实际上是<strong>把解决分支补丁同最新主干代码之间冲突的责任，化转为由提交补丁的人来解决</strong>），只需根据你提供的仓库地址作一次快进合并，或者直接采纳你提交的补丁。</p>
 <p>在rebase的过程中，也许会出现冲突。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用git add命令去更新这些内容的索引， 然后，你无需执行git-commit，只要执行git rebase –continue，这样git会继续应用(apply)余下的补丁。如果要舍弃本次衍合，只需要git rebase &ndash;abort即可。切记，<strong>一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行rebase操作</strong>。</p>
@@ -334,7 +334,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -354,7 +354,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

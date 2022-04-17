@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" />
@@ -175,31 +175,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 重新加载systemd
-systemctl daemon-reload
-
-# 开机启动
-systemctl enable mysqld
-
-# 关闭开机启动
-systemctl disable mysqld
-
-# 启动服务
-systemctl start mysqld
-
-# 停止服务
-systemctl stop mysqld
-
-# 重启服务
-systemctl restart mysqld
-
-# 查看服务状态
-systemctl status mysqld
-systemctl is-active sshd.service
-
-# 结束服务进程(服务无法停止时)
-systemctl kill mysqld
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 重新加载systemd
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 开机启动
+</span></span><span class="line"><span class="cl">systemctl enable mysqld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 关闭开机启动
+</span></span><span class="line"><span class="cl">systemctl disable mysqld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 启动服务
+</span></span><span class="line"><span class="cl">systemctl start mysqld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 停止服务
+</span></span><span class="line"><span class="cl">systemctl stop mysqld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 重启服务
+</span></span><span class="line"><span class="cl">systemctl restart mysqld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 查看服务状态
+</span></span><span class="line"><span class="cl">systemctl status mysqld
+</span></span><span class="line"><span class="cl">systemctl is-active sshd.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 结束服务进程(服务无法停止时)
+</span></span><span class="line"><span class="cl">systemctl kill mysqld
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="新增synergy服务">新增synergy服务</h2>
 <ol>
@@ -219,17 +219,17 @@ systemctl kill mysqld
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[Unit]
-Description=Synergy for sharing mouse and keyboard
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/synergys -f --log /run/synergy.log --debug WARNING --name taylor-debug-pc -c /etc/synergy/synergy.conf --address :24800
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=Synergy for sharing mouse and keyboard
+</span></span><span class="line"><span class="cl">After=network.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">ExecStart=/usr/bin/synergys -f --log /run/synergy.log --debug WARNING --name taylor-debug-pc -c /etc/synergy/synergy.conf --address :24800
+</span></span><span class="line"><span class="cl">Restart=on-failure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -241,10 +241,10 @@ WantedBy=multi-user.target
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
-systemctl enable synergy
-systemctl start synergy
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl enable synergy
+</span></span><span class="line"><span class="cl">systemctl start synergy
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
@@ -325,7 +325,7 @@ systemctl start synergy
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -345,7 +345,7 @@ systemctl start synergy
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

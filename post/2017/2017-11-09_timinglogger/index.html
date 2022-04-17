@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-11-09_timinglogger/" />
@@ -146,17 +146,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class
-
-TimingLogger
-
-extends Object
-
-java.lang.Object
-↳ android.util.TimingLogger
-
-Class OverView
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">TimingLogger
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">extends Object
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">java.lang.Object
+</span></span><span class="line"><span class="cl">↳ android.util.TimingLogger
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Class OverView
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>A utility class to help log timings splits throughout a method call. Typical usage is:</p>
 <div class="highlight"><div class="chroma">
@@ -171,15 +171,15 @@ Class OverView
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> TimingLogger timings = new TimingLogger(TAG, &#34;methodA&#34;);
- // ... do some work A ...
- timings.addSplit(&#34;work A&#34;);
- // ... do some work B ...
- timings.addSplit(&#34;work B&#34;);
- // ... do some work C ...
- timings.addSplit(&#34;work C&#34;);
- timings.dumpToLog();
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> TimingLogger timings = new TimingLogger(TAG, &#34;methodA&#34;);
+</span></span><span class="line"><span class="cl"> // ... do some work A ...
+</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work A&#34;);
+</span></span><span class="line"><span class="cl"> // ... do some work B ...
+</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work B&#34;);
+</span></span><span class="line"><span class="cl"> // ... do some work C ...
+</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work C&#34;);
+</span></span><span class="line"><span class="cl"> timings.dumpToLog();
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>The dumpToLog call would add the following to the log:</p>
 <div class="highlight"><div class="chroma">
@@ -191,12 +191,12 @@ Class OverView
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">D/TAG     ( 3459): methodA: begin
-D/TAG     ( 3459): methodA:      9 ms, work A
-D/TAG     ( 3459): methodA:      1 ms, work B
-D/TAG     ( 3459): methodA:      6 ms, work C
-D/TAG     ( 3459): methodA: end, 16 ms
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">D/TAG     ( 3459): methodA: begin
+</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      9 ms, work A
+</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      1 ms, work B
+</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      6 ms, work C
+</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA: end, 16 ms
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是，</p>
 <p>刚开始使用时可能在Logcat中看不到打出的时间戳信息，百思不得其解，看一下dumpLog()的注释就明白了，要求自己传入TimingLogger 构造方法的TAG必须loggable,即：</p>
@@ -294,7 +294,7 @@ log.tag.TAG=VERBOSE</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -314,7 +314,7 @@ log.tag.TAG=VERBOSE</p>
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

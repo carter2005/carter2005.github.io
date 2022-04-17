@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-13_webssh/" />
@@ -164,18 +164,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># python环境
-apt-get install python python-pip python-imaging
-pip install pyopenssl ordereddict tornado==2.4.1
-# 下载
-wget https://github.com/downloads/liftoff/GateOne/gateone-1.1.tar.gz
-tar -xzvf gateone-1.1.tar.gz
-cd gateone-1.1
-# 安装
-python setup.py install 
-# 启动服务
-service gateone start
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># python环境
+</span></span><span class="line"><span class="cl">apt-get install python python-pip python-imaging
+</span></span><span class="line"><span class="cl">pip install pyopenssl ordereddict tornado==2.4.1
+</span></span><span class="line"><span class="cl"># 下载
+</span></span><span class="line"><span class="cl">wget https://github.com/downloads/liftoff/GateOne/gateone-1.1.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzvf gateone-1.1.tar.gz
+</span></span><span class="line"><span class="cl">cd gateone-1.1
+</span></span><span class="line"><span class="cl"># 安装
+</span></span><span class="line"><span class="cl">python setup.py install 
+</span></span><span class="line"><span class="cl"># 启动服务
+</span></span><span class="line"><span class="cl">service gateone start
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>修改/opt/gateone下面的server.conf里面的origins字段，添加自己的IP地址及域名，然后访问该域名就可以了。</p>
 <h2 id="webssh2">WebSSH2</h2>
@@ -192,16 +192,16 @@ service gateone start
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># nodejs环境
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-apt-get install -y nodejs
-# 下载
-git clone https://github.com/billchurch/WebSSH2
-cd WebSSH2
-npm install --production
-#启动
-npm start
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># nodejs环境
+</span></span><span class="line"><span class="cl">curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+</span></span><span class="line"><span class="cl">apt-get install -y nodejs
+</span></span><span class="line"><span class="cl"># 下载
+</span></span><span class="line"><span class="cl">git clone https://github.com/billchurch/WebSSH2
+</span></span><span class="line"><span class="cl">cd WebSSH2
+</span></span><span class="line"><span class="cl">npm install --production
+</span></span><span class="line"><span class="cl">#启动
+</span></span><span class="line"><span class="cl">npm start
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>访问http://服务器IP:2222/ssh/host/待连接ssh服务器ip即可</p>
 
@@ -281,7 +281,7 @@ npm start
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -301,7 +301,7 @@ npm start
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

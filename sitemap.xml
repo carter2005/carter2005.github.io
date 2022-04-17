@@ -3,20 +3,27 @@
   
   <url>
     <loc>https://carter2005.github.io/</loc>
-    <lastmod>2021-09-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/</loc>
-    <lastmod>2021-09-22T00:00:00+00:00</lastmod>
+    <loc>https://carter2005.github.io/post/2022/2022-4-16_disable_chrome_update/</loc>
+    <lastmod>2022-04-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://carter2005.github.io/post/</loc>
+    <lastmod>2022-04-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/</loc>
     <lastmod>2021-09-22T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/categories/linux/</loc>
+    <loc>https://carter2005.github.io/tags/linux/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/tags/linux/</loc>
+    <loc>https://carter2005.github.io/categories/linux/</loc>
     <lastmod>2020-11-01T10:21:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -429,7 +436,7 @@
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</loc>
+    <loc>https://carter2005.github.io/post/2019/2019-05--07_bluetooth-name-setup/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -450,13 +457,6 @@
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</loc>
-    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/</loc>
     <lastmod>2019-01-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -465,6 +465,13 @@
   
   <url>
     <loc>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/</loc>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</loc>
     <lastmod>2019-01-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

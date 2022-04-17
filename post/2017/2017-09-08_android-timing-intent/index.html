@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-08_android-timing-intent/" />
@@ -149,13 +149,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34;
-2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34;
-3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34;
-4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34;
-
-处理逻辑都集中在AlarmManagerService.java里面，下文代码默认此文件
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. ACTION_TIME_TICK = &#34;android.intent.action.TIME_TICK&#34;
+</span></span><span class="line"><span class="cl">2. ACTION_TIME_CHANGED = &#34;android.intent.action.TIME_SET&#34;
+</span></span><span class="line"><span class="cl">3. ACTION_TIMEZONE_CHANGED = &#34;android.intent.action.TIMEZONE_CHANGED&#34;
+</span></span><span class="line"><span class="cl">4. ACTION_DATE_CHANGED = &#34;android.intent.action.DATE_CHANGED&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">处理逻辑都集中在AlarmManagerService.java里面，下文代码默认此文件
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="action_time_tick和action_date_changed">ACTION_TIME_TICK和ACTION_DATE_CHANGED</h2>
 <div class="highlight"><div class="chroma">
@@ -242,87 +242,87 @@
 </span><span class="lnt">80
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ACTION_TIME_TICK      每分钟发送一次
-ACTION_DATE_CHANGED   日期发生改变时发送
-
-public void onStart() {
-
-    ... ...
-    # 构造TimeTick广播发送对象
-    mTimeTickSender = PendingIntent.getBroadcastAsUser(getContext(), 0,
-            new Intent(Intent.ACTION_TIME_TICK).addFlags(
-                    Intent.FLAG_RECEIVER_REGISTERED_ONLY
-                    | Intent.FLAG_RECEIVER_FOREGROUND), 0,
-                    UserHandle.ALL);
-
-    # 构造DateChanged广播发送对象
-    Intent intent = new Intent(Intent.ACTION_DATE_CHANGED);
-    intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
-    mDateChangeSender = PendingIntent.getBroadcastAsUser(getContext(), 0, intent,
-            Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT, UserHandle.ALL);
-    ... ...
-}
-
-class ClockReceiver extends BroadcastReceiver {
-    public ClockReceiver() {
-        # TimeTick, DateChanged广播是循环的，处理一次后需要继续监听
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_TIME_TICK);
-        filter.addAction(Intent.ACTION_DATE_CHANGED);
-        getContext().registerReceiver(this, filter);
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
-            if (DEBUG_BATCH) {
-                Slog.v(TAG, &#34;Received TIME_TICK alarm; rescheduling&#34;);
-            }
-            # 调度TimeTick广播
-            scheduleTimeTickEvent();
-        } else if (intent.getAction().equals(Intent.ACTION_DATE_CHANGED)) {
-            // Since the kernel does not keep track of DST, we need to
-            // reset the TZ information at the beginning of each day
-            // based off of the current Zone gmt offset + userspace tracked
-            // daylight savings information.
-            TimeZone zone = TimeZone.getTimeZone(SystemProperties.get(TIMEZONE_PROPERTY));
-            int gmtOffset = zone.getOffset(System.currentTimeMillis());
-            setKernelTimezone(mNativeData, -(gmtOffset / 60000));
-            #调度DateChanged广播
-            scheduleDateChangedEvent();
-        }
-    }
-
-    public void scheduleTimeTickEvent() {
-        final long currentTime = System.currentTimeMillis();
-        final long nextTime = 60000 * ((currentTime / 60000) + 1);
-
-        // Schedule this event for the amount of time that it would take to get to
-        // the top of the next minute.
-        final long tickEventDelay = nextTime - currentTime;
-
-        final WorkSource workSource = null; // Let system take blame for time tick events.
-        # 发送TimeTick广播
-        setImpl(ELAPSED_REALTIME, SystemClock.elapsedRealtime() + tickEventDelay, 0,
-                0, mTimeTickSender, true, workSource, null);
-    }
-
-    public void scheduleDateChangedEvent() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-
-        final WorkSource workSource = null; // Let system take blame for date change events.
-        # 发送DateChanged广播，注意这里需要calendar的支持，否则该广播无法发出
-        setImpl(RTC, calendar.getTimeInMillis(), 0, 0, mDateChangeSender, true, workSource,
-                null);
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ACTION_TIME_TICK      每分钟发送一次
+</span></span><span class="line"><span class="cl">ACTION_DATE_CHANGED   日期发生改变时发送
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public void onStart() {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ... ...
+</span></span><span class="line"><span class="cl">    # 构造TimeTick广播发送对象
+</span></span><span class="line"><span class="cl">    mTimeTickSender = PendingIntent.getBroadcastAsUser(getContext(), 0,
+</span></span><span class="line"><span class="cl">            new Intent(Intent.ACTION_TIME_TICK).addFlags(
+</span></span><span class="line"><span class="cl">                    Intent.FLAG_RECEIVER_REGISTERED_ONLY
+</span></span><span class="line"><span class="cl">                    | Intent.FLAG_RECEIVER_FOREGROUND), 0,
+</span></span><span class="line"><span class="cl">                    UserHandle.ALL);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 构造DateChanged广播发送对象
+</span></span><span class="line"><span class="cl">    Intent intent = new Intent(Intent.ACTION_DATE_CHANGED);
+</span></span><span class="line"><span class="cl">    intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
+</span></span><span class="line"><span class="cl">    mDateChangeSender = PendingIntent.getBroadcastAsUser(getContext(), 0, intent,
+</span></span><span class="line"><span class="cl">            Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT, UserHandle.ALL);
+</span></span><span class="line"><span class="cl">    ... ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class ClockReceiver extends BroadcastReceiver {
+</span></span><span class="line"><span class="cl">    public ClockReceiver() {
+</span></span><span class="line"><span class="cl">        # TimeTick, DateChanged广播是循环的，处理一次后需要继续监听
+</span></span><span class="line"><span class="cl">        IntentFilter filter = new IntentFilter();
+</span></span><span class="line"><span class="cl">        filter.addAction(Intent.ACTION_TIME_TICK);
+</span></span><span class="line"><span class="cl">        filter.addAction(Intent.ACTION_DATE_CHANGED);
+</span></span><span class="line"><span class="cl">        getContext().registerReceiver(this, filter);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void onReceive(Context context, Intent intent) {
+</span></span><span class="line"><span class="cl">        if (intent.getAction().equals(Intent.ACTION_TIME_TICK)) {
+</span></span><span class="line"><span class="cl">            if (DEBUG_BATCH) {
+</span></span><span class="line"><span class="cl">                Slog.v(TAG, &#34;Received TIME_TICK alarm; rescheduling&#34;);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            # 调度TimeTick广播
+</span></span><span class="line"><span class="cl">            scheduleTimeTickEvent();
+</span></span><span class="line"><span class="cl">        } else if (intent.getAction().equals(Intent.ACTION_DATE_CHANGED)) {
+</span></span><span class="line"><span class="cl">            // Since the kernel does not keep track of DST, we need to
+</span></span><span class="line"><span class="cl">            // reset the TZ information at the beginning of each day
+</span></span><span class="line"><span class="cl">            // based off of the current Zone gmt offset + userspace tracked
+</span></span><span class="line"><span class="cl">            // daylight savings information.
+</span></span><span class="line"><span class="cl">            TimeZone zone = TimeZone.getTimeZone(SystemProperties.get(TIMEZONE_PROPERTY));
+</span></span><span class="line"><span class="cl">            int gmtOffset = zone.getOffset(System.currentTimeMillis());
+</span></span><span class="line"><span class="cl">            setKernelTimezone(mNativeData, -(gmtOffset / 60000));
+</span></span><span class="line"><span class="cl">            #调度DateChanged广播
+</span></span><span class="line"><span class="cl">            scheduleDateChangedEvent();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public void scheduleTimeTickEvent() {
+</span></span><span class="line"><span class="cl">        final long currentTime = System.currentTimeMillis();
+</span></span><span class="line"><span class="cl">        final long nextTime = 60000 * ((currentTime / 60000) + 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        // Schedule this event for the amount of time that it would take to get to
+</span></span><span class="line"><span class="cl">        // the top of the next minute.
+</span></span><span class="line"><span class="cl">        final long tickEventDelay = nextTime - currentTime;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        final WorkSource workSource = null; // Let system take blame for time tick events.
+</span></span><span class="line"><span class="cl">        # 发送TimeTick广播
+</span></span><span class="line"><span class="cl">        setImpl(ELAPSED_REALTIME, SystemClock.elapsedRealtime() + tickEventDelay, 0,
+</span></span><span class="line"><span class="cl">                0, mTimeTickSender, true, workSource, null);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public void scheduleDateChangedEvent() {
+</span></span><span class="line"><span class="cl">        Calendar calendar = Calendar.getInstance();
+</span></span><span class="line"><span class="cl">        calendar.setTimeInMillis(System.currentTimeMillis());
+</span></span><span class="line"><span class="cl">        calendar.set(Calendar.HOUR, 0);
+</span></span><span class="line"><span class="cl">        calendar.set(Calendar.MINUTE, 0);
+</span></span><span class="line"><span class="cl">        calendar.set(Calendar.SECOND, 0);
+</span></span><span class="line"><span class="cl">        calendar.set(Calendar.MILLISECOND, 0);
+</span></span><span class="line"><span class="cl">        calendar.add(Calendar.DAY_OF_MONTH, 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        final WorkSource workSource = null; // Let system take blame for date change events.
+</span></span><span class="line"><span class="cl">        # 发送DateChanged广播，注意这里需要calendar的支持，否则该广播无法发出
+</span></span><span class="line"><span class="cl">        setImpl(RTC, calendar.getTimeInMillis(), 0, 0, mDateChangeSender, true, workSource,
+</span></span><span class="line"><span class="cl">                null);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="action_time_changed">ACTION_TIME_CHANGED</h2>
 <div class="highlight"><div class="chroma">
@@ -330,8 +330,8 @@ class ClockReceiver extends BroadcastReceiver {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">设置时间的时候发送
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">设置时间的时候发送
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>public void run() { ArrayList triggerList = new ArrayList();</p>
 <div class="highlight"><div class="chroma">
@@ -363,32 +363,32 @@ class ClockReceiver extends BroadcastReceiver {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">        while (true)
-        {
-            int result = waitForAlarm(mNativeData);
-
-            triggerList.clear();
-
-            #检测内核TIME_CHANGED_MASK标记，有的话说明系统时间发生过设置，可以是setting或者toolbox触发的
-            if ((result &amp; TIME_CHANGED_MASK) != 0) {
-                if (DEBUG_BATCH) {
-                    Slog.v(TAG, &#34;Time changed notification from kernel; rebatching&#34;);
-                }
-                removeImpl(mTimeTickSender);
-                rebatchAllAlarms();
-                mClockReceiver.scheduleTimeTickEvent();
-                synchronized (mLock) {
-                    mNumTimeChanged++;
-                }
-                Intent intent = new Intent(Intent.ACTION_TIME_CHANGED);
-                intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING
-                        | Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT);
-                getContext().sendBroadcastAsUser(intent, UserHandle.ALL);
-            }
-            ... ...
-        }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        while (true)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            int result = waitForAlarm(mNativeData);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            triggerList.clear();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            #检测内核TIME_CHANGED_MASK标记，有的话说明系统时间发生过设置，可以是setting或者toolbox触发的
+</span></span><span class="line"><span class="cl">            if ((result &amp; TIME_CHANGED_MASK) != 0) {
+</span></span><span class="line"><span class="cl">                if (DEBUG_BATCH) {
+</span></span><span class="line"><span class="cl">                    Slog.v(TAG, &#34;Time changed notification from kernel; rebatching&#34;);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                removeImpl(mTimeTickSender);
+</span></span><span class="line"><span class="cl">                rebatchAllAlarms();
+</span></span><span class="line"><span class="cl">                mClockReceiver.scheduleTimeTickEvent();
+</span></span><span class="line"><span class="cl">                synchronized (mLock) {
+</span></span><span class="line"><span class="cl">                    mNumTimeChanged++;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                Intent intent = new Intent(Intent.ACTION_TIME_CHANGED);
+</span></span><span class="line"><span class="cl">                intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING
+</span></span><span class="line"><span class="cl">                        | Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT);
+</span></span><span class="line"><span class="cl">                getContext().sendBroadcastAsUser(intent, UserHandle.ALL);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ... ...
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="action_timezone_changed">ACTION_TIMEZONE_CHANGED</h2>
 <div class="highlight"><div class="chroma">
@@ -458,70 +458,70 @@ class ClockReceiver extends BroadcastReceiver {
 </span><span class="lnt">63
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">时区改变时发送
-
-public void onStart() {
-    mNativeData = init();
-    mNextWakeup = mNextNonWakeup = 0;
-
-    // We have to set current TimeZone info to kernel
-    // because kernel doesn&#39;t keep this after reboot
-    # 根据时区property设置时区信息
-    setTimeZoneImpl(SystemProperties.get(TIMEZONE_PROPERTY));
-
-    ... ...
-}
-
-void setTimeZoneImpl(String tz) {
-        if (TextUtils.isEmpty(tz)) {
-            return;
-        }
-
-    TimeZone zone = TimeZone.getTimeZone(tz);
-    // Prevent reentrant calls from stepping on each other when writing
-    // the time zone property
-    boolean timeZoneWasChanged = false;
-    synchronized (this) {
-        String current = SystemProperties.get(TIMEZONE_PROPERTY);
-        if (current == null || !current.equals(zone.getID())) {
-            if (localLOGV) {
-                Slog.v(TAG, &#34;timezone changed: &#34; + current + &#34;, new=&#34; + zone.getID());
-            }
-            timeZoneWasChanged = true;
-            SystemProperties.set(TIMEZONE_PROPERTY, zone.getID());
-        }
-
-        // Update the kernel timezone information
-        // Kernel tracks time offsets as &#39;minutes west of GMT&#39;
-        int gmtOffset = zone.getOffset(System.currentTimeMillis());
-        setKernelTimezone(mNativeData, -(gmtOffset / 60000));
-    }
-
-    TimeZone.setDefault(null);
-
-    if (timeZoneWasChanged) {
-        # 发送TimezoneChanged广播
-        Intent intent = new Intent(Intent.ACTION_TIMEZONE_CHANGED);
-        intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
-        intent.putExtra(&#34;time-zone&#34;, zone.getID());
-        getContext().sendBroadcastAsUser(intent, UserHandle.ALL);
-    }
-}
-
-# 对外接口设置时区
-public void setTimeZone(String tz) {
-        getContext().enforceCallingOrSelfPermission(
-                &#34;android.permission.SET_TIME_ZONE&#34;,
-                &#34;setTimeZone&#34;);
-
-        final long oldId = Binder.clearCallingIdentity();
-        try {
-            setTimeZoneImpl(tz);
-        } finally {
-            Binder.restoreCallingIdentity(oldId);
-        }
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">时区改变时发送
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public void onStart() {
+</span></span><span class="line"><span class="cl">    mNativeData = init();
+</span></span><span class="line"><span class="cl">    mNextWakeup = mNextNonWakeup = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // We have to set current TimeZone info to kernel
+</span></span><span class="line"><span class="cl">    // because kernel doesn&#39;t keep this after reboot
+</span></span><span class="line"><span class="cl">    # 根据时区property设置时区信息
+</span></span><span class="line"><span class="cl">    setTimeZoneImpl(SystemProperties.get(TIMEZONE_PROPERTY));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ... ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void setTimeZoneImpl(String tz) {
+</span></span><span class="line"><span class="cl">        if (TextUtils.isEmpty(tz)) {
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    TimeZone zone = TimeZone.getTimeZone(tz);
+</span></span><span class="line"><span class="cl">    // Prevent reentrant calls from stepping on each other when writing
+</span></span><span class="line"><span class="cl">    // the time zone property
+</span></span><span class="line"><span class="cl">    boolean timeZoneWasChanged = false;
+</span></span><span class="line"><span class="cl">    synchronized (this) {
+</span></span><span class="line"><span class="cl">        String current = SystemProperties.get(TIMEZONE_PROPERTY);
+</span></span><span class="line"><span class="cl">        if (current == null || !current.equals(zone.getID())) {
+</span></span><span class="line"><span class="cl">            if (localLOGV) {
+</span></span><span class="line"><span class="cl">                Slog.v(TAG, &#34;timezone changed: &#34; + current + &#34;, new=&#34; + zone.getID());
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            timeZoneWasChanged = true;
+</span></span><span class="line"><span class="cl">            SystemProperties.set(TIMEZONE_PROPERTY, zone.getID());
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        // Update the kernel timezone information
+</span></span><span class="line"><span class="cl">        // Kernel tracks time offsets as &#39;minutes west of GMT&#39;
+</span></span><span class="line"><span class="cl">        int gmtOffset = zone.getOffset(System.currentTimeMillis());
+</span></span><span class="line"><span class="cl">        setKernelTimezone(mNativeData, -(gmtOffset / 60000));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    TimeZone.setDefault(null);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if (timeZoneWasChanged) {
+</span></span><span class="line"><span class="cl">        # 发送TimezoneChanged广播
+</span></span><span class="line"><span class="cl">        Intent intent = new Intent(Intent.ACTION_TIMEZONE_CHANGED);
+</span></span><span class="line"><span class="cl">        intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
+</span></span><span class="line"><span class="cl">        intent.putExtra(&#34;time-zone&#34;, zone.getID());
+</span></span><span class="line"><span class="cl">        getContext().sendBroadcastAsUser(intent, UserHandle.ALL);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 对外接口设置时区
+</span></span><span class="line"><span class="cl">public void setTimeZone(String tz) {
+</span></span><span class="line"><span class="cl">        getContext().enforceCallingOrSelfPermission(
+</span></span><span class="line"><span class="cl">                &#34;android.permission.SET_TIME_ZONE&#34;,
+</span></span><span class="line"><span class="cl">                &#34;setTimeZone&#34;);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        final long oldId = Binder.clearCallingIdentity();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            setTimeZoneImpl(tz);
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            Binder.restoreCallingIdentity(oldId);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -600,7 +600,7 @@ public void setTimeZone(String tz) {
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -620,7 +620,7 @@ public void setTimeZone(String tz) {
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

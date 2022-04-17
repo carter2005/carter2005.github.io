@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-18_broadcast/" />
@@ -158,25 +158,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
-<span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span>
-<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
-<span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
-<span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span>
-<span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="shape兼容检查">shape兼容检查</h1>
 <p>如果两个张量的后缘维度(从末尾开始算起的维度)的轴长度相符或其中一方的长度为1，则认为它们是广播兼容的。广播会在缺失维度和(或)轴长度为1的维度上进行。</p>
@@ -207,29 +207,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++">	    <span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
-        <span class="k">const</span> <span class="kt">int</span> <span class="n">diffDimension</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
-
-        <span class="c1">// else broadcast
-</span><span class="c1"></span>        <span class="c1">// 从右侧开始计算
-</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">maxDimensions</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 将两个输入的shape上下排在一起，右侧对齐，第二个shape缺失的部分补位1
-</span><span class="c1"></span>            <span class="c1">// 然后从右侧开始逐列检查，如果上下不等，并且没有1，那么算是不兼容，这样没法做广播
-</span><span class="c1"></span>            <span class="c1">// 也就是说 [3,4,6]与[4,6]是兼容的，但是[3,4,6]与[2,6]是不兼容的。
-</span><span class="c1"></span>            <span class="c1">// 不等的时候，必须其中一个为1，否则就算是不兼容
-</span><span class="c1"></span>            <span class="k">auto</span> <span class="n">input0Length</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="k">auto</span> <span class="n">input1Length</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">diffDimension</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">input1Length</span> <span class="o">=</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">diffDimension</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">input0Length</span> <span class="o">!=</span> <span class="n">input1Length</span> <span class="o">&amp;&amp;</span> <span class="n">input1Length</span> <span class="o">!=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">input0Length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">MNN_PRINT</span><span class="p">(</span><span class="s">&#34;Don&#39;t support broadcast for binaryOp, i0=%d, i1=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">input1Length</span><span class="p">,</span> <span class="n">input0Length</span><span class="p">);</span>
-                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="c1">// 更新输出shape对应位为二者中大的那个
-</span><span class="c1"></span>            <span class="n">buffer</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">extent</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">input0Length</span><span class="p">,</span> <span class="n">input1Length</span><span class="p">);</span>
-        <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">	    <span class="k">const</span> <span class="kt">int</span> <span class="n">maxDimensions</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">int</span> <span class="n">diffDimension</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// else broadcast
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 从右侧开始计算
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">maxDimensions</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将两个输入的shape上下排在一起，右侧对齐，第二个shape缺失的部分补位1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 然后从右侧开始逐列检查，如果上下不等，并且没有1，那么算是不兼容，这样没法做广播
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 也就是说 [3,4,6]与[4,6]是兼容的，但是[3,4,6]与[2,6]是不兼容的。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 不等的时候，必须其中一个为1，否则就算是不兼容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">auto</span> <span class="n">input0Length</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">input1Length</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">diffDimension</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">input1Length</span> <span class="o">=</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">diffDimension</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">input0Length</span> <span class="o">!=</span> <span class="n">input1Length</span> <span class="o">&amp;&amp;</span> <span class="n">input1Length</span> <span class="o">!=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">input0Length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">MNN_PRINT</span><span class="p">(</span><span class="s">&#34;Don&#39;t support broadcast for binaryOp, i0=%d, i1=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">input1Length</span><span class="p">,</span> <span class="n">input0Length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 更新输出shape对应位为二者中大的那个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">buffer</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">extent</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">input0Length</span><span class="p">,</span> <span class="n">input1Length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="广播计算">广播计算</h1>
 <p>核心是计算stride，对于可以广播的维度，它对应的shape值是1，stride为0，这样其实索引的还是原先的数据。</p>
@@ -290,60 +290,60 @@
 </span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 输入shape不同，通过广播方式计算，核心是计算dim及stride，广播最多支持6维
-</span><span class="c1"></span><span class="cp">#define MAX_DIM 6
-</span><span class="cp"></span>            <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_DIM</span><span class="p">);</span>
-            <span class="kt">int</span> <span class="n">dims</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
-            <span class="kt">int</span> <span class="n">stride</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
-            <span class="kt">int</span> <span class="n">iStride0</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
-            <span class="kt">int</span> <span class="n">iStride1</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">MAX_DIM</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-                <span class="n">stride</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="n">iStride0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="n">iStride1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="kt">int</span> <span class="n">input0I</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
-                <span class="kt">int</span> <span class="n">input1I</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">())</span> <span class="p">{</span>
-                    <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-                    <span class="n">stride</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">input0I</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">input0I</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">iStride0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">input0I</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">input1I</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">input1I</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">iStride1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">input1I</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span> <span class="o">++</span><span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">auto</span> <span class="n">ow</span>  <span class="o">=</span> <span class="n">outputData</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">stride</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">i0w</span> <span class="o">=</span> <span class="n">input0Data</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">iStride0</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">i1w</span> <span class="o">=</span> <span class="n">input1Data</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">iStride1</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-<span class="cp">#define PTR(x, y, i)                      \
-</span><span class="cp">    auto o##x  = o##y + x * stride[i];    \
-</span><span class="cp">    auto i0##x = i0##y + x * iStride0[i]; \
-</span><span class="cp">    auto i1##x = i1##y + x * iStride1[i]
-</span><span class="cp"></span>
-                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span> <span class="o">++</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">PTR</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-                    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span> <span class="o">++</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="n">PTR</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-                        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">z</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">z</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="n">PTR</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-                            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-                                <span class="n">PTR</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-                                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-                                    <span class="n">PTR</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-                                    <span class="o">*</span><span class="n">ox</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">i0x</span><span class="p">,</span> <span class="o">*</span><span class="n">i1x</span><span class="p">));</span>
-                                <span class="p">}</span>
-                            <span class="p">}</span>
-                        <span class="p">}</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-<span class="cp">#undef MAX_DIM
-</span><span class="cp">#undef PTR
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 输入shape不同，通过广播方式计算，核心是计算dim及stride，广播最多支持6维
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define MAX_DIM 6
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>            <span class="n">MNN_ASSERT</span><span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_DIM</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">dims</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">stride</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">iStride0</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">iStride1</span><span class="p">[</span><span class="n">MAX_DIM</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">MAX_DIM</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stride</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">iStride0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">iStride1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">input0I</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">input1I</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">()</span> <span class="o">-</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">dimensions</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">stride</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">input0I</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">input0I</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">iStride0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input0</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">input0I</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">input1I</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">length</span><span class="p">(</span><span class="n">input1I</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">iStride1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input1</span><span class="o">-&gt;</span><span class="n">stride</span><span class="p">(</span><span class="n">input1I</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span> <span class="o">++</span><span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">ow</span>  <span class="o">=</span> <span class="n">outputData</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">stride</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">i0w</span> <span class="o">=</span> <span class="n">input0Data</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">iStride0</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">i1w</span> <span class="o">=</span> <span class="n">input1Data</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">iStride1</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define PTR(x, y, i)                      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    auto o##x  = o##y + x * stride[i];    \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    auto i0##x = i0##y + x * iStride0[i]; \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    auto i1##x = i1##y + x * iStride1[i]
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span> <span class="o">++</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">PTR</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span> <span class="o">++</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">PTR</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">z</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">z</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">PTR</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">PTR</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                    <span class="n">PTR</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                    <span class="o">*</span><span class="n">ox</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">i0x</span><span class="p">,</span> <span class="o">*</span><span class="n">i1x</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#undef MAX_DIM
+</span></span></span><span class="line"><span class="cl"><span class="cp">#undef PTR
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -424,7 +424,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -444,7 +444,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

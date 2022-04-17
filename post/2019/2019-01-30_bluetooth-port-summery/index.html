@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/" />
@@ -147,7 +147,7 @@
 <p><strong>CFI、fornity</strong></p>
 <p>接下来逐一解决，cfi，fortify检查固然更安全，但C代码太灵活，一些函数指针赋值都会触发此类问题，先关闭检查，在android.bp里面添加 sanitize: { never: true, },</p>
 <p><strong>double free</strong> 经过打印，发现fixed_queue_free存在多次调用的情况，添加适当保护，并refine调用者杜绝。</p>
-<p><strong>run_task问题</strong> libchrome更新支持了C17的右值等新特性，更新了模板实现，调用者蓝牙协议栈需要refine相关代码，这里用了更简单的办法，revert libchrome到老一些的版本来避免该问题。 R Run(Args&hellip; args) const &amp; { static_assert(repeat_mode == internal::RepeatMode::Repeating, &ldquo;OnceCallback::Run() may only be invoked on a non-const &quot; &ldquo;rvalue, i.e. std::move(callback).Run().&quot;);</p>
+<p><strong>run_task问题</strong> libchrome更新支持了C17的右值等新特性，更新了模板实现，调用者蓝牙协议栈需要refine相关代码，这里用了更简单的办法，revert libchrome到老一些的版本来避免该问题。 R Run(Args&hellip; args) const &amp; { static_assert(repeat_mode == internal::RepeatMode::Repeating, &ldquo;OnceCallback::Run() may only be invoked on a non-const &quot; &ldquo;rvalue, i.e. std::move(callback).Run().&rdquo;);</p>
 <p>PolymorphicInvoke f = reinterpret_cast<!-- raw HTML omitted -->(this-&gt;polymorphic_invoke()); return f(this-&gt;bind_state_.get(), std::forward<!-- raw HTML omitted -->(args)&hellip;); }</p>
 <p>R Run(Args&hellip; args) &amp;&amp; { // Move the callback instance into a local variable before the invocation, // that ensures the internal state is cleared after the invocation. // It&rsquo;s not safe to touch |this| after the invocation, since running the // bound function may destroy |this|. Callback cb = std::move(*this); PolymorphicInvoke f = reinterpret_cast<!-- raw HTML omitted -->(cb.polymorphic_invoke()); return f(cb.bind_state_.get(), std::forward<!-- raw HTML omitted -->(args)&hellip;); }</p>
 <p>经过上述修改，蓝牙基本可以工作正常了，表现稳定。</p>
@@ -177,8 +177,8 @@
             <span class="prev-text nav-default">蓝牙打电话后播放音乐无声</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/2019/2019-01-14_dso-missing-from-command-line/">
-            <span class="next-text nav-default">DSO missing from command line的原因及解决方法</span>
+        <a class="next" href="/post/2019/2019-01-30_bluetooth-discovery-no-name/">
+            <span class="next-text nav-default">刷机后蓝牙广播没有名字，只显示MAC地址</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -228,7 +228,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -248,7 +248,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

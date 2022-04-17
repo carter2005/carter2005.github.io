@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-04_hackentosh/" />
@@ -170,21 +170,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;dict&gt;
-        &lt;key&gt;Comment&lt;/key&gt;
-        &lt;string&gt;修复ICH10芯片 I/O Error 错误&lt;/string&gt;
-        &lt;key&gt;Disabled&lt;/key&gt;
-        &lt;false/&gt;
-        &lt;key&gt;Find&lt;/key&gt;
-       &lt;data&gt;RYX2D5XCiciD4P5mhcl4D4TSdQs=&lt;/data&gt;
-        &lt;key&gt;MatchOS&lt;/key&gt;
-        &lt;string&gt;10.13.x&lt;/string&gt;
-        &lt;key&gt;Name&lt;/key&gt;
-        &lt;string&gt;AppleAHCIPort&lt;/string&gt;
-        &lt;key&gt;Replace&lt;/key&gt;
-        &lt;data&gt;iciD4P5mhckPmMFBCMyQkJCQdQs=&lt;/data&gt;
-     &lt;/dict&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    &lt;dict&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;Comment&lt;/key&gt;
+</span></span><span class="line"><span class="cl">        &lt;string&gt;修复ICH10芯片 I/O Error 错误&lt;/string&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;Disabled&lt;/key&gt;
+</span></span><span class="line"><span class="cl">        &lt;false/&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;Find&lt;/key&gt;
+</span></span><span class="line"><span class="cl">       &lt;data&gt;RYX2D5XCiciD4P5mhcl4D4TSdQs=&lt;/data&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;MatchOS&lt;/key&gt;
+</span></span><span class="line"><span class="cl">        &lt;string&gt;10.13.x&lt;/string&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;Name&lt;/key&gt;
+</span></span><span class="line"><span class="cl">        &lt;string&gt;AppleAHCIPort&lt;/string&gt;
+</span></span><span class="line"><span class="cl">        &lt;key&gt;Replace&lt;/key&gt;
+</span></span><span class="line"><span class="cl">        &lt;data&gt;iciD4P5mhckPmMFBCMyQkJCQdQs=&lt;/data&gt;
+</span></span><span class="line"><span class="cl">     &lt;/dict&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下文以high sierra为例，记录一下各种问题的修复方法。</p>
 <h2 id="disk-io-error">disk i/o error</h2>
@@ -211,25 +211,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;dict&gt;
-    &lt;key&gt;Comment&lt;/key&gt;
-    &lt;string&gt;patch AppleAHCIPort for ICH* 40600200 to 00000000&lt;/string&gt;
-    &lt;key&gt;Disabled&lt;/key&gt;
-    &lt;false/&gt;
-    &lt;key&gt;Find&lt;/key&gt;
-    &lt;data&gt;
-    QGACAA==
-    &lt;/data&gt;
-    &lt;key&gt;InfoPlistPatch&lt;/key&gt;
-    &lt;false/&gt;
-    &lt;key&gt;Name&lt;/key&gt;
-    &lt;string&gt;AppleAHCIPort&lt;/string&gt;
-    &lt;key&gt;Replace&lt;/key&gt;
-    &lt;data&gt;
-    AAAAAA==
-    &lt;/data&gt;
-&lt;/dict&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;dict&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;Comment&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;string&gt;patch AppleAHCIPort for ICH* 40600200 to 00000000&lt;/string&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;Disabled&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;false/&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;Find&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;data&gt;
+</span></span><span class="line"><span class="cl">    QGACAA==
+</span></span><span class="line"><span class="cl">    &lt;/data&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;InfoPlistPatch&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;false/&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;Name&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;string&gt;AppleAHCIPort&lt;/string&gt;
+</span></span><span class="line"><span class="cl">    &lt;key&gt;Replace&lt;/key&gt;
+</span></span><span class="line"><span class="cl">    &lt;data&gt;
+</span></span><span class="line"><span class="cl">    AAAAAA==
+</span></span><span class="line"><span class="cl">    &lt;/data&gt;
+</span></span><span class="line"><span class="cl">&lt;/dict&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="变频">变频</h2>
 <p>CPU从i3-2100升级成了i7-3770，用<a href="https://github.com/Piker-Alpha/ssdtPRGen.sh">ssdtPRGen</a>重新生成ssdt.aml，放到EFI/CLOVER/ACPI/patched下面即可。</p>
@@ -244,12 +244,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">If (0x1c3a == Local2 &amp;&amp; Ones != Match(Package() { 0x0166, 0x0162 }, MEQ, Local1, MTR, 0, 0))
-{
-    // HD4000 on 6-series, inject 7-series IMEI device-id
-    Return (Package() { &#34;device-id&#34;, Buffer() { 0x3a, 0x1e, 0, 0 } })
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">If (0x1c3a == Local2 &amp;&amp; Ones != Match(Package() { 0x0166, 0x0162 }, MEQ, Local1, MTR, 0, 0))
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    // HD4000 on 6-series, inject 7-series IMEI device-id
+</span></span><span class="line"><span class="cl">    Return (Package() { &#34;device-id&#34;, Buffer() { 0x3a, 0x1e, 0, 0 } })
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="休眠唤醒bios重置">休眠/唤醒bios重置</h2>
 <p>这个问题其实困扰很久了，一直以来都是在设置里面禁止休眠解决的，搜索发现其实可以通过dsdt解决，参见<a href="https://www.tonymacx86.com/threads/solved-high-sierra-need-cmos-reset-after-sleep.237959/">[Solved] High Sierra - need CMOS reset after sleep</a></p>
@@ -271,20 +271,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Device (RTC)
-{
-    Name (_HID, EisaId (&#34;PNP0B00&#34;)) // _HID: Hardware ID
-    Name (_CRS, ResourceTemplate () // _CRS: Current Resource Settings
-    {
-    IO (Decode16,
-    0x0070, // Range Minimum
-    0x0070, // Range Maximum
-    0x00, // Alignment
-    0x02, // Length
-    )
-    })
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Device (RTC)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    Name (_HID, EisaId (&#34;PNP0B00&#34;)) // _HID: Hardware ID
+</span></span><span class="line"><span class="cl">    Name (_CRS, ResourceTemplate () // _CRS: Current Resource Settings
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">    IO (Decode16,
+</span></span><span class="line"><span class="cl">    0x0070, // Range Minimum
+</span></span><span class="line"><span class="cl">    0x0070, // Range Maximum
+</span></span><span class="line"><span class="cl">    0x00, // Alignment
+</span></span><span class="line"><span class="cl">    0x02, // Length
+</span></span><span class="line"><span class="cl">    )
+</span></span><span class="line"><span class="cl">    })
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="usb-30">USB 3.0</h2>
 <p>很久以前就给dsdt打过patch，用起来没有问题。</p>
@@ -306,11 +306,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;key&gt;DefaultLoader&lt;/key&gt;
-&lt;string&gt;grubx64.efi&lt;/string&gt;
-&lt;key&gt;DefaultVolume&lt;/key&gt;
-&lt;string&gt;EFI&lt;/string&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;key&gt;DefaultLoader&lt;/key&gt;
+</span></span><span class="line"><span class="cl">&lt;string&gt;grubx64.efi&lt;/string&gt;
+</span></span><span class="line"><span class="cl">&lt;key&gt;DefaultVolume&lt;/key&gt;
+</span></span><span class="line"><span class="cl">&lt;string&gt;EFI&lt;/string&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="蓝牙">蓝牙</h2>
 <p>用这个纯属家里有个小米的蓝牙音箱，接有线的话，需要每次插拔一下音频线，太麻烦了。以前闲散的BCM92046DG-CL1ROM竟然可以免驱使用，方便不少，算是意外之喜吧。</p>
@@ -393,7 +393,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -413,7 +413,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-06-07_hugo-blog/" />
@@ -161,22 +161,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># hugo new site blog</span>
-<span class="c1"># cd blog</span>
-<span class="c1"># tree</span>
-.
-├── archetypes
-│   └── default.md
-├── config.toml
-├── content
-├── data
-├── layouts
-├── static
-└── themes
-
-<span class="m">6</span> directories, <span class="m">2</span> files
-<span class="c1"># git init</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># hugo new site blog</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># cd blog</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># tree</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── archetypes
+</span></span><span class="line"><span class="cl">│   └── default.md
+</span></span><span class="line"><span class="cl">├── config.toml
+</span></span><span class="line"><span class="cl">├── content
+</span></span><span class="line"><span class="cl">├── data
+</span></span><span class="line"><span class="cl">├── layouts
+</span></span><span class="line"><span class="cl">├── static
+</span></span><span class="line"><span class="cl">└── themes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">6</span> directories, <span class="m">2</span> files
+</span></span><span class="line"><span class="cl"><span class="c1"># git init</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>config.toml</code> 是配置文件，在里面可以定义博客地址、构建配置、标题、导航栏等等。
 <code>themes</code> 是主题目录，可以去 <a href="http://themes.gohugo.io/">themes.gohugo.io</a> 下载喜欢的主题。
@@ -190,10 +190,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git clone https://github.com/olOwOlo/hugo-theme-even themes/even  # 下载主题</span>
-<span class="c1"># rm -rf themes/even/.git  # 清理主题git</span>
-<span class="c1"># cp themes/even/exampleSite/config.toml .  # 复制主题配置</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># git clone https://github.com/olOwOlo/hugo-theme-even themes/even  # 下载主题</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># rm -rf themes/even/.git  # 清理主题git</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># cp themes/even/exampleSite/config.toml .  # 复制主题配置</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据个人需要，调整config.toml文件内容</p>
 <h1 id="忽略public目录">忽略public目录</h1>
@@ -204,9 +204,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># cat ~/blog/.gitignore </span>
-public
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># cat ~/blog/.gitignore </span>
+</span></span><span class="line"><span class="cl">public
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="github-action自动发布">github action自动发布</h1>
 <h2 id="生成发布key">生成发布key</h2>
@@ -218,11 +218,11 @@ public
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;</span><span class="k">$(</span>git config user.email<span class="k">)</span><span class="s2">&#34;</span> -f gh-pages -N <span class="s2">&#34;&#34;</span>
-<span class="c1"># You will get 2 files:</span>
-<span class="c1">#   gh-pages.pub (public key)</span>
-<span class="c1">#   gh-pages     (private key)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;</span><span class="k">$(</span>git config user.email<span class="k">)</span><span class="s2">&#34;</span> -f gh-pages -N <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># You will get 2 files:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   gh-pages.pub (public key)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   gh-pages     (private key)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>把公钥设置到[用户名].github.io仓库的Deploy Keys，记得选上写权限，私钥设置到blog仓库的Secrets，名字叫ACTIONS_DEPLOY_KEY</p>
 <h2 id="github-action">github action</h2>
@@ -264,40 +264,40 @@ public
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># cat .github/workflows/deploy.yml 
-name: deploy hugo blog github action
-
-# 当master分支发生push事件时执行下面任务
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-        fetch-depth: 0
-
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: &#39;latest&#39;
-
-    - name: Build
-      run: hugo -t even
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        external_repository: carter2005/carter2005.github.io
-        publish_branch: master
-        publish_dir: ./public
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># cat .github/workflows/deploy.yml 
+</span></span><span class="line"><span class="cl">name: deploy hugo blog github action
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 当master分支发生push事件时执行下面任务
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">  push:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - master
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">  build-deploy:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-18.04
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">    - uses: actions/checkout@v2
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        submodules: true
+</span></span><span class="line"><span class="cl">        fetch-depth: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Setup Hugo
+</span></span><span class="line"><span class="cl">      uses: peaceiris/actions-hugo@v2
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        hugo-version: &#39;latest&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Build
+</span></span><span class="line"><span class="cl">      run: hugo -t even
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Deploy
+</span></span><span class="line"><span class="cl">      uses: peaceiris/actions-gh-pages@v3
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+</span></span><span class="line"><span class="cl">        external_repository: carter2005/carter2005.github.io
+</span></span><span class="line"><span class="cl">        publish_branch: master
+</span></span><span class="line"><span class="cl">        publish_dir: ./public
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样，只要在content/post下面新增Markdown文件博客，提交后，github会自动调用最新版本的hugo转换并提交到[用户名].github.io仓库。</p>
 
@@ -377,7 +377,7 @@ jobs:
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -397,7 +397,7 @@ jobs:
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

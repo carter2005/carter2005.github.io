@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" />
@@ -146,8 +146,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install apache2 libapache2-mod-php5 php5
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt-get install apache2 libapache2-mod-php5 php5
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="开启rewrite">开启rewrite</h2>
 <div class="highlight"><div class="chroma">
@@ -155,8 +155,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol>
 <li>
@@ -166,8 +166,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -181,12 +181,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Directory /var/www/html&gt;
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-&lt;/Directory&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;Directory /var/www/html&gt;
+</span></span><span class="line"><span class="cl">    Options Indexes FollowSymLinks
+</span></span><span class="line"><span class="cl">    AllowOverride All
+</span></span><span class="line"><span class="cl">    Require all granted
+</span></span><span class="line"><span class="cl">&lt;/Directory&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -201,13 +201,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">RewriteEngine on
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond $1 !^(index.php|images|robots.txt)
-RewriteRule ^(.*)$ /index.php/$1 [L]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RewriteEngine on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RewriteCond %{REQUEST_FILENAME} !-f
+</span></span><span class="line"><span class="cl">RewriteCond %{REQUEST_FILENAME} !-d
+</span></span><span class="line"><span class="cl">RewriteCond $1 !^(index.php|images|robots.txt)
+</span></span><span class="line"><span class="cl">RewriteRule ^(.*)$ /index.php/$1 [L]
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
@@ -217,8 +217,8 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/etc/init.d/apache2 restart 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/etc/init.d/apache2 restart 
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -297,7 +297,7 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -317,7 +317,7 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_watchdog_soft_lockup/" />
@@ -155,26 +155,26 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[ 4028.140669] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [insmod:30243]
-[ 4028.140678] Modules linked in: enflame(OE+) vboxsf sb_edac crct10dif_pclmul crc32_pclmul ghash_clmulni_intel snd_intel8x0 pcbc snd_ac97_codec aesni_intel ac97_bus snd_pcm snd_seq_midi aes_x86_64 vboxvideo(C) crypto_simd snd_seq_midi_event glue_helper cryptd snd_rawmidi ttm snd_seq snd_seq_device drm_kms_helper input_leds lpc_ich intel_rapl_perf snd_timer serio_raw drm fb_sys_fops snd syscopyarea sysfillrect i2c_piix4 mac_hid sysimgblt vboxguest soundcore nfsd auth_rpcgss nfs_acl lockd grace parport_pc sunrpc ppdev lp parport autofs4 psmouse ahci libahci e1000 video [last unloaded: enflame]
-[ 4028.140733] CPU: 0 PID: 30243 Comm: insmod Tainted: G        WC OE    4.15.0-142-generic #146~16.04.1-Ubuntu
-[ 4028.140734] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
-[ 4028.140745] RIP: 0010:__memset+0x24/0x30
-[ 4028.140746] RSP: 0018:ffff9d3e013977f0 EFLAGS: 00010206 ORIG_RAX: ffffffffffffff11
-[ 4028.140748] RAX: 0000000000000000 RBX: 0000000000000001 RCX: 0000000000498600
-[ 4028.140750] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffff9d3e2db3d000
-[ 4028.140751] RBP: ffff9d3e013977f8 R08: ffff9219d8729800 R09: ffff9d3e2c000000
-[ 4028.140753] R10: 00000000dd003601 R11: 0000000004000001 R12: 0000000000000000
-[ 4028.140754] R13: 0000000000000000 R14: 000000400ec0b000 R15: 0000000000001000
-[ 4028.140757] FS:  00007fe8da531700(0000) GS:ffff9219e3c00000(0000) knlGS:0000000000000000
-[ 4028.140758] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[ 4028.140760] CR2: 00007fa0c5c99830 CR3: 000000019a628006 CR4: 00000000000606f0
-[ 4028.140766] Call Trace:
-[ 4028.140857]  ? efi_memset_io+0xe/0x10 [enflame]
-[ 4028.140924]  dtu_mcu_feedback_mgr_init+0x9ca/0xb65 [enflame]
-[ 4028.140984]  ? efi_log+0x59/0x80 [enflame]
-[ 4028.141059]  dtu_device_post_init+0x2bd/0x636 [enflame]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[ 4028.140669] watchdog: BUG: soft lockup - CPU#0 stuck for 22s! [insmod:30243]
+</span></span><span class="line"><span class="cl">[ 4028.140678] Modules linked in: enflame(OE+) vboxsf sb_edac crct10dif_pclmul crc32_pclmul ghash_clmulni_intel snd_intel8x0 pcbc snd_ac97_codec aesni_intel ac97_bus snd_pcm snd_seq_midi aes_x86_64 vboxvideo(C) crypto_simd snd_seq_midi_event glue_helper cryptd snd_rawmidi ttm snd_seq snd_seq_device drm_kms_helper input_leds lpc_ich intel_rapl_perf snd_timer serio_raw drm fb_sys_fops snd syscopyarea sysfillrect i2c_piix4 mac_hid sysimgblt vboxguest soundcore nfsd auth_rpcgss nfs_acl lockd grace parport_pc sunrpc ppdev lp parport autofs4 psmouse ahci libahci e1000 video [last unloaded: enflame]
+</span></span><span class="line"><span class="cl">[ 4028.140733] CPU: 0 PID: 30243 Comm: insmod Tainted: G        WC OE    4.15.0-142-generic #146~16.04.1-Ubuntu
+</span></span><span class="line"><span class="cl">[ 4028.140734] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+</span></span><span class="line"><span class="cl">[ 4028.140745] RIP: 0010:__memset+0x24/0x30
+</span></span><span class="line"><span class="cl">[ 4028.140746] RSP: 0018:ffff9d3e013977f0 EFLAGS: 00010206 ORIG_RAX: ffffffffffffff11
+</span></span><span class="line"><span class="cl">[ 4028.140748] RAX: 0000000000000000 RBX: 0000000000000001 RCX: 0000000000498600
+</span></span><span class="line"><span class="cl">[ 4028.140750] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffff9d3e2db3d000
+</span></span><span class="line"><span class="cl">[ 4028.140751] RBP: ffff9d3e013977f8 R08: ffff9219d8729800 R09: ffff9d3e2c000000
+</span></span><span class="line"><span class="cl">[ 4028.140753] R10: 00000000dd003601 R11: 0000000004000001 R12: 0000000000000000
+</span></span><span class="line"><span class="cl">[ 4028.140754] R13: 0000000000000000 R14: 000000400ec0b000 R15: 0000000000001000
+</span></span><span class="line"><span class="cl">[ 4028.140757] FS:  00007fe8da531700(0000) GS:ffff9219e3c00000(0000) knlGS:0000000000000000
+</span></span><span class="line"><span class="cl">[ 4028.140758] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+</span></span><span class="line"><span class="cl">[ 4028.140760] CR2: 00007fa0c5c99830 CR3: 000000019a628006 CR4: 00000000000606f0
+</span></span><span class="line"><span class="cl">[ 4028.140766] Call Trace:
+</span></span><span class="line"><span class="cl">[ 4028.140857]  ? efi_memset_io+0xe/0x10 [enflame]
+</span></span><span class="line"><span class="cl">[ 4028.140924]  dtu_mcu_feedback_mgr_init+0x9ca/0xb65 [enflame]
+</span></span><span class="line"><span class="cl">[ 4028.140984]  ? efi_log+0x59/0x80 [enflame]
+</span></span><span class="line"><span class="cl">[ 4028.141059]  dtu_device_post_init+0x2bd/0x636 [enflame]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>memset作为系统函数，直觉上感觉是不可能出问题的。先从错误提示看起：<!-- raw HTML omitted -->watchdog: BUG: soft lockup - CPU#0 stuck for 22s!<!-- raw HTML omitted -->，这个错误是典型的cpu软死锁，watchdog发现cpu 0运行超过了22秒，依然无法调度watchdog任务，从而产生的报警。</p>
 <p>调查发现，Linux内核对于每一个cpu都有一个监控进程，叫做watchdog（看门狗）。通过ps –ef | grep watchdog能够看见，进程名称是watchdog/X的形式，X对应cpu编号。</p>
@@ -191,16 +191,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">root        11     2  0 13:32 ?        00:00:00 [watchdog/0]
-root        14     2  0 13:32 ?        00:00:00 [watchdog/1]
-root        20     2  0 13:32 ?        00:00:00 [watchdog/2]
-root        26     2  0 13:32 ?        00:00:00 [watchdog/3]
-root        32     2  0 13:32 ?        00:00:00 [watchdog/4]
-root        38     2  0 13:32 ?        00:00:00 [watchdog/5]
-root        44     2  0 13:32 ?        00:00:00 [watchdog/6]
-root        50     2  0 13:32 ?        00:00:00 [watchdog/7]
-root        80     2  0 13:32 ?        00:00:00 [watchdogd]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root        11     2  0 13:32 ?        00:00:00 [watchdog/0]
+</span></span><span class="line"><span class="cl">root        14     2  0 13:32 ?        00:00:00 [watchdog/1]
+</span></span><span class="line"><span class="cl">root        20     2  0 13:32 ?        00:00:00 [watchdog/2]
+</span></span><span class="line"><span class="cl">root        26     2  0 13:32 ?        00:00:00 [watchdog/3]
+</span></span><span class="line"><span class="cl">root        32     2  0 13:32 ?        00:00:00 [watchdog/4]
+</span></span><span class="line"><span class="cl">root        38     2  0 13:32 ?        00:00:00 [watchdog/5]
+</span></span><span class="line"><span class="cl">root        44     2  0 13:32 ?        00:00:00 [watchdog/6]
+</span></span><span class="line"><span class="cl">root        50     2  0 13:32 ?        00:00:00 [watchdog/7]
+</span></span><span class="line"><span class="cl">root        80     2  0 13:32 ?        00:00:00 [watchdogd]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>watchdog进程每秒钟运行一次，否则会陷入睡眠。这个进程运行会收集对应cpu运行时的使用时间数据并存放到属于每个cpu自己的内核数据结构。在内核中有很多特定的中断函数，这些中断函数会更新soft lockup计数，watchdog会使用当前的时间戳与对应的cpu内核数据结构中保存的时间对比，如果发现当前的时间戳比对应cpu保存的时间大于设定的阀值，意味着watchdog进程在一个相当可观的时间内还没有被执行，也就是系统发生了软死锁。通俗来讲，就是<!-- raw HTML omitted -->执行了加锁操作之后，cpu执行的时间超过了阈值20秒还没有释放锁<!-- raw HTML omitted -->。</p>
 <p>相关kernel参数</p>
@@ -285,7 +285,7 @@ root        80     2  0 13:32 ?        00:00:00 [watchdogd]
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -305,7 +305,7 @@ root        80     2  0 13:32 ?        00:00:00 [watchdogd]
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

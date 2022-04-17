@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-11-13_top/" />
@@ -173,31 +173,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/*
-     * Account user cpu time to a process.
-     * @p: the process that the cpu time gets accounted to
-     * @cputime: the cpu time spent in user space since the last update
-     * @cputime_scaled: cputime scaled by cpu frequency
-     */
-    void account_user_time(struct task_struct *p, cputime_t cputime,
-                           cputime_t cputime_scaled)
-    {
-            int index;
-
-            /* Add user time to process. */
-            p-&gt;utime += cputime;
-            p-&gt;utimescaled += cputime_scaled;
-            account_group_user_time(p, cputime);
-
-            index = (TASK_NICE(p) &gt; 0) ? CPUTIME_NICE : CPUTIME_USER;
-
-            /* Add user time to cpustat. */
-            task_group_account_field(p, index, (__force u64) cputime);
-
-            /* Account for user time used */
-            acct_account_cputime(p);
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl">     * Account user cpu time to a process.
+</span></span><span class="line"><span class="cl">     * @p: the process that the cpu time gets accounted to
+</span></span><span class="line"><span class="cl">     * @cputime: the cpu time spent in user space since the last update
+</span></span><span class="line"><span class="cl">     * @cputime_scaled: cputime scaled by cpu frequency
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    void account_user_time(struct task_struct *p, cputime_t cputime,
+</span></span><span class="line"><span class="cl">                           cputime_t cputime_scaled)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">            int index;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            /* Add user time to process. */
+</span></span><span class="line"><span class="cl">            p-&gt;utime += cputime;
+</span></span><span class="line"><span class="cl">            p-&gt;utimescaled += cputime_scaled;
+</span></span><span class="line"><span class="cl">            account_group_user_time(p, cputime);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            index = (TASK_NICE(p) &gt; 0) ? CPUTIME_NICE : CPUTIME_USER;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            /* Add user time to cpustat. */
+</span></span><span class="line"><span class="cl">            task_group_account_field(p, index, (__force u64) cputime);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            /* Account for user time used */
+</span></span><span class="line"><span class="cl">            acct_account_cputime(p);
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -295,7 +295,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -315,7 +315,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

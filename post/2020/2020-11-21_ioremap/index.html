@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-11-21_ioremap/" />
@@ -160,25 +160,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -xxx
-01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
-00: <span class="m">36</span> 1e <span class="m">01</span> <span class="m">00</span> <span class="m">06</span> <span class="m">04</span> <span class="m">11</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">12</span> <span class="m">10</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-10: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a2 <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a1 0c <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-20: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">36</span> 1e <span class="m">01</span> <span class="m">00</span>
-30: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 0b <span class="m">01</span> <span class="m">00</span> <span class="m">00</span>
-40: <span class="m">01</span> <span class="m">50</span> <span class="m">13</span> <span class="m">48</span> <span class="m">08</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-50: <span class="m">05</span> <span class="m">70</span> <span class="m">80</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-60: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-70: <span class="m">10</span> b0 <span class="m">02</span> <span class="m">00</span> e2 8f 2c <span class="m">11</span> <span class="m">30</span> <span class="m">29</span> <span class="m">00</span> <span class="m">00</span> <span class="m">04</span> 6d <span class="m">43</span> <span class="m">00</span>
-80: <span class="m">40</span> <span class="m">00</span> <span class="m">03</span> <span class="m">11</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-90: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 1f <span class="m">00</span> <span class="m">01</span> <span class="m">80</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 1e <span class="m">00</span> <span class="m">80</span> <span class="m">81</span>
-a0: <span class="m">04</span> <span class="m">00</span> 1f <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-b0: <span class="m">11</span> <span class="m">00</span> <span class="m">07</span> <span class="m">80</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">10</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-c0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-d0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-e0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-f0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@taylor-debug-pc:~# lspci -s 01:00.0 -xxx
+</span></span><span class="line"><span class="cl">01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
+</span></span><span class="line"><span class="cl">00: <span class="m">36</span> 1e <span class="m">01</span> <span class="m">00</span> <span class="m">06</span> <span class="m">04</span> <span class="m">11</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">12</span> <span class="m">10</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">10: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a2 <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> a1 0c <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">20: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">36</span> 1e <span class="m">01</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">30: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">40</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 0b <span class="m">01</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">40: <span class="m">01</span> <span class="m">50</span> <span class="m">13</span> <span class="m">48</span> <span class="m">08</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">50: <span class="m">05</span> <span class="m">70</span> <span class="m">80</span> <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">60: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">70: <span class="m">10</span> b0 <span class="m">02</span> <span class="m">00</span> e2 8f 2c <span class="m">11</span> <span class="m">30</span> <span class="m">29</span> <span class="m">00</span> <span class="m">00</span> <span class="m">04</span> 6d <span class="m">43</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">80: <span class="m">40</span> <span class="m">00</span> <span class="m">03</span> <span class="m">11</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">90: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 1f <span class="m">00</span> <span class="m">01</span> <span class="m">80</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> 1e <span class="m">00</span> <span class="m">80</span> <span class="m">81</span>
+</span></span><span class="line"><span class="cl">a0: <span class="m">04</span> <span class="m">00</span> 1f <span class="m">01</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">b0: <span class="m">11</span> <span class="m">00</span> <span class="m">07</span> <span class="m">80</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">10</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">c0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">d0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">e0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span><span class="line"><span class="cl">f0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -204,27 +204,27 @@ f0: <span class="m">00</span> <span class="m">00</span> <span class="m">00</span
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@taylor-debug-pc:~# lspci -s 01:00.0 -v
-01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
-        Subsystem: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span>
-        Flags: bus master, fast devsel, latency 0, IRQ <span class="m">16</span>
-        Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>     <span class="c1"># bar0寄存器</span>
-        Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>     <span class="c1"># bar1寄存器</span>
-        Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>       <span class="c1"># 片上内存</span>
-        Capabilities: <span class="o">[</span>40<span class="o">]</span> Power Management version <span class="m">3</span>
-        Capabilities: <span class="o">[</span>50<span class="o">]</span> MSI: Enable- <span class="nv">Count</span><span class="o">=</span>1/1 Maskable+ 64bit+
-        Capabilities: <span class="o">[</span>70<span class="o">]</span> Express Endpoint, MSI <span class="m">00</span>
-        Capabilities: <span class="o">[</span>b0<span class="o">]</span> MSI-X: Enable+ <span class="nv">Count</span><span class="o">=</span><span class="m">8</span> Masked-
-        Capabilities: <span class="o">[</span>100<span class="o">]</span> Advanced Error Reporting
-        Capabilities: <span class="o">[</span>148<span class="o">]</span> <span class="c1">#19</span>
-        Capabilities: <span class="o">[</span>178<span class="o">]</span> <span class="c1">#26</span>
-        Capabilities: <span class="o">[</span>1a8<span class="o">]</span> <span class="c1">#27</span>
-        Capabilities: <span class="o">[</span>1f0<span class="o">]</span> <span class="c1">#22</span>
-        Capabilities: <span class="o">[</span>1fc<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0002</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">4</span> <span class="nv">Len</span><span class="o">=</span><span class="m">100</span> &lt;?&gt;
-        Capabilities: <span class="o">[</span>2fc<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0001</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">1</span> <span class="nv">Len</span><span class="o">=</span><span class="m">038</span> &lt;?&gt;
-        Capabilities: <span class="o">[</span>334<span class="o">]</span> <span class="c1">#25</span>
-        Kernel driver in use: dtu
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@taylor-debug-pc:~# lspci -s 01:00.0 -v
+</span></span><span class="line"><span class="cl">01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        Subsystem: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        Flags: bus master, fast devsel, latency 0, IRQ <span class="m">16</span>
+</span></span><span class="line"><span class="cl">        Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>     <span class="c1"># bar0寄存器</span>
+</span></span><span class="line"><span class="cl">        Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>     <span class="c1"># bar1寄存器</span>
+</span></span><span class="line"><span class="cl">        Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>       <span class="c1"># 片上内存</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>40<span class="o">]</span> Power Management version <span class="m">3</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>50<span class="o">]</span> MSI: Enable- <span class="nv">Count</span><span class="o">=</span>1/1 Maskable+ 64bit+
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>70<span class="o">]</span> Express Endpoint, MSI <span class="m">00</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>b0<span class="o">]</span> MSI-X: Enable+ <span class="nv">Count</span><span class="o">=</span><span class="m">8</span> Masked-
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>100<span class="o">]</span> Advanced Error Reporting
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>148<span class="o">]</span> <span class="c1">#19</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>178<span class="o">]</span> <span class="c1">#26</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1a8<span class="o">]</span> <span class="c1">#27</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1f0<span class="o">]</span> <span class="c1">#22</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1fc<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0002</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">4</span> <span class="nv">Len</span><span class="o">=</span><span class="m">100</span> &lt;?&gt;
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>2fc<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0001</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">1</span> <span class="nv">Len</span><span class="o">=</span><span class="m">038</span> &lt;?&gt;
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>334<span class="o">]</span> <span class="c1">#25</span>
+</span></span><span class="line"><span class="cl">        Kernel driver in use: dtu
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一般来说，在系统运行时，外设的I/O内存资源的物理地址是已知的，由硬件的设计决定。但是CPU通常并没有为这些已知的外设I/O内存资源的物理地址预定义虚拟地址范围，驱动程序并不能直接通过物理地址访问I/O内存资源，而必须将它们映射到核心虚地址空间内（通过页表），然后才能根据映射所得到的核心虚地址范围，通过访内指令访问这些I/O内存资源。</p>
 <p>cpu访问寄存器有2种方式：</p>
@@ -317,12 +317,12 @@ Write-back（回写模式）在数据更新时只写入缓存Cache。只在数�
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define ioremap(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
-</span><span class="cp">#define ioremap_nocache(addr, size)	__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
-</span><span class="cp">#define ioremap_wc(addr, size)		__ioremap((addr), (size), __pgprot(PROT_NORMAL_NC))
-</span><span class="cp">#define ioremap_wt(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
-</span><span class="cp">#define iounmap				__iounmap
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#define ioremap(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define ioremap_nocache(addr, size)	__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define ioremap_wc(addr, size)		__ioremap((addr), (size), __pgprot(PROT_NORMAL_NC))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define ioremap_wt(addr, size)		__ioremap((addr), (size), __pgprot(PROT_DEVICE_nGnRE))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define iounmap				__iounmap
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>ARM对于memory类型解释（https://blog.csdn.net/shenhuxi_yu/article/details/90617675）</p>
 <p>ARM把memeory 分成两个类型device 与 normal, device 类型的memory的访问行为比较复杂，例如read clear, read inc addr(读同一个寄存器，实际会递增的去访问某一块memory)，这些特性决定了cpu 不能像normal memory 那样对memroy 访问进行re-order，normal memory即是我们常理解的内存。</p>
@@ -427,7 +427,7 @@ Write-back（回写模式）在数据更新时只写入缓存Cache。只在数�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -447,7 +447,7 @@ Write-back（回写模式）在数据更新时只写入缓存Cache。只在数�
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

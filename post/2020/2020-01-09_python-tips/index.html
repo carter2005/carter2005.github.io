@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-01-09_python-tips/" />
@@ -148,8 +148,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意，<code>simple</code> 不能少, 是 <code>https</code> 而不是 <code>http</code></p>
 <h3 id="设为默认">设为默认</h3>
@@ -160,9 +160,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install pip -U
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install pip -U
+</span></span><span class="line"><span class="cl">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果您到 pip 默认源的网络连接较差，临时使用本镜像站来升级 pip：</p>
 <div class="highlight"><div class="chroma">
@@ -170,8 +170,8 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="lsb_release损坏">lsb_release损坏</h1>
 <p>lsb_release命令是/usr/bin下面的一个python脚本，依赖python里面的lsb_release.py获取系统信息，自己的编译的python 3.6因为没有这个脚本，导致pip无法安装任何库。</p>
@@ -253,7 +253,7 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -273,7 +273,7 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-09-20_arm_memset_crash/" />
@@ -198,61 +198,61 @@
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@wang-1604:~# lspci -d 1e36: -vv
-01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
-        Subsystem: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span>
-        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
-        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- <span class="nv">DEVSEL</span><span class="o">=</span>fast &gt;TAbort- &lt;TAbort- &lt;MAbort- &gt;SERR- &lt;PERR- INTx-
-        Latency: 0, Cache Line Size: <span class="m">64</span> bytes
-        Interrupt: pin A routed to IRQ <span class="m">16</span>
-        Region 0: Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>
-        Region 1: Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>
-        Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>
-        Capabilities: <span class="o">[</span>40<span class="o">]</span> Power Management version <span class="m">3</span>
-                Flags: PMEClk- DSI- D1- D2- <span class="nv">AuxCurrent</span><span class="o">=</span>0mA PME<span class="o">(</span>D0+,D1-,D2-,D3hot+,D3cold-<span class="o">)</span>
-                Status: D0 NoSoftRst+ PME-Enable- <span class="nv">DSel</span><span class="o">=</span><span class="m">0</span> <span class="nv">DScale</span><span class="o">=</span><span class="m">0</span> PME-
-        Capabilities: <span class="o">[</span>50<span class="o">]</span> MSI: Enable- <span class="nv">Count</span><span class="o">=</span>1/1 Maskable+ 64bit+
-                Address: <span class="m">0000000000000000</span>  Data: <span class="m">0000</span>
-                Masking: <span class="m">00000000</span>  Pending: <span class="m">00000000</span>
-        Capabilities: <span class="o">[</span>70<span class="o">]</span> Express <span class="o">(</span>v2<span class="o">)</span> Endpoint, MSI <span class="m">00</span>
-                DevCap: MaxPayload <span class="m">512</span> bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited
-                        ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset-
-                DevCtl: Report errors: Correctable- Non-Fatal- Fatal- Unsupported-
-                        RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
-                        MaxPayload <span class="m">256</span> bytes, MaxReadReq <span class="m">512</span> bytes
-                DevSta: CorrErr- UncorrErr- FatalErr- UnsuppReq- AuxPwr- TransPend-
-                LnkCap: Port <span class="c1">#0, Speed 16GT/s, Width x16, ASPM L0s L1, Exit Latency L0s &lt;4us, L1 &lt;64us</span>
-                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+
-                LnkCtl: ASPM Disabled<span class="p">;</span> RCB <span class="m">64</span> bytes Disabled- CommClk+
-                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
-                LnkSta: Speed 8GT/s, Width x16, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
-                DevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported
-                DevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled
-                LnkCtl2: Target Link Speed: 16GT/s, EnterCompliance- SpeedDis-
-                         Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
-                         Compliance De-emphasis: -6dB
-                LnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+
-                         EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-
-        Capabilities: <span class="o">[</span>b0<span class="o">]</span> MSI-X: Enable+ <span class="nv">Count</span><span class="o">=</span><span class="m">8</span> Masked-
-                Vector table: <span class="nv">BAR</span><span class="o">=</span><span class="m">0</span> <span class="nv">offset</span><span class="o">=</span><span class="m">00000000</span>
-                PBA: <span class="nv">BAR</span><span class="o">=</span><span class="m">0</span> <span class="nv">offset</span><span class="o">=</span><span class="m">00001000</span>
-        Capabilities: <span class="o">[</span><span class="m">100</span> v2<span class="o">]</span> Advanced Error Reporting
-                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
-                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
-                UESvrt: DLP+ SDES+ TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
-                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr-
-                CEMsk:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr+
-                AERCap: First Error Pointer: 00, GenCap+ CGenEn- ChkCap+ ChkEn-
-        Capabilities: <span class="o">[</span><span class="m">148</span> v1<span class="o">]</span> <span class="c1">#19</span>
-        Capabilities: <span class="o">[</span><span class="m">178</span> v1<span class="o">]</span> <span class="c1">#26</span>
-        Capabilities: <span class="o">[</span>1a8 v1<span class="o">]</span> <span class="c1">#27</span>
-        Capabilities: <span class="o">[</span>1f0 v1<span class="o">]</span> <span class="c1">#22</span>
-        Capabilities: <span class="o">[</span>1fc v1<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0002</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">4</span> <span class="nv">Len</span><span class="o">=</span><span class="m">100</span> &lt;?&gt;
-        Capabilities: <span class="o">[</span>2fc v1<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0001</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">1</span> <span class="nv">Len</span><span class="o">=</span><span class="m">038</span> &lt;?&gt;
-        Capabilities: <span class="o">[</span><span class="m">334</span> v1<span class="o">]</span> <span class="c1">#25</span>
-        Kernel driver in use: dtu
-        Kernel modules: enflame
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@wang-1604:~# lspci -d 1e36: -vv
+</span></span><span class="line"><span class="cl">01:00.0 Processing accelerators: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span> <span class="o">(</span>rev 01<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        Subsystem: Shanghai Enflame Technology Co. Ltd T10 <span class="o">[</span>CloudBlazer<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+</span></span><span class="line"><span class="cl">        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- <span class="nv">DEVSEL</span><span class="o">=</span>fast &gt;TAbort- &lt;TAbort- &lt;MAbort- &gt;SERR- &lt;PERR- INTx-
+</span></span><span class="line"><span class="cl">        Latency: 0, Cache Line Size: <span class="m">64</span> bytes
+</span></span><span class="line"><span class="cl">        Interrupt: pin A routed to IRQ <span class="m">16</span>
+</span></span><span class="line"><span class="cl">        Region 0: Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        Region 1: Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>40<span class="o">]</span> Power Management version <span class="m">3</span>
+</span></span><span class="line"><span class="cl">                Flags: PMEClk- DSI- D1- D2- <span class="nv">AuxCurrent</span><span class="o">=</span>0mA PME<span class="o">(</span>D0+,D1-,D2-,D3hot+,D3cold-<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                Status: D0 NoSoftRst+ PME-Enable- <span class="nv">DSel</span><span class="o">=</span><span class="m">0</span> <span class="nv">DScale</span><span class="o">=</span><span class="m">0</span> PME-
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>50<span class="o">]</span> MSI: Enable- <span class="nv">Count</span><span class="o">=</span>1/1 Maskable+ 64bit+
+</span></span><span class="line"><span class="cl">                Address: <span class="m">0000000000000000</span>  Data: <span class="m">0000</span>
+</span></span><span class="line"><span class="cl">                Masking: <span class="m">00000000</span>  Pending: <span class="m">00000000</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>70<span class="o">]</span> Express <span class="o">(</span>v2<span class="o">)</span> Endpoint, MSI <span class="m">00</span>
+</span></span><span class="line"><span class="cl">                DevCap: MaxPayload <span class="m">512</span> bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited
+</span></span><span class="line"><span class="cl">                        ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset-
+</span></span><span class="line"><span class="cl">                DevCtl: Report errors: Correctable- Non-Fatal- Fatal- Unsupported-
+</span></span><span class="line"><span class="cl">                        RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
+</span></span><span class="line"><span class="cl">                        MaxPayload <span class="m">256</span> bytes, MaxReadReq <span class="m">512</span> bytes
+</span></span><span class="line"><span class="cl">                DevSta: CorrErr- UncorrErr- FatalErr- UnsuppReq- AuxPwr- TransPend-
+</span></span><span class="line"><span class="cl">                LnkCap: Port <span class="c1">#0, Speed 16GT/s, Width x16, ASPM L0s L1, Exit Latency L0s &lt;4us, L1 &lt;64us</span>
+</span></span><span class="line"><span class="cl">                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+
+</span></span><span class="line"><span class="cl">                LnkCtl: ASPM Disabled<span class="p">;</span> RCB <span class="m">64</span> bytes Disabled- CommClk+
+</span></span><span class="line"><span class="cl">                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+</span></span><span class="line"><span class="cl">                LnkSta: Speed 8GT/s, Width x16, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+</span></span><span class="line"><span class="cl">                DevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported
+</span></span><span class="line"><span class="cl">                DevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled
+</span></span><span class="line"><span class="cl">                LnkCtl2: Target Link Speed: 16GT/s, EnterCompliance- SpeedDis-
+</span></span><span class="line"><span class="cl">                         Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+</span></span><span class="line"><span class="cl">                         Compliance De-emphasis: -6dB
+</span></span><span class="line"><span class="cl">                LnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+
+</span></span><span class="line"><span class="cl">                         EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>b0<span class="o">]</span> MSI-X: Enable+ <span class="nv">Count</span><span class="o">=</span><span class="m">8</span> Masked-
+</span></span><span class="line"><span class="cl">                Vector table: <span class="nv">BAR</span><span class="o">=</span><span class="m">0</span> <span class="nv">offset</span><span class="o">=</span><span class="m">00000000</span>
+</span></span><span class="line"><span class="cl">                PBA: <span class="nv">BAR</span><span class="o">=</span><span class="m">0</span> <span class="nv">offset</span><span class="o">=</span><span class="m">00001000</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span><span class="m">100</span> v2<span class="o">]</span> Advanced Error Reporting
+</span></span><span class="line"><span class="cl">                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+</span></span><span class="line"><span class="cl">                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+</span></span><span class="line"><span class="cl">                UESvrt: DLP+ SDES+ TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
+</span></span><span class="line"><span class="cl">                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr-
+</span></span><span class="line"><span class="cl">                CEMsk:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr+
+</span></span><span class="line"><span class="cl">                AERCap: First Error Pointer: 00, GenCap+ CGenEn- ChkCap+ ChkEn-
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span><span class="m">148</span> v1<span class="o">]</span> <span class="c1">#19</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span><span class="m">178</span> v1<span class="o">]</span> <span class="c1">#26</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1a8 v1<span class="o">]</span> <span class="c1">#27</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1f0 v1<span class="o">]</span> <span class="c1">#22</span>
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>1fc v1<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0002</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">4</span> <span class="nv">Len</span><span class="o">=</span><span class="m">100</span> &lt;?&gt;
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span>2fc v1<span class="o">]</span> Vendor Specific Information: <span class="nv">ID</span><span class="o">=</span><span class="m">0001</span> <span class="nv">Rev</span><span class="o">=</span><span class="m">1</span> <span class="nv">Len</span><span class="o">=</span><span class="m">038</span> &lt;?&gt;
+</span></span><span class="line"><span class="cl">        Capabilities: <span class="o">[</span><span class="m">334</span> v1<span class="o">]</span> <span class="c1">#25</span>
+</span></span><span class="line"><span class="cl">        Kernel driver in use: dtu
+</span></span><span class="line"><span class="cl">        Kernel modules: enflame
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>lspci显示存在3个bar space，物理地址分别在0xa1000000, 0xa2000000, 0x4000000000</p>
 <div class="highlight"><div class="chroma">
@@ -262,10 +262,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Region 0: Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>
-Region 1: Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>
-Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Region 0: Memory at a2000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16K<span class="o">]</span>
+</span></span><span class="line"><span class="cl">Region 1: Memory at a1000000 <span class="o">(</span>32-bit, non-prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16M<span class="o">]</span>
+</span></span><span class="line"><span class="cl">Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64-bit, prefetchable<span class="o">)</span> <span class="o">[</span><span class="nv">size</span><span class="o">=</span>16G<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看/proc/iomem，存在对应物理地址</p>
 <div class="highlight"><div class="chroma">
@@ -278,13 +278,13 @@ Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@wang-1604:~# cat /proc/iomem <span class="p">|</span>grep 0000:01
-  a1000000-a20fffff : PCI Bus 0000:01
-    a1000000-a1ffffff : 0000:01:00.0
-    a2000000-a2003fff : 0000:01:00.0
-  4000000000-43ffffffff : PCI Bus 0000:01
-    4000000000-43ffffffff : 0000:01:00.0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@wang-1604:~# cat /proc/iomem <span class="p">|</span>grep 0000:01
+</span></span><span class="line"><span class="cl">  a1000000-a20fffff : PCI Bus 0000:01
+</span></span><span class="line"><span class="cl">    a1000000-a1ffffff : 0000:01:00.0
+</span></span><span class="line"><span class="cl">    a2000000-a2003fff : 0000:01:00.0
+</span></span><span class="line"><span class="cl">  4000000000-43ffffffff : PCI Bus 0000:01
+</span></span><span class="line"><span class="cl">    4000000000-43ffffffff : 0000:01:00.0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="normal-memory和device-memory">normal memory和device memory</h2>
 <p><strong>normal memory</strong>：normal memory就是我们平常所说的内存，对该种memory访问时无副作用(side effect)，即第n次访问与第n+1次访问没有任何差别（对比device memory的side effect特性，更容易理解一些）。</p>
@@ -356,18 +356,18 @@ Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#define readb(addr) (*(volatile unsigned char *) __io_virt(addr))
-</span><span class="cp">#define readw(addr) (*(volatile unsigned short *) __io_virt(addr))
-</span><span class="cp">#define readl(addr) (*(volatile unsigned int *) __io_virt(addr))
-</span><span class="cp"></span>
-<span class="cp">#define writeb(b,addr) (*(volatile unsigned char *) __io_virt(addr) = (b))
-</span><span class="cp">#define writew(b,addr) (*(volatile unsigned short *) __io_virt(addr) = (b))
-</span><span class="cp">#define writel(b,addr) (*(volatile unsigned int *) __io_virt(addr) = (b))
-</span><span class="cp"></span>
-<span class="cp">#define memset_io(a,b,c) memset(__io_virt(a),(b),(c))
-</span><span class="cp">#define memcpy_fromio(a,b,c) memcpy((a),__io_virt(b),(c))
-</span><span class="cp">#define memcpy_toio(a,b,c) memcpy(__io_virt(a),(b),(c))
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define readb(addr) (*(volatile unsigned char *) __io_virt(addr))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define readw(addr) (*(volatile unsigned short *) __io_virt(addr))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define readl(addr) (*(volatile unsigned int *) __io_virt(addr))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define writeb(b,addr) (*(volatile unsigned char *) __io_virt(addr) = (b))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define writew(b,addr) (*(volatile unsigned short *) __io_virt(addr) = (b))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define writel(b,addr) (*(volatile unsigned int *) __io_virt(addr) = (b))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define memset_io(a,b,c) memset(__io_virt(a),(b),(c))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define memcpy_fromio(a,b,c) memcpy((a),__io_virt(b),(c))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define memcpy_toio(a,b,c) memcpy(__io_virt(a),(b),(c))
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这些io函数在不同的平台，实现是不一样的，与内存的memcpy，memset相比，考虑了对齐，依赖io read/write函数读写数据。这也是为什么跨平台代码推荐使用io函数操作io类型内存的原因。</p>
 <p>X86：</p>
@@ -423,55 +423,55 @@ Region 2: Memory at <span class="m">4000000000</span> <span class="o">(</span>64
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#define memcpy_fromio memcpy_fromio
-#define memcpy_toio memcpy_toio
-#define memset_io memset_io
-
-void memcpy_fromio(void *to, const volatile void __iomem *from, size_t n)
-{
-	if (unlikely(!n))
-		return;
-
-	/* Align any unaligned source IO */
-	if (unlikely(1 &amp; (unsigned long)from)) {
-		movs(&#34;b&#34;, to, from);
-		n--;
-	}
-	if (n &gt; 1 &amp;&amp; unlikely(2 &amp; (unsigned long)from)) {
-		movs(&#34;w&#34;, to, from);
-		n-=2;
-	}
-	rep_movs(to, (const void *)from, n);
-}
-EXPORT_SYMBOL(memcpy_fromio);
-
-void memcpy_toio(volatile void __iomem *to, const void *from, size_t n)
-{
-	if (unlikely(!n))
-		return;
-
-	/* Align any unaligned destination IO */
-	if (unlikely(1 &amp; (unsigned long)to)) {
-		movs(&#34;b&#34;, to, from);
-		n--;
-	}
-	if (n &gt; 1 &amp;&amp; unlikely(2 &amp; (unsigned long)to)) {
-		movs(&#34;w&#34;, to, from);
-		n-=2;
-	}
-	rep_movs((void *)to, (const void *) from, n);
-}
-EXPORT_SYMBOL(memcpy_toio);
-
-void memset_io(volatile void __iomem *a, int b, size_t c)
-{
-	/*
-	 * TODO: memset can mangle the IO patterns quite a bit.
-	 * perhaps it would be better to use a dumb one:
-	 */
-	memset((void *)a, b, c);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define memcpy_fromio memcpy_fromio
+</span></span><span class="line"><span class="cl">#define memcpy_toio memcpy_toio
+</span></span><span class="line"><span class="cl">#define memset_io memset_io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void memcpy_fromio(void *to, const volatile void __iomem *from, size_t n)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (unlikely(!n))
+</span></span><span class="line"><span class="cl">		return;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	/* Align any unaligned source IO */
+</span></span><span class="line"><span class="cl">	if (unlikely(1 &amp; (unsigned long)from)) {
+</span></span><span class="line"><span class="cl">		movs(&#34;b&#34;, to, from);
+</span></span><span class="line"><span class="cl">		n--;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	if (n &gt; 1 &amp;&amp; unlikely(2 &amp; (unsigned long)from)) {
+</span></span><span class="line"><span class="cl">		movs(&#34;w&#34;, to, from);
+</span></span><span class="line"><span class="cl">		n-=2;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	rep_movs(to, (const void *)from, n);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">EXPORT_SYMBOL(memcpy_fromio);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void memcpy_toio(volatile void __iomem *to, const void *from, size_t n)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (unlikely(!n))
+</span></span><span class="line"><span class="cl">		return;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	/* Align any unaligned destination IO */
+</span></span><span class="line"><span class="cl">	if (unlikely(1 &amp; (unsigned long)to)) {
+</span></span><span class="line"><span class="cl">		movs(&#34;b&#34;, to, from);
+</span></span><span class="line"><span class="cl">		n--;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	if (n &gt; 1 &amp;&amp; unlikely(2 &amp; (unsigned long)to)) {
+</span></span><span class="line"><span class="cl">		movs(&#34;w&#34;, to, from);
+</span></span><span class="line"><span class="cl">		n-=2;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	rep_movs((void *)to, (const void *) from, n);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">EXPORT_SYMBOL(memcpy_toio);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void memset_io(volatile void __iomem *a, int b, size_t c)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	/*
+</span></span><span class="line"><span class="cl">	 * TODO: memset can mangle the IO patterns quite a bit.
+</span></span><span class="line"><span class="cl">	 * perhaps it would be better to use a dumb one:
+</span></span><span class="line"><span class="cl">	 */
+</span></span><span class="line"><span class="cl">	memset((void *)a, b, c);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>arm：</p>
 <div class="highlight"><div class="chroma">
@@ -567,96 +567,96 @@ void memset_io(volatile void __iomem *a, int b, size_t c)
 </span><span class="lnt">89
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#define memset_io(c,v,l)	__memset_io((c),(v),(l))
-</span><span class="cp">#define memcpy_fromio(a,c,l)	__memcpy_fromio((a),(c),(l))
-</span><span class="cp">#define memcpy_toio(c,a,l)	__memcpy_toio((c),(a),(l))
-</span><span class="cp"></span>
-<span class="cm">/*
-</span><span class="cm"> * Copy data from IO memory space to &#34;real&#34; memory space.
-</span><span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">__memcpy_fromio</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">from</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
-		<span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readb</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
-		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
-		<span class="o">*</span><span class="p">(</span><span class="n">u64</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readq</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
-		<span class="n">from</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="n">to</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-		<span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readb</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
-		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">__memcpy_fromio</span><span class="p">);</span>
-
-<span class="cm">/*
-</span><span class="cm"> * Copy data from &#34;real&#34; memory space to IO memory space.
-</span><span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">__memcpy_toio</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">from</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">to</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">__raw_writeb</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
-		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">__raw_writeq</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u64</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
-		<span class="n">from</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="n">to</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">__raw_writeb</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
-		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">__memcpy_toio</span><span class="p">);</span>
-
-<span class="cm">/*
-</span><span class="cm"> * &#34;memset&#34; on IO memory space.
-</span><span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">__memset_io</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="n">u64</span> <span class="n">qc</span> <span class="o">=</span> <span class="p">(</span><span class="n">u8</span><span class="p">)</span><span class="n">c</span><span class="p">;</span>
-
-	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">;</span>
-	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">;</span>
-	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">;</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">dst</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">__raw_writeb</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
-		<span class="n">dst</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">__raw_writeq</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
-		<span class="n">dst</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">__raw_writeb</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
-		<span class="n">dst</span><span class="o">++</span><span class="p">;</span>
-		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define memset_io(c,v,l)	__memset_io((c),(v),(l))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define memcpy_fromio(a,c,l)	__memcpy_fromio((a),(c),(l))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define memcpy_toio(c,a,l)	__memcpy_toio((c),(a),(l))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Copy data from IO memory space to &#34;real&#34; memory space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">__memcpy_fromio</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">from</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readb</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">*</span><span class="p">(</span><span class="n">u64</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readq</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">to</span> <span class="o">=</span> <span class="n">__raw_readb</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">__memcpy_fromio</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Copy data from &#34;real&#34; memory space to IO memory space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">__memcpy_toio</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">from</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">to</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeb</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeq</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u64</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeb</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">from</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">to</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">__memcpy_toio</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * &#34;memset&#34; on IO memory space.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">__memset_io</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">void</span> <span class="n">__iomem</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">u64</span> <span class="n">qc</span> <span class="o">=</span> <span class="p">(</span><span class="n">u8</span><span class="p">)</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">qc</span> <span class="o">|=</span> <span class="n">qc</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">IS_ALIGNED</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">dst</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeb</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">dst</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeq</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">dst</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span> <span class="o">-=</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">__raw_writeb</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dst</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">dst</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="write-combine">write combine</h2>
 <p>对于现代cpu而言，性能瓶颈则是对于内存的访问。cpu的速度往往都比主存的高至少两个数量级。因此cpu都引入了L1_cache与L2_cache,更加高端的cpu还加入了L3_cache.很显然，这个技术引起了下一个问题:</p>
@@ -753,91 +753,91 @@ void memset_io(volatile void __iomem *a, int b, size_t c)
 </span><span class="lnt">84
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
-<span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">items</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">;</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">mask</span><span class="p">;</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayA</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayB</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayC</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayD</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayE</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayF</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayG</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">arrayH</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
-
-<span class="kt">double</span> <span class="nf">run_one_case_for_8</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">start_time</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">end_time</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">start</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">end</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
-    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">arrayA</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayB</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayC</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayD</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayE</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayF</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayG</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayH</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">start_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
-    <span class="n">end_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">double</span> <span class="nf">run_two_case_for_4</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">start_time</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">end_time</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">start</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">end</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
-    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">arrayA</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayB</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayC</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayD</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">arrayG</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayE</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayF</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-        <span class="n">arrayH</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">start_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
-    <span class="n">end_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">items</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test begin----&gt;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34; %d, run_one_case_for_8: %lf</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">run_one_case_for_8</span><span class="p">());</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34; %d, run_two_case_for_4: %lf</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">run_two_case_for_4</span><span class="p">());</span>
-    <span class="p">}</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test end&#34;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">items</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayA</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayB</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayC</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayD</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayE</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayF</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayG</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">arrayH</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">run_one_case_for_8</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">start_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">end_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">start</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayA</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayB</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayC</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayD</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayE</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayF</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayG</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayH</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">start_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">end_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">run_two_case_for_4</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">start_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">end_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">start</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayA</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayB</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayC</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayD</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayG</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayE</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayF</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arrayH</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">start_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">start</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">end_time</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">end</span><span class="p">.</span><span class="n">tv_usec</span> <span class="o">/</span> <span class="mf">1000000.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mask</span> <span class="o">=</span> <span class="n">items</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test begin----&gt;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34; %d, run_one_case_for_8: %lf</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">run_one_case_for_8</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34; %d, run_two_case_for_4: %lf</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">run_two_case_for_4</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test end&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>测试结果：</p>
 <div class="highlight"><div class="chroma">
@@ -852,15 +852,15 @@ void memset_io(volatile void __iomem *a, int b, size_t c)
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">root@wang-1604:~/Desktop# ./wc-test 
-<span class="nb">test</span> begin----&gt;
- 0, run_one_case_for_8: 27.442992
- 0, run_two_case_for_4: 12.841221
- 1, run_one_case_for_8: 27.068290
- 1, run_two_case_for_4: 12.692629
- 2, run_one_case_for_8: 27.159333
- 2, run_two_case_for_4: 12.675539
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@wang-1604:~/Desktop# ./wc-test 
+</span></span><span class="line"><span class="cl"><span class="nb">test</span> begin----&gt;
+</span></span><span class="line"><span class="cl"> 0, run_one_case_for_8: 27.442992
+</span></span><span class="line"><span class="cl"> 0, run_two_case_for_4: 12.841221
+</span></span><span class="line"><span class="cl"> 1, run_one_case_for_8: 27.068290
+</span></span><span class="line"><span class="cl"> 1, run_two_case_for_4: 12.692629
+</span></span><span class="line"><span class="cl"> 2, run_one_case_for_8: 27.159333
+</span></span><span class="line"><span class="cl"> 2, run_two_case_for_4: 12.675539
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>原理:上面提到的合并写存入缓冲区离cpu很近，容量为64字节，很小了，估计很贵。数量也是有限的，我这款cpu它的个数为4。个数时依赖cpu模型的，intel的cpu在同一时刻只能拿到4个。</p>
 <p>因此，run_one_case_for_8函数中连续写入8个不同位置的内存，那么当4个数据写满了合并写缓冲时，cpu就要等待合并写缓冲区更新到L2cache中，因此cpu就被强制暂停了。然而在run_two_case_for_4函数中是每次写入4个不同位置的内存，可以很好的利用合并写缓冲区，因合并写缓冲区满到引起的cpu暂停的次数会大大减少，当然如果每次写入的内存位置数目小于4，也是一样的。虽然多了一次循环的i++操作（实际上你可能会问，i++也是会写入内存的啊，其实i这个变量保存在了寄存器上）， 但是它们之间的性能差距依然非常大。</p>
@@ -927,62 +927,62 @@ void memset_io(volatile void __iomem *a, int b, size_t c)
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>  196.090332<span class="o">]</span> Unable to handle kernel paging request at virtual address ffff00001fb20000
-<span class="o">[</span>  196.090377<span class="o">]</span> Mem abort info:
-<span class="o">[</span>  196.090393<span class="o">]</span>   <span class="nv">ESR</span> <span class="o">=</span> 0x96000061
-<span class="o">[</span>  196.090412<span class="o">]</span>   Exception <span class="nv">class</span> <span class="o">=</span> DABT <span class="o">(</span>current EL<span class="o">)</span>, <span class="nv">IL</span> <span class="o">=</span> <span class="m">32</span> bits
-<span class="o">[</span>  196.090440<span class="o">]</span>   <span class="nv">SET</span> <span class="o">=</span> 0, <span class="nv">FnV</span> <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>  196.090457<span class="o">]</span>   <span class="nv">EA</span> <span class="o">=</span> 0, <span class="nv">S1PTW</span> <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>  196.090474<span class="o">]</span> Data abort info:
-<span class="o">[</span>  196.090490<span class="o">]</span>   <span class="nv">ISV</span> <span class="o">=</span> 0, <span class="nv">ISS</span> <span class="o">=</span> 0x00000061
-<span class="o">[</span>  196.090509<span class="o">]</span>   <span class="nv">CM</span> <span class="o">=</span> 0, <span class="nv">WnR</span> <span class="o">=</span> <span class="m">1</span>
-<span class="o">[</span>  196.090527<span class="o">]</span> swapper pgtable: 64k pages, 48-bit VAs, <span class="nv">pgdp</span> <span class="o">=</span> 00000000fae502d6
-<span class="o">[</span>  196.090560<span class="o">]</span> <span class="o">[</span>ffff00001fb20000<span class="o">]</span> <span class="nv">pgd</span><span class="o">=</span>00000381fffe0803, <span class="nv">pud</span><span class="o">=</span>00000381fffe0803, <span class="nv">pmd</span><span class="o">=</span>00000381fffd0803, <span class="nv">pte</span><span class="o">=</span>0068082000610f07
-<span class="o">[</span>  196.090610<span class="o">]</span> Internal error: Oops: <span class="m">96000061</span> <span class="o">[</span><span class="c1">#1] SMP</span>
-<span class="o">[</span>  196.090633<span class="o">]</span> Modules linked in: dtu<span class="o">(</span>OE+<span class="o">)</span> dtu_kcl<span class="o">(</span>OE<span class="o">)</span> mpt3sas ast igb ttm raid_class rtc_ds1307
-<span class="o">[</span>  196.090677<span class="o">]</span> Process kworker/0:3 <span class="o">(</span>pid: 737, stack <span class="nv">limit</span> <span class="o">=</span> 0x0000000031d7cfb7<span class="o">)</span>
-<span class="o">[</span>  196.090712<span class="o">]</span> CPU: <span class="m">0</span> PID: <span class="m">737</span> Comm: kworker/0:3 Kdump: loaded Tainted: G           OE     4.19.90-17.ky10.aarch64 <span class="c1">#1</span>
-<span class="o">[</span>  196.090756<span class="o">]</span> Hardware name:  /, BIOS RELEASE 5.6 Aug <span class="m">17</span> <span class="m">2020</span>
-<span class="o">[</span>  196.090789<span class="o">]</span> Workqueue: events work_for_cpu_fn
-<span class="o">[</span>  196.090811<span class="o">]</span> pstate: <span class="m">40000005</span> <span class="o">(</span>nZcv daif -PAN -UAO<span class="o">)</span>
-<span class="o">[</span>  196.090837<span class="o">]</span> pc : __memset+0x16c/0x188
-<span class="o">[</span>  196.090904<span class="o">]</span> lr : dtu_bp_create+0x84/0xc0 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.091530<span class="o">]</span> sp : ffff80814d7ffab0
-<span class="o">[</span>  196.092128<span class="o">]</span> x29: ffff80814d7ffab0 x28: <span class="m">0000000000000000</span> 
-<span class="o">[</span>  196.092723<span class="o">]</span> x27: <span class="m">0000000000000000</span> x26: ffff0000024b0000 
-<span class="o">[</span>  196.093301<span class="o">]</span> x25: <span class="m">0000000000000000</span> x24: <span class="m">0000000000000002</span> 
-<span class="o">[</span>  196.093859<span class="o">]</span> x23: ffff0000024689c0 x22: ffff808107001680 
-<span class="o">[</span>  196.094403<span class="o">]</span> x21: <span class="m">0000000000000001</span> x20: <span class="m">0000000000000000</span> 
-<span class="o">[</span>  196.094948<span class="o">]</span> x19: ffff83810d6bb000 x18: <span class="m">0000000000000020</span> 
-<span class="o">[</span>  196.095494<span class="o">]</span> x17: ffff808107000110 x16: ffff808107000110 
-<span class="o">[</span>  196.096032<span class="o">]</span> x15: ffff0000091de000 x14: 5f766564202c3239 
-<span class="o">[</span>  196.096566<span class="o">]</span> x13: 3138203a657a6973 x12: 202c6f62206c656e 
-<span class="o">[</span>  196.097110<span class="o">]</span> x11: <span class="m">0000000000000000</span> x10: <span class="m">0000000000000004</span> 
-<span class="o">[</span>  196.097656<span class="o">]</span> x9 : <span class="m">0000000000000000</span> x8 : ffff00001fb20000 
-<span class="o">[</span>  196.098204<span class="o">]</span> x7 : <span class="m">0000000000000000</span> x6 : 000000000000003f 
-<span class="o">[</span>  196.098746<span class="o">]</span> x5 : <span class="m">0000000000000040</span> x4 : <span class="m">0000000000000000</span> 
-<span class="o">[</span>  196.099271<span class="o">]</span> x3 : <span class="m">0000000000000004</span> x2 : 0000000000001fc0 
-<span class="o">[</span>  196.099777<span class="o">]</span> x1 : <span class="m">0000000000000000</span> x0 : ffff00001fb20000 
-<span class="o">[</span>  196.100268<span class="o">]</span> Call trace:
-<span class="o">[</span>  196.100742<span class="o">]</span>  __memset+0x16c/0x188
-<span class="o">[</span>  196.101270<span class="o">]</span>  dtu_bp_init+0x68/0x1c0 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.101790<span class="o">]</span>  leo_ih_init+0x5c/0x68 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.102291<span class="o">]</span>  dtu_ip_instance_init+0x14c/0x298 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.102787<span class="o">]</span>  dtu_device_ips_init+0x174/0x648 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.103266<span class="o">]</span>  dtu_device_init.part.3+0x51c/0xd68 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.103727<span class="o">]</span>  dtu_device_init+0x48/0xa0 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.104167<span class="o">]</span>  dtu_pci_probe+0x22c/0x8f0 <span class="o">[</span>dtu<span class="o">]</span>
-<span class="o">[</span>  196.104536<span class="o">]</span>  local_pci_probe+0x3c/0xb8
-<span class="o">[</span>  196.104898<span class="o">]</span>  work_for_cpu_fn+0x18/0x28
-<span class="o">[</span>  196.105254<span class="o">]</span>  process_one_work+0x1f0/0x3c8
-<span class="o">[</span>  196.105607<span class="o">]</span>  worker_thread+0x26c/0x4d0
-<span class="o">[</span>  196.105961<span class="o">]</span>  kthread+0x128/0x130
-<span class="o">[</span>  196.106308<span class="o">]</span>  ret_from_fork+0x10/0x18
-<span class="o">[</span>  196.106652<span class="o">]</span> Code: <span class="m">91010108</span> 54ffff4a 8b040108 cb050042 <span class="o">(</span>d50b7428<span class="o">)</span> 
-<span class="o">[</span>  196.107045<span class="o">]</span> SMP: stopping secondary CPUs
-<span class="o">[</span>  196.107898<span class="o">]</span> Starting crashdump kernel...
-<span class="o">[</span>  196.108259<span class="o">]</span> Bye!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>  196.090332<span class="o">]</span> Unable to handle kernel paging request at virtual address ffff00001fb20000
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090377<span class="o">]</span> Mem abort info:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090393<span class="o">]</span>   <span class="nv">ESR</span> <span class="o">=</span> 0x96000061
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090412<span class="o">]</span>   Exception <span class="nv">class</span> <span class="o">=</span> DABT <span class="o">(</span>current EL<span class="o">)</span>, <span class="nv">IL</span> <span class="o">=</span> <span class="m">32</span> bits
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090440<span class="o">]</span>   <span class="nv">SET</span> <span class="o">=</span> 0, <span class="nv">FnV</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090457<span class="o">]</span>   <span class="nv">EA</span> <span class="o">=</span> 0, <span class="nv">S1PTW</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090474<span class="o">]</span> Data abort info:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090490<span class="o">]</span>   <span class="nv">ISV</span> <span class="o">=</span> 0, <span class="nv">ISS</span> <span class="o">=</span> 0x00000061
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090509<span class="o">]</span>   <span class="nv">CM</span> <span class="o">=</span> 0, <span class="nv">WnR</span> <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090527<span class="o">]</span> swapper pgtable: 64k pages, 48-bit VAs, <span class="nv">pgdp</span> <span class="o">=</span> 00000000fae502d6
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090560<span class="o">]</span> <span class="o">[</span>ffff00001fb20000<span class="o">]</span> <span class="nv">pgd</span><span class="o">=</span>00000381fffe0803, <span class="nv">pud</span><span class="o">=</span>00000381fffe0803, <span class="nv">pmd</span><span class="o">=</span>00000381fffd0803, <span class="nv">pte</span><span class="o">=</span>0068082000610f07
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090610<span class="o">]</span> Internal error: Oops: <span class="m">96000061</span> <span class="o">[</span><span class="c1">#1] SMP</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090633<span class="o">]</span> Modules linked in: dtu<span class="o">(</span>OE+<span class="o">)</span> dtu_kcl<span class="o">(</span>OE<span class="o">)</span> mpt3sas ast igb ttm raid_class rtc_ds1307
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090677<span class="o">]</span> Process kworker/0:3 <span class="o">(</span>pid: 737, stack <span class="nv">limit</span> <span class="o">=</span> 0x0000000031d7cfb7<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090712<span class="o">]</span> CPU: <span class="m">0</span> PID: <span class="m">737</span> Comm: kworker/0:3 Kdump: loaded Tainted: G           OE     4.19.90-17.ky10.aarch64 <span class="c1">#1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090756<span class="o">]</span> Hardware name:  /, BIOS RELEASE 5.6 Aug <span class="m">17</span> <span class="m">2020</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090789<span class="o">]</span> Workqueue: events work_for_cpu_fn
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090811<span class="o">]</span> pstate: <span class="m">40000005</span> <span class="o">(</span>nZcv daif -PAN -UAO<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090837<span class="o">]</span> pc : __memset+0x16c/0x188
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.090904<span class="o">]</span> lr : dtu_bp_create+0x84/0xc0 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.091530<span class="o">]</span> sp : ffff80814d7ffab0
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.092128<span class="o">]</span> x29: ffff80814d7ffab0 x28: <span class="m">0000000000000000</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.092723<span class="o">]</span> x27: <span class="m">0000000000000000</span> x26: ffff0000024b0000 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.093301<span class="o">]</span> x25: <span class="m">0000000000000000</span> x24: <span class="m">0000000000000002</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.093859<span class="o">]</span> x23: ffff0000024689c0 x22: ffff808107001680 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.094403<span class="o">]</span> x21: <span class="m">0000000000000001</span> x20: <span class="m">0000000000000000</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.094948<span class="o">]</span> x19: ffff83810d6bb000 x18: <span class="m">0000000000000020</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.095494<span class="o">]</span> x17: ffff808107000110 x16: ffff808107000110 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.096032<span class="o">]</span> x15: ffff0000091de000 x14: 5f766564202c3239 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.096566<span class="o">]</span> x13: 3138203a657a6973 x12: 202c6f62206c656e 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.097110<span class="o">]</span> x11: <span class="m">0000000000000000</span> x10: <span class="m">0000000000000004</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.097656<span class="o">]</span> x9 : <span class="m">0000000000000000</span> x8 : ffff00001fb20000 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.098204<span class="o">]</span> x7 : <span class="m">0000000000000000</span> x6 : 000000000000003f 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.098746<span class="o">]</span> x5 : <span class="m">0000000000000040</span> x4 : <span class="m">0000000000000000</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.099271<span class="o">]</span> x3 : <span class="m">0000000000000004</span> x2 : 0000000000001fc0 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.099777<span class="o">]</span> x1 : <span class="m">0000000000000000</span> x0 : ffff00001fb20000 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.100268<span class="o">]</span> Call trace:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.100742<span class="o">]</span>  __memset+0x16c/0x188
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.101270<span class="o">]</span>  dtu_bp_init+0x68/0x1c0 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.101790<span class="o">]</span>  leo_ih_init+0x5c/0x68 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.102291<span class="o">]</span>  dtu_ip_instance_init+0x14c/0x298 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.102787<span class="o">]</span>  dtu_device_ips_init+0x174/0x648 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.103266<span class="o">]</span>  dtu_device_init.part.3+0x51c/0xd68 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.103727<span class="o">]</span>  dtu_device_init+0x48/0xa0 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.104167<span class="o">]</span>  dtu_pci_probe+0x22c/0x8f0 <span class="o">[</span>dtu<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.104536<span class="o">]</span>  local_pci_probe+0x3c/0xb8
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.104898<span class="o">]</span>  work_for_cpu_fn+0x18/0x28
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.105254<span class="o">]</span>  process_one_work+0x1f0/0x3c8
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.105607<span class="o">]</span>  worker_thread+0x26c/0x4d0
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.105961<span class="o">]</span>  kthread+0x128/0x130
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.106308<span class="o">]</span>  ret_from_fork+0x10/0x18
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.106652<span class="o">]</span> Code: <span class="m">91010108</span> 54ffff4a 8b040108 cb050042 <span class="o">(</span>d50b7428<span class="o">)</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.107045<span class="o">]</span> SMP: stopping secondary CPUs
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.107898<span class="o">]</span> Starting crashdump kernel...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>  196.108259<span class="o">]</span> Bye!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对umd，mmap出来的虚地址指针（ioremap方式映射），直接memset访问的话，由于汇编指令里面用到了DC ZVA指令，遇到device memory就会报对齐错误，这也是为什么会出现sigbus错误的原因。</p>
 <div class="highlight"><div class="chroma">
@@ -993,11 +993,11 @@ void memset_io(volatile void __iomem *a, int b, size_t c)
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">If the memory region being zeroed is any type of Device memory, these
-instructions give an alignment fault which is prioritized in the same way
-as other alignment faults that are determined by the memory type.&#34;
-from arm reference menual
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">If the memory region being zeroed is any type of Device memory, these
+</span></span><span class="line"><span class="cl">instructions give an alignment fault which is prioritized in the same way
+</span></span><span class="line"><span class="cl">as other alignment faults that are determined by the memory type.&#34;
+</span></span><span class="line"><span class="cl">from arm reference menual
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>解决办法是设置缺页属性为pgprot_writecombine。详见https://qiita.com/ikwzm/items/3216f907ff8fc41866c4</p>
 <p>arm memset分析：https://www.reexpound.com/2021/05/26/arm性能优化三-memset-优化/</p>
@@ -1179,181 +1179,181 @@ from arm reference menual
 </span><span class="lnt">174
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/* Copyright (C) 2012-2019 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library.  If not, see
-   &lt;http://www.gnu.org/licenses/&gt;.  */
-#include &lt;sysdep.h&gt;
-#include &#34;memset-reg.h&#34;
-#ifndef MEMSET
-# define MEMSET memset
-#endif
-
-/* Assumptions:
- *
- * ARMv8-a, AArch64, unaligned accesses
- *
- */
-ENTRY_ALIGN (MEMSET, 6)
-        DELOUSE (0)
-        DELOUSE (2)
-        dup        v0.16B, valw
-        add        dstend, dstin, count
-        cmp        count, 96
-        b.hi        L(set_long)
-        cmp        count, 16
-        b.hs        L(set_medium)
-        mov        val, v0.D[0]
-        /* Set 0..15 bytes.  */
-        tbz        count, 3, 1f
-        str        val, [dstin]
-        str        val, [dstend, -8]
-        ret
-        nop
-1:      tbz        count, 2, 2f
-        str        valw, [dstin]
-        str        valw, [dstend, -4]
-        ret
-2:     cbz        count, 3f
-        strb        valw, [dstin]
-        tbz        count, 1, 3f
-        strh        valw, [dstend, -2]
-3:      ret
-        /* Set 17..96 bytes.  */
-L(set_medium):
-        str        q0, [dstin]
-        tbnz        count, 6, L(set96)
-        str        q0, [dstend, -16]
-        tbz        count, 5, 1f
-        str        q0, [dstin, 16]
-        str        q0, [dstend, -32]
-1:      ret
-
-        .p2align 4
-        /* Set 64..96 bytes.  Write 64 bytes from the start and
-           32 bytes from the end.  */
-L(set96):
-        str        q0, [dstin, 16]
-        stp        q0, q0, [dstin, 32]
-        stp        q0, q0, [dstend, -32]
-        ret
-        .p2align 3
-        nop
-L(set_long):
-        and        valw, valw, 255
-        bic        dst, dstin, 15
-        str        q0, [dstin]
-        cmp        count, 256
-        ccmp        valw, 0, 0, cs
-        b.eq        L(try_zva)
-L(no_zva):
-        sub        count, dstend, dst        /* Count is 16 too large.  */
-        sub        dst, dst, 16                /* Dst is biased by -32.  */
-        sub        count, count, 64 + 16        /* Adjust count and bias for loop.  */
-1:      stp        q0, q0, [dst, 32]
-        stp        q0, q0, [dst, 64]!
-L(tail64):
-        subs        count, count, 64
-        b.hi        1b
-2:      stp        q0, q0, [dstend, -64]
-        stp        q0, q0, [dstend, -32]
-        ret
-
-L(try_zva):
-#ifdef ZVA_MACRO
-        zva_macro
-#else
-        .p2align 3
-        mrs        tmp1, dczid_el0
-        tbnz        tmp1w, 4, L(no_zva)
-        and        tmp1w, tmp1w, 15
-        cmp        tmp1w, 4        /* ZVA size is 64 bytes.  */
-        b.ne         L(zva_128)
-        /* Write the first and last 64 byte aligned block using stp rather
-           than using DC ZVA.  This is faster on some cores.
-         */
-L(zva_64):
-        str        q0, [dst, 16]
-        stp        q0, q0, [dst, 32]
-        bic        dst, dst, 63
-        stp        q0, q0, [dst, 64]
-        stp        q0, q0, [dst, 96]
-        sub        count, dstend, dst        /* Count is now 128 too large.        */
-        sub        count, count, 128+64+64        /* Adjust count and bias for loop.  */
-        add        dst, dst, 128
-        nop
-1:      dc         zva, dst
-        add        dst, dst, 64
-        subs       count, count, 64
-        b.hi        1b
-        stp        q0, q0, [dst, 0]
-        stp        q0, q0, [dst, 32]
-        stp        q0, q0, [dstend, -64]
-        stp        q0, q0, [dstend, -32]
-        ret
-
-        .p2align 3
-L(zva_128):
-        cmp        tmp1w, 5        /* ZVA size is 128 bytes.  */
-        b.ne        L(zva_other)
-        str        q0, [dst, 16]
-        stp        q0, q0, [dst, 32]
-        stp        q0, q0, [dst, 64]
-        stp        q0, q0, [dst, 96]
-        bic        dst, dst, 127
-        sub        count, dstend, dst        /* Count is now 128 too large.        */
-        sub        count, count, 128+128        /* Adjust count and bias for loop.  */
-        add        dst, dst, 128
-1:      dc        zva, dst
-        add        dst, dst, 128
-        subs        count, count, 128
-        b.hi        1b
-        stp        q0, q0, [dstend, -128]
-        stp        q0, q0, [dstend, -96]
-        stp        q0, q0, [dstend, -64]
-        stp        q0, q0, [dstend, -32]
-        ret
-
-L(zva_other):
-        mov        tmp2w, 4
-        lsl        zva_lenw, tmp2w, tmp1w
-        add        tmp1, zva_len, 64        /* Max alignment bytes written.         */
-        cmp        count, tmp1
-        blo        L(no_zva)
-        sub        tmp2, zva_len, 1
-        add        tmp1, dst, zva_len
-        add        dst, dst, 16
-        subs        count, tmp1, dst        /* Actual alignment bytes to write.  */
-        bic        tmp1, tmp1, tmp2        /* Aligned dc zva start address.  */
-        beq        2f
-1:      stp        q0, q0, [dst], 64
-        stp        q0, q0, [dst, -32]
-        subs        count, count, 64
-        b.hi        1b
-2:      mov        dst, tmp1
-        sub        count, dstend, tmp1        /* Remaining bytes to write.  */
-        subs        count, count, zva_len
-        b.lo        4f
-3:      dc        zva, dst
-        add        dst, dst, zva_len
-        subs        count, count, zva_len
-        b.hs        3b
-4:      add        count, count, zva_len
-        sub        dst, dst, 32                /* Bias dst for tail loop.  */
-        b        L(tail64)
-#endif
-END (MEMSET)
-libc_hidden_builtin_def (MEMSET)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* Copyright (C) 2012-2019 Free Software Foundation, Inc.
+</span></span><span class="line"><span class="cl">   This file is part of the GNU C Library.
+</span></span><span class="line"><span class="cl">   The GNU C Library is free software; you can redistribute it and/or
+</span></span><span class="line"><span class="cl">   modify it under the terms of the GNU Lesser General Public
+</span></span><span class="line"><span class="cl">   License as published by the Free Software Foundation; either
+</span></span><span class="line"><span class="cl">   version 2.1 of the License, or (at your option) any later version.
+</span></span><span class="line"><span class="cl">   The GNU C Library is distributed in the hope that it will be useful,
+</span></span><span class="line"><span class="cl">   but WITHOUT ANY WARRANTY; without even the implied warranty of
+</span></span><span class="line"><span class="cl">   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+</span></span><span class="line"><span class="cl">   Lesser General Public License for more details.
+</span></span><span class="line"><span class="cl">   You should have received a copy of the GNU Lesser General Public
+</span></span><span class="line"><span class="cl">   License along with the GNU C Library.  If not, see
+</span></span><span class="line"><span class="cl">   &lt;http://www.gnu.org/licenses/&gt;.  */
+</span></span><span class="line"><span class="cl">#include &lt;sysdep.h&gt;
+</span></span><span class="line"><span class="cl">#include &#34;memset-reg.h&#34;
+</span></span><span class="line"><span class="cl">#ifndef MEMSET
+</span></span><span class="line"><span class="cl"># define MEMSET memset
+</span></span><span class="line"><span class="cl">#endif
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* Assumptions:
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * ARMv8-a, AArch64, unaligned accesses
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">ENTRY_ALIGN (MEMSET, 6)
+</span></span><span class="line"><span class="cl">        DELOUSE (0)
+</span></span><span class="line"><span class="cl">        DELOUSE (2)
+</span></span><span class="line"><span class="cl">        dup        v0.16B, valw
+</span></span><span class="line"><span class="cl">        add        dstend, dstin, count
+</span></span><span class="line"><span class="cl">        cmp        count, 96
+</span></span><span class="line"><span class="cl">        b.hi        L(set_long)
+</span></span><span class="line"><span class="cl">        cmp        count, 16
+</span></span><span class="line"><span class="cl">        b.hs        L(set_medium)
+</span></span><span class="line"><span class="cl">        mov        val, v0.D[0]
+</span></span><span class="line"><span class="cl">        /* Set 0..15 bytes.  */
+</span></span><span class="line"><span class="cl">        tbz        count, 3, 1f
+</span></span><span class="line"><span class="cl">        str        val, [dstin]
+</span></span><span class="line"><span class="cl">        str        val, [dstend, -8]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">        nop
+</span></span><span class="line"><span class="cl">1:      tbz        count, 2, 2f
+</span></span><span class="line"><span class="cl">        str        valw, [dstin]
+</span></span><span class="line"><span class="cl">        str        valw, [dstend, -4]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">2:     cbz        count, 3f
+</span></span><span class="line"><span class="cl">        strb        valw, [dstin]
+</span></span><span class="line"><span class="cl">        tbz        count, 1, 3f
+</span></span><span class="line"><span class="cl">        strh        valw, [dstend, -2]
+</span></span><span class="line"><span class="cl">3:      ret
+</span></span><span class="line"><span class="cl">        /* Set 17..96 bytes.  */
+</span></span><span class="line"><span class="cl">L(set_medium):
+</span></span><span class="line"><span class="cl">        str        q0, [dstin]
+</span></span><span class="line"><span class="cl">        tbnz        count, 6, L(set96)
+</span></span><span class="line"><span class="cl">        str        q0, [dstend, -16]
+</span></span><span class="line"><span class="cl">        tbz        count, 5, 1f
+</span></span><span class="line"><span class="cl">        str        q0, [dstin, 16]
+</span></span><span class="line"><span class="cl">        str        q0, [dstend, -32]
+</span></span><span class="line"><span class="cl">1:      ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        .p2align 4
+</span></span><span class="line"><span class="cl">        /* Set 64..96 bytes.  Write 64 bytes from the start and
+</span></span><span class="line"><span class="cl">           32 bytes from the end.  */
+</span></span><span class="line"><span class="cl">L(set96):
+</span></span><span class="line"><span class="cl">        str        q0, [dstin, 16]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstin, 32]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -32]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">        .p2align 3
+</span></span><span class="line"><span class="cl">        nop
+</span></span><span class="line"><span class="cl">L(set_long):
+</span></span><span class="line"><span class="cl">        and        valw, valw, 255
+</span></span><span class="line"><span class="cl">        bic        dst, dstin, 15
+</span></span><span class="line"><span class="cl">        str        q0, [dstin]
+</span></span><span class="line"><span class="cl">        cmp        count, 256
+</span></span><span class="line"><span class="cl">        ccmp        valw, 0, 0, cs
+</span></span><span class="line"><span class="cl">        b.eq        L(try_zva)
+</span></span><span class="line"><span class="cl">L(no_zva):
+</span></span><span class="line"><span class="cl">        sub        count, dstend, dst        /* Count is 16 too large.  */
+</span></span><span class="line"><span class="cl">        sub        dst, dst, 16                /* Dst is biased by -32.  */
+</span></span><span class="line"><span class="cl">        sub        count, count, 64 + 16        /* Adjust count and bias for loop.  */
+</span></span><span class="line"><span class="cl">1:      stp        q0, q0, [dst, 32]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 64]!
+</span></span><span class="line"><span class="cl">L(tail64):
+</span></span><span class="line"><span class="cl">        subs        count, count, 64
+</span></span><span class="line"><span class="cl">        b.hi        1b
+</span></span><span class="line"><span class="cl">2:      stp        q0, q0, [dstend, -64]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -32]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">L(try_zva):
+</span></span><span class="line"><span class="cl">#ifdef ZVA_MACRO
+</span></span><span class="line"><span class="cl">        zva_macro
+</span></span><span class="line"><span class="cl">#else
+</span></span><span class="line"><span class="cl">        .p2align 3
+</span></span><span class="line"><span class="cl">        mrs        tmp1, dczid_el0
+</span></span><span class="line"><span class="cl">        tbnz        tmp1w, 4, L(no_zva)
+</span></span><span class="line"><span class="cl">        and        tmp1w, tmp1w, 15
+</span></span><span class="line"><span class="cl">        cmp        tmp1w, 4        /* ZVA size is 64 bytes.  */
+</span></span><span class="line"><span class="cl">        b.ne         L(zva_128)
+</span></span><span class="line"><span class="cl">        /* Write the first and last 64 byte aligned block using stp rather
+</span></span><span class="line"><span class="cl">           than using DC ZVA.  This is faster on some cores.
+</span></span><span class="line"><span class="cl">         */
+</span></span><span class="line"><span class="cl">L(zva_64):
+</span></span><span class="line"><span class="cl">        str        q0, [dst, 16]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 32]
+</span></span><span class="line"><span class="cl">        bic        dst, dst, 63
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 64]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 96]
+</span></span><span class="line"><span class="cl">        sub        count, dstend, dst        /* Count is now 128 too large.        */
+</span></span><span class="line"><span class="cl">        sub        count, count, 128+64+64        /* Adjust count and bias for loop.  */
+</span></span><span class="line"><span class="cl">        add        dst, dst, 128
+</span></span><span class="line"><span class="cl">        nop
+</span></span><span class="line"><span class="cl">1:      dc         zva, dst
+</span></span><span class="line"><span class="cl">        add        dst, dst, 64
+</span></span><span class="line"><span class="cl">        subs       count, count, 64
+</span></span><span class="line"><span class="cl">        b.hi        1b
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 0]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 32]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -64]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -32]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        .p2align 3
+</span></span><span class="line"><span class="cl">L(zva_128):
+</span></span><span class="line"><span class="cl">        cmp        tmp1w, 5        /* ZVA size is 128 bytes.  */
+</span></span><span class="line"><span class="cl">        b.ne        L(zva_other)
+</span></span><span class="line"><span class="cl">        str        q0, [dst, 16]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 32]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 64]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, 96]
+</span></span><span class="line"><span class="cl">        bic        dst, dst, 127
+</span></span><span class="line"><span class="cl">        sub        count, dstend, dst        /* Count is now 128 too large.        */
+</span></span><span class="line"><span class="cl">        sub        count, count, 128+128        /* Adjust count and bias for loop.  */
+</span></span><span class="line"><span class="cl">        add        dst, dst, 128
+</span></span><span class="line"><span class="cl">1:      dc        zva, dst
+</span></span><span class="line"><span class="cl">        add        dst, dst, 128
+</span></span><span class="line"><span class="cl">        subs        count, count, 128
+</span></span><span class="line"><span class="cl">        b.hi        1b
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -128]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -96]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -64]
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dstend, -32]
+</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">L(zva_other):
+</span></span><span class="line"><span class="cl">        mov        tmp2w, 4
+</span></span><span class="line"><span class="cl">        lsl        zva_lenw, tmp2w, tmp1w
+</span></span><span class="line"><span class="cl">        add        tmp1, zva_len, 64        /* Max alignment bytes written.         */
+</span></span><span class="line"><span class="cl">        cmp        count, tmp1
+</span></span><span class="line"><span class="cl">        blo        L(no_zva)
+</span></span><span class="line"><span class="cl">        sub        tmp2, zva_len, 1
+</span></span><span class="line"><span class="cl">        add        tmp1, dst, zva_len
+</span></span><span class="line"><span class="cl">        add        dst, dst, 16
+</span></span><span class="line"><span class="cl">        subs        count, tmp1, dst        /* Actual alignment bytes to write.  */
+</span></span><span class="line"><span class="cl">        bic        tmp1, tmp1, tmp2        /* Aligned dc zva start address.  */
+</span></span><span class="line"><span class="cl">        beq        2f
+</span></span><span class="line"><span class="cl">1:      stp        q0, q0, [dst], 64
+</span></span><span class="line"><span class="cl">        stp        q0, q0, [dst, -32]
+</span></span><span class="line"><span class="cl">        subs        count, count, 64
+</span></span><span class="line"><span class="cl">        b.hi        1b
+</span></span><span class="line"><span class="cl">2:      mov        dst, tmp1
+</span></span><span class="line"><span class="cl">        sub        count, dstend, tmp1        /* Remaining bytes to write.  */
+</span></span><span class="line"><span class="cl">        subs        count, count, zva_len
+</span></span><span class="line"><span class="cl">        b.lo        4f
+</span></span><span class="line"><span class="cl">3:      dc        zva, dst
+</span></span><span class="line"><span class="cl">        add        dst, dst, zva_len
+</span></span><span class="line"><span class="cl">        subs        count, count, zva_len
+</span></span><span class="line"><span class="cl">        b.hs        3b
+</span></span><span class="line"><span class="cl">4:      add        count, count, zva_len
+</span></span><span class="line"><span class="cl">        sub        dst, dst, 32                /* Bias dst for tail loop.  */
+</span></span><span class="line"><span class="cl">        b        L(tail64)
+</span></span><span class="line"><span class="cl">#endif
+</span></span><span class="line"><span class="cl">END (MEMSET)
+</span></span><span class="line"><span class="cl">libc_hidden_builtin_def (MEMSET)
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -1432,7 +1432,7 @@ libc_hidden_builtin_def (MEMSET)
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -1452,7 +1452,7 @@ libc_hidden_builtin_def (MEMSET)
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

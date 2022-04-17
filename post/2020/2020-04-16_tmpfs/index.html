@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-04-16_tmpfs/" />
@@ -142,8 +142,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mount -t tmpfs -o size=20m tmpfs /test
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mount -t tmpfs -o size=20m tmpfs /test
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="android使用方法">Android使用方法</h1>
 <p>android和Linux类似，mount命令虽然也可以创建，但更常用的做法是写在init.rc中.</p>
@@ -153,9 +153,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">on onit
-	mount tmpfs none /test mode=0750 rw noexec nosuid nodev size=16M
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">on onit
+</span></span><span class="line"><span class="cl">	mount tmpfs none /test mode=0750 rw noexec nosuid nodev size=16M
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -236,7 +236,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -256,7 +256,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

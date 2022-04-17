@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-10-09_tensorflow/" />
@@ -182,24 +182,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install python-pip python-dev
-
-# Ubuntu/Linux 64-bit, CPU only, Python 2.7:
-$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
-
-测试：
-$ python
-&gt;&gt;&gt; import tensorflow as tf
-&gt;&gt;&gt; hello = tf.constant(&#39;Hello, TensorFlow!&#39;)
-&gt;&gt;&gt; sess = tf.Session()
-&gt;&gt;&gt; sess.run(hello)
-&#39;Hello, TensorFlow!&#39;
-&gt;&gt;&gt; a = tf.constant(10)
-&gt;&gt;&gt; b = tf.constant(32)
-&gt;&gt;&gt; sess.run(a + b)
-42
-&gt;&gt;&gt; sess.close()
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install python-pip python-dev
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Ubuntu/Linux 64-bit, CPU only, Python 2.7:
+</span></span><span class="line"><span class="cl">$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">测试：
+</span></span><span class="line"><span class="cl">$ python
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; import tensorflow as tf
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; hello = tf.constant(&#39;Hello, TensorFlow!&#39;)
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess = tf.Session()
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.run(hello)
+</span></span><span class="line"><span class="cl">&#39;Hello, TensorFlow!&#39;
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; a = tf.constant(10)
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; b = tf.constant(32)
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.run(a + b)
+</span></span><span class="line"><span class="cl">42
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.close()
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="python-simple例子">python simple例子</h2>
 <div class="highlight"><div class="chroma">
@@ -238,39 +238,39 @@ $ python
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import tensorflow as tf
-import numpy as np
-
-# 使用 NumPy 生成假数据(phony data), 总共 100 个点.
-x_data = np.float32(np.random.rand(2, 100)) # 随机输入
-y_data = np.dot([0.100, 0.200], x_data) + 0.300
-
-# 构造一个线性模型
-# 
-b = tf.Variable(tf.zeros([1]))
-W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
-y = tf.matmul(W, x_data) + b
-
-# 最小化方差
-loss = tf.reduce_mean(tf.square(y - y_data))
-optimizer = tf.train.GradientDescentOptimizer(0.5)
-train = optimizer.minimize(loss)
-
-# 初始化变量
-init = tf.initialize_all_variables()
-
-# 启动图 (graph)
-sess = tf.Session()
-sess.run(init)
-
-# 拟合平面
-for step in xrange(0, 201):
-    sess.run(train)
-    if step % 20 == 0:
-        print step, sess.run(W), sess.run(b)
-
-# 得到最佳拟合结果 W: [[0.100  0.200]], b: [0.300]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import tensorflow as tf
+</span></span><span class="line"><span class="cl">import numpy as np
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 使用 NumPy 生成假数据(phony data), 总共 100 个点.
+</span></span><span class="line"><span class="cl">x_data = np.float32(np.random.rand(2, 100)) # 随机输入
+</span></span><span class="line"><span class="cl">y_data = np.dot([0.100, 0.200], x_data) + 0.300
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 构造一个线性模型
+</span></span><span class="line"><span class="cl"># 
+</span></span><span class="line"><span class="cl">b = tf.Variable(tf.zeros([1]))
+</span></span><span class="line"><span class="cl">W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
+</span></span><span class="line"><span class="cl">y = tf.matmul(W, x_data) + b
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 最小化方差
+</span></span><span class="line"><span class="cl">loss = tf.reduce_mean(tf.square(y - y_data))
+</span></span><span class="line"><span class="cl">optimizer = tf.train.GradientDescentOptimizer(0.5)
+</span></span><span class="line"><span class="cl">train = optimizer.minimize(loss)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 初始化变量
+</span></span><span class="line"><span class="cl">init = tf.initialize_all_variables()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 启动图 (graph)
+</span></span><span class="line"><span class="cl">sess = tf.Session()
+</span></span><span class="line"><span class="cl">sess.run(init)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 拟合平面
+</span></span><span class="line"><span class="cl">for step in xrange(0, 201):
+</span></span><span class="line"><span class="cl">    sess.run(train)
+</span></span><span class="line"><span class="cl">    if step % 20 == 0:
+</span></span><span class="line"><span class="cl">        print step, sess.run(W), sess.run(b)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 得到最佳拟合结果 W: [[0.100  0.200]], b: [0.300]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="手写体数字分类">手写体数字分类</h2>
 <p><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/tutorials/mnist_beginners.html">mnist例子</a></p>
@@ -351,7 +351,7 @@ for step in xrange(0, 201):
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -371,7 +371,7 @@ for step in xrange(0, 201):
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

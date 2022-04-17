@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-06-09_git%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" />
@@ -186,9 +186,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
-$ chmod a+x ~/bin/repo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
+</span></span><span class="line"><span class="cl">$ chmod a+x ~/bin/repo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="初始化manifest">初始化manifest</h2>
 <div class="highlight"><div class="chroma">
@@ -196,8 +196,8 @@ $ chmod a+x ~/bin/repo
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.1_r1
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.1_r1
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="下载代码">下载代码</h2>
 <div class="highlight"><div class="chroma">
@@ -205,8 +205,8 @@ $ chmod a+x ~/bin/repo
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ repo sync
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ repo sync
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="提交代码">提交代码</h2>
 <p>repo管理系统中的每一个子项目都是单独的git仓库，所以我们在某一个仓库进行开发时，完全可以使用原先单个git仓库的开发方式，可以使用git pull，git rebase，git push等命令。</p>
@@ -225,15 +225,15 @@ $ chmod a+x ~/bin/repo
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git status
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
-Changes to be committed:
-  (use &#34;git reset HEAD &lt;file&gt;...&#34; to unstage)
-
-    new file:   .gitmodules
-    new file:   themes/Hacker
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git status
+</span></span><span class="line"><span class="cl">On branch master
+</span></span><span class="line"><span class="cl">Your branch is up-to-date with &#39;origin/master&#39;.
+</span></span><span class="line"><span class="cl">Changes to be committed:
+</span></span><span class="line"><span class="cl">  (use &#34;git reset HEAD &lt;file&gt;...&#34; to unstage)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    new file:   .gitmodules
+</span></span><span class="line"><span class="cl">    new file:   themes/Hacker
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先应当注意到新的<code>.gitmodules</code>文件。该文件保存了子模块的<code>url</code>与本地目录之间的映射：</p>
 <div class="highlight"><div class="chroma">
@@ -243,10 +243,10 @@ Changes to be committed:
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[submodule &#34;themes/Hacker&#34;]
-    path = themes/Hacker
-    url = /private/tmp/remote/Hacker.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[submodule &#34;themes/Hacker&#34;]
+</span></span><span class="line"><span class="cl">    path = themes/Hacker
+</span></span><span class="line"><span class="cl">    url = /private/tmp/remote/Hacker.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在<code>git status</code>输出中列出的另一个是项目文件夹记录。如果你运行<code>git diff</code>，会看到类似下面的信息：</p>
 <div class="highlight"><div class="chroma">
@@ -261,15 +261,15 @@ Changes to be committed:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ git diff --cached themes/Hacker
-diff --git a/themes/Hacker b/themes/Hacker
-new file mode 160000
-index 0000000..98260cd
---- /dev/null
-+++ b/themes/Hacker
-@@ -0,0 +1 @@
-+Subproject commit 98260cd27f0bb6340757cd05c3fb00d574b42d52
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git diff --cached themes/Hacker
+</span></span><span class="line"><span class="cl">diff --git a/themes/Hacker b/themes/Hacker
+</span></span><span class="line"><span class="cl">new file mode 160000
+</span></span><span class="line"><span class="cl">index 0000000..98260cd
+</span></span><span class="line"><span class="cl">--- /dev/null
+</span></span><span class="line"><span class="cl">+++ b/themes/Hacker
+</span></span><span class="line"><span class="cl">@@ -0,0 +1 @@
+</span></span><span class="line"><span class="cl">+Subproject commit 98260cd27f0bb6340757cd05c3fb00d574b42d52
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>除了<code>git status</code>看到的差异外，还有个隐藏的变化在<code>.git/config</code>中：</p>
 <div class="highlight"><div class="chroma">
@@ -292,23 +292,23 @@ index 0000000..98260cd
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ cat .git/config 
-[core]
-    repositoryformatversion = 0
-    filemode = true
-    bare = false
-    logallrefupdates = true
-    ignorecase = true
-    precomposeunicode = true
-[remote &#34;origin&#34;]
-    url = /private/tmp/remote/feilongwang.org.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[branch &#34;master&#34;]
-    remote = origin
-    merge = refs/heads/master
-[submodule &#34;themes/Hacker&#34;]
-    url = /private/tmp/remote/Hacker.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat .git/config 
+</span></span><span class="line"><span class="cl">[core]
+</span></span><span class="line"><span class="cl">    repositoryformatversion = 0
+</span></span><span class="line"><span class="cl">    filemode = true
+</span></span><span class="line"><span class="cl">    bare = false
+</span></span><span class="line"><span class="cl">    logallrefupdates = true
+</span></span><span class="line"><span class="cl">    ignorecase = true
+</span></span><span class="line"><span class="cl">    precomposeunicode = true
+</span></span><span class="line"><span class="cl">[remote &#34;origin&#34;]
+</span></span><span class="line"><span class="cl">    url = /private/tmp/remote/feilongwang.org.git
+</span></span><span class="line"><span class="cl">    fetch = +refs/heads/*:refs/remotes/origin/*
+</span></span><span class="line"><span class="cl">[branch &#34;master&#34;]
+</span></span><span class="line"><span class="cl">    remote = origin
+</span></span><span class="line"><span class="cl">    merge = refs/heads/master
+</span></span><span class="line"><span class="cl">[submodule &#34;themes/Hacker&#34;]
+</span></span><span class="line"><span class="cl">    url = /private/tmp/remote/Hacker.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>父项目的<code>.git/config</code>文件中也保存了子模块的信息，所以你可以根据自己的需要，通过配置父项目<code>.git/config</code>文件来覆盖<code>.gitmodules</code>中的配置。</p>
 <h2 id="克隆子模块">克隆子模块</h2>
@@ -325,15 +325,15 @@ index 0000000..98260cd
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
-Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
-<span class="k">done</span>.
-$ <span class="nb">cd</span> feilongwang.org/themes/Hacker/
-$ ls -al
-total <span class="m">0</span>
-drwxr-xr-x <span class="m">2</span> wangfeilong wheel  <span class="m">68</span>  <span class="m">9</span> <span class="m">19</span> 03:01 ./
-drwxr-xr-x <span class="m">4</span> wangfeilong wheel <span class="m">136</span>  <span class="m">9</span> <span class="m">19</span> 03:01 ../
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone /private/tmp/remote/feilongwang.org.git
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> feilongwang.org/themes/Hacker/
+</span></span><span class="line"><span class="cl">$ ls -al
+</span></span><span class="line"><span class="cl">total <span class="m">0</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> wangfeilong wheel  <span class="m">68</span>  <span class="m">9</span> <span class="m">19</span> 03:01 ./
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">4</span> wangfeilong wheel <span class="m">136</span>  <span class="m">9</span> <span class="m">19</span> 03:01 ../
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>你必须运行两个命令：<code>git submodule init</code>用来初始化本地配置文件，而<code>git submodule update</code>则从该项目中抓取所有数据并检出父项目中列出的合适的提交。</p>
 <div class="highlight"><div class="chroma">
@@ -346,13 +346,13 @@ drwxr-xr-x <span class="m">4</span> wangfeilong wheel <span class="m">136</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git submodule init
-Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
-$ git submodule update
-Cloning into <span class="s1">&#39;/private/tmp/feilongwang.org/themes/Hacker&#39;</span>...
-<span class="k">done</span>.
-Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <span class="s1">&#39;dc4a047cac6f26c47aba7bcd5b36f3ea7d3abf8b&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git submodule init
+</span></span><span class="line"><span class="cl">Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
+</span></span><span class="line"><span class="cl">$ git submodule update
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;/private/tmp/feilongwang.org/themes/Hacker&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <span class="s1">&#39;dc4a047cac6f26c47aba7bcd5b36f3ea7d3abf8b&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在<code>themes/Hacker</code>就处在和之前提交时相同的状态。</p>
 <p>不过还有更简单一点的方式。如果给<code>git clone</code>命令传递<code>--recursive</code>选项，它就会自动初始化并更新仓库中的每一个子模块。</p>
@@ -367,14 +367,14 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone --recursive /private/tmp/remote/feilongwang.org.git
-Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
-<span class="k">done</span>.
-Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
-Cloning into <span class="s1">&#39;/private/tmp/feilongwang.org/themes/Hacker&#39;</span>...
-<span class="k">done</span>.
-Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <span class="s1">&#39;dc4a047cac6f26c47aba7bcd5b36f3ea7d3abf8b&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone --recursive /private/tmp/remote/feilongwang.org.git
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Submodule <span class="s1">&#39;themes/Hacker&#39;</span> <span class="o">(</span>/private/tmp/remote/Hacker.git<span class="o">)</span> registered <span class="k">for</span> path <span class="s1">&#39;themes/Hacker&#39;</span>
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;/private/tmp/feilongwang.org/themes/Hacker&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <span class="s1">&#39;dc4a047cac6f26c47aba7bcd5b36f3ea7d3abf8b&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="子模块存在的问题">子模块存在的问题</h2>
 <ul>
@@ -402,18 +402,18 @@ Submodule path <span class="s1">&#39;themes/Hacker&#39;</span>: checked out <spa
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git subtree pull --prefix<span class="o">=</span>themes/Hacker /private/tmp/remote/Hacker.git master --squash 
-remote: Counting objects: 8, <span class="k">done</span>.
-remote: Compressing objects: 100% <span class="o">(</span>8/8<span class="o">)</span>, <span class="k">done</span>.
-remote: Total <span class="m">8</span> <span class="o">(</span>delta 6<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
-Unpacking objects: 100% <span class="o">(</span>8/8<span class="o">)</span>, <span class="k">done</span>.
-From /private/tmp/remote/Hacker
- * branch            master     -&gt; FETCH_HEAD
-Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
- themes/Hacker/README.md                    <span class="p">|</span> <span class="m">2</span> +-
- themes/Hacker/layout/components/footer.ejs <span class="p">|</span> <span class="m">3</span> ++-
- <span class="m">2</span> files changed, <span class="m">3</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">2</span> deletions<span class="o">(</span>-<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git subtree pull --prefix<span class="o">=</span>themes/Hacker /private/tmp/remote/Hacker.git master --squash 
+</span></span><span class="line"><span class="cl">remote: Counting objects: 8, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">remote: Compressing objects: 100% <span class="o">(</span>8/8<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">remote: Total <span class="m">8</span> <span class="o">(</span>delta 6<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Unpacking objects: 100% <span class="o">(</span>8/8<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">From /private/tmp/remote/Hacker
+</span></span><span class="line"><span class="cl"> * branch            master     -&gt; FETCH_HEAD
+</span></span><span class="line"><span class="cl">Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
+</span></span><span class="line"><span class="cl"> themes/Hacker/README.md                    <span class="p">|</span> <span class="m">2</span> +-
+</span></span><span class="line"><span class="cl"> themes/Hacker/layout/components/footer.ejs <span class="p">|</span> <span class="m">3</span> ++-
+</span></span><span class="line"><span class="cl"> <span class="m">2</span> files changed, <span class="m">3</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">2</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>就可以将父项目中子项目对应目录里的内容更新为子项目最新的代码了。</p>
 <h2 id="提取子项目">提取子项目</h2>
@@ -438,23 +438,23 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="nb">split</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span> <span class="o">--</span><span class="n">branch</span> <span class="n">hacker</span>
-<span class="no">Created</span> <span class="n">branch</span> <span class="s1">&#39;hacker&#39;</span>
-<span class="mi">843147</span><span class="n">f3181399b06528251451bc498e01425f34</span>
-<span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">a</span>
-  <span class="n">hacker</span>
-<span class="o">*</span> <span class="n">master</span>
-  <span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="no">HEAD</span> <span class="o">-&gt;</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span>
-  <span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
-<span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">hacker</span> 
-<span class="no">Switched</span> <span class="n">to</span> <span class="n">branch</span> <span class="s1">&#39;hacker&#39;</span>
-<span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
-<span class="n">commit</span> <span class="mi">843147</span><span class="n">f3181399b06528251451bc498e01425f34</span>
-<span class="ss">Author</span><span class="p">:</span> <span class="no">Feilong</span> <span class="no">Wang</span> <span class="o">&lt;</span><span class="n">i</span><span class="vi">@feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span>
-<span class="ss">Date</span><span class="p">:</span>   <span class="no">Mon</span> <span class="no">Sep</span> <span class="mi">19</span> <span class="mo">01</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mo">02</span> <span class="mi">2016</span> <span class="o">+</span><span class="mi">0800</span>
-
-    <span class="no">Change</span> <span class="n">theme</span> <span class="n">to</span> <span class="no">Hacker</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="nb">split</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span> <span class="o">--</span><span class="n">branch</span> <span class="n">hacker</span>
+</span></span><span class="line"><span class="cl"><span class="no">Created</span> <span class="n">branch</span> <span class="s1">&#39;hacker&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">843147</span><span class="n">f3181399b06528251451bc498e01425f34</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">a</span>
+</span></span><span class="line"><span class="cl">  <span class="n">hacker</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="n">master</span>
+</span></span><span class="line"><span class="cl">  <span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="no">HEAD</span> <span class="o">-&gt;</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+</span></span><span class="line"><span class="cl">  <span class="n">remotes</span><span class="o">/</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">hacker</span> 
+</span></span><span class="line"><span class="cl"><span class="no">Switched</span> <span class="n">to</span> <span class="n">branch</span> <span class="s1">&#39;hacker&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span></span><span class="line"><span class="cl"><span class="n">commit</span> <span class="mi">843147</span><span class="n">f3181399b06528251451bc498e01425f34</span>
+</span></span><span class="line"><span class="cl"><span class="ss">Author</span><span class="p">:</span> <span class="no">Feilong</span> <span class="no">Wang</span> <span class="o">&lt;</span><span class="n">i</span><span class="vi">@feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="ss">Date</span><span class="p">:</span>   <span class="no">Mon</span> <span class="no">Sep</span> <span class="mi">19</span> <span class="mo">01</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mo">02</span> <span class="mi">2016</span> <span class="o">+</span><span class="mi">0800</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="no">Change</span> <span class="n">theme</span> <span class="n">to</span> <span class="no">Hacker</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中<code>--branch</code>指定将生成的历史提交记录保存到一个新的分支。</p>
 <h2 id="提交子项目">提交子项目</h2>
@@ -473,17 +473,17 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="n">push</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="n">Hacker</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
-<span class="n">git</span> <span class="n">push</span> <span class="k">using</span><span class="o">:</span>  <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
-<span class="n">Counting</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">301</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Delta</span> <span class="n">compression</span> <span class="k">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="p">.</span>
-<span class="n">Compressing</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">211</span><span class="o">/</span><span class="mi">211</span><span class="p">),</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Writing</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">301</span><span class="o">/</span><span class="mi">301</span><span class="p">),</span> <span class="mf">579.91</span> <span class="n">KiB</span> <span class="o">|</span> <span class="mi">0</span> <span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
-<span class="n">Total</span> <span class="mi">301</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">67</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">292</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">64</span><span class="p">)</span>
-<span class="nl">remote</span><span class="p">:</span> <span class="n">Resolving</span> <span class="nl">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">67</span><span class="o">/</span><span class="mi">67</span><span class="p">),</span> <span class="n">completed</span> <span class="n">with</span> <span class="mi">2</span> <span class="n">local</span> <span class="n">objects</span><span class="p">.</span>
-<span class="n">To</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span>
-   <span class="mi">96</span><span class="n">ca04b</span><span class="p">.</span><span class="mf">.5565513</span>  <span class="mf">556551375034489f</span><span class="n">c8710070a29a2f22240a39b3</span> <span class="o">-&gt;</span> <span class="n">master</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">subtree</span> <span class="n">push</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">themes</span><span class="o">/</span><span class="n">Hacker</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">push</span> <span class="k">using</span><span class="o">:</span>  <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">master</span>
+</span></span><span class="line"><span class="cl"><span class="n">Counting</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">301</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Delta</span> <span class="n">compression</span> <span class="k">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Compressing</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">211</span><span class="o">/</span><span class="mi">211</span><span class="p">),</span> <span class="n">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Writing</span> <span class="nl">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">301</span><span class="o">/</span><span class="mi">301</span><span class="p">),</span> <span class="mf">579.91</span> <span class="n">KiB</span> <span class="o">|</span> <span class="mi">0</span> <span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Total</span> <span class="mi">301</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">67</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">292</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">64</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nl">remote</span><span class="p">:</span> <span class="n">Resolving</span> <span class="nl">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">67</span><span class="o">/</span><span class="mi">67</span><span class="p">),</span> <span class="n">completed</span> <span class="n">with</span> <span class="mi">2</span> <span class="n">local</span> <span class="n">objects</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="o">/</span><span class="k">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">96</span><span class="n">ca04b</span><span class="p">.</span><span class="mf">.5565513</span>  <span class="mf">556551375034489f</span><span class="n">c8710070a29a2f22240a39b3</span> <span class="o">-&gt;</span> <span class="n">master</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="gitslave">GitSlave</h1>
 <p>GitSlave用于管理相关的一个父项目和多个Slave项目。通常，它会将你要执行的Git常规操作顺序在父项目和Slave项目中执行一遍，所以当你执行pull操作，项目中的所有仓库会顺序执行pull操作。GitSlave是对Git命令的封装，是被设计用于简化多仓库的Git操作，而不是要取代Git。我们还是以Hexo博客项目和Hacker主题项目为例来说明GitSlave的用法。</p>
@@ -502,16 +502,16 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
-<span class="no">Cloning</span> <span class="n">into</span> <span class="s1">&#39;feilongwang.org&#39;</span><span class="o">...</span>
-<span class="n">done</span><span class="o">.</span>
-<span class="err">$</span> <span class="n">cd</span> <span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span>
-<span class="err">$</span> <span class="n">gits</span> <span class="n">prepare</span>
-<span class="o">[</span><span class="n">master</span> <span class="mi">211</span><span class="n">dc36</span><span class="o">]</span> <span class="n">gits</span> <span class="n">creating</span> <span class="o">.</span><span class="n">gitslave</span>
- <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">0</span> <span class="n">deletions</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
- <span class="n">create</span> <span class="n">mode</span> <span class="mi">100644</span> <span class="o">.</span><span class="n">gitslave</span>
-<span class="err">$</span> <span class="n">cat</span> <span class="o">.</span><span class="n">gitslave</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="no">Cloning</span> <span class="n">into</span> <span class="s1">&#39;feilongwang.org&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">done</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">cd</span> <span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gits</span> <span class="n">prepare</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">master</span> <span class="mi">211</span><span class="n">dc36</span><span class="o">]</span> <span class="n">gits</span> <span class="n">creating</span> <span class="o">.</span><span class="n">gitslave</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">0</span> <span class="n">deletions</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="n">create</span> <span class="n">mode</span> <span class="mi">100644</span> <span class="o">.</span><span class="n">gitslave</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">cat</span> <span class="o">.</span><span class="n">gitslave</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看出，当执行<code>gits prepare</code>命令时，它会在父项目的根目录下添加一个空的<code>.gitslave</code>文件。然后我们可以执行<code>gits attach REPOSITORY LOCALPATH</code>来添加Slave项目：</p>
 <div class="highlight"><div class="chroma">
@@ -538,27 +538,27 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="err">$</span> <span class="n">gits</span> <span class="n">attach</span> <span class="p">../</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span>
-<span class="n">Cloning</span> <span class="k">into</span> <span class="err">&#39;</span><span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span><span class="err">&#39;</span><span class="p">...</span>
-<span class="n">done</span><span class="p">.</span>
-<span class="na">[master 2e059b2]</span> <span class="n">gits</span> <span class="n">adding</span> <span class="s">&#34;../Hacker.git&#34;</span> <span class="s">&#34;themes/Hacker&#34;</span>
-<span class="err">$</span> <span class="n">git</span> <span class="n">show</span>
-<span class="n">diff</span> <span class="p">--</span><span class="n">git</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitignore</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitignore</span>
-<span class="n">index</span> <span class="n">cd1fbcc</span><span class="p">..</span><span class="m">401d29</span><span class="n">a</span> <span class="m">100644</span>
-<span class="p">---</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitignore</span>
-<span class="p">+++</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitignore</span>
-<span class="err">@@</span> <span class="p">-</span><span class="m">5</span><span class="p">,</span><span class="m">3</span> <span class="p">+</span><span class="m">5</span><span class="p">,</span><span class="m">4</span> <span class="err">@@</span> <span class="n">db</span><span class="p">.</span><span class="n">json</span>
- <span class="n">node_modules</span><span class="p">/</span>
- <span class="k">public</span><span class="p">/</span>
- <span class="p">.</span><span class="n">deploy</span><span class="p">*/</span>
-<span class="p">+/</span><span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span><span class="p">/</span>
-<span class="n">diff</span> <span class="p">--</span><span class="n">git</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitslave</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitslave</span>
-<span class="n">index</span> <span class="n">e69de29</span><span class="p">..</span><span class="m">3</span><span class="n">b17767</span> <span class="m">100644</span>
-<span class="p">---</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitslave</span>
-<span class="p">+++</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitslave</span>
-<span class="err">@@</span> <span class="p">-</span><span class="m">0</span><span class="p">,</span><span class="m">0</span> <span class="p">+</span><span class="m">1</span> <span class="err">@@</span>
-<span class="p">+</span><span class="s">&#34;../Hacker.git&#34;</span> <span class="s">&#34;themes/Hacker&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gits</span> <span class="n">attach</span> <span class="p">../</span><span class="n">Hacker</span><span class="p">.</span><span class="n">git</span> <span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cloning</span> <span class="k">into</span> <span class="err">&#39;</span><span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span><span class="err">&#39;</span><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="na">[master 2e059b2]</span> <span class="n">gits</span> <span class="n">adding</span> <span class="s">&#34;../Hacker.git&#34;</span> <span class="s">&#34;themes/Hacker&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">git</span> <span class="n">show</span>
+</span></span><span class="line"><span class="cl"><span class="n">diff</span> <span class="p">--</span><span class="n">git</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitignore</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitignore</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="n">cd1fbcc</span><span class="p">..</span><span class="m">401d29</span><span class="n">a</span> <span class="m">100644</span>
+</span></span><span class="line"><span class="cl"><span class="p">---</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitignore</span>
+</span></span><span class="line"><span class="cl"><span class="p">+++</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitignore</span>
+</span></span><span class="line"><span class="cl"><span class="err">@@</span> <span class="p">-</span><span class="m">5</span><span class="p">,</span><span class="m">3</span> <span class="p">+</span><span class="m">5</span><span class="p">,</span><span class="m">4</span> <span class="err">@@</span> <span class="n">db</span><span class="p">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"> <span class="n">node_modules</span><span class="p">/</span>
+</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="p">/</span>
+</span></span><span class="line"><span class="cl"> <span class="p">.</span><span class="n">deploy</span><span class="p">*/</span>
+</span></span><span class="line"><span class="cl"><span class="p">+/</span><span class="n">themes</span><span class="p">/</span><span class="n">Hacker</span><span class="p">/</span>
+</span></span><span class="line"><span class="cl"><span class="n">diff</span> <span class="p">--</span><span class="n">git</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitslave</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitslave</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="n">e69de29</span><span class="p">..</span><span class="m">3</span><span class="n">b17767</span> <span class="m">100644</span>
+</span></span><span class="line"><span class="cl"><span class="p">---</span> <span class="n">a</span><span class="p">/.</span><span class="n">gitslave</span>
+</span></span><span class="line"><span class="cl"><span class="p">+++</span> <span class="n">b</span><span class="p">/.</span><span class="n">gitslave</span>
+</span></span><span class="line"><span class="cl"><span class="err">@@</span> <span class="p">-</span><span class="m">0</span><span class="p">,</span><span class="m">0</span> <span class="p">+</span><span class="m">1</span> <span class="err">@@</span>
+</span></span><span class="line"><span class="cl"><span class="p">+</span><span class="s">&#34;../Hacker.git&#34;</span> <span class="s">&#34;themes/Hacker&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="克隆带有slave仓库的项目">克隆带有Slave仓库的项目</h2>
 <p>我们可以使用<code>gits clone</code>来克隆带有Slave仓库的项目，如：</p>
@@ -571,12 +571,12 @@ Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ gits clone /private/tmp/remote/feilongwang.org.git
-Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
-<span class="k">done</span>.
-Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
-<span class="k">done</span>.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gits clone /private/tmp/remote/feilongwang.org.git
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我们看到Git的克隆操作顺序在父项目与子项目中被执行。如果一开始你并知道要克隆的项目带有Slave仓库而直接将父项目克隆下来，此时我们可以通过<code>git populate</code>来进一步克隆Slave仓库，如：</p>
 <div class="highlight"><div class="chroma">
@@ -599,23 +599,23 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone /private/tmp/remote/feilongwang.org.git
-Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
-<span class="k">done</span>.
-$ <span class="nb">cd</span> feilongwang.org/
-$ ls -al
-total <span class="m">20</span>
-drwxr-xr-x <span class="m">10</span> wangfeilong wheel  <span class="m">340</span> <span class="m">10</span> <span class="m">30</span> 16:43 ./
-drwxr-xr-x  <span class="m">3</span> wangfeilong wheel  <span class="m">102</span> <span class="m">10</span> <span class="m">30</span> 16:43 ../
-drwxr-xr-x <span class="m">12</span> wangfeilong wheel  <span class="m">408</span> <span class="m">10</span> <span class="m">30</span> 16:43 .git/
--rw-r--r--  <span class="m">1</span> wangfeilong wheel   <span class="m">82</span> <span class="m">10</span> <span class="m">30</span> 16:43 .gitignore
--rw-r--r--  <span class="m">1</span> wangfeilong wheel   <span class="m">32</span> <span class="m">10</span> <span class="m">30</span> 16:43 .gitslave
--rw-r--r--  <span class="m">1</span> wangfeilong wheel  <span class="m">540</span> <span class="m">10</span> <span class="m">30</span> 16:43 README.md
--rw-r--r--  <span class="m">1</span> wangfeilong wheel <span class="m">1599</span> <span class="m">10</span> <span class="m">30</span> 16:43 _config.yml
--rw-r--r--  <span class="m">1</span> wangfeilong wheel  <span class="m">630</span> <span class="m">10</span> <span class="m">30</span> 16:43 package.json
-drwxr-xr-x  <span class="m">5</span> wangfeilong wheel  <span class="m">170</span> <span class="m">10</span> <span class="m">30</span> 16:43 scaffolds/
-drwxr-xr-x  <span class="m">6</span> wangfeilong wheel  <span class="m">204</span> <span class="m">10</span> <span class="m">30</span> 16:43 source/
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone /private/tmp/remote/feilongwang.org.git
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;feilongwang.org&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> feilongwang.org/
+</span></span><span class="line"><span class="cl">$ ls -al
+</span></span><span class="line"><span class="cl">total <span class="m">20</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">10</span> wangfeilong wheel  <span class="m">340</span> <span class="m">10</span> <span class="m">30</span> 16:43 ./
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">3</span> wangfeilong wheel  <span class="m">102</span> <span class="m">10</span> <span class="m">30</span> 16:43 ../
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">12</span> wangfeilong wheel  <span class="m">408</span> <span class="m">10</span> <span class="m">30</span> 16:43 .git/
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> wangfeilong wheel   <span class="m">82</span> <span class="m">10</span> <span class="m">30</span> 16:43 .gitignore
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> wangfeilong wheel   <span class="m">32</span> <span class="m">10</span> <span class="m">30</span> 16:43 .gitslave
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> wangfeilong wheel  <span class="m">540</span> <span class="m">10</span> <span class="m">30</span> 16:43 README.md
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> wangfeilong wheel <span class="m">1599</span> <span class="m">10</span> <span class="m">30</span> 16:43 _config.yml
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> wangfeilong wheel  <span class="m">630</span> <span class="m">10</span> <span class="m">30</span> 16:43 package.json
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">5</span> wangfeilong wheel  <span class="m">170</span> <span class="m">10</span> <span class="m">30</span> 16:43 scaffolds/
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">6</span> wangfeilong wheel  <span class="m">204</span> <span class="m">10</span> <span class="m">30</span> 16:43 source/
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时我们发现子项目并没有被克隆。执行<code>gits populate</code>将克隆所有子项目：</p>
 <div class="highlight"><div class="chroma">
@@ -625,10 +625,10 @@ drwxr-xr-x  <span class="m">6</span> wangfeilong wheel  <span class="m">204</spa
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ gits populate
-Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
-<span class="k">done</span>.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gits populate
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
+</span></span><span class="line"><span class="cl"><span class="k">done</span>.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="提交项目">提交项目</h2>
 <p>我们对父项目和子项目做些修改、提交并将这些改动push到服务端，只需将对应的<code>git</code>命令换成<code>gits</code>，它会顺序在所有仓库中执行对应的<code>git</code>命令，如：</p>
@@ -653,24 +653,24 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">echo</span> <span class="err">“</span><span class="o">*.</span><span class="n">iml</span><span class="s2">&#34; &gt;&gt; .gitignore
-</span><span class="s2">$ echo “*.iml&#34;</span> <span class="o">&gt;&gt;</span> <span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span><span class="o">/.</span><span class="n">gitignore</span>
-<span class="err">$</span> <span class="err">$</span> <span class="n">gits</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
-<span class="err">$</span> <span class="n">gits</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&#34;Ignore *.iml&#34;</span>
-<span class="ss">On</span><span class="p">:</span> <span class="p">(</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="p">):</span>
-  <span class="o">[</span><span class="n">master</span> <span class="n">a2ff2d7</span><span class="o">]</span> <span class="no">Ignore</span> <span class="o">*.</span><span class="n">iml</span>
-   <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
-<span class="ss">On</span><span class="p">:</span> <span class="n">themes</span><span class="o">/</span><span class="ss">Hacker</span><span class="p">:</span>
-  <span class="o">[</span><span class="n">master</span> <span class="mo">03</span><span class="n">dfa7b</span><span class="o">]</span> <span class="no">Ignore</span> <span class="o">*.</span><span class="n">iml</span>
-   <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">2</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="n">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
-<span class="err">$</span> <span class="n">gits</span> <span class="n">push</span>
-<span class="ss">On</span><span class="p">:</span> <span class="p">(</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="p">):</span>
-  <span class="no">To</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
-     <span class="mi">2e059</span><span class="n">b2</span><span class="o">..</span><span class="n">a2ff2d7</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
-<span class="ss">On</span><span class="p">:</span> <span class="n">themes</span><span class="o">/</span><span class="ss">Hacker</span><span class="p">:</span>
-  <span class="no">To</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="no">Hacker</span><span class="o">.</span><span class="n">git</span>
-     <span class="n">dc4a047</span><span class="o">..</span><span class="mo">03</span><span class="n">dfa7b</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">echo</span> <span class="err">“</span><span class="o">*.</span><span class="n">iml</span><span class="s2">&#34; &gt;&gt; .gitignore
+</span></span></span><span class="line"><span class="cl"><span class="s2">$ echo “*.iml&#34;</span> <span class="o">&gt;&gt;</span> <span class="n">themes</span><span class="o">/</span><span class="no">Hacker</span><span class="o">/.</span><span class="n">gitignore</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="err">$</span> <span class="n">gits</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gits</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&#34;Ignore *.iml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="ss">On</span><span class="p">:</span> <span class="p">(</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="n">master</span> <span class="n">a2ff2d7</span><span class="o">]</span> <span class="no">Ignore</span> <span class="o">*.</span><span class="n">iml</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="ss">On</span><span class="p">:</span> <span class="n">themes</span><span class="o">/</span><span class="ss">Hacker</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="n">master</span> <span class="mo">03</span><span class="n">dfa7b</span><span class="o">]</span> <span class="no">Ignore</span> <span class="o">*.</span><span class="n">iml</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">2</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">1</span> <span class="n">deletion</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gits</span> <span class="n">push</span>
+</span></span><span class="line"><span class="cl"><span class="ss">On</span><span class="p">:</span> <span class="p">(</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="no">To</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">feilongwang</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">2e059</span><span class="n">b2</span><span class="o">..</span><span class="n">a2ff2d7</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+</span></span><span class="line"><span class="cl"><span class="ss">On</span><span class="p">:</span> <span class="n">themes</span><span class="o">/</span><span class="ss">Hacker</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="no">To</span> <span class="sr">/private/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="no">Hacker</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl">     <span class="n">dc4a047</span><span class="o">..</span><span class="mo">03</span><span class="n">dfa7b</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="更新项目">更新项目</h2>
 <p>如果你想更新服务端最新代码，可以使用<code>gits pull</code>命令，它会将所有仓库代码都同步为服务端最新状态，如：</p>
@@ -687,16 +687,16 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">$</span><span class="w"> </span><span class="n">gits</span><span class="w"> </span><span class="n">pull</span><span class="w">
-</span><span class="w"></span><span class="n">On</span>: <span class="p">(</span><span class="n">feilongwang</span><span class="p">.</span><span class="n">org</span><span class="p">)</span>:
-  <span class="nc">Already</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="p">.</span><span class="w">
-</span><span class="w"></span><span class="n">On</span>: <span class="nc">themes</span><span class="o">/</span><span class="n">Hacker</span>:
-  <span class="nb">From</span> <span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/%</span><span class="n">REPO</span><span class="o">%</span><span class="w">
-</span><span class="w">    </span><span class="n">master</span><span class="w">     </span>-&gt; <span class="nc">origin</span><span class="o">/</span><span class="n">master</span><span class="w">
-</span><span class="w">  </span><span class="n">Fast</span><span class="o">-</span><span class="n">forward</span><span class="w">
-</span><span class="w">   </span><span class="p">.</span><span class="n">gitignore</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w">
-</span><span class="w">   </span><span class="mi">1</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">changed</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="cp">$</span><span class="w"> </span><span class="n">gits</span><span class="w"> </span><span class="n">pull</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">On</span>: <span class="p">(</span><span class="n">feilongwang</span><span class="p">.</span><span class="n">org</span><span class="p">)</span>:
+</span></span><span class="line"><span class="cl">  <span class="nc">Already</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">On</span>: <span class="nc">themes</span><span class="o">/</span><span class="n">Hacker</span>:
+</span></span><span class="line"><span class="cl">  <span class="nb">From</span> <span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">remote</span><span class="o">/%</span><span class="n">REPO</span><span class="o">%</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">master</span><span class="w">     </span>-&gt; <span class="nc">origin</span><span class="o">/</span><span class="n">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Fast</span><span class="o">-</span><span class="n">forward</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">.</span><span class="n">gitignore</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="mi">1</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">changed</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>从上面的命令可以看出，GitSlave是对Git命令的封装，它可以简化多项目的Git操作。</p>
 <h2 id="gitslave的缺点">GitSlave的缺点</h2>
@@ -782,7 +782,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -802,7 +802,7 @@ Cloning into <span class="s1">&#39;themes/Hacker&#39;</span>...
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-01_ssh-proxy/" />
@@ -150,8 +150,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install expect
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install expect
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -172,19 +172,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#!/usr/bin/expect
-
-set timeout 10
-spawn /usr/bin/ssh -D 6300 -g -p 42043 cabox@host12.codeanyhost.com
-expect {
-&#34;password:&#34; {
-send &#34;密码r&#34;
-}
-}
-interact {
-timeout 10 { send &#34;n&#34;}
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#!/usr/bin/expect
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">set timeout 10
+</span></span><span class="line"><span class="cl">spawn /usr/bin/ssh -D 6300 -g -p 42043 cabox@host12.codeanyhost.com
+</span></span><span class="line"><span class="cl">expect {
+</span></span><span class="line"><span class="cl">&#34;password:&#34; {
+</span></span><span class="line"><span class="cl">send &#34;密码r&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">interact {
+</span></span><span class="line"><span class="cl">timeout 10 { send &#34;n&#34;}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -271,7 +271,7 @@ timeout 10 { send &#34;n&#34;}
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -291,7 +291,7 @@ timeout 10 { send &#34;n&#34;}
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

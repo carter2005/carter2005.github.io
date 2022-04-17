@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-09-22_lubuntu_2004_home_server/" />
@@ -156,11 +156,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo -s
-passwd root
-sed -i <span class="s1">&#39;s/User=wang/User=root/&#39;</span> /etc/sddm.conf
-reboot
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo -s
+</span></span><span class="line"><span class="cl">passwd root
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/User=wang/User=root/&#39;</span> /etc/sddm.conf
+</span></span><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="基本设置">基本设置</h2>
 <div class="highlight"><div class="chroma">
@@ -171,11 +171,11 @@ reboot
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apt update
-apt install curl tree unzip htop openssh-server
-sed -i <span class="s1">&#39;s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g&#39;</span>   /etc/ssh/sshd_config
-reboot
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt update
+</span></span><span class="line"><span class="cl">apt install curl tree unzip htop openssh-server
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g&#39;</span>   /etc/ssh/sshd_config
+</span></span><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后在setting里面，关闭更新和开机通知，调整apt源为清华的，并设置30秒自动关闭屏幕</p>
 <h2 id="rclocal服务">rc.local服务</h2>
@@ -187,10 +187,10 @@ reboot
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[Install]
-WantedBy=multi-user.target
-Alias=rc-local.service
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
+</span></span><span class="line"><span class="cl">Alias=rc-local.service
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>添加/etc/rc.local文件，修改权限为777</p>
 <div class="highlight"><div class="chroma">
@@ -202,12 +202,12 @@ Alias=rc-local.service
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
-</span><span class="cp"></span>
-/usr/local/bin/user.sh <span class="p">&amp;</span>
-
-<span class="nb">exit</span> <span class="m">0</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">/usr/local/bin/user.sh <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>启用服务</p>
 <div class="highlight"><div class="chroma">
@@ -218,11 +218,11 @@ Alias=rc-local.service
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
-systemctl enable rc-local
-systemctl start rc-local
-systemctl status rc-local
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl enable rc-local
+</span></span><span class="line"><span class="cl">systemctl start rc-local
+</span></span><span class="line"><span class="cl">systemctl status rc-local
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="socket5代理">socket5代理</h2>
 <p>把基于ssh，kcptun的代理脚本放到/usr/local/bin下并运行一次（添加自动登录记录）</p>
@@ -234,9 +234,9 @@ systemctl status rc-local
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git config --global http.proxy &#39;socks5://192.168.1.29:6500&#39;
-git config --global https.proxy &#39;socks5://192.168.1.29:6500&#39;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --global http.proxy &#39;socks5://192.168.1.29:6500&#39;
+</span></span><span class="line"><span class="cl">git config --global https.proxy &#39;socks5://192.168.1.29:6500&#39;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="webssh2">WebSSH2</h2>
 <div class="highlight"><div class="chroma">
@@ -255,19 +255,19 @@ git config --global https.proxy &#39;socks5://192.168.1.29:6500&#39;
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd /usr/local/bin/
-apt install curl make cmake
-
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-apt-get -y install nodejs
-npm config set registry &#34;https://registry.npm.taobao.org&#34;
-
-cd /usr/local/bin/
-git clone https://github.com/billchurch/WebSSH2.git WebSSH2
-cd WebSSH2/app/
-cp config.json.sample config.json
-npm install --production
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">apt install curl make cmake
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+</span></span><span class="line"><span class="cl">apt-get -y install nodejs
+</span></span><span class="line"><span class="cl">npm config set registry &#34;https://registry.npm.taobao.org&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">git clone https://github.com/billchurch/WebSSH2.git WebSSH2
+</span></span><span class="line"><span class="cl">cd WebSSH2/app/
+</span></span><span class="line"><span class="cl">cp config.json.sample config.json
+</span></span><span class="line"><span class="cl">npm install --production
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="x11vnc--novnc">x11vnc &amp; noVNC</h2>
 <p>安装并设置密码</p>
@@ -286,18 +286,18 @@ npm install --production
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd /usr/local/bin/
-apt-get -y install x11vnc
-x11vnc -storepasswd /etc/x11vnc.pass
-
-cd /usr/local/bin/
-git clone https://github.com/novnc/noVNC.git noVNC
-rm -rf .key
-mkdir -p .key
-scp -r root@192.168.1.88:/usr/syno/etc/certificate/system/default/*  .key/
-/usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 &amp;
-apt install python3-numpy
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">apt-get -y install x11vnc
+</span></span><span class="line"><span class="cl">x11vnc -storepasswd /etc/x11vnc.pass
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">git clone https://github.com/novnc/noVNC.git noVNC
+</span></span><span class="line"><span class="cl">rm -rf .key
+</span></span><span class="line"><span class="cl">mkdir -p .key
+</span></span><span class="line"><span class="cl">scp -r root@192.168.1.88:/usr/syno/etc/certificate/system/default/*  .key/
+</span></span><span class="line"><span class="cl">/usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 &amp;
+</span></span><span class="line"><span class="cl">apt install python3-numpy
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="阿里云盘">阿里云盘</h2>
 <p>通过webdav-aliyundriver将阿里云盘转成webdav协议磁盘供nas使用</p>
@@ -309,11 +309,11 @@ apt install python3-numpy
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd /usr/local/bin/
-apt install openjdk-11-jdk-headless
-wget https://github.com/zxbu/webdav-aliyundriver/releases/download/v2.4.2/webdav-aliyundriver-2.4.2.jar
-apt
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">apt install openjdk-11-jdk-headless
+</span></span><span class="line"><span class="cl">wget https://github.com/zxbu/webdav-aliyundriver/releases/download/v2.4.2/webdav-aliyundriver-2.4.2.jar
+</span></span><span class="line"><span class="cl">apt
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="usersh脚本">user.sh脚本</h2>
 <p>最终的加载脚本如下</p>
@@ -367,53 +367,53 @@ apt
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-echoc<span class="o">()</span>
-<span class="o">{</span>   
-    <span class="k">case</span> <span class="nv">$1</span> in
-        red<span class="o">)</span>            <span class="nv">color</span><span class="o">=</span>31<span class="p">;;</span>
-        green<span class="o">)</span>          <span class="nv">color</span><span class="o">=</span>32<span class="p">;;</span>
-        yellow<span class="o">)</span>         <span class="nv">color</span><span class="o">=</span>33<span class="p">;;</span>
-        blue<span class="o">)</span>           <span class="nv">color</span><span class="o">=</span>34<span class="p">;;</span>
-        purple<span class="o">)</span>         <span class="nv">color</span><span class="o">=</span>35<span class="p">;;</span>
-        white<span class="o">)</span>          <span class="nv">color</span><span class="o">=</span>37<span class="p">;;</span>
-        light-red<span class="o">)</span>      <span class="nv">color</span><span class="o">=</span>91<span class="p">;;</span>
-        light-green<span class="o">)</span>    <span class="nv">color</span><span class="o">=</span>92<span class="p">;;</span>
-        light-yellow<span class="o">)</span>   <span class="nv">color</span><span class="o">=</span>93<span class="p">;;</span>
-        light-blue<span class="o">)</span>     <span class="nv">color</span><span class="o">=</span>94<span class="p">;;</span>
-        light-purple<span class="o">)</span>   <span class="nv">color</span><span class="o">=</span>95<span class="p">;;</span>
-        *<span class="o">)</span>              <span class="nv">color</span><span class="o">=</span>36<span class="p">;;</span>
-    <span class="k">esac</span>
-    <span class="nb">echo</span> -e <span class="s2">&#34;\033[;</span><span class="si">${</span><span class="nv">color</span><span class="si">}</span><span class="s2">m</span><span class="nv">$2</span><span class="s2">\033[0m&#34;</span>
-<span class="o">}</span>
-
-<span class="nv">base_path</span><span class="o">=</span><span class="s2">&#34;/usr/local/bin&#34;</span>
-
-<span class="nb">ulimit</span> -n <span class="m">16384</span>
-
-<span class="c1"># ddns</span>
-/usr/local/bin/ddns.sh <span class="p">&amp;</span>
-
-<span class="c1"># proxy</span>
-/usr/local/bin/kcptun/ssh-proxy-kuptun.sh <span class="p">&amp;</span>
-
-<span class="c1"># WebSSH2</span>
-<span class="nb">cd</span> /usr/local/bin/WebSSH2/app/
-nohup npm start &gt; /run/webssh2.log <span class="p">&amp;</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-
-<span class="c1"># caddy</span>
-/usr/local/bin/caddy/caddy -agree -conf /usr/local/bin/caddy/Caddyfile  -log /run/caddy.log <span class="p">&amp;</span>
-
-<span class="c1"># noVNC</span>
-/usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 <span class="p">&amp;</span>
-
-<span class="c1"># ali yunpan</span>
-java -jar /usr/local/bin/webdav-aliyundriver-2.4.2.jar --aliyundrive.refresh-token<span class="o">=</span>a5b6c4e7cb8f4476a77c6e51065adfb5 --aliyundrive.auth.user-name<span class="o">=</span>wang --aliyundrive.auth.password<span class="o">=</span>XXXXXXX <span class="p">&amp;</span>
-
-sleep <span class="m">5</span>
-x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<span class="k">)</span>  -forever -bg -o /run/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> <span class="p">&amp;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">echoc<span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>   
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nv">$1</span> in
+</span></span><span class="line"><span class="cl">        red<span class="o">)</span>            <span class="nv">color</span><span class="o">=</span>31<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        green<span class="o">)</span>          <span class="nv">color</span><span class="o">=</span>32<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        yellow<span class="o">)</span>         <span class="nv">color</span><span class="o">=</span>33<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        blue<span class="o">)</span>           <span class="nv">color</span><span class="o">=</span>34<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        purple<span class="o">)</span>         <span class="nv">color</span><span class="o">=</span>35<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        white<span class="o">)</span>          <span class="nv">color</span><span class="o">=</span>37<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        light-red<span class="o">)</span>      <span class="nv">color</span><span class="o">=</span>91<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        light-green<span class="o">)</span>    <span class="nv">color</span><span class="o">=</span>92<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        light-yellow<span class="o">)</span>   <span class="nv">color</span><span class="o">=</span>93<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        light-blue<span class="o">)</span>     <span class="nv">color</span><span class="o">=</span>94<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        light-purple<span class="o">)</span>   <span class="nv">color</span><span class="o">=</span>95<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        *<span class="o">)</span>              <span class="nv">color</span><span class="o">=</span>36<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">esac</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -e <span class="s2">&#34;\033[;</span><span class="si">${</span><span class="nv">color</span><span class="si">}</span><span class="s2">m</span><span class="nv">$2</span><span class="s2">\033[0m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">base_path</span><span class="o">=</span><span class="s2">&#34;/usr/local/bin&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">ulimit</span> -n <span class="m">16384</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ddns</span>
+</span></span><span class="line"><span class="cl">/usr/local/bin/ddns.sh <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># proxy</span>
+</span></span><span class="line"><span class="cl">/usr/local/bin/kcptun/ssh-proxy-kuptun.sh <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># WebSSH2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/bin/WebSSH2/app/
+</span></span><span class="line"><span class="cl">nohup npm start &gt; /run/webssh2.log <span class="p">&amp;</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># caddy</span>
+</span></span><span class="line"><span class="cl">/usr/local/bin/caddy/caddy -agree -conf /usr/local/bin/caddy/Caddyfile  -log /run/caddy.log <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># noVNC</span>
+</span></span><span class="line"><span class="cl">/usr/local/bin/noVNC/utils/novnc_proxy --ssl-only --cert /usr/local/bin/.key/cert.pem --key /usr/local/bin/.key/privkey.pem --vnc localhost:5900 <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ali yunpan</span>
+</span></span><span class="line"><span class="cl">java -jar /usr/local/bin/webdav-aliyundriver-2.4.2.jar --aliyundrive.refresh-token<span class="o">=</span>a5b6c4e7cb8f4476a77c6e51065adfb5 --aliyundrive.auth.user-name<span class="o">=</span>wang --aliyundrive.auth.password<span class="o">=</span>XXXXXXX <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sleep <span class="m">5</span>
+</span></span><span class="line"><span class="cl">x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<span class="k">)</span>  -forever -bg -o /run/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport <span class="m">5900</span> <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -436,7 +436,11 @@ x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<sp
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2022/2022-4-16_disable_chrome_update/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">disable_chrome_update</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/2021/2021-09-20_arm_memset_crash/">
             <span class="next-text nav-default">arm memset crash</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -488,7 +492,7 @@ x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<sp
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -508,7 +512,7 @@ x11vnc -display :0 -auth <span class="k">$(</span>find /var/run/sddm/ -type f<sp
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 

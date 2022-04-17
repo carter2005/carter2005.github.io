@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.97.0 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/" />
@@ -112,6 +112,25 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-12-17_tar/">tar压缩/解压缩</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-12-17 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      压缩 tar czpfv /path/to/file.tar.gz -C `pwd` . 解压 tar xzvf /path/to/file.tar.gz -C /path/to 加密压缩 tar -czpvf - * | openssl des3 -salt -k password -out /path/to/file.tar.gz 解密解压 openssl des3 -d -k password -salt -in /path/to/file.tar.gz | tar xzf -
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/2019-12-17_tar/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2019/2019-12-11_ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-12-11 </span>
@@ -146,25 +165,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2019/2019-11-20_proxmox/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-10-21_synology-mailplus-server/">基于群晖的mailplus邮件服务器</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-10-21 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      先决条件 公网IP 个人域名 一台群晖 域名解析 类型：MX 主机记录：@ 记录值：edward.cf MX优先等级：5 类型：CNAME 主机记录：imap 记
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-10-21_synology-mailplus-server/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -212,7 +212,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -232,7 +232,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.2517c0eb67172a0bae917de4af59b10ca2531411a009d4c0b82f5685259e5771.js"></script>
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
 
 
 
