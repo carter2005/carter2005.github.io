@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ubuntu 20.04.4开发环境 - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="2022年注定是一个不平凡的一年，俄罗斯，乌克兰的战争离我们很远，近在眼前的上海疫情，先是3月初在公司隔离4天，回来后就在家办公，已经五一节" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.98.0 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2022/2022-05-02_ubuntu_20.04_%E7%8E%AF%E5%A2%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="ubuntu 20.04.4开发环境" />
+<meta property="og:description" content="2022年注定是一个不平凡的一年，俄罗斯，乌克兰的战争离我们很远，近在眼前的上海疫情，先是3月初在公司隔离4天，回来后就在家办公，已经五一节" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2022/2022-05-02_ubuntu_20.04_%E7%8E%AF%E5%A2%83/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="ubuntu 20.04.4开发环境">
+<meta itemprop="description" content="2022年注定是一个不平凡的一年，俄罗斯，乌克兰的战争离我们很远，近在眼前的上海疫情，先是3月初在公司隔离4天，回来后就在家办公，已经五一节"><meta itemprop="datePublished" content="2022-05-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-05-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1420">
+<meta itemprop="keywords" content="chrome," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ubuntu 20.04.4开发环境"/>
+<meta name="twitter:description" content="2022年注定是一个不平凡的一年，俄罗斯，乌克兰的战争离我们很远，近在眼前的上海疫情，先是3月初在公司隔离4天，回来后就在家办公，已经五一节"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ubuntu 20.04.4开发环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-02 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> Linux </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#root登陆">root登陆</a></li>
+    <li><a href="#中文输入法">中文输入法</a></li>
+    <li><a href="#chrome">chrome</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>2022年注定是一个不平凡的一年，俄罗斯，乌克兰的战争离我们很远，近在眼前的上海疫情，先是3月初在公司隔离4天，回来后就在家办公，已经五一节了，依然形势不容乐观。所幸我们的工作远程办公很容易，工作倒也没有什么大影响，每天还不用浪费路上的3个小时，家里可以用自己的电脑，醒了就工作，困了就休息，其实比去公司更方便。</p>
+<p>本篇主要想谈谈现在的pc操作系统市场，以及近期部署的ubuntu 20.04开发环境。截至目前，主流的操作系统就下面几个：</p>
+<ul>
+<li>win7：特别经典好用的一个系统，无奈现在的新硬件基本都抛弃了对它的支持，只能在虚拟机里面苟延残喘了。</li>
+<li>win10：经历了多年无穷无尽的更新，基本也到了生命末期，好用的还是LTSC 2019，关掉更新用起来还是省心的，综合看来，依然是目前最好用的系统。</li>
+<li>win11：接过了bug10的交接棒，只有最新的硬件才能安装。不发展上5年是不能当作主力系统使用的。</li>
+<li>Linux：自从一大波发行版把界面换成了gnome3，感觉Linux就丧失了灵魂，失去了方向，很多时候纯粹为了更新而更新，夹在windows，macos中间不知所措，基本一个能打的图形界面都没有了，比windows，macos落后了一大截。</li>
+<li>macos：Apple的步伐一直很激进，一直按着自己的想法在改造系统，虽然现在印度人的审美水准导致UI美观度下降，但依然是最漂亮的，Apple silicon也确实引导了潮流，开创了硬件研发的新河。</li>
+</ul>
+<p>工作中开发android那些年用的是ubuntu 14.04.6，用起来非常的省心，开发AI加速卡的时候，用的ubuntu 16.04.7，这个系统在1080p显示器上鼠标有些飘，加速度乱跑，在公司的2k显示器上问题比较不明显，体验尚可。后期发布的18.04，20.04，22.04，更换成了gnome界面，简直一代更比一代差，最近的项目目标环境是ubuntu 20.04，新系统对新硬件的支持要好上不少，是时候更新主力工作环境了。</p>
+<p>ubuntu 20.04截止目前已经迭代了5个小版本到了22.04.4，稳定性不容置疑，安装没什么好讲的，重点是安装以后的定制。</p>
+<h2 id="root登陆">root登陆</h2>
+<p>因为经常要和硬件打交道，老得sudo切换root，我平时还是更喜欢直接使用root账号</p>
+<ol>
+<li>以普通用户登录系统，创建root用户的密码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在终端输入命令：sudo passwd root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">然后输入设置的密码，输入两次，这样就完成了设置root用户密码了（注意Linux系统下密码是没有回显的）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>修改 50-ubuntu.conf 文件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在终端输入命令：sudo gedit /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在文件末尾增加如下两行：
+</span></span><span class="line"><span class="cl">greeter-show-manual-login=true
+</span></span><span class="line"><span class="cl">all-guest=false
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>修改 gdm-autologin 文件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在终端输入命令：sudo gedit /etc/pam.d/gdm-autologin 打开文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">前面加 # 注释掉第三行的 auth required pam_succeed_if.so user != root quiet_success
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>修改 gdm-password 文件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在终端输入命令：sudo gedit /etc/pam.d/gdm-password 打开文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">前面加 # 注释掉第三行的 auth required pam_succeed_if.so user != root quiet_success
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>修改 /root/.profile 文件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在终端输入命令：sudo gedit /root/.profile 打开文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">将文件末尾的 mesg n 2&gt; /dev/null || true 这一行修改成
+</span></span><span class="line"><span class="cl">tty -s &amp;&amp; mesg n || true
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>最后一步，重启试一下吧</li>
+</ol>
+<h2 id="中文输入法">中文输入法</h2>
+<p>安装ibus-libpinyin</p>
+<h2 id="chrome">chrome</h2>
+<p>安装66版本的chrome(特别新的版本无法跳转OpenGrok搜索链接到指定行，查看代码特别不便)，然后修改/usr/share/applications/google-chrome.desktop，添加参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">--user-data-dir=/root/.config/chrome --test-type --no-sandbox
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加–no-sandbox后，启动 chrome会提示You are using an unsupported command-line flag: –no-sandbox. Stability and security will suffer，&ndash;test-type可以消除该提示。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/chrome/">chrome</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2022/2022-4-16_disable_chrome_update/">
+            <span class="next-text nav-default">disable chrome update</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
