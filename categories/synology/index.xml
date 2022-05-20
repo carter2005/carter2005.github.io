@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>synology on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/categories/synology/</link>
+    <description>Recent content in synology on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/categories/synology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>群晖7.1.X引导编译</title>
+      <link>https://carter2005.github.io/post/2022/2022-05-20_synology_bootloader_compile/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2022/2022-05-20_synology_bootloader_compile/</guid>
+      <description>背景 毫无疑问，群晖是最好用的NAS系统，具备良好的生态，在6.X的年代，jun提供了闭源的引导，但在6.2.4版本以后都失效了，很长的一段时</description>
+    </item>
+    
+  </channel>
+</rss>
