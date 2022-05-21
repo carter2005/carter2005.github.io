@@ -6,7 +6,16 @@
     <description>Recent content in tools on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 16 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>typora自动上传图片</title>
+      <link>https://carter2005.github.io/post/2022/2022-05-21_typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Sat, 21 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2022/2022-05-21_typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+      <description>typora图片保存在本地的话，md文件给别人以后，图片大概率就显示不了，非常影响体验。要解决这个问题，最好的解决办法是把图片自动上传到图床</description>
+    </item>
+    
     <item>
       <title>disable chrome update</title>
       <link>https://carter2005.github.io/post/2022/2022-4-16_disable_chrome_update/</link>
