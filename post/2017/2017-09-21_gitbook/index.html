@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-21_gitbook/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="gitbook搭建" />
 <meta property="og:description" content="GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-21_gitbook/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-21_gitbook/" />
 <meta property="article:published_time" content="2017-09-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-09-21T00:00:00+00:00" />
-
 <meta itemprop="name" content="gitbook搭建">
-<meta itemprop="description" content="GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非"><meta itemprop="datePublished" content="2017-09-21T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-09-21T00:00:00+00:00" />
+<meta itemprop="description" content="GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非">
+<meta itemprop="datePublished" content="2017-09-21T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-09-21T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="261">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gitbook搭建"/>
 <meta name="twitter:description" content="GitBook是一家成立于2014年中，位于法国里昂的小型公司，它们的产品gitbook，提供了简单易用的界面，完美支持markdown，非"/>
@@ -141,43 +144,43 @@
 <h2 id="安装nodejs">安装node.js</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gitbook需要node.js环境支持，ubuntu自带的版本太老，建议从node.js官网下载安装，命令如下：
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-</span></span><span class="line"><span class="cl">sudo apt-get install -y nodejs
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">gitbook需要node.js环境支持，ubuntu自带的版本太老，建议从node.js官网下载安装，命令如下：
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="安装gitbook">安装gitbook</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install -g gitbook
-</span></span><span class="line"><span class="cl">npm install -g gitbook-cli
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install -g gitbook
+npm install -g gitbook-cli
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="创建书籍">创建书籍</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gitbook init
-</span></span><span class="line"><span class="cl">修改summery.md，添加章节目录
-</span></span><span class="line"><span class="cl">gitbook serve
-</span></span><span class="line"><span class="cl">访问http://127.0.0.1:4000
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">gitbook init
+修改summery.md，添加章节目录
+gitbook serve
+访问http://127.0.0.1:4000
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -256,7 +259,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -276,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

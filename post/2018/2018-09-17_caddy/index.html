@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-17_caddy/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="caddy" />
 <meta property="og:description" content="背景 caddy 是一个用go语言写的，像 Apache, nginx, 或 lighttpd 的web服务器，其优点如下： HTTP/2 全自动支持HTTP/2协议，无需任何配置。 Auto HTTPS Caddy 使用 Let&rsquo;s Encrypt 让你的站点全自动" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-17_caddy/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-17_caddy/" />
 <meta property="article:published_time" content="2018-09-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-09-17T00:00:00+00:00" />
-
 <meta itemprop="name" content="caddy">
-<meta itemprop="description" content="背景 caddy 是一个用go语言写的，像 Apache, nginx, 或 lighttpd 的web服务器，其优点如下： HTTP/2 全自动支持HTTP/2协议，无需任何配置。 Auto HTTPS Caddy 使用 Let&rsquo;s Encrypt 让你的站点全自动"><meta itemprop="datePublished" content="2018-09-17T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2018-09-17T00:00:00+00:00" />
+<meta itemprop="description" content="背景 caddy 是一个用go语言写的，像 Apache, nginx, 或 lighttpd 的web服务器，其优点如下： HTTP/2 全自动支持HTTP/2协议，无需任何配置。 Auto HTTPS Caddy 使用 Let&rsquo;s Encrypt 让你的站点全自动">
+<meta itemprop="datePublished" content="2018-09-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-17T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="656">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="caddy"/>
 <meta name="twitter:description" content="背景 caddy 是一个用go语言写的，像 Apache, nginx, 或 lighttpd 的web服务器，其优点如下： HTTP/2 全自动支持HTTP/2协议，无需任何配置。 Auto HTTPS Caddy 使用 Let&rsquo;s Encrypt 让你的站点全自动"/>
@@ -153,11 +156,11 @@
 <h2 id="安装">安装</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl https://getcaddy.com | bash -s personal
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl https://getcaddy.com | bash -s personal
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="第一个网站">第一个网站</h2>
 <p>执行 ./caddy 这时候访问localhost:2015，很简单吧</p>
@@ -165,19 +168,19 @@
 <p>caddy的配置文件叫Caddyfile，下面是一个简单的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">toyoo.pw {
-</span></span><span class="line"><span class="cl">     gzip
-</span></span><span class="line"><span class="cl">     tls /root/xxx.crt /root/xxx.key  #或者指定邮箱自动获取证书
-</span></span><span class="line"><span class="cl">     proxy / https://www.google.com.hk
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">toyoo.pw {
+     gzip
+     tls /root/xxx.crt /root/xxx.key  #或者指定邮箱自动获取证书
+     proxy / https://www.google.com.hk
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>常用的命令有：</p>
 <ol>
@@ -189,56 +192,56 @@
 <p>2.目录访问</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">browse
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">browse
+</code></pre></td></tr></table>
 </div>
 </div><p>3.gzip压缩</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gzip
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">gzip
+</code></pre></td></tr></table>
 </div>
 </div><p>4.自主ssl证书</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tls /path/ssl/example.com.crt /path/ssl/example.com.key
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tls /path/ssl/example.com.crt /path/ssl/example.com.key
+</code></pre></td></tr></table>
 </div>
 </div><p>5.git拉取功能(3600秒为间隔时间)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git https://github.com/user/project.git /var/www/html/git/ {
-</span></span><span class="line"><span class="cl">  interval 3600
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git https://github.com/user/project.git /var/www/html/git/ {
+  interval 3600
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>6.访问口令认证（用户emiria，密码abc123）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">basicauth / emiria abc123
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">basicauth / emiria abc123
+</code></pre></td></tr></table>
 </div>
 </div><p>7.cors跨域(下载时记得勾上)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -249,58 +252,58 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cors / {  
-</span></span><span class="line"><span class="cl">    origin            https://alleysakura.com
-</span></span><span class="line"><span class="cl">    origin            http://alleysakura.pw https://alleysakura.pw
-</span></span><span class="line"><span class="cl">    methods           POST,PUT
-</span></span><span class="line"><span class="cl">    allow_credentials false
-</span></span><span class="line"><span class="cl">    max_age           3600
-</span></span><span class="line"><span class="cl">    allowed_headers   X-Custom-Header,X-Foobar
-</span></span><span class="line"><span class="cl">    exposed_headers   X-Something-Special,SomethingElse
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cors / {  
+    origin            https://alleysakura.com
+    origin            http://alleysakura.pw https://alleysakura.pw
+    methods           POST,PUT
+    allow_credentials false
+    max_age           3600
+    allowed_headers   X-Custom-Header,X-Foobar
+    exposed_headers   X-Something-Special,SomethingElse
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>8.IP屏蔽(下载时记得勾上)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ipfilter / {  
-</span></span><span class="line"><span class="cl">    rule       block
-</span></span><span class="line"><span class="cl">    ip         212.10.15.0-255 202.10.15.0-10 59.43.247.103
-</span></span><span class="line"><span class="cl">    blockpage  /var/www/html/403.html
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ipfilter / {  
+    rule       block
+    ip         212.10.15.0-255 202.10.15.0-10 59.43.247.103
+    blockpage  /var/www/html/403.html
+}
+</code></pre></td></tr></table>
 </div>
 </div><p>9.跳转功能(目录重写功能也类似)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">redir http://example.com{url}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">redir http://example.com{url}
+</code></pre></td></tr></table>
 </div>
 </div><p>不像nginx进行www重定向那么麻烦，把域名原域名（不限协议）写上，大括号里加上这个就可以，简直太赞了</p>
 <p>10.自定义错误页面</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">errors {
-</span></span><span class="line"><span class="cl">    404 404.html
-</span></span><span class="line"><span class="cl">    500 /var/www/html/500.html
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">errors {
+    404 404.html
+    500 /var/www/html/500.html
+}
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -379,7 +382,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -399,7 +402,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Android.bp条件编译" />
 <meta property="og:description" content="Android的makefile越来越多的开始使用Android .bp，它的好处是编译速度快，计算依赖比Android.mk快速的多。 但是，" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-07-01_android.bp%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/" />
 <meta property="article:published_time" content="2020-07-01T15:21:20+08:00" />
 <meta property="article:modified_time" content="2020-07-01T15:21:20+08:00" />
-
 <meta itemprop="name" content="Android.bp条件编译">
-<meta itemprop="description" content="Android的makefile越来越多的开始使用Android .bp，它的好处是编译速度快，计算依赖比Android.mk快速的多。 但是，"><meta itemprop="datePublished" content="2020-07-01T15:21:20+08:00" />
-<meta itemprop="dateModified" content="2020-07-01T15:21:20+08:00" />
-<meta itemprop="wordCount" content="468">
+<meta itemprop="description" content="Android的makefile越来越多的开始使用Android .bp，它的好处是编译速度快，计算依赖比Android.mk快速的多。 但是，">
+<meta itemprop="datePublished" content="2020-07-01T15:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-01T15:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="469">
+
+
+
 <meta itemprop="keywords" content="makefile," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Android.bp条件编译"/>
 <meta name="twitter:description" content="Android的makefile越来越多的开始使用Android .bp，它的好处是编译速度快，计算依赖比Android.mk快速的多。 但是，"/>
@@ -140,25 +143,25 @@
 <p>Android.bp直接添加宏非常简单，只需要在cflags后面添加对应的宏就OK了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="nx">cflags</span><span class="p">:</span> <span class="p">[</span><span class="s">&#34;-DXXX&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="c1">// ANDROIDMK TRANSLATION ERROR: endif from unsupported contitional
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// endif
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s">&#34;-Wno-error=implicit-function-declaration&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;-DPRINT&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span> 
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"> <span class="nx">cflags</span><span class="p">:</span> <span class="p">[</span><span class="s">&#34;-DXXX&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="c1">// ANDROIDMK TRANSLATION ERROR: endif from unsupported contitional
+</span><span class="c1"></span>    <span class="c1">// endif
+</span><span class="c1"></span>        <span class="s">&#34;-Wno-error=implicit-function-declaration&#34;</span><span class="p">,</span>
+        <span class="s">&#34;-DPRINT&#34;</span><span class="p">,</span>
+    <span class="p">],</span> 
+</code></pre></td></tr></table>
 </div>
 </div><h1 id="有条件添加宏">有条件添加宏</h1>
 <p>添加go脚本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -199,55 +202,57 @@
 </span><span class="lnt">39
 </span><span class="lnt">40
 </span><span class="lnt">41
+</span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">vold</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;android/soong/android&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;android/soong/cc&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// for DEBUG
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;vold init start &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">android</span><span class="p">.</span><span class="nf">RegisterModuleType</span><span class="p">(</span><span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span> <span class="nx">voldDefaultsFactory</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">voldDefaultsFactory</span><span class="p">()</span> <span class="p">(</span><span class="nx">android</span><span class="p">.</span><span class="nx">Module</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">module</span> <span class="o">:=</span> <span class="nx">cc</span><span class="p">.</span><span class="nf">DefaultsFactory</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">android</span><span class="p">.</span><span class="nf">AddLoadHook</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">voldDefaults</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">module</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">voldDefaults</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">android</span><span class="p">.</span><span class="nx">LoadHookContext</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">type</span> <span class="nx">props</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">Cflags</span> <span class="p">[]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">props</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p</span><span class="p">.</span><span class="nx">Cflags</span> <span class="p">=</span> <span class="nf">globalDefaults</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span><span class="p">.</span><span class="nf">AppendProperties</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">globalDefaults</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">android</span><span class="p">.</span><span class="nx">BaseContext</span><span class="p">)</span> <span class="p">([]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">cppflags</span> <span class="p">[]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY:&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">ctx</span><span class="p">.</span><span class="nf">AConfig</span><span class="p">().</span><span class="nf">IsEnvTrue</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">AConfig</span><span class="p">().</span><span class="nf">IsEnvTrue</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">cppflags</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">cppflags</span><span class="p">,</span> <span class="s">&#34;-DSDCARD_READONLY=1&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">cppflags</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">vold</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+        <span class="s">&#34;android/soong/android&#34;</span>
+        <span class="s">&#34;android/soong/cc&#34;</span>
+        <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// for DEBUG
+</span><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;vold init start &#34;</span><span class="p">)</span>
+    <span class="nx">android</span><span class="p">.</span><span class="nf">RegisterModuleType</span><span class="p">(</span><span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span> <span class="nx">voldDefaultsFactory</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">voldDefaultsFactory</span><span class="p">()</span> <span class="p">(</span><span class="nx">android</span><span class="p">.</span><span class="nx">Module</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">module</span> <span class="o">:=</span> <span class="nx">cc</span><span class="p">.</span><span class="nf">DefaultsFactory</span><span class="p">()</span>
+    <span class="nx">android</span><span class="p">.</span><span class="nf">AddLoadHook</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">voldDefaults</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">module</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">voldDefaults</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">android</span><span class="p">.</span><span class="nx">LoadHookContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">type</span> <span class="nx">props</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Cflags</span> <span class="p">[]</span><span class="kt">string</span>
+    <span class="p">}</span>
+    <span class="nx">p</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">props</span><span class="p">{}</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">Cflags</span> <span class="p">=</span> <span class="nf">globalDefaults</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+    <span class="nx">ctx</span><span class="p">.</span><span class="nf">AppendProperties</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">globalDefaults</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">android</span><span class="p">.</span><span class="nx">BaseContext</span><span class="p">)</span> <span class="p">([]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">cppflags</span> <span class="p">[]</span><span class="kt">string</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY:&#34;</span><span class="p">,</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nf">AConfig</span><span class="p">().</span><span class="nf">IsEnvTrue</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY&#34;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">AConfig</span><span class="p">().</span><span class="nf">IsEnvTrue</span><span class="p">(</span><span class="s">&#34;BUILD_WITH_SDCARD_READONLY&#34;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">cppflags</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">cppflags</span><span class="p">,</span> <span class="s">&#34;-DSDCARD_READONLY=1&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">cppflags</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
 </div>
 </div><p>Android.bp修改</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -277,35 +282,35 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">vold_defaults</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">defaults</span><span class="p">:</span> <span class="p">[</span> <span class="s">&#34;vold_default_flags&#34;</span> <span class="p">],</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">bootstrap_go_package</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;soong-vold&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pkgPath</span><span class="p">:</span> <span class="s">&#34;android/soong/vold&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">deps</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;blueprint&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;blueprint-pathtools&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;soong&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;soong-android&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;soong-cc&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;soong-genrule&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span>  
-</span></span><span class="line"><span class="cl">    <span class="nx">srcs</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;vold.go&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span>  
-</span></span><span class="line"><span class="cl">    <span class="nx">pluginFor</span><span class="p">:</span> <span class="p">[</span><span class="s">&#34;soong_build&#34;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">cc_library_static</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;libvold&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">defaults</span><span class="p">:</span> <span class="p">[</span>        
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;vold_default_libs&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span>  <span class="c1">// 添加依赖
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">],</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">vold_defaults</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span>
+    <span class="nx">defaults</span><span class="p">:</span> <span class="p">[</span> <span class="s">&#34;vold_default_flags&#34;</span> <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="nx">bootstrap_go_package</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;soong-vold&#34;</span><span class="p">,</span>
+    <span class="nx">pkgPath</span><span class="p">:</span> <span class="s">&#34;android/soong/vold&#34;</span><span class="p">,</span>
+    <span class="nx">deps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">&#34;blueprint&#34;</span><span class="p">,</span>
+        <span class="s">&#34;blueprint-pathtools&#34;</span><span class="p">,</span>
+        <span class="s">&#34;soong&#34;</span><span class="p">,</span>
+        <span class="s">&#34;soong-android&#34;</span><span class="p">,</span>
+        <span class="s">&#34;soong-cc&#34;</span><span class="p">,</span>
+        <span class="s">&#34;soong-genrule&#34;</span><span class="p">,</span>
+    <span class="p">],</span>  
+    <span class="nx">srcs</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">&#34;vold.go&#34;</span><span class="p">,</span>
+    <span class="p">],</span>  
+    <span class="nx">pluginFor</span><span class="p">:</span> <span class="p">[</span><span class="s">&#34;soong_build&#34;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="nx">cc_library_static</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;libvold&#34;</span><span class="p">,</span>
+    <span class="nx">defaults</span><span class="p">:</span> <span class="p">[</span>        
+        <span class="s">&#34;vold_default_libs&#34;</span><span class="p">,</span>
+        <span class="s">&#34;vold_defaults&#34;</span><span class="p">,</span>  <span class="c1">// 添加依赖
+</span><span class="c1"></span>    <span class="p">],</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>go是从init开始运行的，它其实只是注册了XXXDefaultFactory对象，然后添加hook，在里面判断环境变量，然后赋值给cppflags，逻辑还是很清晰的。</p>
 
@@ -387,7 +392,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -407,7 +412,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

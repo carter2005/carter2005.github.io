@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="蓝牙打电话后播放音乐无声" />
 <meta property="og:description" content="查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" />
 <meta property="article:published_time" content="2019-01-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-01-30T00:00:00+00:00" />
-
 <meta itemprop="name" content="蓝牙打电话后播放音乐无声">
-<meta itemprop="description" content="查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c"><meta itemprop="datePublished" content="2019-01-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-01-30T00:00:00+00:00" />
+<meta itemprop="description" content="查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c">
+<meta itemprop="datePublished" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-30T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="492">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="蓝牙打电话后播放音乐无声"/>
 <meta name="twitter:description" content="查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c"/>
@@ -140,7 +143,7 @@ INFO(&ldquo;state %d&rdquo;, common-&gt;state);</p>
 common-&gt;state = AUDIO_A2DP_STATE_STARTING;</p>
 <p>int a2dp_status = a2dp_command(common, A2DP_CTRL_CMD_START);
 if (a2dp_status &lt; 0) {
-ERROR(&ldquo;Audiopath start failed (status %d)&rdquo;, a2dp_status);
+ERROR(&ldquo;Audiopath start failed (status %d)&quot;, a2dp_status);
 goto error;
 } else if (a2dp_status == A2DP_CTRL_ACK_INCALL_FAILURE) {
 ERROR(&ldquo;Audiopath start failed - in call, move to suspended&rdquo;);
@@ -176,7 +179,7 @@ case A2DP_CTRL_CMD_START:
 * while in a call, and respond with BAD_STATE.
 */
 if (!bluetooth::headset::IsCallIdle()) {
-APPL_TRACE_WARNING(&quot;%s: A2DP command %s failed as call state is busy&quot;,
+APPL_TRACE_WARNING(&quot;%s: A2DP command %s failed as call state is busy&rdquo;,
 __func__,
 audio_a2dp_hw_dump_ctrl_event((tA2DP_CTRL_CMD)cmd));
 status = A2DP_CTRL_ACK_INCALL_FAILURE;
@@ -215,9 +218,9 @@ return false;
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/2019/2019-03-14_nfc/">
+        <a class="prev" href="/post/2019/2019-01-30_bluetooth-discovery-no-name/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">nfc基础</span>
+            <span class="prev-text nav-default">刷机后蓝牙广播没有名字，只显示MAC地址</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/2019/2019-01-30_bluetooth-port-summery/">
@@ -271,7 +274,7 @@ return false;
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -291,7 +294,7 @@ return false;
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

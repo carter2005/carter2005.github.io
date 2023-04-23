@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-19_recovery-id/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="recovery_id" />
 <meta property="og:description" content="在分析android 8.0 property的时候，发现有2个后缀为recovery_id的变量，前者在init初始化property时，通过计算" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-19_recovery-id/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-19_recovery-id/" />
 <meta property="article:published_time" content="2017-09-19T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-09-19T00:00:00+00:00" />
-
 <meta itemprop="name" content="recovery_id">
-<meta itemprop="description" content="在分析android 8.0 property的时候，发现有2个后缀为recovery_id的变量，前者在init初始化property时，通过计算"><meta itemprop="datePublished" content="2017-09-19T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-09-19T00:00:00+00:00" />
+<meta itemprop="description" content="在分析android 8.0 property的时候，发现有2个后缀为recovery_id的变量，前者在init初始化property时，通过计算">
+<meta itemprop="datePublished" content="2017-09-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-09-19T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="502">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="recovery_id"/>
 <meta name="twitter:description" content="在分析android 8.0 property的时候，发现有2个后缀为recovery_id的变量，前者在init初始化property时，通过计算"/>
@@ -144,7 +147,7 @@
 <h2 id="rorecovery_id">ro.recovery_id</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -184,51 +187,51 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    void load_recovery_id_prop() {
-</span></span><span class="line"><span class="cl">        std::unique_ptr&lt;fstab, decltype(&amp;fs_mgr_free_fstab)&gt; fstab(fs_mgr_read_fstab_default(),
-</span></span><span class="line"><span class="cl">                                                                   fs_mgr_free_fstab);
-</span></span><span class="line"><span class="cl">        if (!fstab) {
-</span></span><span class="line"><span class="cl">            PLOG(ERROR) &lt;&lt; &#34;unable to read default fstab&#34;;
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        fstab_rec* rec = fs_mgr_get_entry_for_mount_point(fstab.get(), RECOVERY_MOUNT_POINT);
-</span></span><span class="line"><span class="cl">        if (rec == NULL) {
-</span></span><span class="line"><span class="cl">            LOG(ERROR) &lt;&lt; &#34;/recovery not specified in fstab&#34;;
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        int fd = open(rec-&gt;blk_device, O_RDONLY);
-</span></span><span class="line"><span class="cl">        if (fd == -1) {
-</span></span><span class="line"><span class="cl">            PLOG(ERROR) &lt;&lt; &#34;error opening block device &#34; &lt;&lt; rec-&gt;blk_device;
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        boot_img_hdr hdr;
-</span></span><span class="line"><span class="cl">        if (android::base::ReadFully(fd, &amp;hdr, sizeof(hdr))) {
-</span></span><span class="line"><span class="cl">            std::string hex = bytes_to_hex(reinterpret_cast&lt;uint8_t*&gt;(hdr.id), sizeof(hdr.id));
-</span></span><span class="line"><span class="cl">            property_set(&#34;ro.recovery_id&#34;, hex.c_str());
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            PLOG(ERROR) &lt;&lt; &#34;error reading /recovery&#34;;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        close(fd);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    void load_system_props() {
-</span></span><span class="line"><span class="cl">        load_properties_from_file(&#34;/system/build.prop&#34;, NULL);
-</span></span><span class="line"><span class="cl">        load_properties_from_file(&#34;/odm/build.prop&#34;, NULL);
-</span></span><span class="line"><span class="cl">        load_properties_from_file(&#34;/vendor/build.prop&#34;, NULL);
-</span></span><span class="line"><span class="cl">        load_properties_from_file(&#34;/factory/factory.prop&#34;, &#34;ro.*&#34;);
-</span></span><span class="line"><span class="cl">        load_recovery_id_prop();
-</span></span><span class="line"><span class="cl">    }
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    void load_recovery_id_prop() {
+        std::unique_ptr&lt;fstab, decltype(&amp;fs_mgr_free_fstab)&gt; fstab(fs_mgr_read_fstab_default(),
+                                                                   fs_mgr_free_fstab);
+        if (!fstab) {
+            PLOG(ERROR) &lt;&lt; &#34;unable to read default fstab&#34;;
+            return;
+        }
+
+        fstab_rec* rec = fs_mgr_get_entry_for_mount_point(fstab.get(), RECOVERY_MOUNT_POINT);
+        if (rec == NULL) {
+            LOG(ERROR) &lt;&lt; &#34;/recovery not specified in fstab&#34;;
+            return;
+        }
+
+        int fd = open(rec-&gt;blk_device, O_RDONLY);
+        if (fd == -1) {
+            PLOG(ERROR) &lt;&lt; &#34;error opening block device &#34; &lt;&lt; rec-&gt;blk_device;
+            return;
+        }
+
+        boot_img_hdr hdr;
+        if (android::base::ReadFully(fd, &amp;hdr, sizeof(hdr))) {
+            std::string hex = bytes_to_hex(reinterpret_cast&lt;uint8_t*&gt;(hdr.id), sizeof(hdr.id));
+            property_set(&#34;ro.recovery_id&#34;, hex.c_str());
+        } else {
+            PLOG(ERROR) &lt;&lt; &#34;error reading /recovery&#34;;
+        }
+
+        close(fd);
+    }
+
+    void load_system_props() {
+        load_properties_from_file(&#34;/system/build.prop&#34;, NULL);
+        load_properties_from_file(&#34;/odm/build.prop&#34;, NULL);
+        load_properties_from_file(&#34;/vendor/build.prop&#34;, NULL);
+        load_properties_from_file(&#34;/factory/factory.prop&#34;, &#34;ro.*&#34;);
+        load_recovery_id_prop();
+    }
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="roexpectrecovery_id">ro.expect.recovery_id</h2>
 <p>生成recovery镜像的时候，通过命令得到recovery.id文件，进而将文件内容写到property里面</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -239,16 +242,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">... ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1) --id &gt; $(RECOVERYIMAGE_ID_FILE))
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">... ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$(hide) echo ro.expect.recovery_id=`cat $(RECOVERYIMAGE_ID_FILE)` &gt;&gt; $@
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">RECOVERYIMAGE_ID_FILE := $(PRODUCT_OUT)/recovery.id
+
+... ...
+
+$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $(1) --id &gt; $(RECOVERYIMAGE_ID_FILE))
+
+... ...
+
+$(hide) echo ro.expect.recovery_id=`cat $(RECOVERYIMAGE_ID_FILE)` &gt;&gt; $@
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -327,7 +330,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -347,7 +350,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-08-07_tls/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="TLS" />
 <meta property="og:description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-08-07_tls/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-08-07_tls/" />
 <meta property="article:published_time" content="2020-08-07T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-07T00:00:00+00:00" />
-
 <meta itemprop="name" content="TLS">
-<meta itemprop="description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati"><meta itemprop="datePublished" content="2020-08-07T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-08-07T00:00:00+00:00" />
-<meta itemprop="wordCount" content="843">
+<meta itemprop="description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati">
+<meta itemprop="datePublished" content="2020-08-07T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-08-07T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="844">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TLS"/>
 <meta name="twitter:description" content="TLS是什么 TLS英文全称Thread local Storage，准确的定义是 a computer programming method that uses static or global memory local to a thread。在线程中使用的全局或者stati"/>
@@ -142,26 +145,26 @@
 <p>在bionic中errno的定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"> <span class="kt">int</span><span class="o">*</span> <span class="nf">__errno</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">__attribute_const__</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> <span class="cp">#define errno (*__errno())
-</span></span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"> <span class="kt">int</span><span class="o">*</span> <span class="nf">__errno</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">__attribute_const__</span><span class="p">;</span>
+ <span class="cp">#define errno (*__errno())
+</span></code></pre></td></tr></table>
 </div>
 </div><p><strong>attribute_const</strong>   <strong>const</strong> 告诉编译器某个函数是无状态的（也就是说，它使用传递给它的参数生成要返回的结果）。The const function attribute specifies that a function examines only its arguments, and has no effect except for the return value. That is, the function does not read or modify any global memory.// <strong>attribute</strong>((const)) functions do not read or modify any global memory。
 // <strong>attribute</strong>((const)) functions do not read or modify any global memory
 还有就是使用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">__thread</span> <span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">thread_local</span> <span class="kt">int</span> <span class="n">tls_var</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">__thread</span> <span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
+<span class="k">thread_local</span> <span class="kt">int</span> <span class="n">tls_var</span><span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="存贮位置">存贮位置</h2>
 <p>在elf中，tls变量存储在elf的tbss和tdata段</p>
@@ -175,22 +178,22 @@
 <p>目前bionic不支持ELF TLS，因此在编译时使用了-emulated-tls，相关的soong代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">            <span class="c1">// Work around bug in Clang that doesn&#39;t pass correct emulated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// TLS option to target. See b/72706604 or
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// https://github.com/android-ndk/ndk/issues/498.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span><span class="p">,</span> <span class="s">&#34;-Wl,-plugin-opt,-emulated-tls&#34;</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-go" data-lang="go">            <span class="c1">// Work around bug in Clang that doesn&#39;t pass correct emulated
+</span><span class="c1"></span>            <span class="c1">// TLS option to target. See b/72706604 or
+</span><span class="c1"></span>            <span class="c1">// https://github.com/android-ndk/ndk/issues/498.
+</span><span class="c1"></span>            <span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">flags</span><span class="p">.</span><span class="nx">LdFlags</span><span class="p">,</span> <span class="s">&#34;-Wl,-plugin-opt,-emulated-tls&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>libc中相关的处理，对于tls的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -202,22 +205,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">ELF_ST_TYPE</span><span class="p">(</span><span class="nx">s</span><span class="o">-&gt;</span><span class="na">st_info</span><span class="p">)</span> <span class="o">==</span> <span class="nx">STT_TLS</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="nx">DL_ERR</span><span class="p">(</span><span class="s2">&#34;unsupported ELF TLS symbol </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2"> referenced by </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                 <span class="nx">sym_name</span><span class="p">,</span> <span class="nx">get_realpath</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">relocating_linker</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="o">-&gt;</span><span class="na">d_tag</span> <span class="o">==</span> <span class="nx">DT_TLSDESC_GOT</span> <span class="o">||</span> <span class="nx">d</span><span class="o">-&gt;</span><span class="na">d_tag</span> <span class="o">==</span> <span class="nx">DT_TLSDESC_PLT</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">           <span class="nx">DL_ERR</span><span class="p">(</span><span class="s2">&#34;unsupported ELF TLS DT entry in </span><span class="se">\&#34;</span><span class="s2">%s</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nx">get_realpath</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">         <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php">        if (ELF_ST_TYPE(s-&gt;st_info) == STT_TLS) {
+          DL_ERR(&#34;unsupported ELF TLS symbol \&#34;%s\&#34; referenced by \&#34;%s\&#34;&#34;,
+                 sym_name, get_realpath());
+          return false;
+        }
+        if (!relocating_linker) {
+          if (d-&gt;d_tag == DT_TLSDESC_GOT || d-&gt;d_tag == DT_TLSDESC_PLT) {
+           DL_ERR(&#34;unsupported ELF TLS DT entry in \&#34;%s\&#34;&#34;, get_realpath());
+            return false;
+         }
+</code></pre></td></tr></table>
 </div>
 </div><p>对于errno处理比较特殊，专门放到了tcb中，相关的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -252,40 +255,40 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Well-known TLS slots. What data goes in which slot is arbitrary unless otherwise noted.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">TLS_SLOT_SELF</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// The kernel requires this specific slot for x86.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_THREAD_ID</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">TLS_SLOT_ERRNO</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// These two aren&#39;t used by bionic itself, but allow the graphics code to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// access TLS directly rather than using the pthread API.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_OPENGL_API</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">TLS_SLOT_OPENGL</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// This slot is only used to pass information from the dynamic linker to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// libc.so when the C library is loaded in to memory. The C runtime init
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// function will then clear it. Since its use is extremely temporary,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// we reuse an existing location that isn&#39;t needed during libc startup.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_BIONIC_PREINIT</span> <span class="o">=</span> <span class="n">TLS_SLOT_OPENGL_API</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">TLS_SLOT_STACK_GUARD</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// GCC requires this specific slot for x86.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_DLERROR</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Fast storage for Thread::Current() in ART.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_ART_THREAD_SELF</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Lets TSAN avoid using pthread_getspecific for finding the current thread
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// state.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TLS_SLOT_TSAN</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">BIONIC_TLS_SLOTS</span> <span class="c1">// Must come last!
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span><span class="o">*</span>  <span class="nf">__errno</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">__get_tls</span><span class="p">()[</span><span class="n">TLS_SLOT_ERRNO</span><span class="p">]));</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Well-known TLS slots. What data goes in which slot is arbitrary unless otherwise noted.
+</span><span class="c1"></span><span class="k">enum</span> <span class="p">{</span>
+  <span class="n">TLS_SLOT_SELF</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// The kernel requires this specific slot for x86.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_THREAD_ID</span><span class="p">,</span>
+  <span class="n">TLS_SLOT_ERRNO</span><span class="p">,</span>
+
+  <span class="c1">// These two aren&#39;t used by bionic itself, but allow the graphics code to
+</span><span class="c1"></span>  <span class="c1">// access TLS directly rather than using the pthread API.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_OPENGL_API</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">TLS_SLOT_OPENGL</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+
+  <span class="c1">// This slot is only used to pass information from the dynamic linker to
+</span><span class="c1"></span>  <span class="c1">// libc.so when the C library is loaded in to memory. The C runtime init
+</span><span class="c1"></span>  <span class="c1">// function will then clear it. Since its use is extremely temporary,
+</span><span class="c1"></span>  <span class="c1">// we reuse an existing location that isn&#39;t needed during libc startup.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_BIONIC_PREINIT</span> <span class="o">=</span> <span class="n">TLS_SLOT_OPENGL_API</span><span class="p">,</span>
+
+  <span class="n">TLS_SLOT_STACK_GUARD</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// GCC requires this specific slot for x86.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_DLERROR</span><span class="p">,</span>
+
+  <span class="c1">// Fast storage for Thread::Current() in ART.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_ART_THREAD_SELF</span><span class="p">,</span>
+
+  <span class="c1">// Lets TSAN avoid using pthread_getspecific for finding the current thread
+</span><span class="c1"></span>  <span class="c1">// state.
+</span><span class="c1"></span>  <span class="n">TLS_SLOT_TSAN</span><span class="p">,</span>
+
+  <span class="n">BIONIC_TLS_SLOTS</span> <span class="c1">// Must come last!
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="kt">int</span><span class="o">*</span>  <span class="nf">__errno</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">__get_tls</span><span class="p">()[</span><span class="n">TLS_SLOT_ERRNO</span><span class="p">]));</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>但是从android 10.0的最新代码看,ELF TLS支持已经添加进去。</p>
 
@@ -365,7 +368,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -385,7 +388,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

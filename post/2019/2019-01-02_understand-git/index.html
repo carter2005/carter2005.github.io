@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="深入理解git原理" />
 <meta property="og:description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-02_understand-git/" />
 <meta property="article:published_time" content="2019-01-02T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-01-02T00:00:00+00:00" />
-
 <meta itemprop="name" content="深入理解git原理">
-<meta itemprop="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C"><meta itemprop="datePublished" content="2019-01-02T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-01-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="12214">
+<meta itemprop="description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C">
+<meta itemprop="datePublished" content="2019-01-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="12215">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="深入理解git原理"/>
 <meta name="twitter:description" content="carter 2019-1-2 8:03:25 Git和SVN是我们最常用的版本控制系（Version Control System， VCS），当然，除了这二者之外还有许多其他的VCS，例如早期的C"/>
@@ -152,7 +155,7 @@
 <p>上节中我们讲到，Git分为porcelain命令和plumbing命令，而porcelain命令是基于plumbing来实现的。为了进一步的理解Git的底层原理，我们将在这一节中详细的探讨Git对象的存储格式以及plumbing命令。如果把Git比作Linux操作系统，那plumbing命令就有点类似于shell命令，而上层的procelain命令便是利用shell命令编写的一系列的系统功能或工具，如你自定义的自动化运维工具等。在接下来的介绍中，我们将试着如何利用plumbing命令，而不是porcelain命令，来完成Git的暂存和提交工作，并利用log查看提交记录。首先，我们从Git的对象介绍开始。</p>
 <p><strong>Git对象</strong></p>
 <p>在之前我们提到过，Git是一套<strong>内容寻址</strong>（content-addressable）文件系统，那么Git是怎么进行寻址呢？其实，寻址无非就是查找，而Git采用HashTable的方式进行查找，也就是说，Git只是通过简单的存储键值对（key-value pair）的方式来实现内容寻址的，而key就是<strong>文件（头+内容）的哈希值</strong>（采用sha-1的方式，40位），value就是<strong>经过压缩后的文件内容</strong>。因此，在接下来的实践中，我们会经常通过40位的hash值来进行plumbing操作，几乎每一个plumbing命令都需要通过key来指定所要操作的对象。</p>
-<p>Git对象的类型包括：<strong>BLOB、tree对象、commit对象</strong>。BLOB对象可以存储几乎所有的文件类型，全称为binary large object，顾名思义，就是大的二进制表示的对象，这种对象类型和数据库中的BLOB类型（经常用来在数据库中存储图片、视频等）是一样的，当作一种数据类型即可；tree对象是用来组织BLOB对象的一种数据类型，你完全可以把它想象成二叉树中的树节点，只不过Git中的树不是二叉树，而是&quot;多叉树&quot;；commit对象表示每一次的提交操作，由tree对象衍生，每一个commit对象表示一次提交，在创建的过程中可以指定该commit对象的父节点，这样所有的commit操作便可以连接在一起，而这些commit对象便组成了提交树，branch只不过是这个树中的某一个子树罢了。如果你能理解commit树，那Git几乎就已经理解了一半了。</p>
+<p>Git对象的类型包括：<strong>BLOB、tree对象、commit对象</strong>。BLOB对象可以存储几乎所有的文件类型，全称为binary large object，顾名思义，就是大的二进制表示的对象，这种对象类型和数据库中的BLOB类型（经常用来在数据库中存储图片、视频等）是一样的，当作一种数据类型即可；tree对象是用来组织BLOB对象的一种数据类型，你完全可以把它想象成二叉树中的树节点，只不过Git中的树不是二叉树，而是&quot;多叉树&rdquo;；commit对象表示每一次的提交操作，由tree对象衍生，每一个commit对象表示一次提交，在创建的过程中可以指定该commit对象的父节点，这样所有的commit操作便可以连接在一起，而这些commit对象便组成了提交树，branch只不过是这个树中的某一个子树罢了。如果你能理解commit树，那Git几乎就已经理解了一半了。</p>
 <p>Git对象的存储方式也很简单，基本可以用如下表达式来表示：</p>
 <p>Key = sha1(file_header + file_content)</p>
 <p>Value = zlib(file_content)</p>
@@ -217,7 +220,7 @@
 <p>图5 Git的基本工作流程图</p>
 <p><strong>Git log</strong></p>
 <p>在提交了若干更新之后，又或者克隆了某个项目，想回顾下提交历史，可以使用 git log 命令查看。默认不用任何参数的话，git log会按提交时间列出所有的更新，最近的更新排在最上面。一般情况下，我会使用如下命令来打印log中的提交日志记录：</p>
-<p>git log &ndash;pretty=format:&quot;%h %s&quot; &ndash;graph</p>
+<p>git log &ndash;pretty=format:&quot;%h %s&rdquo; &ndash;graph</p>
 <p>其中。&ndash;pretty选项指定打印的格式，%h表示列出每个提交对象的短的sha1值（40位中的前6位）；&ndash;graph选项表示使用图的方式来打印日志记录。打印的结果如下图所示：</p>
 <p><img src="http://p3.pstatp.com/large/pgc-image/2ae2ef17feb042818d33a4ec585b6f7e" alt="深入理解git原理"></p>
 <p>也可以使用Git的GUI来显示Git的提交历史，在仓库中右键选择Git GUI，然后选择菜单栏上的 repository&ndash;&gt;visual all branch history 选项，即可以显示所有分支的提交记录。如下图所示：</p>
@@ -334,7 +337,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -354,7 +357,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

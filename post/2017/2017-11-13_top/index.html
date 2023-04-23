@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-11-13_top/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="top" />
 <meta property="og:description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-13_top/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-13_top/" />
 <meta property="article:published_time" content="2017-11-13T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-11-13T00:00:00+00:00" />
-
 <meta itemprop="name" content="top">
-<meta itemprop="description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy"><meta itemprop="datePublished" content="2017-11-13T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-11-13T00:00:00+00:00" />
+<meta itemprop="description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy">
+<meta itemprop="datePublished" content="2017-11-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-11-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="360">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="top"/>
 <meta name="twitter:description" content="Linux top命令输出一般如下 和CPU相关的内容如下： load average：当前系统任务调度繁忙程度 %CPU：cpu使用率 us：用户态CPU占用率 sy"/>
@@ -147,7 +150,7 @@
 <p>ni：那些调整过进程nice值（-20 ～ 19之间，越小优先级越高），且nice大于0的进程的CPU占用率。此值越大，说明有一些进程被调低了优先级，但是其实是CPU繁忙类型的进程，这样做是不当的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -173,31 +176,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/*
-</span></span><span class="line"><span class="cl">     * Account user cpu time to a process.
-</span></span><span class="line"><span class="cl">     * @p: the process that the cpu time gets accounted to
-</span></span><span class="line"><span class="cl">     * @cputime: the cpu time spent in user space since the last update
-</span></span><span class="line"><span class="cl">     * @cputime_scaled: cputime scaled by cpu frequency
-</span></span><span class="line"><span class="cl">     */
-</span></span><span class="line"><span class="cl">    void account_user_time(struct task_struct *p, cputime_t cputime,
-</span></span><span class="line"><span class="cl">                           cputime_t cputime_scaled)
-</span></span><span class="line"><span class="cl">    {
-</span></span><span class="line"><span class="cl">            int index;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            /* Add user time to process. */
-</span></span><span class="line"><span class="cl">            p-&gt;utime += cputime;
-</span></span><span class="line"><span class="cl">            p-&gt;utimescaled += cputime_scaled;
-</span></span><span class="line"><span class="cl">            account_group_user_time(p, cputime);
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            index = (TASK_NICE(p) &gt; 0) ? CPUTIME_NICE : CPUTIME_USER;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            /* Add user time to cpustat. */
-</span></span><span class="line"><span class="cl">            task_group_account_field(p, index, (__force u64) cputime);
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            /* Account for user time used */
-</span></span><span class="line"><span class="cl">            acct_account_cputime(p);
-</span></span><span class="line"><span class="cl">    }
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/*
+     * Account user cpu time to a process.
+     * @p: the process that the cpu time gets accounted to
+     * @cputime: the cpu time spent in user space since the last update
+     * @cputime_scaled: cputime scaled by cpu frequency
+     */
+    void account_user_time(struct task_struct *p, cputime_t cputime,
+                           cputime_t cputime_scaled)
+    {
+            int index;
+      
+            /* Add user time to process. */
+            p-&gt;utime += cputime;
+            p-&gt;utimescaled += cputime_scaled;
+            account_group_user_time(p, cputime);
+      
+            index = (TASK_NICE(p) &gt; 0) ? CPUTIME_NICE : CPUTIME_USER;
+      
+            /* Add user time to cpustat. */
+            task_group_account_field(p, index, (__force u64) cputime);
+      
+            /* Account for user time used */
+            acct_account_cputime(p);
+    }
+</code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -295,7 +298,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -315,7 +318,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

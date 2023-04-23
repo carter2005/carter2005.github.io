@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-04_hackentosh/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="黑苹果完善记" />
 <meta property="og:description" content="家里的台式机很久前就装过黑苹果，一路从mavericks，el capitan，sierra走来，由于硬件和tonymacx86推荐的类似，原" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-04_hackentosh/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-04_hackentosh/" />
 <meta property="article:published_time" content="2018-06-14T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-06-14T00:00:00+00:00" />
-
 <meta itemprop="name" content="黑苹果完善记">
-<meta itemprop="description" content="家里的台式机很久前就装过黑苹果，一路从mavericks，el capitan，sierra走来，由于硬件和tonymacx86推荐的类似，原"><meta itemprop="datePublished" content="2018-06-14T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2018-06-14T00:00:00+00:00" />
+<meta itemprop="description" content="家里的台式机很久前就装过黑苹果，一路从mavericks，el capitan，sierra走来，由于硬件和tonymacx86推荐的类似，原">
+<meta itemprop="datePublished" content="2018-06-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-06-14T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1733">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="黑苹果完善记"/>
 <meta name="twitter:description" content="家里的台式机很久前就装过黑苹果，一路从mavericks，el capitan，sierra走来，由于硬件和tonymacx86推荐的类似，原"/>
@@ -154,7 +157,7 @@
 <p>前阵子在网上突然看到一篇文章：<a href="https://blog.daliansky.net/macOS-10.13-installation-of-common-problems-and-solutions.html">macOS 10.13安装中常见的问题及解决方法</a>，提到ICH10要打上补丁，虽然H61芯片组用的不是ICH10，抱着死马当活马医的想法，发现打了补丁后的机器安装high sierra再也没有disk i/o error之类的错误了，加之最近空闲时间很多，于是有了本文。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -170,28 +173,28 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    &lt;dict&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;Comment&lt;/key&gt;
-</span></span><span class="line"><span class="cl">        &lt;string&gt;修复ICH10芯片 I/O Error 错误&lt;/string&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;Disabled&lt;/key&gt;
-</span></span><span class="line"><span class="cl">        &lt;false/&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;Find&lt;/key&gt;
-</span></span><span class="line"><span class="cl">       &lt;data&gt;RYX2D5XCiciD4P5mhcl4D4TSdQs=&lt;/data&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;MatchOS&lt;/key&gt;
-</span></span><span class="line"><span class="cl">        &lt;string&gt;10.13.x&lt;/string&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;Name&lt;/key&gt;
-</span></span><span class="line"><span class="cl">        &lt;string&gt;AppleAHCIPort&lt;/string&gt;
-</span></span><span class="line"><span class="cl">        &lt;key&gt;Replace&lt;/key&gt;
-</span></span><span class="line"><span class="cl">        &lt;data&gt;iciD4P5mhckPmMFBCMyQkJCQdQs=&lt;/data&gt;
-</span></span><span class="line"><span class="cl">     &lt;/dict&gt;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;dict&gt;
+        &lt;key&gt;Comment&lt;/key&gt;
+        &lt;string&gt;修复ICH10芯片 I/O Error 错误&lt;/string&gt;
+        &lt;key&gt;Disabled&lt;/key&gt;
+        &lt;false/&gt;
+        &lt;key&gt;Find&lt;/key&gt;
+       &lt;data&gt;RYX2D5XCiciD4P5mhcl4D4TSdQs=&lt;/data&gt;
+        &lt;key&gt;MatchOS&lt;/key&gt;
+        &lt;string&gt;10.13.x&lt;/string&gt;
+        &lt;key&gt;Name&lt;/key&gt;
+        &lt;string&gt;AppleAHCIPort&lt;/string&gt;
+        &lt;key&gt;Replace&lt;/key&gt;
+        &lt;data&gt;iciD4P5mhckPmMFBCMyQkJCQdQs=&lt;/data&gt;
+     &lt;/dict&gt;
+</code></pre></td></tr></table>
 </div>
 </div><p>下文以high sierra为例，记录一下各种问题的修复方法。</p>
 <h2 id="disk-io-error">disk i/o error</h2>
 <p>Apple在high sierra上将AppleAHCIPort升级到了v329版本，该版本存在bug，对第三方的sata接口不兼容从而导致的问题，上文讲到可以通过打ICH10补丁的方法解决，但是，这并不是一个很好的解决办法，仅适用于high sierra， mojave上就失效了。一个更好的解决办法是patch ICH id，通用性更好。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -211,25 +214,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;dict&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;Comment&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;string&gt;patch AppleAHCIPort for ICH* 40600200 to 00000000&lt;/string&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;Disabled&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;false/&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;Find&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;data&gt;
-</span></span><span class="line"><span class="cl">    QGACAA==
-</span></span><span class="line"><span class="cl">    &lt;/data&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;InfoPlistPatch&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;false/&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;Name&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;string&gt;AppleAHCIPort&lt;/string&gt;
-</span></span><span class="line"><span class="cl">    &lt;key&gt;Replace&lt;/key&gt;
-</span></span><span class="line"><span class="cl">    &lt;data&gt;
-</span></span><span class="line"><span class="cl">    AAAAAA==
-</span></span><span class="line"><span class="cl">    &lt;/data&gt;
-</span></span><span class="line"><span class="cl">&lt;/dict&gt;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;dict&gt;
+    &lt;key&gt;Comment&lt;/key&gt;
+    &lt;string&gt;patch AppleAHCIPort for ICH* 40600200 to 00000000&lt;/string&gt;
+    &lt;key&gt;Disabled&lt;/key&gt;
+    &lt;false/&gt;
+    &lt;key&gt;Find&lt;/key&gt;
+    &lt;data&gt;
+    QGACAA==
+    &lt;/data&gt;
+    &lt;key&gt;InfoPlistPatch&lt;/key&gt;
+    &lt;false/&gt;
+    &lt;key&gt;Name&lt;/key&gt;
+    &lt;string&gt;AppleAHCIPort&lt;/string&gt;
+    &lt;key&gt;Replace&lt;/key&gt;
+    &lt;data&gt;
+    AAAAAA==
+    &lt;/data&gt;
+&lt;/dict&gt;
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="变频">变频</h2>
 <p>CPU从i3-2100升级成了i7-3770，用<a href="https://github.com/Piker-Alpha/ssdtPRGen.sh">ssdtPRGen</a>重新生成ssdt.aml，放到EFI/CLOVER/ACPI/patched下面即可。</p>
@@ -237,26 +240,26 @@
 <p>kernel打印存在kextd stall[0], (240s): &lsquo;pci8086,1c3a字样，同样是由于更换CPU引起的，3代i7-3770本应搭配7代的芯片组，搭配H61的话，导致IMEI加载错误，从而显卡fb初始化失败。可以通过dsdt打<a href="https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-IMEI.dsl">补丁</a>解决。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">If (0x1c3a == Local2 &amp;&amp; Ones != Match(Package() { 0x0166, 0x0162 }, MEQ, Local1, MTR, 0, 0))
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">    // HD4000 on 6-series, inject 7-series IMEI device-id
-</span></span><span class="line"><span class="cl">    Return (Package() { &#34;device-id&#34;, Buffer() { 0x3a, 0x1e, 0, 0 } })
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">If (0x1c3a == Local2 &amp;&amp; Ones != Match(Package() { 0x0166, 0x0162 }, MEQ, Local1, MTR, 0, 0))
+{
+    // HD4000 on 6-series, inject 7-series IMEI device-id
+    Return (Package() { &#34;device-id&#34;, Buffer() { 0x3a, 0x1e, 0, 0 } })
+}
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="休眠唤醒bios重置">休眠/唤醒bios重置</h2>
 <p>这个问题其实困扰很久了，一直以来都是在设置里面禁止休眠解决的，搜索发现其实可以通过dsdt解决，参见<a href="https://www.tonymacx86.com/threads/solved-high-sierra-need-cmos-reset-after-sleep.237959/">[Solved] High Sierra - need CMOS reset after sleep</a></p>
 <p>简而言之，替换dsdt里面rtc部分。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -271,20 +274,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Device (RTC)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">    Name (_HID, EisaId (&#34;PNP0B00&#34;)) // _HID: Hardware ID
-</span></span><span class="line"><span class="cl">    Name (_CRS, ResourceTemplate () // _CRS: Current Resource Settings
-</span></span><span class="line"><span class="cl">    {
-</span></span><span class="line"><span class="cl">    IO (Decode16,
-</span></span><span class="line"><span class="cl">    0x0070, // Range Minimum
-</span></span><span class="line"><span class="cl">    0x0070, // Range Maximum
-</span></span><span class="line"><span class="cl">    0x00, // Alignment
-</span></span><span class="line"><span class="cl">    0x02, // Length
-</span></span><span class="line"><span class="cl">    )
-</span></span><span class="line"><span class="cl">    })
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Device (RTC)
+{
+    Name (_HID, EisaId (&#34;PNP0B00&#34;)) // _HID: Hardware ID
+    Name (_CRS, ResourceTemplate () // _CRS: Current Resource Settings
+    {
+    IO (Decode16,
+    0x0070, // Range Minimum
+    0x0070, // Range Maximum
+    0x00, // Alignment
+    0x02, // Length
+    )
+    })
+}
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="usb-30">USB 3.0</h2>
 <p>很久以前就给dsdt打过patch，用起来没有问题。</p>
@@ -300,17 +303,17 @@
 <p>Windows，Linux都是gpt分区，UEFI安装，启动文件在EFI分区，单纯设置DefaultVolume为EFI的话，默认进Windows，Sierra进mac，如果默认想进Linux，需要额外设置DefaultLoader为grubx64.efi。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;key&gt;DefaultLoader&lt;/key&gt;
-</span></span><span class="line"><span class="cl">&lt;string&gt;grubx64.efi&lt;/string&gt;
-</span></span><span class="line"><span class="cl">&lt;key&gt;DefaultVolume&lt;/key&gt;
-</span></span><span class="line"><span class="cl">&lt;string&gt;EFI&lt;/string&gt;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;key&gt;DefaultLoader&lt;/key&gt;
+&lt;string&gt;grubx64.efi&lt;/string&gt;
+&lt;key&gt;DefaultVolume&lt;/key&gt;
+&lt;string&gt;EFI&lt;/string&gt;
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="蓝牙">蓝牙</h2>
 <p>用这个纯属家里有个小米的蓝牙音箱，接有线的话，需要每次插拔一下音频线，太麻烦了。以前闲散的BCM92046DG-CL1ROM竟然可以免驱使用，方便不少，算是意外之喜吧。</p>
@@ -393,7 +396,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -413,7 +416,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

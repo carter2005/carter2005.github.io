@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2022/2022-05-20_synology_bootloader_compile/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="群晖7.X引导编译" />
 <meta property="og:description" content="背景 毫无疑问，群晖是最好用的NAS系统，具备良好的生态，在6.X的年代，jun提供了闭源的引导，但在6.2.4版本以后都失效了，很长的一段时" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2022/2022-05-20_synology_bootloader_compile/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2022/2022-05-20_synology_bootloader_compile/" />
 <meta property="article:published_time" content="2022-05-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-05-20T00:00:00+00:00" />
-
 <meta itemprop="name" content="群晖7.X引导编译">
-<meta itemprop="description" content="背景 毫无疑问，群晖是最好用的NAS系统，具备良好的生态，在6.X的年代，jun提供了闭源的引导，但在6.2.4版本以后都失效了，很长的一段时"><meta itemprop="datePublished" content="2022-05-20T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-20T00:00:00+00:00" />
+<meta itemprop="description" content="背景 毫无疑问，群晖是最好用的NAS系统，具备良好的生态，在6.X的年代，jun提供了闭源的引导，但在6.2.4版本以后都失效了，很长的一段时">
+<meta itemprop="datePublished" content="2022-05-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-05-20T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1124">
+
+
+
 <meta itemprop="keywords" content="bootloader," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="群晖7.X引导编译"/>
 <meta name="twitter:description" content="背景 毫无疑问，群晖是最好用的NAS系统，具备良好的生态，在6.X的年代，jun提供了闭源的引导，但在6.2.4版本以后都失效了，很长的一段时"/>
@@ -158,31 +161,31 @@
 <h3 id="安装依赖">安装依赖</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt update
-</span></span><span class="line"><span class="cl">apt install docker.io curl jq bspatch -y
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt update
+apt install docker.io curl jq bspatch -y
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="克隆redpill-load仓库">克隆redpill-load仓库</h3>
 <p>在以下仓库中选择一个你中意的，clone到本地即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/RedPill-TTG/redpill-load  #官方仓库，版本更新较慢
-</span></span><span class="line"><span class="cl">git clone https://github.com/jumkey/redpill-load   #jumkey第三方仓库，版本更新比较勤快（master分支和官方分支一样，develop分支有新版本）
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/RedPill-TTG/redpill-load  #官方仓库，版本更新较慢
+git clone https://github.com/jumkey/redpill-load   #jumkey第三方仓库，版本更新比较勤快（master分支和官方分支一样，develop分支有新版本）
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="创建user_configjson">创建user_config.json</h3>
 <p>在redpill-load的根目录创建一个user_config.json，写入如下内容：（如果是QEMU虚拟机，vid和pid请分别设置为0x46f4和0x0001；如果是<!-- raw HTML omitted --><strong>实体机请和你的U盘一样</strong><!-- raw HTML omitted -->。此处一点要对，否则可能导致安装DSM时出现13错误。如果SATA启动方式的话随意）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -192,28 +195,28 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">    &#34;extra_cmdline&#34;: {
-</span></span><span class="line"><span class="cl">        &#34;vid&#34;: &#34;&lt;fill me&gt;&#34;,
-</span></span><span class="line"><span class="cl">        &#34;pid&#34;: &#34;&lt;fill me&gt;&#34;,
-</span></span><span class="line"><span class="cl">        &#34;sn&#34;: &#34;&lt;fill me&gt;&#34;,
-</span></span><span class="line"><span class="cl">        &#34;mac1&#34;: &#34;&lt;fill me&gt;&#34;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    &#34;extra_cmdline&#34;: {
+        &#34;vid&#34;: &#34;&lt;fill me&gt;&#34;,
+        &#34;pid&#34;: &#34;&lt;fill me&gt;&#34;,
+        &#34;sn&#34;: &#34;&lt;fill me&gt;&#34;,
+        &#34;mac1&#34;: &#34;&lt;fill me&gt;&#34;
+    }
+}
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="将redpillko拷贝进入目录">将redpill.ko拷贝进入目录</h3>
 <p>将redpill.ko拷贝入目录ext/rp-lkm/（如果没有则创建），并且将redpill.ko更名为redpill-linux-<!-- raw HTML omitted -->.ko（比如redpill-linux-v3.10.108.ko），如果Linux版本不知道可以从config/[你的机型]/[你的DSM版本号]/config.json中的ramdisk_copy中查看到redpill的命名。</p>
 <h3 id="生成镜像">生成镜像</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./build-loader.sh [你的机型] [你的版本]
-</span></span><span class="line"><span class="cl">#比如./build-loader.sh &#39;DS3615xs&#39; &#39;7.0.1-42218&#39;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">./build-loader.sh [你的机型] [你的版本]
+#比如./build-loader.sh &#39;DS3615xs&#39; &#39;7.0.1-42218&#39;
+</code></pre></td></tr></table>
 </div>
 </div><p>生成完成后，即可将其导入虚拟机启动了！（可以通过串口查看启动状态）</p>
 <h2 id="github-action编译">github action编译</h2>
@@ -304,7 +307,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -324,7 +327,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

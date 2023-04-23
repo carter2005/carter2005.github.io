@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Tensorflow Stridedslice算子是怎么计算的" />
 <meta property="og:description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-05-19_how_stridedslice_run/" />
 <meta property="article:published_time" content="2020-05-19T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-05-19T00:00:00+00:00" />
-
 <meta itemprop="name" content="Tensorflow Stridedslice算子是怎么计算的">
-<meta itemprop="description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非"><meta itemprop="datePublished" content="2020-05-19T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-05-19T00:00:00+00:00" />
+<meta itemprop="description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非">
+<meta itemprop="datePublished" content="2020-05-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-19T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="3574">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tensorflow Stridedslice算子是怎么计算的"/>
 <meta name="twitter:description" content="stridedslice算子定义 strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非"/>
@@ -135,17 +138,17 @@
 <p>strided_slice算子是tensorflow独有的一个算子，用于从输入中按照一定规律挑选数据，功能非常强大，官方文档定义的算子原型如下所示。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tf.strided_slice(
-</span></span><span class="line"><span class="cl">    input_, begin, end, strides=None, begin_mask=0, end_mask=0, ellipsis_mask=0,
-</span></span><span class="line"><span class="cl">    new_axis_mask=0, shrink_axis_mask=0, var=None, name=None
-</span></span><span class="line"><span class="cl">)
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tf.strided_slice(
+    input_, begin, end, strides=None, begin_mask=0, end_mask=0, ellipsis_mask=0,
+    new_axis_mask=0, shrink_axis_mask=0, var=None, name=None
+)
+</code></pre></td></tr></table>
 </div>
 </div><p>一般来讲，begin，end，strides是1D矢量，个数必须相同，不能多于input的维数，mask参数是与begin，end，strides对应的位变量，用于精细控制挑选数据的行为。</p>
 <h1 id="参数">参数</h1>
@@ -158,7 +161,7 @@
 <p>本文重点关注后面的这5个mask参数，首先我们看官方文档的介绍：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -167,14 +170,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">If the ith bit of begin_mask is set, begin[i] is ignored and the fullest possible range in that dimension is used instead. end_mask works analogously, except with the end range.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">If the ith bit of ellipsis_mask is set, as many unspecified dimensions as needed will be inserted between other dimensions. Only one non-zero bit is allowed in ellipsis_mask.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">If the ith bit of new_axis_mask is set, then begin, end, and stride are ignored and a new length 1 dimension is added at this point in the output tensor.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">If the ith bit of shrink_axis_mask is set, it implies that the ith specification shrinks the dimensionality by 1, taking on the value at index begin[i]. end[i] and strides[i] are ignored in this case.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">If the ith bit of begin_mask is set, begin[i] is ignored and the fullest possible range in that dimension is used instead. end_mask works analogously, except with the end range.
+
+If the ith bit of ellipsis_mask is set, as many unspecified dimensions as needed will be inserted between other dimensions. Only one non-zero bit is allowed in ellipsis_mask.
+
+If the ith bit of new_axis_mask is set, then begin, end, and stride are ignored and a new length 1 dimension is added at this point in the output tensor.
+
+If the ith bit of shrink_axis_mask is set, it implies that the ith specification shrinks the dimensionality by 1, taking on the value at index begin[i]. end[i] and strides[i] are ignored in this case.
+</code></pre></td></tr></table>
 </div>
 </div><p>相信绝大多数人看了上文的解释，觉得这5个mask功能还是很明确的，很好理解的，但是，一执行TensorFlow，就会发现实际情况远不是字面的那样，很多场景运行结果完全无法解释清楚，google搜索也没有什么实质的解释，一头雾水。</p>
 <h1 id="计算过程">计算过程</h1>
@@ -430,7 +433,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -450,7 +453,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

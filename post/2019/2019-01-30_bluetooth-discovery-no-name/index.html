@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="刷机后蓝牙广播没有名字，只显示MAC地址" />
 <meta property="og:description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/" />
 <meta property="article:published_time" content="2019-01-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-01-30T00:00:00+00:00" />
-
 <meta itemprop="name" content="刷机后蓝牙广播没有名字，只显示MAC地址">
-<meta itemprop="description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ"><meta itemprop="datePublished" content="2019-01-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-01-30T00:00:00+00:00" />
+<meta itemprop="description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ">
+<meta itemprop="datePublished" content="2019-01-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-30T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1111">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="刷机后蓝牙广播没有名字，只显示MAC地址"/>
 <meta name="twitter:description" content="刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ"/>
@@ -134,7 +137,7 @@
       <p>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ_RES_EVT时，构造的消息内只存在mac，dev_class，dev_type。</p>
 <p>static void btif_dm_search_devices_evt(uint16_t event, char* p_param) {
 tBTA_DM_SEARCH* p_search_data;
-BTIF_TRACE_EVENT(&quot;%s event=%s&quot;, __func__, dump_dm_search_event(event));</p>
+BTIF_TRACE_EVENT(&quot;%s event=%s&rdquo;, __func__, dump_dm_search_event(event));</p>
 <p>switch (event) {
 case BTA_DM_DISC_RES_EVT: {
 p_search_data = (tBTA_DM_SEARCH*)p_param;
@@ -443,13 +446,13 @@ return btif\_transfer\_context(execute\_storage\_request, storage\_req\_id,
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/2019/2019-01-30_bluetooth-port-summery/">
+        <a class="prev" href="/post/2019/2019-03-14_nfc/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">蓝牙调试总结</span>
+            <span class="prev-text nav-default">nfc基础</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/2019/2019-01-14_dso-missing-from-command-line/">
-            <span class="next-text nav-default">DSO missing from command line的原因及解决方法</span>
+        <a class="next" href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/">
+            <span class="next-text nav-default">蓝牙打电话后播放音乐无声</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -499,7 +502,7 @@ return btif\_transfer\_context(execute\_storage\_request, storage\_req\_id,
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -519,7 +522,7 @@ return btif\_transfer\_context(execute\_storage\_request, storage\_req\_id,
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

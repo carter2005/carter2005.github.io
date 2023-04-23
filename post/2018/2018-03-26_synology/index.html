@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-03-26_synology/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="群晖" />
 <meta property="og:description" content="root 1 终端下面运行synouser --setpw root XXXX即可 tmux 安装tmux后运行报错 1 tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory 可以这样解决 1 2 sh-4.3# ln -s libncurses.so.5 libtinfo.so.5 sh-4.3# ln -s" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-03-26_synology/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-03-26_synology/" />
 <meta property="article:published_time" content="2018-03-26T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-03-26T00:00:00+00:00" />
-
 <meta itemprop="name" content="群晖">
-<meta itemprop="description" content="root 1 终端下面运行synouser --setpw root XXXX即可 tmux 安装tmux后运行报错 1 tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory 可以这样解决 1 2 sh-4.3# ln -s libncurses.so.5 libtinfo.so.5 sh-4.3# ln -s"><meta itemprop="datePublished" content="2018-03-26T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2018-03-26T00:00:00+00:00" />
+<meta itemprop="description" content="root 1 终端下面运行synouser --setpw root XXXX即可 tmux 安装tmux后运行报错 1 tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory 可以这样解决 1 2 sh-4.3# ln -s libncurses.so.5 libtinfo.so.5 sh-4.3# ln -s">
+<meta itemprop="datePublished" content="2018-03-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-03-26T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="72">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="群晖"/>
 <meta name="twitter:description" content="root 1 终端下面运行synouser --setpw root XXXX即可 tmux 安装tmux后运行报错 1 tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory 可以这样解决 1 2 sh-4.3# ln -s libncurses.so.5 libtinfo.so.5 sh-4.3# ln -s"/>
@@ -139,32 +142,32 @@
       <h2 id="root">root</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">终端下面运行synouser --setpw root XXXX即可
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">终端下面运行synouser --setpw root XXXX即可
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="tmux">tmux</h2>
 <p>安装tmux后运行报错</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tmux: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+</code></pre></td></tr></table>
 </div>
 </div><p>可以这样解决</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sh-4.3# ln -s libncurses.so.5 libtinfo.so.5
-</span></span><span class="line"><span class="cl">sh-4.3# ln -s libncurses.so libtinfo.so
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sh-4.3# ln -s libncurses.so.5 libtinfo.so.5
+sh-4.3# ln -s libncurses.so libtinfo.so
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -243,7 +246,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -263,7 +266,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

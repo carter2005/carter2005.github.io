@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="群晖隐藏启动盘" />
 <meta property="og:description" content="为什么隐藏启动盘？ 黑群的引导大约50M，不隐藏的话，一是碍眼，几T的硬盘中间突然有个50M的小家伙，看着怎么都不顺眼。二是在虚拟机环境下，哪" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-09_synology-hide-boot-disk/" />
 <meta property="article:published_time" content="2020-03-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-03-09T00:00:00+00:00" />
-
 <meta itemprop="name" content="群晖隐藏启动盘">
-<meta itemprop="description" content="为什么隐藏启动盘？ 黑群的引导大约50M，不隐藏的话，一是碍眼，几T的硬盘中间突然有个50M的小家伙，看着怎么都不顺眼。二是在虚拟机环境下，哪"><meta itemprop="datePublished" content="2020-03-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-03-09T00:00:00+00:00" />
+<meta itemprop="description" content="为什么隐藏启动盘？ 黑群的引导大约50M，不隐藏的话，一是碍眼，几T的硬盘中间突然有个50M的小家伙，看着怎么都不顺眼。二是在虚拟机环境下，哪">
+<meta itemprop="datePublished" content="2020-03-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="688">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="群晖隐藏启动盘"/>
 <meta name="twitter:description" content="为什么隐藏启动盘？ 黑群的引导大约50M，不隐藏的话，一是碍眼，几T的硬盘中间突然有个50M的小家伙，看着怎么都不顺眼。二是在虚拟机环境下，哪"/>
@@ -140,9 +143,9 @@
 <h1 id="虚拟环境">虚拟环境</h1>
 <p>esxi/proxmox虚拟机环境下，是没办法U盘引导的，都是转换成vmdk磁盘镜像，挂载在第一个sata控制器的0位置（数据盘挂在第二个sata控制器上）引导的，这种情况下，需要修改grub.cfg里面的sata_args参数，并用<strong>最后一项esxi环境启动</strong></p>
 <p>3617：</p>
-<p>set sata_args=&lsquo;sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=0C00 SataPortMap=26 SasIdxMap=1&rsquo;</p>
+<p>set sata_args='sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=0C00 SataPortMap=26 SasIdxMap=1&rsquo;</p>
 <p>918：</p>
-<p>set sata_args=&lsquo;sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=1000 SataPortMap=26 SasIdxMap=1&rsquo;</p>
+<p>set sata_args='sata_uid=1 sata_pcislot=5 synoboot_satadom=1 DiskIdxMap=1000 SataPortMap=26 SasIdxMap=1&rsquo;</p>
 <p> </p>
 <p>SataPortMap：每个sata控制器的接口数量，对上例3617，第一个控制器2个端口，第二个4个端口</p>
 <p>SasIdxMap：每个sata控制器命名索引，对上例3617，第一个sata控制器为sdb，第二个sda</p>
@@ -227,7 +230,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -247,7 +250,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

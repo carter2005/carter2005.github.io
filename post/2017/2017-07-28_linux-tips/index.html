@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-07-28_linux-tips/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Linux中！号的妙用" />
 <meta property="og:description" content="在Linux中，曾经运行过的命令可以通过history命令查看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 1992 ll 1993 cc test.c nvram.c -o test 1994 ll 1995 gdb ./test 1996 ./test 1997 ls 1998 reboot 1999 netstat -tln" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-07-28_linux-tips/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-07-28_linux-tips/" />
 <meta property="article:published_time" content="2017-07-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-07-28T00:00:00+00:00" />
-
 <meta itemprop="name" content="Linux中！号的妙用">
-<meta itemprop="description" content="在Linux中，曾经运行过的命令可以通过history命令查看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 1992 ll 1993 cc test.c nvram.c -o test 1994 ll 1995 gdb ./test 1996 ./test 1997 ls 1998 reboot 1999 netstat -tln"><meta itemprop="datePublished" content="2017-07-28T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-07-28T00:00:00+00:00" />
+<meta itemprop="description" content="在Linux中，曾经运行过的命令可以通过history命令查看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 1992 ll 1993 cc test.c nvram.c -o test 1994 ll 1995 gdb ./test 1996 ./test 1997 ls 1998 reboot 1999 netstat -tln">
+<meta itemprop="datePublished" content="2017-07-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-07-28T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="175">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux中！号的妙用"/>
 <meta name="twitter:description" content="在Linux中，曾经运行过的命令可以通过history命令查看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 1992 ll 1993 cc test.c nvram.c -o test 1994 ll 1995 gdb ./test 1996 ./test 1997 ls 1998 reboot 1999 netstat -tln"/>
@@ -134,7 +137,7 @@
       <p>在Linux中，曾经运行过的命令可以通过history命令查看</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -153,29 +156,29 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1992  ll
-</span></span><span class="line"><span class="cl">1993  cc test.c nvram.c -o test
-</span></span><span class="line"><span class="cl">1994  ll
-</span></span><span class="line"><span class="cl">1995  gdb ./test
-</span></span><span class="line"><span class="cl">1996  ./test
-</span></span><span class="line"><span class="cl">1997  ls
-</span></span><span class="line"><span class="cl">1998  reboot
-</span></span><span class="line"><span class="cl">1999  netstat -tln carter.iask.in
-</span></span><span class="line"><span class="cl">2000  ping carter.iask.in
-</span></span><span class="line"><span class="cl">2001  netstat -tln carter.iask.in
-</span></span><span class="line"><span class="cl">2002  history 
-</span></span><span class="line"><span class="cl">2003  history |grep carter
-</span></span><span class="line"><span class="cl">2004  nmap -o -sV carter.iask.in
-</span></span><span class="line"><span class="cl">2005* ping carter.iask.in
-</span></span><span class="line"><span class="cl">2006  nmap -o -sV www.sina.com.cn
-</span></span><span class="line"><span class="cl">2007  nmap -o -sV carter.iask.in
-</span></span><span class="line"><span class="cl">2008  history 
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">1992  ll
+1993  cc test.c nvram.c -o test
+1994  ll
+1995  gdb ./test
+1996  ./test
+1997  ls
+1998  reboot
+1999  netstat -tln carter.iask.in
+2000  ping carter.iask.in
+2001  netstat -tln carter.iask.in
+2002  history 
+2003  history |grep carter
+2004  nmap -o -sV carter.iask.in
+2005* ping carter.iask.in
+2006  nmap -o -sV www.sina.com.cn
+2007  nmap -o -sV carter.iask.in
+2008  history 
+</code></pre></td></tr></table>
 </div>
 </div><p>如果要重复执行上述某个命令，复制/粘贴肯定可以，但还有更快速的方法，输入“！序号”，可以快速执行。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -184,14 +187,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> 2008  history 
-</span></span><span class="line"><span class="cl"> 2009  ls
-</span></span><span class="line"><span class="cl"> 2010  touch dks
-</span></span><span class="line"><span class="cl"> 2011  ll
-</span></span><span class="line"><span class="cl"> 2012  history 
-</span></span><span class="line"><span class="cl">root@taylorwang-debug:~# !2010
-</span></span><span class="line"><span class="cl">touch dks
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> 2008  history 
+ 2009  ls
+ 2010  touch dks
+ 2011  ll
+ 2012  history 
+root@taylorwang-debug:~# !2010
+touch dks
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -270,7 +273,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -290,7 +293,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

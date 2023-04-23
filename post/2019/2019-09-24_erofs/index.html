@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2019/2019-09-24_erofs/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="erofs" />
 <meta property="og:description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-09-24_erofs/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-09-24_erofs/" />
 <meta property="article:published_time" content="2019-09-24T10:21:20+08:00" />
 <meta property="article:modified_time" content="2019-09-24T10:21:20+08:00" />
-
 <meta itemprop="name" content="erofs">
-<meta itemprop="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能"><meta itemprop="datePublished" content="2019-09-24T10:21:20+08:00" />
-<meta itemprop="dateModified" content="2019-09-24T10:21:20+08:00" />
+<meta itemprop="description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能">
+<meta itemprop="datePublished" content="2019-09-24T10:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-24T10:21:20&#43;08:00" />
 <meta itemprop="wordCount" content="1366">
+
+
+
 <meta itemprop="keywords" content="file system," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="erofs"/>
 <meta name="twitter:description" content="erofs erofs(extendable read-only file system)是和squashfs类似的文件系统，有两个显著的特定：只读和压缩，其在减小体积的同时，带来了比ext4更好的性能。 性能"/>
@@ -252,11 +255,11 @@
 <h2 id="编译参数">编译参数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">subproduct=EROFS export_para=UPDATE_PRODUCT_EROFS:true export_para=SYSTEMIMAGE_FS_TYPE:erofs
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">subproduct=EROFS export_para=UPDATE_PRODUCT_EROFS:true export_para=SYSTEMIMAGE_FS_TYPE:erofs
+</code></pre></td></tr></table>
 </div>
 </div><p>特别注意：preload功能也需要打开，否则mount会卡在preload处，后续的一些分区无法自动mount上来。</p>
 <h2 id="overlay">overlay</h2>
@@ -279,7 +282,7 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+<pre class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -444,170 +447,170 @@
 </span><span class="lnt">163
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash -
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">#===============================================================================</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#          FILE: get_erofs.sh</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#         USAGE: ./get_erofs.sh</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   DESCRIPTION:</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#       OPTIONS: ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#  REQUIREMENTS: ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#          BUGS: ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#         NOTES: ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#        AUTHOR: YOUR NAME (),</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#  ORGANIZATION:</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#       CREATED: 03/01/2019 10:35:26 AM</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#      REVISION:  ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#===============================================================================</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> -o nounset                                  <span class="c1"># Treat unset variables as an error</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">RET_IS_UNKNOWN</span><span class="o">=</span><span class="m">0</span>
-</span></span><span class="line"><span class="cl"><span class="nv">RET_IS_DIR</span><span class="o">=</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="nv">RET_IS_SPARSE</span><span class="o">=</span><span class="m">2</span>
-</span></span><span class="line"><span class="cl"><span class="nv">RET_IS_EXT4</span><span class="o">=</span><span class="m">3</span>
-</span></span><span class="line"><span class="cl"><span class="nv">RET_IS_GZIP</span><span class="o">=</span><span class="m">4</span>
-</span></span><span class="line"><span class="cl"><span class="nv">VERSION</span><span class="o">=</span>1.20190307.0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">usage<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;check_file_type.sh version:</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;usage&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;	check_file_type.sh &lt;image&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;notes:&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;	1. xxd V1.10 27oct98 by Juergen Weigert is depend&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;	   Current xxd is: &#34;</span>	
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> -n <span class="s2">&#34;	   &#34;</span>
-</span></span><span class="line"><span class="cl">	xxd --version
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;	2.simg2img is depend&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">checkcmd<span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -n <span class="s2">&#34;check cmd : </span><span class="nv">$1</span><span class="s2"> &#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">hash</span> <span class="nv">$1</span> &gt; /dev/null 2&gt;<span class="p">&amp;</span>1<span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    	<span class="nb">echo</span> <span class="s2">&#34;found&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="m">0</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        pr_red <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> not found&#34;</span>
-</span></span><span class="line"><span class="cl">        usage
-</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">check_file_type<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">local</span> <span class="nv">src</span><span class="o">=</span><span class="nv">$1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$1</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> -d <span class="nv">$src</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span>  <span class="s2">&#34;</span><span class="nv">$src</span><span class="s2"> is dir ret=</span><span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># &#34;dir&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    file <span class="nv">$src</span> <span class="p">|</span> grep sparse &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is sparse img ret=</span><span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#return &#34;sparse&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    file <span class="nv">$src</span> <span class="p">|</span> grep ext4 &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is ext4 img ret=</span><span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#return &#34;raw ext4&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    file <span class="nv">$src</span> <span class="p">|</span> grep gzip &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is gizp img ret=</span><span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#return &#34;gzip&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">is_erofs_img<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;check img: </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">#xxd should be xxd V1.10 27oct98 by Juergen Weigert</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">magic_erofs</span><span class="o">=</span><span class="k">$(</span>xxd -s +1024 -l4 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">magic_ext4</span><span class="o">=</span><span class="k">$(</span>xxd -s +1080 -l2 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span> <span class="o">==</span> e2e1f5e0
-</span></span><span class="line"><span class="cl">	<span class="k">then</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EROFS&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="m">0</span>
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span> <span class="o">==</span> 53ef
-</span></span><span class="line"><span class="cl">	<span class="k">then</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EXT4&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="m">0</span>
-</span></span><span class="line"><span class="cl">	<span class="k">else</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;magic_erofs: </span><span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;magic_ext4 : </span><span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is unknow, NOT EROFS or EXT4 !!&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">main<span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">filename_raw</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>_raw
-</span></span><span class="line"><span class="cl">	check_file_type <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">file_type</span><span class="o">=</span><span class="nv">$?</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">		is_erofs_img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">			<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a dir, ERROR !!&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a EXT4!!&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">#rm -f ${filename_raw}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">		<span class="nv">tempdir</span><span class="o">=</span>.erofs_temp
-</span></span><span class="line"><span class="cl">		<span class="nv">filename_zip</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.zip
-</span></span><span class="line"><span class="cl">		mkdir <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		cp <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">cd</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		gunzip <span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">cd</span> ..
-</span></span><span class="line"><span class="cl">		<span class="c1">#rm -rf ${tempdir}</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">exit</span> <span class="m">0</span>
-</span></span><span class="line"><span class="cl">	<span class="k">else</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is unknown file type !!&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> !<span class="o">=</span> <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">	usage
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">checkcmd simg2img
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -e <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is NOT exist !!!&#34;</span>
-</span></span><span class="line"><span class="cl">	usage
-</span></span><span class="line"><span class="cl">	<span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">main <span class="nv">$1</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash -
+</span><span class="cp"></span><span class="c1">#===============================================================================</span>
+#
+<span class="c1">#          FILE: get_erofs.sh</span>
+#
+<span class="c1">#         USAGE: ./get_erofs.sh</span>
+#
+<span class="c1">#   DESCRIPTION:</span>
+#
+<span class="c1">#       OPTIONS: ---</span>
+<span class="c1">#  REQUIREMENTS: ---</span>
+<span class="c1">#          BUGS: ---</span>
+<span class="c1">#         NOTES: ---</span>
+<span class="c1">#        AUTHOR: YOUR NAME (),</span>
+<span class="c1">#  ORGANIZATION:</span>
+<span class="c1">#       CREATED: 03/01/2019 10:35:26 AM</span>
+<span class="c1">#      REVISION:  ---</span>
+<span class="c1">#===============================================================================</span>
+
+<span class="nb">set</span> -o nounset                                  <span class="c1"># Treat unset variables as an error</span>
+
+<span class="nv">RET_IS_UNKNOWN</span><span class="o">=</span>0
+<span class="nv">RET_IS_DIR</span><span class="o">=</span>1
+<span class="nv">RET_IS_SPARSE</span><span class="o">=</span>2
+<span class="nv">RET_IS_EXT4</span><span class="o">=</span>3
+<span class="nv">RET_IS_GZIP</span><span class="o">=</span>4
+<span class="nv">VERSION</span><span class="o">=</span>1.20190307.0
+
+usage<span class="o">(){</span>
+	<span class="nb">echo</span> <span class="s2">&#34;check_file_type.sh version:</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;usage&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	check_file_type.sh &lt;image&gt;&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;notes:&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	1. xxd V1.10 27oct98 by Juergen Weigert is depend&#34;</span>
+	<span class="nb">echo</span> <span class="s2">&#34;	   Current xxd is: &#34;</span>	
+	<span class="nb">echo</span> -n <span class="s2">&#34;	   &#34;</span>
+	xxd --version
+	<span class="nb">echo</span> <span class="s2">&#34;	2.simg2img is depend&#34;</span>
+	<span class="nb">exit</span> 1
+<span class="o">}</span>
+
+checkcmd<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -n <span class="s2">&#34;check cmd : </span><span class="nv">$1</span><span class="s2"> &#34;</span>
+    <span class="k">if</span> <span class="nb">hash</span> <span class="nv">$1</span> &gt; /dev/null 2&gt;<span class="p">&amp;</span>1<span class="p">;</span> <span class="k">then</span>
+    	<span class="nb">echo</span> <span class="s2">&#34;found&#34;</span>
+        <span class="k">return</span> 0
+    <span class="k">else</span>
+        pr_red <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> not found&#34;</span>
+        usage
+        <span class="nb">exit</span> 1
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+check_file_type<span class="o">(){</span>
+    <span class="nb">local</span> <span class="nv">src</span><span class="o">=</span><span class="nv">$1</span>
+
+    <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$1</span><span class="s2">&#34;</span>
+    <span class="k">if</span> <span class="o">[</span> -d <span class="nv">$src</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;</span><span class="nv">$src</span><span class="s2"> is dir ret=</span><span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1"># &#34;dir&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep sparse &gt;/dev/null 2&gt;<span class="p">&amp;</span>1
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is sparse img ret=</span><span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;sparse&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep ext4 &gt;/dev/null 2&gt;<span class="p">&amp;</span>1
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is ext4 img ret=</span><span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;raw ext4&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span>
+    <span class="k">fi</span>
+
+    file <span class="nv">$src</span> <span class="p">|</span> grep gzip &gt;/dev/null 2&gt;<span class="p">&amp;</span>1
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+        <span class="nb">echo</span>  <span class="s2">&#34;check file: </span><span class="nv">$src</span><span class="s2"> is gizp img ret=</span><span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span><span class="s2">&#34;</span>
+        <span class="c1">#return &#34;gzip&#34;</span>
+        <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span>
+    <span class="k">fi</span>
+    <span class="k">return</span> <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span>
+<span class="o">}</span>
+
+is_erofs_img<span class="o">(){</span>
+	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
+
+	<span class="nb">echo</span> <span class="s2">&#34;check img: </span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2">&#34;</span>
+	<span class="c1">#xxd should be xxd V1.10 27oct98 by Juergen Weigert</span>
+	<span class="nv">magic_erofs</span><span class="o">=</span><span class="k">$(</span>xxd -s +1024 -l4 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
+	<span class="nv">magic_ext4</span><span class="o">=</span><span class="k">$(</span>xxd -s +1080 -l2 -ps <span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="k">)</span>
+
+	<span class="k">if</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span> <span class="o">==</span> e2e1f5e0
+	<span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EROFS&#34;</span>
+		<span class="k">return</span> 0
+	<span class="k">elif</span> <span class="nb">test</span> <span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span> <span class="o">==</span> 53ef
+	<span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is EXT4&#34;</span>
+		<span class="k">return</span> 0
+	<span class="k">else</span>
+		<span class="nb">echo</span> <span class="s2">&#34;magic_erofs: </span><span class="si">${</span><span class="nv">magic_erofs</span><span class="si">}</span><span class="s2">&#34;</span>
+		<span class="nb">echo</span> <span class="s2">&#34;magic_ext4 : </span><span class="si">${</span><span class="nv">magic_ext4</span><span class="si">}</span><span class="s2">&#34;</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span><span class="s2"> is unknow, NOT EROFS or EXT4 !!&#34;</span>
+		<span class="k">return</span> 1
+	<span class="k">fi</span>
+<span class="o">}</span>
+
+main<span class="o">()</span> <span class="o">{</span>
+	<span class="nv">filename</span><span class="o">=</span><span class="nv">$1</span>
+	<span class="nv">filename_raw</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>_raw
+	check_file_type <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+	<span class="nv">file_type</span><span class="o">=</span><span class="nv">$?</span>
+
+	<span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_UNKNOWN</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+		<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+			<span class="nb">exit</span> 1
+		<span class="k">fi</span>
+
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_DIR</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a dir, ERROR !!&#34;</span>
+		<span class="nb">exit</span> 1
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_EXT4</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is a EXT4!!&#34;</span>
+		<span class="nb">exit</span> 1
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_SPARSE</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		<span class="c1">#rm -f ${filename_raw}</span>
+
+	<span class="k">elif</span> <span class="o">[</span> <span class="si">${</span><span class="nv">file_type</span><span class="si">}</span> -eq <span class="si">${</span><span class="nv">RET_IS_GZIP</span><span class="si">}</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+		<span class="nv">tempdir</span><span class="o">=</span>.erofs_temp
+		<span class="nv">filename_zip</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.zip
+		mkdir <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
+		cp <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
+		<span class="nb">cd</span> <span class="si">${</span><span class="nv">tempdir</span><span class="si">}</span>
+		gunzip <span class="si">${</span><span class="nv">filename_zip</span><span class="si">}</span>
+		simg2img <span class="si">${</span><span class="nv">filename</span><span class="si">}</span> <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		is_erofs_img <span class="si">${</span><span class="nv">filename_raw</span><span class="si">}</span>
+		<span class="nb">cd</span> ..
+		<span class="c1">#rm -rf ${tempdir}</span>
+		<span class="nb">exit</span> 0
+	<span class="k">else</span>
+		<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is unknown file type !!&#34;</span>
+		<span class="nb">exit</span> 1
+	<span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> !<span class="o">=</span> <span class="m">1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+	usage
+<span class="k">fi</span>
+
+checkcmd simg2img
+
+<span class="k">if</span> <span class="o">[</span> ! -e <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+	<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> is NOT exist !!!&#34;</span>
+	usage
+	<span class="nb">exit</span> 1
+<span class="k">fi</span>
+main <span class="nv">$1</span>
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="手工mount">手工mount</h2>
 <ol>
@@ -698,7 +701,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -718,7 +721,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

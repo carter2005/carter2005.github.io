@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>virtulization on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/tags/virtulization/</link>
+    <description>Recent content in virtulization on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 15 Apr 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/tags/virtulization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>vGPU</title>
+      <link>https://carter2005.github.io/post/2023/2023-04-15_vgpu/</link>
+      <pubDate>Sat, 15 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2023/2023-04-15_vgpu/</guid>
+      <description>背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car</description>
+    </item>
+    
+  </channel>
+</rss>

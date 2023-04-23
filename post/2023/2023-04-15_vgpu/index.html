@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vGPU - carter&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="carter2005" /><meta name="description" content="背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://carter2005.github.io/post/2023/2023-04-15_vgpu/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vGPU" />
+<meta property="og:description" content="背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://carter2005.github.io/post/2023/2023-04-15_vgpu/" />
+<meta property="article:published_time" content="2023-04-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-15T00:00:00+00:00" />
+<meta itemprop="name" content="vGPU">
+<meta itemprop="description" content="背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car">
+<meta itemprop="datePublished" content="2023-04-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2023-04-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1313">
+
+
+
+<meta itemprop="keywords" content="virtulization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vGPU"/>
+<meta name="twitter:description" content="背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">carter&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">carter&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vGPU</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-15 </span>
+        <div class="post-category">
+            <a href="/categories/virtulization/"> virtulization </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#vgpu部署">vGPU部署</a>
+      <ul>
+        <li><a href="#平台选择">平台选择</a></li>
+        <li><a href="#vgpu版本选择">vGPU版本选择</a></li>
+        <li><a href="#部署">部署</a></li>
+        <li><a href="#windows虚拟机">windows虚拟机</a></li>
+        <li><a href="#linux虚拟机">Linux虚拟机</a></li>
+      </ul>
+    </li>
+    <li><a href="#vgpu-license">vGPU license</a></li>
+    <li><a href="#q--a">Q &amp; A</a>
+      <ul>
+        <li><a href="#windows环境parsec无法自动运行">windows环境parsec无法自动运行</a></li>
+        <li><a href="#linux环境glxgears帧率降为1fps">Linux环境glxgears帧率降为1fps</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="背景">背景</h2>
+<p>NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-cards-for-virtualization/）上，可以创建虚拟GPU被kvm虚拟机共享，大大丰富了GPU的使用场景，提高了灵活性。</p>
+<p>VGPU技术与消费级显卡是无缘的，黑客通过patch的手段，为普通NVIDIA显卡增加了支持，pascal，tuling这2代卡获得了广泛的支持，本文以GTX 1660 Super为例，演示vGPU的使用。</p>
+<h2 id="vgpu部署">vGPU部署</h2>
+<h3 id="平台选择">平台选择</h3>
+<p>综合来看，Proxmox 7.3最佳。以前的版本配置较为复杂，7.4版本截至2023-04-15日，bug还比较多。</p>
+<h3 id="vgpu版本选择">vGPU版本选择</h3>
+<p>社区最新版本15.1（https://github.com/justin-himself/NVIDIA-VGPU-Driver-Archive）</p>
+<h3 id="部署">部署</h3>
+<h4 id="proxmox安装">Proxmox安装</h4>
+<p>常规安装即可，无特殊</p>
+<h4 id="vgpu-unlock">vGPU-Unlock</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/VGPU-Community-Drivers/vGPU-Unlock-patcher
+git submodule --init update
+</code></pre></td></tr></table>
+</div>
+</div><p>1660 Super的pci id是10de:21c4，可以模拟成RTX 6000，首先修改patch.sh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x21C4 0x0000
+</code></pre></td></tr></table>
+</div>
+</div><p>然后放入NVIDIA vGPU驱动包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">NVIDIA-Linux-x86_64-525.85.07-vgpu-kvm.run
+NVIDIA-Linux-x86_64-525.85.05-grid.run
+</code></pre></td></tr></table>
+</div>
+</div><p>最后执行./patch.sh vgpu-kvm生成patch驱动并执行nvidia-install安装</p>
+<h3 id="windows虚拟机">windows虚拟机</h3>
+<ol>
+<li>创建虚拟机，添加声卡，virtio显卡，mdev pcie设备，常规安装即可。</li>
+<li>系统装好后，安装NVIDIA vGPU windows guest驱动，开启远程桌面，parsec远程软件（比较快，支持60Hz）</li>
+<li>禁用virtio显卡，parsec远程访问</li>
+</ol>
+<h3 id="linux虚拟机">Linux虚拟机</h3>
+<ol>
+<li>创建虚拟机，添加声卡，virtio显卡，mdev pcie设备，常规安装即可。</li>
+<li>系统安装好以后，修改为root登录，开启ssh远程访问</li>
+</ol>
+<h2 id="vgpu-license">vGPU license</h2>
+<p>vGPU需要license才能正常运作，否则20分钟以后性能将下降到1fps，严重影响使用，fastapi-dls项目提供了NVIDIA兼容的实现，支持vGPU 14.3之后的版本，docker方式使用最为简单。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">WORKING_DIR=/opt/docker/fastapi-dls/cert
+mkdir -p $WORKING_DIR
+cd $WORKING_DIR
+# create instance private and public key for singing JWT&#39;s
+openssl genrsa -out $WORKING_DIR/instance.private.pem 2048 
+openssl rsa -in $WORKING_DIR/instance.private.pem -outform PEM -pubout -out $WORKING_DIR/instance.public.pem
+# create ssl certificate for integrated webserver (uvicorn) - because clients rely on ssl
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout  $WORKING_DIR/webserver.key -out $WORKING_DIR/webserver.crt
+
+docker volume create dls-db
+docker run -e DLS_URL=`hostname -i` -e DLS_PORT=443 -p 443:443 -v $WORKING_DIR:/app/cert -v dls-db:/app/database collinwebdesigns/fastapi-dls:latest
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Linux</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget --no-check-certificate -O /etc/nvidia/ClientConfigToken/client_configuration_token_$(date &#39;+%d-%m-%Y-%H-%M-%S&#39;).tok https://192.168.1.29/-/client-token
+
+service nvidia-gridd restart
+nvidia-smi -q | grep &#34;License&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Windows</strong></p>
+<p>访问https://192.168.1.29/-/client-token，将下载到的文件放到C:\Program Files\NVIDIA Corporation\vGPU Licensing\ClientConfigToken目录内重启</p>
+<h2 id="q--a">Q &amp; A</h2>
+<h3 id="windows环境parsec无法自动运行">windows环境parsec无法自动运行</h3>
+<p>parsec依赖显卡才能正常运作，必须得先获取vGPU license，这也就是为什么先用RDP远程访问一次，parsec就可以正常工作了。</p>
+<p>解决版本也很简单，开启windows自动登录功能</p>
+<h3 id="linux环境glxgears帧率降为1fps">Linux环境glxgears帧率降为1fps</h3>
+<p>原因和windows类似，一旦屏幕关闭，性能就不正常了。</p>
+<p>解决方法任选其一</p>
+<ol>
+<li>系统自动登录，电源管理关闭屏幕电源管理，保持常量</li>
+<li>配置xorg.conf，然后重启</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">edit the /etc/X11/xorg.conf file to set the options to disable DPMS and disable the screen saver.
+ a). In the Monitor section, set the DPMS option to false.
+	Option &#34;DPMS&#34; &#34;false&#34;
+ b). At the end of the file, add a ServerFlags section that contains option to disable the screen saver.
+	Section &#34;ServerFlags&#34;
+		Option &#34;BlankTime&#34; &#34;0&#34;
+	EndSection
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">carter2005</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/virtulization/">virtulization</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2022/2022-05-21_typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+            <span class="next-text nav-default">typora自动上传图片</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="carter2005/carter2005.github.io"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:carter2008@gmail.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://carter2005.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">carter2005</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://fastly.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://fastly.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-7CB6WNEBLM', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

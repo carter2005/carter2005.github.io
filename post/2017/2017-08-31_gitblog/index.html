@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="gitblog" />
 <meta property="og:description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-31_gitblog/" />
 <meta property="article:published_time" content="2017-08-31T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-08-31T00:00:00+00:00" />
-
 <meta itemprop="name" content="gitblog">
-<meta itemprop="description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的"><meta itemprop="datePublished" content="2017-08-31T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-08-31T00:00:00+00:00" />
+<meta itemprop="description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的">
+<meta itemprop="datePublished" content="2017-08-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-08-31T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="211">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gitblog"/>
 <meta name="twitter:description" content="下载地址 https://github.com/jockchou/gitblog/releases 安装ubuntu 14.04 &#43; apache2 &#43; php 1 apt-get install apache2 libapache2-mod-php5 php5 开启rewrite 1 gitblog利用了apache2的伪静态技术，需要rewrite模块的"/>
@@ -143,57 +146,57 @@
 <h2 id="安装ubuntu-1404--apache2--php">安装ubuntu 14.04 + apache2 + php</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apt-get install apache2 libapache2-mod-php5 php5
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install apache2 libapache2-mod-php5 php5
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="开启rewrite">开启rewrite</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">gitblog利用了apache2的伪静态技术，需要rewrite模块的支持
+</code></pre></td></tr></table>
 </div>
 </div><ol>
 <li>
 <p>修改/etc/apache2/apache2.conf,文件末尾添加</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+</code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>apache2.conf搜索directory字段，添加</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;Directory /var/www/html&gt;
-</span></span><span class="line"><span class="cl">    Options Indexes FollowSymLinks
-</span></span><span class="line"><span class="cl">    AllowOverride All
-</span></span><span class="line"><span class="cl">    Require all granted
-</span></span><span class="line"><span class="cl">&lt;/Directory&gt;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Directory /var/www/html&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;
+</code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>网站根目录下添加.htaccess,内容如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -201,24 +204,24 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RewriteEngine on
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">RewriteCond %{REQUEST_FILENAME} !-f
-</span></span><span class="line"><span class="cl">RewriteCond %{REQUEST_FILENAME} !-d
-</span></span><span class="line"><span class="cl">RewriteCond $1 !^(index.php|images|robots.txt)
-</span></span><span class="line"><span class="cl">RewriteRule ^(.*)$ /index.php/$1 [L]
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">RewriteEngine on
+   
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index.php|images|robots.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
 <h2 id="重启apache2服务">重启apache2服务</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/etc/init.d/apache2 restart 
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/etc/init.d/apache2 restart 
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -297,7 +300,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -317,7 +320,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

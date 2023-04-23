@@ -16,17 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="carter2005" /><meta name="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="carter2005" /><meta name="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
-<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-05--07_bluetooth-name-setup/" />
+<link rel="canonical" href="https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -35,24 +35,27 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="蓝牙名称设置" />
-<meta property="og:description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;" />
+<meta property="og:description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-05--07_bluetooth-name-setup/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/" />
 <meta property="article:published_time" content="2019-05-07T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-05-07T00:00:00+00:00" />
-
 <meta itemprop="name" content="蓝牙名称设置">
-<meta itemprop="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;"><meta itemprop="datePublished" content="2019-05-07T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-05-07T00:00:00+00:00" />
+<meta itemprop="description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;">
+<meta itemprop="datePublished" content="2019-05-07T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-05-07T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="709">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="蓝牙名称设置"/>
-<meta name="twitter:description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;"/>
+<meta name="twitter:description" content="java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&quot;%s&rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&gt;GetArrayLength(value); prop.val = val;"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -151,7 +154,7 @@ name.getBytes());
 <h3 id="jni">JNI</h3>
 <p>static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type,
 jbyteArray value) {
-ALOGV(&quot;%s&quot;, __func__);</p>
+ALOGV(&quot;%s&rdquo;, __func__);</p>
 <p>if (!sBluetoothInterface) return JNI_FALSE;</p>
 <p>jbyte* val = env-&gt;GetByteArrayElements(value, NULL);
 bt_property_t prop;
@@ -355,7 +358,7 @@ p_prop-&gt;val);</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -375,7 +378,7 @@ p_prop-&gt;val);</p>
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

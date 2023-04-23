@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-10-09_tensorflow/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="TensorFlow" />
 <meta property="og:description" content="在机器学习流行之前，都是基于规则的系统，因此做语音的需要了解语音学，做NLP的需要很多语言学知识，做深蓝需要很多国际象棋大师。 而到后来统计方" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-10-09_tensorflow/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-10-09_tensorflow/" />
 <meta property="article:published_time" content="2017-10-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-10-09T00:00:00+00:00" />
-
 <meta itemprop="name" content="TensorFlow">
-<meta itemprop="description" content="在机器学习流行之前，都是基于规则的系统，因此做语音的需要了解语音学，做NLP的需要很多语言学知识，做深蓝需要很多国际象棋大师。 而到后来统计方"><meta itemprop="datePublished" content="2017-10-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-10-09T00:00:00+00:00" />
+<meta itemprop="description" content="在机器学习流行之前，都是基于规则的系统，因此做语音的需要了解语音学，做NLP的需要很多语言学知识，做深蓝需要很多国际象棋大师。 而到后来统计方">
+<meta itemprop="datePublished" content="2017-10-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-10-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1773">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TensorFlow"/>
 <meta name="twitter:description" content="在机器学习流行之前，都是基于规则的系统，因此做语音的需要了解语音学，做NLP的需要很多语言学知识，做深蓝需要很多国际象棋大师。 而到后来统计方"/>
@@ -163,7 +166,7 @@
 <h2 id="环境准备----ubuntu">环境准备 &ndash; ubuntu</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -182,29 +185,29 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install python-pip python-dev
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># Ubuntu/Linux 64-bit, CPU only, Python 2.7:
-</span></span><span class="line"><span class="cl">$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">测试：
-</span></span><span class="line"><span class="cl">$ python
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; import tensorflow as tf
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; hello = tf.constant(&#39;Hello, TensorFlow!&#39;)
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess = tf.Session()
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.run(hello)
-</span></span><span class="line"><span class="cl">&#39;Hello, TensorFlow!&#39;
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; a = tf.constant(10)
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; b = tf.constant(32)
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.run(a + b)
-</span></span><span class="line"><span class="cl">42
-</span></span><span class="line"><span class="cl">&gt;&gt;&gt; sess.close()
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install python-pip python-dev
+
+# Ubuntu/Linux 64-bit, CPU only, Python 2.7:
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
+
+测试：
+$ python
+&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; hello = tf.constant(&#39;Hello, TensorFlow!&#39;)
+&gt;&gt;&gt; sess = tf.Session()
+&gt;&gt;&gt; sess.run(hello)
+&#39;Hello, TensorFlow!&#39;
+&gt;&gt;&gt; a = tf.constant(10)
+&gt;&gt;&gt; b = tf.constant(32)
+&gt;&gt;&gt; sess.run(a + b)
+42
+&gt;&gt;&gt; sess.close()
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="python-simple例子">python simple例子</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -238,39 +241,39 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import tensorflow as tf
-</span></span><span class="line"><span class="cl">import numpy as np
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 使用 NumPy 生成假数据(phony data), 总共 100 个点.
-</span></span><span class="line"><span class="cl">x_data = np.float32(np.random.rand(2, 100)) # 随机输入
-</span></span><span class="line"><span class="cl">y_data = np.dot([0.100, 0.200], x_data) + 0.300
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 构造一个线性模型
-</span></span><span class="line"><span class="cl"># 
-</span></span><span class="line"><span class="cl">b = tf.Variable(tf.zeros([1]))
-</span></span><span class="line"><span class="cl">W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
-</span></span><span class="line"><span class="cl">y = tf.matmul(W, x_data) + b
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 最小化方差
-</span></span><span class="line"><span class="cl">loss = tf.reduce_mean(tf.square(y - y_data))
-</span></span><span class="line"><span class="cl">optimizer = tf.train.GradientDescentOptimizer(0.5)
-</span></span><span class="line"><span class="cl">train = optimizer.minimize(loss)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 初始化变量
-</span></span><span class="line"><span class="cl">init = tf.initialize_all_variables()
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 启动图 (graph)
-</span></span><span class="line"><span class="cl">sess = tf.Session()
-</span></span><span class="line"><span class="cl">sess.run(init)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 拟合平面
-</span></span><span class="line"><span class="cl">for step in xrange(0, 201):
-</span></span><span class="line"><span class="cl">    sess.run(train)
-</span></span><span class="line"><span class="cl">    if step % 20 == 0:
-</span></span><span class="line"><span class="cl">        print step, sess.run(W), sess.run(b)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 得到最佳拟合结果 W: [[0.100  0.200]], b: [0.300]
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">import tensorflow as tf
+import numpy as np
+
+# 使用 NumPy 生成假数据(phony data), 总共 100 个点.
+x_data = np.float32(np.random.rand(2, 100)) # 随机输入
+y_data = np.dot([0.100, 0.200], x_data) + 0.300
+
+# 构造一个线性模型
+# 
+b = tf.Variable(tf.zeros([1]))
+W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
+y = tf.matmul(W, x_data) + b
+
+# 最小化方差
+loss = tf.reduce_mean(tf.square(y - y_data))
+optimizer = tf.train.GradientDescentOptimizer(0.5)
+train = optimizer.minimize(loss)
+
+# 初始化变量
+init = tf.initialize_all_variables()
+
+# 启动图 (graph)
+sess = tf.Session()
+sess.run(init)
+
+# 拟合平面
+for step in xrange(0, 201):
+    sess.run(train)
+    if step % 20 == 0:
+        print step, sess.run(W), sess.run(b)
+
+# 得到最佳拟合结果 W: [[0.100  0.200]], b: [0.300]
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="手写体数字分类">手写体数字分类</h2>
 <p><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/tutorials/mnist_beginners.html">mnist例子</a></p>
@@ -351,7 +354,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -371,7 +374,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

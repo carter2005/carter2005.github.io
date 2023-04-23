@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="新增systemd服务" />
 <meta property="og:description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2021/2021-06-24_add_systemd_service/" />
 <meta property="article:published_time" content="2021-06-24T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-06-24T00:00:00+00:00" />
-
 <meta itemprop="name" content="新增systemd服务">
-<meta itemprop="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"><meta itemprop="datePublished" content="2021-06-24T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-06-24T00:00:00+00:00" />
+<meta itemprop="description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。">
+<meta itemprop="datePublished" content="2021-06-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-06-24T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="379">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="新增systemd服务"/>
 <meta name="twitter:description" content="systemd源于Apple的launchd，是sysvinit，ubuntu upstart的替代品，已经集成进了主流的Linux发行版中。"/>
@@ -149,7 +152,7 @@
 <h2 id="常用命令">常用命令</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -175,31 +178,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 重新加载systemd
-</span></span><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 开机启动
-</span></span><span class="line"><span class="cl">systemctl enable mysqld
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 关闭开机启动
-</span></span><span class="line"><span class="cl">systemctl disable mysqld
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 启动服务
-</span></span><span class="line"><span class="cl">systemctl start mysqld
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 停止服务
-</span></span><span class="line"><span class="cl">systemctl stop mysqld
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 重启服务
-</span></span><span class="line"><span class="cl">systemctl restart mysqld
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 查看服务状态
-</span></span><span class="line"><span class="cl">systemctl status mysqld
-</span></span><span class="line"><span class="cl">systemctl is-active sshd.service
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># 结束服务进程(服务无法停止时)
-</span></span><span class="line"><span class="cl">systemctl kill mysqld
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 重新加载systemd
+systemctl daemon-reload
+
+# 开机启动
+systemctl enable mysqld
+
+# 关闭开机启动
+systemctl disable mysqld
+
+# 启动服务
+systemctl start mysqld
+
+# 停止服务
+systemctl stop mysqld
+
+# 重启服务
+systemctl restart mysqld
+
+# 查看服务状态
+systemctl status mysqld
+systemctl is-active sshd.service
+
+# 结束服务进程(服务无法停止时)
+systemctl kill mysqld
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="新增synergy服务">新增synergy服务</h2>
 <ol>
@@ -207,7 +210,7 @@
 <p>新增/lib/systemd/system/synergy.service</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -219,32 +222,32 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Unit]
-</span></span><span class="line"><span class="cl">Description=Synergy for sharing mouse and keyboard
-</span></span><span class="line"><span class="cl">After=network.target
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">[Service]
-</span></span><span class="line"><span class="cl">ExecStart=/usr/bin/synergys -f --log /run/synergy.log --debug WARNING --name taylor-debug-pc -c /etc/synergy/synergy.conf --address :24800
-</span></span><span class="line"><span class="cl">Restart=on-failure
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">[Install]
-</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[Unit]
+Description=Synergy for sharing mouse and keyboard
+After=network.target
+   
+[Service]
+ExecStart=/usr/bin/synergys -f --log /run/synergy.log --debug WARNING --name taylor-debug-pc -c /etc/synergy/synergy.conf --address :24800
+Restart=on-failure
+   
+[Install]
+WantedBy=multi-user.target
+</code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>启用synergy服务</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">systemctl enable synergy
-</span></span><span class="line"><span class="cl">systemctl start synergy
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
+systemctl enable synergy
+systemctl start synergy
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
@@ -325,7 +328,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -345,7 +348,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

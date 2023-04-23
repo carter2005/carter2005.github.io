@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Lets_encrypt泛域名证书" />
 <meta property="og:description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2018/2018-09-11_lets-encrypt-cert/" />
 <meta property="article:published_time" content="2018-09-11T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-09-11T00:00:00+00:00" />
-
 <meta itemprop="name" content="Lets_encrypt泛域名证书">
-<meta itemprop="description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt"><meta itemprop="datePublished" content="2018-09-11T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2018-09-11T00:00:00+00:00" />
+<meta itemprop="description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt">
+<meta itemprop="datePublished" content="2018-09-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-11T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="416">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Lets_encrypt泛域名证书"/>
 <meta name="twitter:description" content="背景 Let&rsquo;s encrypt是目前流行的免费ssl证书提供商，它签出的证书一般3个月有效，是广大个人网站的首选。Let&rsquo;s encrypt"/>
@@ -144,16 +147,16 @@
 <h2 id="安装">安装</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl https://get.acme.sh | sh
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl https://get.acme.sh | sh
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="申请证书">申请证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -163,29 +166,29 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export DP_Id=&#34;ID数字&#34;
-</span></span><span class="line"><span class="cl">export DP_Key=&#34;Token字符串&#34;
-</span></span><span class="line"><span class="cl">./acme.sh --issue -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34; --dns dns_dp  
-</span></span><span class="line"><span class="cl">    --cert-file /usr/syno/etc/certificate/system/default/cert.pem 
-</span></span><span class="line"><span class="cl">    --key-file /usr/syno/etc/certificate/system/default/privkey.pem 
-</span></span><span class="line"><span class="cl">    --fullchain-file /usr/syno/etc/certificate/system/default/fullchain.pem 
-</span></span><span class="line"><span class="cl">    --reloadcmd &#34;/usr/syno/sbin/synoservicectl --reload nginx&#34; 
-</span></span><span class="line"><span class="cl">    --dnssleep 30
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">export DP_Id=&#34;ID数字&#34;
+export DP_Key=&#34;Token字符串&#34;
+./acme.sh --issue -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34; --dns dns_dp  
+    --cert-file /usr/syno/etc/certificate/system/default/cert.pem 
+    --key-file /usr/syno/etc/certificate/system/default/privkey.pem 
+    --fullchain-file /usr/syno/etc/certificate/system/default/fullchain.pem 
+    --reloadcmd &#34;/usr/syno/sbin/synoservicectl --reload nginx&#34; 
+    --dnssleep 30
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="更新证书">更新证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./acme.sh --renew -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">./acme.sh --renew -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34;
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="nas自动更新所有证书">nas自动更新所有证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -221,41 +224,41 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cert_root_dir=&#34;/usr/syno/etc/certificate&#34;
-</span></span><span class="line"><span class="cl">package_cert_dir=&#34;/usr/local/etc/certificate&#34;
-</span></span><span class="line"><span class="cl">default_cert_dir=&#34;$cert_root_dir/system/default&#34;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#./acme.sh --install --nocron --home /usr/local/bin/acme.sh
-</span></span><span class="line"><span class="cl">./acme.sh --issue -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34; --dns dns_dp  
-</span></span><span class="line"><span class="cl">      --cert-file $default_cert_dir/cert.pem 
-</span></span><span class="line"><span class="cl">      --key-file $default_cert_dir/privkey.pem 
-</span></span><span class="line"><span class="cl">      --ca-file $default_cert_dir/chain.pem 
-</span></span><span class="line"><span class="cl">      --fullchain-file $default_cert_dir/fullchain.pem 
-</span></span><span class="line"><span class="cl">      --dnssleep 30
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># find all subdirectories containing cert.pem files
-</span></span><span class="line"><span class="cl">pem_files=$(find $cert_root_dir -name cert.pem)
-</span></span><span class="line"><span class="cl">if [ ! -z &#34;$pem_files&#34; ]; then
-</span></span><span class="line"><span class="cl">        for DIR in $pem_files; do
-</span></span><span class="line"><span class="cl">                # replace all certificates, but not the ones in the default folder
-</span></span><span class="line"><span class="cl">                if [[ $DIR != *&#34;/default/&#34;* ]]; then
-</span></span><span class="line"><span class="cl">                        rsync -avh &#34;$default_cert_dir/&#34; &#34;$(dirname $DIR)/&#34;
-</span></span><span class="line"><span class="cl">                fi
-</span></span><span class="line"><span class="cl">        done
-</span></span><span class="line"><span class="cl">fi
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># reload
-</span></span><span class="line"><span class="cl">/usr/syno/sbin/synoservicectl --reload nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># update and restart all installed packages
-</span></span><span class="line"><span class="cl">pem_files=$(find $package_cert_dir -name cert.pem)
-</span></span><span class="line"><span class="cl">if [ ! -z &#34;$pem_files&#34; ]; then
-</span></span><span class="line"><span class="cl">    for DIR in $pem_files; do
-</span></span><span class="line"><span class="cl">        rsync -avh &#34;$default_cert_dir/&#34; &#34;$(dirname $DIR)/&#34;
-</span></span><span class="line"><span class="cl">        /usr/syno/bin/synopkg restart $(echo $DIR | awk -F/ &#39;{print $6}&#39;)
-</span></span><span class="line"><span class="cl">    done
-</span></span><span class="line"><span class="cl">fi
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cert_root_dir=&#34;/usr/syno/etc/certificate&#34;
+package_cert_dir=&#34;/usr/local/etc/certificate&#34;
+default_cert_dir=&#34;$cert_root_dir/system/default&#34;
+
+#./acme.sh --install --nocron --home /usr/local/bin/acme.sh
+./acme.sh --issue -d &#34;edward.cf&#34; -d &#34;*.edward.cf&#34; --dns dns_dp  
+      --cert-file $default_cert_dir/cert.pem 
+      --key-file $default_cert_dir/privkey.pem 
+      --ca-file $default_cert_dir/chain.pem 
+      --fullchain-file $default_cert_dir/fullchain.pem 
+      --dnssleep 30
+
+# find all subdirectories containing cert.pem files
+pem_files=$(find $cert_root_dir -name cert.pem)
+if [ ! -z &#34;$pem_files&#34; ]; then
+        for DIR in $pem_files; do
+                # replace all certificates, but not the ones in the default folder
+                if [[ $DIR != *&#34;/default/&#34;* ]]; then
+                        rsync -avh &#34;$default_cert_dir/&#34; &#34;$(dirname $DIR)/&#34;
+                fi
+        done
+fi
+
+# reload
+/usr/syno/sbin/synoservicectl --reload nginx
+
+# update and restart all installed packages
+pem_files=$(find $package_cert_dir -name cert.pem)
+if [ ! -z &#34;$pem_files&#34; ]; then
+    for DIR in $pem_files; do
+        rsync -avh &#34;$default_cert_dir/&#34; &#34;$(dirname $DIR)/&#34;
+        /usr/syno/bin/synopkg restart $(echo $DIR | awk -F/ &#39;{print $6}&#39;)
+    done
+fi
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -334,7 +337,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -354,7 +357,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

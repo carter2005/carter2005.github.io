@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-10-05_install-hsierra/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="High_Sierra安装记录" />
 <meta property="og:description" content="十一长假期间，也没打算去远处玩，只在近处散了散心，闲的时间比较多，正好将家里的台式机系统做了一下升级。 家里的电脑主要有3个系统： win7 主要是孩子" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-10-05_install-hsierra/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-10-05_install-hsierra/" />
 <meta property="article:published_time" content="2017-10-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-10-05T00:00:00+00:00" />
-
 <meta itemprop="name" content="High_Sierra安装记录">
-<meta itemprop="description" content="十一长假期间，也没打算去远处玩，只在近处散了散心，闲的时间比较多，正好将家里的台式机系统做了一下升级。 家里的电脑主要有3个系统： win7 主要是孩子"><meta itemprop="datePublished" content="2017-10-05T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-10-05T00:00:00+00:00" />
+<meta itemprop="description" content="十一长假期间，也没打算去远处玩，只在近处散了散心，闲的时间比较多，正好将家里的台式机系统做了一下升级。 家里的电脑主要有3个系统： win7 主要是孩子">
+<meta itemprop="datePublished" content="2017-10-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-10-05T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1245">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="High_Sierra安装记录"/>
 <meta name="twitter:description" content="十一长假期间，也没打算去远处玩，只在近处散了散心，闲的时间比较多，正好将家里的台式机系统做了一下升级。 家里的电脑主要有3个系统： win7 主要是孩子"/>
@@ -157,21 +160,21 @@
 <p>按照经验，先升级clover，更新到了4233版本，fakesmc也下载了最新的版本，放入others和10.13目录下，接着商店下载high sierra镜像，制作USB安装盘。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo &#34;/Applications/Install macOS High Sierra.app/Contents/Resources/createinstallmedia&#34; --volume  /Volumes/install_osx --nointeraction
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo &#34;/Applications/Install macOS High Sierra.app/Contents/Resources/createinstallmedia&#34; --volume  /Volumes/install_osx --nointeraction
+</code></pre></td></tr></table>
 </div>
 </div><p>第一次安装在机械硬盘上，复制完文件，第一次重启，直接就是一个禁止标志，这是以前好几个版本从来没出现过的现象。好吧，网上搜一下，似乎high sierra只支持装在固态硬盘上，不支持机械硬盘安装了（但也有人报告机械硬盘安装成功的）。</p>
 <p>幸好电脑上还有一块sandisk的固态硬盘，分区重新安装，这次果然可以继续了，但好景不长，安装完毕，clover找不到启动盘，调查才发现需要放入apfs.efi，提取方法如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">打开/Applications/Install macOS High Sierra.app/Contents/SharedSupport/BaseSystem.dmg，提取/usr/standalone/i386/apfs.efi放入EFI/CLOVER/drivers64和EFI/CLOVER/drivers64UEFI里面。
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">打开/Applications/Install macOS High Sierra.app/Contents/SharedSupport/BaseSystem.dmg，提取/usr/standalone/i386/apfs.efi放入EFI/CLOVER/drivers64和EFI/CLOVER/drivers64UEFI里面。
+</code></pre></td></tr></table>
 </div>
 </div><p>然后第一次启动等了好几分钟也不见向导，屏幕光显示一个进度条，也已经走到了100%，-v显示在重建文件cache，期间重启了几次，有一次成功了，设置完向导重启之后又不行了。怀疑是apfs驱动的问题，毕竟sandisk的固态硬盘和apple自家的差异不小，纵观安装过程，感觉换老的hfs格式应该就没问题了。</p>
 <h2 id="hfs全新安装">hfs全新安装</h2>
@@ -184,11 +187,11 @@
 <p>BTW：如果是升级的话，直接用下述命令开始安装即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/Install macOS High Sierra.app/Contents/Resources/startosinstall --volume the_target_volume--converttoapfs NO --agreetolicense
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/Install macOS High Sierra.app/Contents/Resources/startosinstall --volume the_target_volume--converttoapfs NO --agreetolicense
+</code></pre></td></tr></table>
 </div>
 </div><p><a href="https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/">TonyMacX86参考</a></p>
 
@@ -268,7 +271,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -288,7 +291,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

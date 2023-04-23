@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-11-09_timinglogger/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="TimingLogger" />
 <meta property="og:description" content="TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档： 1 2 3 4 5 6 7 8 9 10 public class TimingLogger extends Object java.lang.Object ↳ android.util.TimingLogger Class OverView A utility class to help log timings splits throughout a method" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-09_timinglogger/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-11-09_timinglogger/" />
 <meta property="article:published_time" content="2017-11-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-11-09T00:00:00+00:00" />
-
 <meta itemprop="name" content="TimingLogger">
-<meta itemprop="description" content="TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档： 1 2 3 4 5 6 7 8 9 10 public class TimingLogger extends Object java.lang.Object ↳ android.util.TimingLogger Class OverView A utility class to help log timings splits throughout a method"><meta itemprop="datePublished" content="2017-11-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-11-09T00:00:00+00:00" />
+<meta itemprop="description" content="TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档： 1 2 3 4 5 6 7 8 9 10 public class TimingLogger extends Object java.lang.Object ↳ android.util.TimingLogger Class OverView A utility class to help log timings splits throughout a method">
+<meta itemprop="datePublished" content="2017-11-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-11-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="396">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TimingLogger"/>
 <meta name="twitter:description" content="TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档： 1 2 3 4 5 6 7 8 9 10 public class TimingLogger extends Object java.lang.Object ↳ android.util.TimingLogger Class OverView A utility class to help log timings splits throughout a method"/>
@@ -134,7 +137,7 @@
       <p>TimingLogger 是Android SDK内置的用来打印时间戳的工具类。用法很简单，见官方文档：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -146,22 +149,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">TimingLogger
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">extends Object
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">java.lang.Object
-</span></span><span class="line"><span class="cl">↳ android.util.TimingLogger
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Class OverView
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public class
+
+TimingLogger
+
+extends Object
+
+java.lang.Object
+↳ android.util.TimingLogger
+
+Class OverView
+</code></pre></td></tr></table>
 </div>
 </div><p>A utility class to help log timings splits throughout a method call. Typical usage is:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -171,32 +174,32 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> TimingLogger timings = new TimingLogger(TAG, &#34;methodA&#34;);
-</span></span><span class="line"><span class="cl"> // ... do some work A ...
-</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work A&#34;);
-</span></span><span class="line"><span class="cl"> // ... do some work B ...
-</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work B&#34;);
-</span></span><span class="line"><span class="cl"> // ... do some work C ...
-</span></span><span class="line"><span class="cl"> timings.addSplit(&#34;work C&#34;);
-</span></span><span class="line"><span class="cl"> timings.dumpToLog();
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> TimingLogger timings = new TimingLogger(TAG, &#34;methodA&#34;);
+ // ... do some work A ...
+ timings.addSplit(&#34;work A&#34;);
+ // ... do some work B ...
+ timings.addSplit(&#34;work B&#34;);
+ // ... do some work C ...
+ timings.addSplit(&#34;work C&#34;);
+ timings.dumpToLog();
+</code></pre></td></tr></table>
 </div>
 </div><p>The dumpToLog call would add the following to the log:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">D/TAG     ( 3459): methodA: begin
-</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      9 ms, work A
-</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      1 ms, work B
-</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA:      6 ms, work C
-</span></span><span class="line"><span class="cl">D/TAG     ( 3459): methodA: end, 16 ms
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">D/TAG     ( 3459): methodA: begin
+D/TAG     ( 3459): methodA:      9 ms, work A
+D/TAG     ( 3459): methodA:      1 ms, work B
+D/TAG     ( 3459): methodA:      6 ms, work C
+D/TAG     ( 3459): methodA: end, 16 ms
+</code></pre></td></tr></table>
 </div>
 </div><p>但是，</p>
 <p>刚开始使用时可能在Logcat中看不到打出的时间戳信息，百思不得其解，看一下dumpLog()的注释就明白了，要求自己传入TimingLogger 构造方法的TAG必须loggable,即：</p>
@@ -294,7 +297,7 @@ log.tag.TAG=VERBOSE</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -314,7 +317,7 @@ log.tag.TAG=VERBOSE</p>
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

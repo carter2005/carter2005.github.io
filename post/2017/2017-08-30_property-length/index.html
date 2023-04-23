@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="carter2005" /><meta name="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;ldquo;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="carter2005" /><meta name="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;quot;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-08-30_property-length/" />
@@ -35,24 +35,27 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="fingerprint越界" />
-<meta property="og:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py." />
+<meta property="og:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&quot;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-30_property-length/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-08-30_property-length/" />
 <meta property="article:published_time" content="2017-08-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-08-30T00:00:00+00:00" />
-
 <meta itemprop="name" content="fingerprint越界">
-<meta itemprop="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py."><meta itemprop="datePublished" content="2017-08-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-08-30T00:00:00+00:00" />
+<meta itemprop="description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&quot;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.">
+<meta itemprop="datePublished" content="2017-08-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-08-30T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="104">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="fingerprint越界"/>
-<meta name="twitter:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py."/>
+<meta name="twitter:description" content="有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&quot;abc&rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,13 +137,13 @@
       <p>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个</p>
 <ul>
 <li>
-<p>make -j 8 BUILD_FINGERPRINT=&ldquo;abc&rdquo;</p>
+<p>make -j 8 BUILD_FINGERPRINT=&quot;abc&rdquo;</p>
 </li>
 <li>
 <p>修改源码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -156,21 +159,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Edit build/tools/post_process_props.py. Change lines as follows:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">PROP_NAME_MAX = 31
-</span></span><span class="line"><span class="cl"># PROP_VALUE_MAX = 91
-</span></span><span class="line"><span class="cl">PROP_VALUE_MAX = 128
-</span></span><span class="line"><span class="cl">Edit bionic/libc/include/sys/system_properties.h. Change lines as follows:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">#define PROP_NAME_MAX   32
-</span></span><span class="line"><span class="cl">// #define PROP_VALUE_MAX  92
-</span></span><span class="line"><span class="cl">#define PROP_VALUE_MAX  128
-</span></span><span class="line"><span class="cl">Do
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">make clean
-</span></span><span class="line"><span class="cl">make
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Edit build/tools/post_process_props.py. Change lines as follows:
+  
+PROP_NAME_MAX = 31
+# PROP_VALUE_MAX = 91
+PROP_VALUE_MAX = 128
+Edit bionic/libc/include/sys/system_properties.h. Change lines as follows:
+  
+#define PROP_NAME_MAX   32
+// #define PROP_VALUE_MAX  92
+#define PROP_VALUE_MAX  128
+Do
+  
+make clean
+make
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -251,7 +254,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -271,7 +274,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

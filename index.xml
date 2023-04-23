@@ -6,7 +6,20 @@
     <description>Recent content on carter&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>vGPU</title>
+      <link>https://carter2005.github.io/post/2023/2023-04-15_vgpu/</link>
+      <pubDate>Sat, 15 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2023/2023-04-15_vgpu/</guid>
+      <description>背景 NVIDIA vGPU软件在企业或数据中心的物理GPU（https://www.nvidia.cn/data-center/graphics-car</description>
+    </item>
+    
     <item>
       <title>typora自动上传图片</title>
       <link>https://carter2005.github.io/post/2022/2022-05-21_typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
@@ -441,11 +454,11 @@
     
     <item>
       <title>蓝牙名称设置</title>
-      <link>https://carter2005.github.io/post/2019/2019-05--07_bluetooth-name-setup/</link>
+      <link>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://carter2005.github.io/post/2019/2019-05--07_bluetooth-name-setup/</guid>
-      <description>java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;quot;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;</description>
+      <guid>https://carter2005.github.io/post/2019/2019-05-07_bluetooth-name-setup/</guid>
+      <description>java侧，AdapterProperties类 boolean setName(String name) { synchronized (mObject) { return mService.setAdapterPropertyNative(AbstractionLayer.BT_PROPERTY_BDNAME, name.getBytes()); } } JNI static jboolean setAdapterPropertyNative(JNIEnv* env, jobject obj, jint type, jbyteArray value) { ALOGV(&amp;quot;%s&amp;rdquo;, __func__); if (!sBluetoothInterface) return JNI_FALSE; jbyte* val = env-&amp;gt;GetByteArrayElements(value, NULL); bt_property_t prop; prop.type = (bt_property_type_t)type; prop.len = env-&amp;gt;GetArrayLength(value); prop.val = val;</description>
     </item>
     
     <item>
@@ -467,6 +480,15 @@
     </item>
     
     <item>
+      <title>刷机后蓝牙广播没有名字，只显示MAC地址</title>
+      <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</guid>
+      <description>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ</description>
+    </item>
+    
+    <item>
       <title>蓝牙打电话后播放音乐无声</title>
       <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
@@ -482,15 +504,6 @@
       
       <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-port-summery/</guid>
       <description>最近在移植蓝牙，简单适配以后，发现蓝牙随机工作，非常的不稳定，出错堆栈随机在以下几个之中 情况一 #00 pc 00000000000229ac /system/lib64/libc.so (abort+116) #01 pc 000000000001dac8 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Abort()+56) #02 pc 000000000001b688 /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__sanitizer::Die()+164) #03 pc 0000000000026b6c /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so (__ubsan_handle_cfi_check_fail_abort+68) #04 pc 000000000004d7b4</description>
-    </item>
-    
-    <item>
-      <title>刷机后蓝牙广播没有名字，只显示MAC地址</title>
-      <link>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://carter2005.github.io/post/2019/2019-01-30_bluetooth-discovery-no-name/</guid>
-      <description>刷机后，第一次打开蓝牙，在别的手机上搜到的蓝牙显示MAC地址，而非易于识别的蓝牙名称，查看蓝牙搜索的代码，发现协议栈收到BTA_DM_INQ</description>
     </item>
     
     <item>
@@ -832,7 +845,7 @@
       <pubDate>Wed, 30 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://carter2005.github.io/post/2017/2017-08-30_property-length/</guid>
-      <description>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;ldquo;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.</description>
+      <description>有些项目编译时会遇到ro.build.fingerprint cannot exceed 91 bytes，解决办法有2个 make -j 8 BUILD_FINGERPRINT=&amp;quot;abc&amp;rdquo; 修改源码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 Edit build/tools/post_process_props.py.</description>
     </item>
     
     <item>

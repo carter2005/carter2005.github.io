@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Google ML Kit分析" />
 <meta property="og:description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2020/2020-03-06-google-ml-kit%E5%88%86%E6%9E%90/" />
 <meta property="article:published_time" content="2020-03-06T12:21:20+08:00" />
 <meta property="article:modified_time" content="2020-03-06T12:21:20+08:00" />
-
 <meta itemprop="name" content="Google ML Kit分析">
-<meta itemprop="description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用"><meta itemprop="datePublished" content="2020-03-06T12:21:20+08:00" />
-<meta itemprop="dateModified" content="2020-03-06T12:21:20+08:00" />
+<meta itemprop="description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用">
+<meta itemprop="datePublished" content="2020-03-06T12:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-06T12:21:20&#43;08:00" />
 <meta itemprop="wordCount" content="4955">
+
+
+
 <meta itemprop="keywords" content="training," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Google ML Kit分析"/>
 <meta name="twitter:description" content="1. ML Kit简介 在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用"/>
@@ -157,7 +160,7 @@
 <p>在 Google I/O 2018 上，Google 发布了 ML Kit。通过 ML Kit，即使没有机器学习背景的开发者也可以快速开发出一些基于机器学习的项目。调用 ML Kit 的 API 就像调用其他移动原生 SDK 一样简单。简单的文字识别如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -182,30 +185,30 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">performTextRecognition</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">textDetector</span> <span class="p">=</span> <span class="n">vision</span><span class="p">.</span><span class="n">textDetector</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">uiImage</span> <span class="p">=</span> <span class="n">UIImage</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&#34;demo_image&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">visionImage</span> <span class="p">=</span> <span class="n">VisionImage</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">uiImage</span><span class="p">!)</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">visionMetaData</span> <span class="p">=</span> <span class="n">VisionImageMetadata</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="n">visionMetaData</span><span class="p">.</span><span class="n">orientation</span> <span class="p">=</span> <span class="p">.</span><span class="n">bottomRight</span>
-</span></span><span class="line"><span class="cl">    <span class="n">visionImage</span><span class="p">.</span><span class="n">metadata</span> <span class="p">=</span> <span class="n">visionMetaData</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">textDetector</span><span class="p">!.</span><span class="n">detect</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">visionImage</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
-</span></span><span class="line"><span class="cl">        <span class="k">guard</span> <span class="n">error</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">features</span> <span class="p">=</span> <span class="n">features</span><span class="p">,</span> <span class="o">!</span><span class="n">features</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Error. You should also check the console for error messages.&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// Recognized and extracted text</span>
-</span></span><span class="line"><span class="cl">        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Detected text has: </span><span class="si">\(</span><span class="n">features</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> blocks&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">block</span> <span class="k">in</span> <span class="n">features</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\&#34;</span><span class="si">\(</span><span class="n">block</span><span class="p">.</span><span class="n">text</span><span class="si">)</span><span class="se">\&#34;</span><span class="s">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">performTextRecognition</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">textDetector</span> <span class="p">=</span> <span class="n">vision</span><span class="p">.</span><span class="n">textDetector</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">uiImage</span> <span class="p">=</span> <span class="n">UIImage</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&#34;demo_image&#34;</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">visionImage</span> <span class="p">=</span> <span class="n">VisionImage</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">uiImage</span><span class="p">!)</span>
+    <span class="kd">let</span> <span class="nv">visionMetaData</span> <span class="p">=</span> <span class="n">VisionImageMetadata</span><span class="p">()</span>
+    <span class="n">visionMetaData</span><span class="p">.</span><span class="n">orientation</span> <span class="p">=</span> <span class="p">.</span><span class="n">bottomRight</span>
+    <span class="n">visionImage</span><span class="p">.</span><span class="n">metadata</span> <span class="p">=</span> <span class="n">visionMetaData</span>
+
+    <span class="n">textDetector</span><span class="p">!.</span><span class="n">detect</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">visionImage</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">guard</span> <span class="n">error</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">features</span> <span class="p">=</span> <span class="n">features</span><span class="p">,</span> <span class="o">!</span><span class="n">features</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Error. You should also check the console for error messages.&#34;</span><span class="p">)</span>
+            <span class="c1">// ...</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Recognized and extracted text</span>
+        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Detected text has: </span><span class="si">\(</span><span class="n">features</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> blocks&#34;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="k">in</span> <span class="n">features</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\&#34;</span><span class="si">\(</span><span class="n">block</span><span class="p">.</span><span class="n">text</span><span class="si">)</span><span class="se">\&#34;</span><span class="s">&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>机器学习套件是一个移动 SDK，它通过一个强大且易用的软件包将 Google 的机器学习专业技术应用到<!-- raw HTML omitted -->Android 和 iOS 应用<!-- raw HTML omitted -->中。无论您是刚开始接触机器学习，还是拥有丰富的相关经验，只需几行代码即可实现所需的功能。您无需具备丰富的神经网络或模型优化知识即可开始使用该套件。另一方面，如果您是一名经验丰富的机器学习开发者，机器学习套件提供了便捷的 API，可帮助您在移动应用中使用自定义 TensorFlow Lite 模型。</p>
 <p>目前ML Kit提供的功能如下：</p>
@@ -1147,7 +1150,7 @@
 <p>ML Kit尚处在Beta阶段，自从2018年5月发布以来，变化非常多，基本1~2个月一个版本，更新日期如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1172,36 +1175,36 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">November 11, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">October 16, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">September 26, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">September 09, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">August 28, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">August 16, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">July 26, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">July 24, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">July 12, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">June 17, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">May 28, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">May 7, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">March 27, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">January 31, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">January 30, 2019：ML Kit更新
-</span></span><span class="line"><span class="cl">January 18, 2019：unity更新
-</span></span><span class="line"><span class="cl">November 29, 2018：ML Kit更新
-</span></span><span class="line"><span class="cl">October 16, 2018：ML Kit更新
-</span></span><span class="line"><span class="cl">October 3, 2018:增加unity版本
-</span></span><span class="line"><span class="cl">August 13, 2018：ML Kit更新
-</span></span><span class="line"><span class="cl">June 20, 2018：增加ios版本
-</span></span><span class="line"><span class="cl">May 23, 2018：ML Kit更新
-</span></span><span class="line"><span class="cl">May 8, 2018：ML Kit首次发布
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">November 11, 2019：ML Kit更新
+October 16, 2019：ML Kit更新
+September 26, 2019：ML Kit更新
+September 09, 2019：ML Kit更新
+August 28, 2019：ML Kit更新
+August 16, 2019：ML Kit更新
+July 26, 2019：ML Kit更新
+July 24, 2019：ML Kit更新
+July 12, 2019：ML Kit更新
+June 17, 2019：ML Kit更新
+May 28, 2019：ML Kit更新
+May 7, 2019：ML Kit更新
+March 27, 2019：ML Kit更新
+January 31, 2019：ML Kit更新
+January 30, 2019：ML Kit更新
+January 18, 2019：unity更新
+November 29, 2018：ML Kit更新
+October 16, 2018：ML Kit更新
+October 3, 2018:增加unity版本
+August 13, 2018：ML Kit更新
+June 20, 2018：增加ios版本
+May 23, 2018：ML Kit更新
+May 8, 2018：ML Kit首次发布
+</code></pre></td></tr></table>
 </div>
 </div><p>部分更新列表如下，主要是bug fix和增加新的功能，详细更新历史见 <a href="https://firebase.google.com/support/release-notes/android">https://firebase.google.com/support/release-notes/android</a></p>
 <p>November 22, 2019</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1215,24 +1218,24 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ML Kit Common version 22.0.1
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Vision version 24.0.1
-</span></span><span class="line"><span class="cl">Fixed a bug which allowed the use of FirebaseAutoMLRemoteModel when instantiating AutoML FirebaseVisionImageLabeler without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
-</span></span><span class="line"><span class="cl">ML Kit Barcode Model version 16.0.2
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Object Detection and Tracking Model version 19.0.3
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Model Interpreter version 22.0.1
-</span></span><span class="line"><span class="cl">Fixed a bug which allowed the use of FirebaseCustomRemoteModel when instantiating FirebaseModelInterpreter without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
-</span></span><span class="line"><span class="cl">ML Kit Vision AutoML version 18.0.3
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Common version 22.0.1
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Vision version 24.0.1
+Fixed a bug which allowed the use of FirebaseAutoMLRemoteModel when instantiating AutoML FirebaseVisionImageLabeler without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
+ML Kit Barcode Model version 16.0.2
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Object Detection and Tracking Model version 19.0.3
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Model Interpreter version 22.0.1
+Fixed a bug which allowed the use of FirebaseCustomRemoteModel when instantiating FirebaseModelInterpreter without calling FirebaseModelManager.download if the model had already been downloaded and existed locally.
+ML Kit Vision AutoML version 18.0.3
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
 </div>
 </div><p>October 16, 2019</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1287,65 +1290,65 @@
 </span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ML Kit Common version 22.0.0
-</span></span><span class="line"><span class="cl">This release contains breaking changes. Review details of the changes below.
-</span></span><span class="line"><span class="cl">Breaking change: Updated FirebaseRemoteModel with the following changes in order to get feature specific handling:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">FirebaseRemoteModel and FirebaseLocalModel initializers are disabled. With this release, new subclasses have been added for AutoML, Custom, and Translate SDKs. Use the intializers for those subclasses to create instances of remote and local models.
-</span></span><span class="line"><span class="cl">initialConditions and updatesConditions are moved out of FirebaseRemoteModel; now specify the downloadConditions in the FirebaseModelManager.download API.
-</span></span><span class="line"><span class="cl">Breaking change: Updated FirebaseModelManager with the following changes to simplify developer workflow for using remoteModel and localModel:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Simplified the API by eliminating the requirement of advance model registration. FirebaseRemoteModel and FirebaseLocalModel registration APIs are removed.
-</span></span><span class="line"><span class="cl">deleteDownloadedModel(remoteModel) API is introduced to remove downloaded models not in use to save space.
-</span></span><span class="line"><span class="cl">Updated downloadRemoteModelIfNeeded(remoteModel) to download(remoteModel, downloadConditions). Download conditions can now be specified directly at the time when the download API is invoked.
-</span></span><span class="line"><span class="cl">Developers now have full control and flexibility to customize the model download options to fit their needs, including indicating whether to use a remote model or a local model.
-</span></span><span class="line"><span class="cl">Added isModelDownloaded(remoteModel) API.
-</span></span><span class="line"><span class="cl">ML Kit Vision version 24.0.0
-</span></span><span class="line"><span class="cl">This release contains breaking changes. Review details of the changes below.
-</span></span><span class="line"><span class="cl">Added FirebaseAutoMLRemoteModel and FirebaseAutoMLLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Breaking change: Updated the initializers for FirebaseVisionOnDeviceAutoMLImageLabelerOptions to be initialized with either a FirebaseAutoMLRemoteModel or a FirebaseAutoMLLocalModel, but not both.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Breaking change: Implicit model downloading is no longer available through the AutoML FirebaseVisionImageLabeler. You must invoke the download(remoteModel, downloadConditions) API from ModelManager to download any FirebaseAutoMLRemoteModel.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Enhanced barcode scanner with better speed and accuracy. The enhancements are available in the firebase-ml-vision-barcode-model v16.0.1 and later.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ML Kit Vision AutoML version 18.0.2
-</span></span><span class="line"><span class="cl">Warning: Due to an issue in ML Kit Vision AutoML v18.0.2, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Barcode Model version 16.0.1
-</span></span><span class="line"><span class="cl">Updated the Barcode implementation with the newly added Barcode Model, which comes with significant improvements in both latency and accuracy. Also added API to access the raw bytes for non UTF-8 encoded barcode data. To learn more, refer to the ML Kit documentation.
-</span></span><span class="line"><span class="cl">ML Kit Object Detection and Tracking Model version 19.0.2
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Model Interpreter version 22.0.0
-</span></span><span class="line"><span class="cl">Warning: Due to an issue in ML Kit Model Interpreter v22.0.0, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
-</span></span><span class="line"><span class="cl">This release contains breaking changes. Review details of the changes below.
-</span></span><span class="line"><span class="cl">Added FirebaseCustomRemoteModel and FirebaseCustomLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Breaking change: Replace FirebaseModelOptions with FirebaseModelInterpreterOptions. Note that FirebaseModelInterpreterOptions can only be initialized with either a FirebaseCustomRemoteModel or a FirebaseCustomLocalModel, but not both.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Breaking change: Implicit model downloading is no longer available through the FirebaseModelInterpreter. You must invoke the download(remoteModel, downloadConditions) API from FirebaseModelManager to download any FirebaseCustomRemoteModel.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ML Kit Natural Language version 22.0.0
-</span></span><span class="line"><span class="cl">This release contains breaking changes. Review details of the changes below.
-</span></span><span class="line"><span class="cl">Breaking change: Updated FirebaseTranslateRemoteModel with the following changes to simplify the developer workflow:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Removed the setFirebaseApp method in Builder. A custom FirebaseApp is now supported through the getInstance method in FirebaseModelManager.
-</span></span><span class="line"><span class="cl">Removed the setDownloadConditions method in Builder. Download conditions are now passed to the download method in FirebaseModelManager.
-</span></span><span class="line"><span class="cl">Breaking change: Removed FirebaseTranslateModelManager. Translate models are now handled through FirebaseModelManager.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ML Kit Language Identification Model version 20.0.7
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Smart Reply Model version 20.0.7
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Translate Model version 20.0.7
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Common version 22.0.0
+This release contains breaking changes. Review details of the changes below.
+Breaking change: Updated FirebaseRemoteModel with the following changes in order to get feature specific handling:
+
+FirebaseRemoteModel and FirebaseLocalModel initializers are disabled. With this release, new subclasses have been added for AutoML, Custom, and Translate SDKs. Use the intializers for those subclasses to create instances of remote and local models.
+initialConditions and updatesConditions are moved out of FirebaseRemoteModel; now specify the downloadConditions in the FirebaseModelManager.download API.
+Breaking change: Updated FirebaseModelManager with the following changes to simplify developer workflow for using remoteModel and localModel:
+
+Simplified the API by eliminating the requirement of advance model registration. FirebaseRemoteModel and FirebaseLocalModel registration APIs are removed.
+deleteDownloadedModel(remoteModel) API is introduced to remove downloaded models not in use to save space.
+Updated downloadRemoteModelIfNeeded(remoteModel) to download(remoteModel, downloadConditions). Download conditions can now be specified directly at the time when the download API is invoked.
+Developers now have full control and flexibility to customize the model download options to fit their needs, including indicating whether to use a remote model or a local model.
+Added isModelDownloaded(remoteModel) API.
+ML Kit Vision version 24.0.0
+This release contains breaking changes. Review details of the changes below.
+Added FirebaseAutoMLRemoteModel and FirebaseAutoMLLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
+
+Breaking change: Updated the initializers for FirebaseVisionOnDeviceAutoMLImageLabelerOptions to be initialized with either a FirebaseAutoMLRemoteModel or a FirebaseAutoMLLocalModel, but not both.
+
+Breaking change: Implicit model downloading is no longer available through the AutoML FirebaseVisionImageLabeler. You must invoke the download(remoteModel, downloadConditions) API from ModelManager to download any FirebaseAutoMLRemoteModel.
+
+Enhanced barcode scanner with better speed and accuracy. The enhancements are available in the firebase-ml-vision-barcode-model v16.0.1 and later.
+
+ML Kit Vision AutoML version 18.0.2
+Warning: Due to an issue in ML Kit Vision AutoML v18.0.2, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Barcode Model version 16.0.1
+Updated the Barcode implementation with the newly added Barcode Model, which comes with significant improvements in both latency and accuracy. Also added API to access the raw bytes for non UTF-8 encoded barcode data. To learn more, refer to the ML Kit documentation.
+ML Kit Object Detection and Tracking Model version 19.0.2
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Model Interpreter version 22.0.0
+Warning: Due to an issue in ML Kit Model Interpreter v22.0.0, when using a remote model, you must call firebaseModelManager.download(remoteModel) before initialization, regardless of what firebaseModelManager.isModelDownloaded() returns.
+This release contains breaking changes. Review details of the changes below.
+Added FirebaseCustomRemoteModel and FirebaseCustomLocalModel as instantiable subclasses of FirebaseRemoteModel and FirebaseLocalModel classes, respectively.
+
+Breaking change: Replace FirebaseModelOptions with FirebaseModelInterpreterOptions. Note that FirebaseModelInterpreterOptions can only be initialized with either a FirebaseCustomRemoteModel or a FirebaseCustomLocalModel, but not both.
+
+Breaking change: Implicit model downloading is no longer available through the FirebaseModelInterpreter. You must invoke the download(remoteModel, downloadConditions) API from FirebaseModelManager to download any FirebaseCustomRemoteModel.
+
+ML Kit Natural Language version 22.0.0
+This release contains breaking changes. Review details of the changes below.
+Breaking change: Updated FirebaseTranslateRemoteModel with the following changes to simplify the developer workflow:
+
+Removed the setFirebaseApp method in Builder. A custom FirebaseApp is now supported through the getInstance method in FirebaseModelManager.
+Removed the setDownloadConditions method in Builder. Download conditions are now passed to the download method in FirebaseModelManager.
+Breaking change: Removed FirebaseTranslateModelManager. Translate models are now handled through FirebaseModelManager.
+
+ML Kit Language Identification Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Smart Reply Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Translate Model version 20.0.7
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
 </div>
 </div><p>September 26, 2019</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1355,36 +1358,36 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ML Kit Natural Language version 21.0.3
-</span></span><span class="line"><span class="cl">Internal changes to ensure functionality alignment with other SDK releases.
-</span></span><span class="line"><span class="cl">ML Kit Language Identification Model version 20.0.6
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Smart Reply Model version 20.0.6
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span><span class="line"><span class="cl">ML Kit Translate Model version 20.0.6
-</span></span><span class="line"><span class="cl">Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ML Kit Natural Language version 21.0.3
+Internal changes to ensure functionality alignment with other SDK releases.
+ML Kit Language Identification Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Smart Reply Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+ML Kit Translate Model version 20.0.6
+Versioned only to ensure compatibility with other ML Kit SDKs released simultaneously.
+</code></pre></td></tr></table>
 </div>
 </div><p>.</p>
 <p>August 16, 2018：ML Kit version 17.0.0</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">- Unified and enhanced on-device and cloud text recognition API.
-</span></span><span class="line"><span class="cl">- Enhanced cloud document scanning API.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">- Unified and enhanced on-device and cloud text recognition API.
+- Enhanced cloud document scanning API.
+</code></pre></td></tr></table>
 </div>
 </div><p>June 12, 2018：ML Kit version 16.0.0</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Improved custom model downloading logic to handle user cancellation.
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Improved custom model downloading logic to handle user cancellation.
+</code></pre></td></tr></table>
 </div>
 </div><p>May 8, 2018：ML Kit首次发布</p>
 <h1 id="5-总结">5 总结</h1>
@@ -1474,7 +1477,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -1494,7 +1497,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">

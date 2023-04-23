@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.99.1 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://carter2005.github.io/post/2017/2017-09-13_ethtool/" />
@@ -35,21 +35,24 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="ethtool" />
 <meta property="og:description" content="ethtool命令 查询及设置网卡参数 主要参数 1 2 3 4 5 6 7 8 ethtool ethx //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-13_ethtool/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://carter2005.github.io/post/2017/2017-09-13_ethtool/" />
 <meta property="article:published_time" content="2017-09-13T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-09-13T00:00:00+00:00" />
-
 <meta itemprop="name" content="ethtool">
-<meta itemprop="description" content="ethtool命令 查询及设置网卡参数 主要参数 1 2 3 4 5 6 7 8 ethtool ethx //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等"><meta itemprop="datePublished" content="2017-09-13T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2017-09-13T00:00:00+00:00" />
+<meta itemprop="description" content="ethtool命令 查询及设置网卡参数 主要参数 1 2 3 4 5 6 7 8 ethtool ethx //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等">
+<meta itemprop="datePublished" content="2017-09-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-09-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="355">
+
+
+
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ethtool"/>
 <meta name="twitter:description" content="ethtool命令 查询及设置网卡参数 主要参数 1 2 3 4 5 6 7 8 ethtool ethx //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等"/>
@@ -142,7 +145,7 @@
 <h2 id="主要参数">主要参数</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -152,20 +155,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ethtool ethx       //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等等
-</span></span><span class="line"><span class="cl">ethtool –h         //显示ethtool的命令帮助(help)
-</span></span><span class="line"><span class="cl">ethtool –i ethX    //查询ethX网口的相关信息 
-</span></span><span class="line"><span class="cl">ethtool –d ethX    //查询ethX网口注册性信息
-</span></span><span class="line"><span class="cl">ethtool –r ethX    //重置ethX网口到自适应模式
-</span></span><span class="line"><span class="cl">ethtool –S ethX    //查询ethX网口收发包统计
-</span></span><span class="line"><span class="cl">ethtool –s ethX [speed 10|100|1000] [duplex half|full]  [autoneg on|off]                                   
-</span></span><span class="line"><span class="cl">                   //设置网口速率10/100/1000M、设置网口半/全双工、设置网口是否自协商
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ethtool ethx       //查询ethx网口基本设置，其中 x 是对应网卡的编号，如eth0、eth1等等
+ethtool –h         //显示ethtool的命令帮助(help)
+ethtool –i ethX    //查询ethX网口的相关信息 
+ethtool –d ethX    //查询ethX网口注册性信息
+ethtool –r ethX    //重置ethX网口到自适应模式
+ethtool –S ethX    //查询ethX网口收发包统计
+ethtool –s ethX [speed 10|100|1000] [duplex half|full]  [autoneg on|off]                                   
+                   //设置网口速率10/100/1000M、设置网口半/全双工、设置网口是否自协商
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="命令示例">命令示例</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -196,36 +199,36 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root@taylorwang-debug:~# ethtool eth1
-</span></span><span class="line"><span class="cl">Settings for eth1:
-</span></span><span class="line"><span class="cl">    Supported ports: [ TP MII ]
-</span></span><span class="line"><span class="cl">    Supported link modes:   10baseT/Half 10baseT/Full 
-</span></span><span class="line"><span class="cl">                            100baseT/Half 100baseT/Full 
-</span></span><span class="line"><span class="cl">                            1000baseT/Half 1000baseT/Full 
-</span></span><span class="line"><span class="cl">    Supported pause frame use: No
-</span></span><span class="line"><span class="cl">    Supports auto-negotiation: Yes
-</span></span><span class="line"><span class="cl">    Advertised link modes:  10baseT/Half 10baseT/Full 
-</span></span><span class="line"><span class="cl">                            100baseT/Half 100baseT/Full 
-</span></span><span class="line"><span class="cl">                            1000baseT/Half 1000baseT/Full 
-</span></span><span class="line"><span class="cl">    Advertised pause frame use: Symmetric Receive-only
-</span></span><span class="line"><span class="cl">    Advertised auto-negotiation: Yes
-</span></span><span class="line"><span class="cl">    Link partner advertised link modes:  10baseT/Half 10baseT/Full 
-</span></span><span class="line"><span class="cl">                                         100baseT/Half 100baseT/Full 
-</span></span><span class="line"><span class="cl">    Link partner advertised pause frame use: Symmetric Receive-only
-</span></span><span class="line"><span class="cl">    Link partner advertised auto-negotiation: Yes
-</span></span><span class="line"><span class="cl">    Speed: 100Mb/s
-</span></span><span class="line"><span class="cl">    Duplex: Full
-</span></span><span class="line"><span class="cl">    Port: MII
-</span></span><span class="line"><span class="cl">    PHYAD: 0
-</span></span><span class="line"><span class="cl">    Transceiver: internal
-</span></span><span class="line"><span class="cl">    Auto-negotiation: on
-</span></span><span class="line"><span class="cl">    Supports Wake-on: pumbg
-</span></span><span class="line"><span class="cl">    Wake-on: g
-</span></span><span class="line"><span class="cl">    Current message level: 0x00000033 (51)
-</span></span><span class="line"><span class="cl">                   drv probe ifdown ifup
-</span></span><span class="line"><span class="cl">    Link detected: yes
-</span></span><span class="line"><span class="cl">root@taylorwang-debug:~#
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">root@taylorwang-debug:~# ethtool eth1
+Settings for eth1:
+    Supported ports: [ TP MII ]
+    Supported link modes:   10baseT/Half 10baseT/Full 
+                            100baseT/Half 100baseT/Full 
+                            1000baseT/Half 1000baseT/Full 
+    Supported pause frame use: No
+    Supports auto-negotiation: Yes
+    Advertised link modes:  10baseT/Half 10baseT/Full 
+                            100baseT/Half 100baseT/Full 
+                            1000baseT/Half 1000baseT/Full 
+    Advertised pause frame use: Symmetric Receive-only
+    Advertised auto-negotiation: Yes
+    Link partner advertised link modes:  10baseT/Half 10baseT/Full 
+                                         100baseT/Half 100baseT/Full 
+    Link partner advertised pause frame use: Symmetric Receive-only
+    Link partner advertised auto-negotiation: Yes
+    Speed: 100Mb/s
+    Duplex: Full
+    Port: MII
+    PHYAD: 0
+    Transceiver: internal
+    Auto-negotiation: on
+    Supports Wake-on: pumbg
+    Wake-on: g
+    Current message level: 0x00000033 (51)
+                   drv probe ifdown ifup
+    Link detected: yes
+root@taylorwang-debug:~#
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -304,7 +307,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -324,7 +327,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.30dad356188cdaba5047112eaa8bf5e85cb14ae7e803337403591fce94a531a0.js"></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
 
 
 <script type="application/javascript">
