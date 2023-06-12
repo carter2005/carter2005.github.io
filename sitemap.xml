@@ -848,4 +848,10 @@
     <priority>0.5</priority>
   </url>
   
+  <url>
+    <loc>https://carter2005.github.io/post/2023/2023-06-12_barrier/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
 </urlset>
