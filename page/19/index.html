@@ -45,7 +45,7 @@
 <meta property="og:description" content="carter&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://carter2005.github.io/" />
-<meta property="og:updated_time" content="2023-04-15T00:00:00+00:00" />
+<meta property="og:updated_time" content="2023-06-12T00:00:00+00:00" />
 <meta itemprop="name" content="carter&#39;s blog">
 <meta itemprop="description" content="carter&#39;s blog"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="carter&#39;s blog"/>
@@ -112,6 +112,25 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/">蓝牙打电话后播放音乐无声</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-01-30 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      查看log，发现播放音乐的时候，频繁打印 bt_a2dp_hw: start_audio_datapath: Audiopath start failed - in call, move to suspended 跟踪start_audio_datapath代码，发现执行A2DP命令时还是c
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/2019-01-30_bluetooth-issue-no-sound-after-phone-call/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-30_bluetooth-port-summery/">蓝牙调试总结</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-01-30 </span>
@@ -144,25 +163,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2019/2019-01-14_dso-missing-from-command-line/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2019/2019-01-14_debug-with-gdbserver/">GDBServer远程调试</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-01-14 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      手机端 $ adb shell ps #查看要调试进程的PID gdbserver :1234 &ndash;attach 96 #:1234是端口号，96 是进程ID pc端 # adb forward tcp:1234 tcp:1234 #端口映射，将pc机的1234端口映射到手
-    </div>
-    <div class="read-more">
-      <a href="/post/2019/2019-01-14_debug-with-gdbserver/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

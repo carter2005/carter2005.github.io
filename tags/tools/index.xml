@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on carter&#39;s blog</title>
+    <link>https://carter2005.github.io/tags/tools/</link>
+    <description>Recent content in tools on carter&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 12 Jun 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://carter2005.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>barrier</title>
+      <link>https://carter2005.github.io/post/2023/2023-06-12_barrier/</link>
+      <pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2023/2023-06-12_barrier/</guid>
+      <description>barrier是一个局域网内共享键鼠的开源工具，算是synergy的开源版本，使用非常方便，还可以共享剪贴板，发送文件。 节后barrier突</description>
+    </item>
+    
+  </channel>
+</rss>
