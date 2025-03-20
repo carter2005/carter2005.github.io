@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>opengrok</title>
+      <link>https://carter2005.github.io/post/2024/2024-11-11_opengrok/</link>
+      <pubDate>Fri, 11 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://carter2005.github.io/post/2024/2024-11-11_opengrok/</guid>
+      <description>Opengrok是一个深受好评的大型代码查看工具，其原生配置较为复杂，使用docker镜像能大大简化配置过程，值得推广 镜像 1 docker pull opengrok/opengrok 准备目录 1</description>
+    </item>
+    
+    <item>
       <title>typora自动上传图片</title>
       <link>https://carter2005.github.io/post/2022/2022-05-21_typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
       <pubDate>Sat, 21 May 2022 00:00:00 +0000</pubDate>
