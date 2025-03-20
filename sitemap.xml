@@ -51,28 +51,35 @@
   </url>
   
   <url>
-    <loc>https://carter2005.github.io/post/2023/2023-06-12_barrier/</loc>
-    <lastmod>2023-06-12T00:00:00+00:00</lastmod>
+    <loc>https://carter2005.github.io/post/2024/2024-11-11_opengrok/</loc>
+    <lastmod>2024-11-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://carter2005.github.io/tags/tool/</loc>
-    <lastmod>2023-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://carter2005.github.io/tags/tools/</loc>
-    <lastmod>2023-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2024-11-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://carter2005.github.io/categories/tools/</loc>
+    <lastmod>2024-11-11T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://carter2005.github.io/post/2023/2023-06-12_barrier/</loc>
     <lastmod>2023-06-12T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -95,13 +102,6 @@
   <url>
     <loc>https://carter2005.github.io/categories/virtulization/</loc>
     <lastmod>2023-04-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://carter2005.github.io/post/2024/2024-11-11_opengrok/</loc>
-    <lastmod>2022-11-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
